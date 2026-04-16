@@ -1,0 +1,13 @@
+{
+  "name": "marketing-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard interativo de leads de marketing da Vesti",
+  "private": true,
+  "scripts": {
+    "extract": "node scripts/extract.js",
+    "serve": "npx --yes http-server docs -p 8080 -c-1"
+  },
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
+}

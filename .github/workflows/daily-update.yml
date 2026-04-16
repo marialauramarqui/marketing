@@ -1,0 +1,61 @@
+name: Daily data update + Pages deploy
+
+on:
+  schedule:
+    # 04:30 BRT (UTC-3) = 07:30 UTC
+    - cron: '30 7 * * *'
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci || npm install
+
+      - name: Extract data from Google Sheet
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        run: node scripts/extract.js
+
+      - name: Commit updated data.json (if changed)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet docs/data/data.json; then
+            git add docs/data/data.json
+            git commit -m "chore(data): atualiza dados [skip ci]"
+            git push
+          else
+            echo "Sem mudanças em data.json."
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

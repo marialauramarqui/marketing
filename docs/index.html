@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vesti · Dashboard de Leads</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="js/data-loader.js"></script>
+  <script defer src="js/filters.js"></script>
+  <script defer src="js/kpis.js"></script>
+  <script defer src="js/charts.js"></script>
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-dot"></span>
+      <h1>Vesti · Marketing</h1>
+    </div>
+    <div class="meta" id="meta-info">Carregando…</div>
+  </header>
+
+  <main class="container">
+    <section class="filters card">
+      <div class="filter-group">
+        <label for="filter-origem">Origem</label>
+        <select id="filter-origem"><option value="">Todas</option></select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-perfil">Perfil</label>
+        <select id="filter-perfil"><option value="">Todos</option></select>
+      </div>
+      <button id="filter-clear" type="button" class="ghost">Limpar filtros</button>
+    </section>
+
+    <section class="sql-highlight card">
+      <div class="sql-main">
+        <span class="sql-label">SQL (Sales Qualified Leads)</span>
+        <span class="sql-value" id="sql-total">—</span>
+        <span class="sql-pct" id="sql-pct">—</span>
+      </div>
+      <div class="sql-sub" id="sql-breakdown">Starter + Pro + Qualificado (sem faixa)</div>
+    </section>
+
+    <section class="kpis" id="kpis"></section>
+
+    <section class="charts">
+      <div class="card chart-card">
+        <h2>Origem × SQLs</h2>
+        <div class="chart-wrap"><canvas id="chart-origem-sql"></canvas></div>
+      </div>
+      <div class="card chart-card">
+        <h2>Distribuição de Perfis</h2>
+        <div class="chart-wrap"><canvas id="chart-perfil-dist"></canvas></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Atualizado automaticamente todo dia às 04:30 BRT.</span>
+  </footer>
+</body>
+</html>
