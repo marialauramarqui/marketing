@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-04-16T19:26:09.228Z",
+  "generated_at": "2026-04-17T09:00:41.797Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "Leads",
-  "total_leads": 756,
+  "total_leads": 763,
   "total_sql": 78,
-  "sql_pct": 10.32,
+  "sql_pct": 10.22,
   "perfis": [
     "Pro",
     "Starter",
@@ -13,7 +13,8 @@
     "Desqualificado",
     "Suporte",
     "Em atendimento",
-    "Qualificação_incompleta"
+    "Qualificação_incompleta",
+    "Qualificação incompleta"
   ],
   "origens": [
     "[SALES] Chanel",
@@ -24,22 +25,23 @@
     "Site"
   ],
   "perfil_counts": {
-    "Qualificação_incompleta": 512,
+    "Qualificação_incompleta": 503,
     "Multimarca": 64,
     "Qualificado (Sem Faixa)": 3,
     "Starter": 57,
-    "Suporte": 42,
+    "Suporte": 43,
     "Pro": 18,
-    "Desqualificado": 40,
-    "Em atendimento": 20
+    "Desqualificado": 41,
+    "Qualificação incompleta": 10,
+    "Em atendimento": 24
   },
   "origem_counts": {
-    "[SALES] Chanel": 41,
-    "Site": 177,
+    "[SALES] Chanel": 42,
+    "Site": 180,
     "Número BIO": 16,
-    "Orgânico": 50,
+    "Orgânico": 52,
     "Evento Denim": 466,
-    "Bio Instagram": 5
+    "Bio Instagram": 6
   },
   "sql_by_origem": {
     "Site": 50,
@@ -1077,32 +1079,32 @@
     {
       "data": "07/04/2026 10:31:13",
       "origem": "Evento Denim",
-      "perfil": "Qualificação_incompleta"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "07/04/2026 10:57:20",
       "origem": "Evento Denim",
-      "perfil": "Qualificação_incompleta"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "07/04/2026 10:59:20",
       "origem": "Evento Denim",
-      "perfil": "Qualificação_incompleta"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "07/04/2026 10:59:22",
       "origem": "Evento Denim",
-      "perfil": "Qualificação_incompleta"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "07/04/2026 10:59:23",
       "origem": "Evento Denim",
-      "perfil": "Qualificação_incompleta"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "07/04/2026 10:59:30",
       "origem": "Evento Denim",
-      "perfil": "Qualificação_incompleta"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "07/04/2026 11:02:30",
@@ -3357,17 +3359,17 @@
     {
       "data": "08/04/2026 15:20:27",
       "origem": "Evento Denim",
-      "perfil": "Qualificação_incompleta"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "08/04/2026 15:20:34",
       "origem": "Evento Denim",
-      "perfil": "Qualificação_incompleta"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "08/04/2026 15:20:50",
       "origem": "Evento Denim",
-      "perfil": "Qualificação_incompleta"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "08/04/2026 15:21:08",
@@ -3712,7 +3714,7 @@
     {
       "data": "14/04/2026 12:21:07",
       "origem": "Site",
-      "perfil": "Desqualificado"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "14/04/2026 12:43:02",
@@ -3833,6 +3835,41 @@
       "data": "16/04/2026 14:29:16",
       "origem": "Site",
       "perfil": "Desqualificado"
+    },
+    {
+      "data": "16/04/2026 16:43:31",
+      "origem": "Orgânico",
+      "perfil": "Em atendimento"
+    },
+    {
+      "data": "16/04/2026 16:51:56",
+      "origem": "Orgânico",
+      "perfil": "Suporte"
+    },
+    {
+      "data": "16/04/2026 17:18:21",
+      "origem": "Site",
+      "perfil": "Em atendimento"
+    },
+    {
+      "data": "16/04/2026 19:47:15",
+      "origem": "[SALES] Chanel",
+      "perfil": "Desqualificado"
+    },
+    {
+      "data": "16/04/2026 20:00:50",
+      "origem": "Bio Instagram",
+      "perfil": "Em atendimento"
+    },
+    {
+      "data": "16/04/2026 21:03:09",
+      "origem": "Site",
+      "perfil": "Desqualificado"
+    },
+    {
+      "data": "16/04/2026 23:30:55",
+      "origem": "Site",
+      "perfil": "Em atendimento"
     }
   ]
 }
