@@ -93,7 +93,7 @@
           <Chevron open={open} />
         </button>
         {open && (
-          <div className="absolute z-30 mt-1.5 w-full min-w-[220px] bg-[#1a1d26]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden">
+          <div className="absolute left-0 right-0 z-50 mt-1.5 bg-[#1a1d26]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden">
             <label className="flex items-center gap-2.5 px-3.5 py-2.5 hover:bg-white/5 cursor-pointer border-b border-white/5">
               <input type="checkbox" checked={allSelected} onChange={toggleAll} />
               <span className="text-sm font-medium text-white">Selecionar todas</span>
@@ -133,7 +133,7 @@
           <Chevron open={open} />
         </button>
         {open && (
-          <div className="absolute z-30 mt-1.5 w-full min-w-[160px] bg-[#1a1d26]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden max-h-72 overflow-y-auto py-1">
+          <div className="absolute left-0 right-0 z-50 mt-1.5 bg-[#1a1d26]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden max-h-72 overflow-y-auto py-1">
             <button type="button" onClick={() => { onChange(null); setOpen(false); }}
               className={`w-full text-left px-3.5 py-2 text-sm hover:bg-white/5 ${isDefault ? "text-brand-pink" : "text-slate-200"}`}>
               {placeholder}
@@ -216,14 +216,14 @@
     const monthOptions = MONTH_LABELS_FULL.map((l, i) => ({ value: i + 1, label: l }));
 
     return (
-      <section className="card card-gradient-border p-5 lg:p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+      <section className="card card-gradient-border p-5 lg:p-6 relative z-40">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
           <MultiSelect label="Origem" options={origens} selected={origemSel} onChange={setOrigemSel} />
           <MultiSelect label="Perfil" options={perfis}  selected={perfilSel} onChange={setPerfilSel} />
           <SingleSelect label="Ano"   options={yearOptions}  value={year}  onChange={setYear}  placeholder="Todos" />
           <SingleSelect label="Mês"   options={monthOptions} value={month} onChange={setMonth} placeholder="Todos" />
           <button type="button" onClick={onClear}
-            className="h-[42px] text-sm text-slate-300 border border-white/10 rounded-xl px-4 hover:text-white hover:border-brand-pink hover:bg-brand-pink/10 transition">
+            className="h-[42px] w-full text-sm text-slate-300 border border-white/10 rounded-xl px-4 hover:text-white hover:border-brand-pink hover:bg-brand-pink/10 transition">
             Limpar filtros
           </button>
         </div>
@@ -283,11 +283,11 @@
     const palette = ["#ff5a8a","#7c5cff","#ff9b6a","#47c8d4","#b877ff","#ff6fbb"];
     const sortedOrigens = [...origens].sort((a, b) => (originCounts[b] || 0) - (originCounts[a] || 0));
     return (
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <section className="relative z-0 grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className="lg:col-span-1">
           <CentralKpi total={total} sql={sql} sqlPct={sqlPct} />
         </div>
-        <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-3.5">
+        <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-3.5">
           {sortedOrigens.map((o, i) => (
             <OriginCard
               key={o}
@@ -622,7 +622,7 @@
             origens={visibleOrigens}
           />
 
-          <section className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <section className="relative z-0 grid grid-cols-1 gap-5">
             <ChartCard title="Origem × SQLs" subtitle="Leads qualificados por canal">
               <SqlByOriginChart data={sqlsByOriginData} />
             </ChartCard>
