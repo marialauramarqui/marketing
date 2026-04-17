@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-04-17T17:38:58.752Z",
+  "generated_at": "2026-04-17T19:11:57.062Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "Leads",
   "total_leads": 765,
-  "total_sql": 79,
-  "sql_pct": 10.33,
+  "total_sql": 78,
+  "sql_pct": 10.2,
   "perfis": [
     "Pro",
     "Starter",
@@ -26,11 +26,11 @@
     "Qualificação incompleta": 513,
     "Multimarca": 64,
     "Qualificado (Sem Faixa)": 3,
-    "Starter": 58,
+    "Starter": 57,
     "Suporte": 45,
     "Pro": 18,
     "Desqualificado": 41,
-    "Em atendimento": 23
+    "Em atendimento": 24
   },
   "origem_counts": {
     "[SALES] Chanel": 42,
@@ -40,7 +40,7 @@
     "Evento Denim": 467
   },
   "sql_by_origem": {
-    "Site": 51,
+    "Site": 50,
     "Orgânico": 9,
     "Bio Instagram": 2,
     "Evento Denim": 9,
@@ -3425,7 +3425,7 @@
     {
       "data": "08/04/2026 15:52:59",
       "origem": "Site",
-      "perfil": "Starter"
+      "perfil": "Em atendimento"
     },
     {
       "data": "08/04/2026 16:02:07",
