@@ -31,17 +31,28 @@
 
       <header class="login-head">
         <h1 id="login-title">Bem-vinda de volta</h1>
-        <p>Digite o código de acesso para abrir o dashboard.</p>
+        <p>Digite a senha de acesso para abrir o dashboard.</p>
       </header>
 
-      <form id="pin-form" class="pin-form" autocomplete="off" novalidate>
-        <div class="pin-inputs" id="pin-inputs">
-          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 1" />
-          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 2" />
-          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 3" />
-          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 4" />
-          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 5" />
-          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 6" />
+      <form id="login-form" class="login-form" autocomplete="off" novalidate>
+        <div class="field" id="field-password">
+          <span class="field-icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" width="16" height="16">
+              <path d="M6 9V6.5a4 4 0 0 1 8 0V9M5 9h10a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <input id="password" type="password" name="password" placeholder="Senha"
+                 autocomplete="current-password" spellcheck="false" aria-label="Senha" />
+          <button type="button" class="field-toggle" id="toggle-pw"
+                  aria-label="Mostrar senha" aria-pressed="false">
+            <svg class="icon-eye" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+              <path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <circle cx="10" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <svg class="icon-eye-off" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+              <path d="M3 3l14 14M8 5.3A7.6 7.6 0 0 1 10 5c5 0 8 5 8 5a12.6 12.6 0 0 1-2.3 2.8M6.2 6.4A12.6 12.6 0 0 0 2 10s3 5 8 5a7.6 7.6 0 0 0 3-.6M8.5 8.6a2.4 2.4 0 0 0 3 3.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
 
         <div class="pin-msg" id="pin-msg" aria-live="polite"></div>

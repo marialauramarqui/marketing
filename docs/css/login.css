@@ -177,46 +177,79 @@ html, body {
   font-size: 13.5px;
 }
 
-/* ---------- PIN ---------- */
-.pin-form { display: flex; flex-direction: column; gap: 18px; }
+/* ---------- Senha ---------- */
+.login-form { display: flex; flex-direction: column; gap: 18px; }
 
-.pin-inputs {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
-}
-.pin-inputs input {
-  aspect-ratio: 1 / 1.15;
-  width: 100%;
+.field {
+  position: relative;
+  display: flex;
+  align-items: center;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-strong);
   border-radius: 12px;
-  color: var(--text);
-  font-size: 22px;
-  font-weight: 600;
-  text-align: center;
-  outline: none;
-  caret-color: var(--accent);
-  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease, transform .18s ease;
-  -moz-appearance: textfield;
+  padding: 0 12px;
+  height: 48px;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.pin-inputs input::-webkit-outer-spin-button,
-.pin-inputs input::-webkit-inner-spin-button {
-  -webkit-appearance: none; margin: 0;
-}
-.pin-inputs input:focus {
+.field:focus-within {
   border-color: var(--accent);
-  background: rgba(255, 90, 138, 0.08);
-  box-shadow: 0 0 0 4px rgba(255, 90, 138, 0.12), 0 0 20px rgba(255, 90, 138, 0.18);
+  background: rgba(255, 90, 138, 0.06);
+  box-shadow: 0 0 0 4px rgba(255, 90, 138, 0.12), 0 0 20px rgba(255, 90, 138, 0.14);
 }
-.pin-inputs input.filled {
-  border-color: rgba(124, 92, 255, 0.55);
-  background: rgba(124, 92, 255, 0.10);
+.field-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  margin-right: 10px;
+}
+.field:focus-within .field-icon { color: var(--accent); }
+
+.field input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--text);
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  padding: 0;
+  caret-color: var(--accent);
+}
+.field input::placeholder { color: var(--text-dim); opacity: 0.8; }
+.field input:-webkit-autofill {
+  -webkit-text-fill-color: var(--text);
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 9999s;
 }
 
-.pin-inputs.shake { animation: shake .45s cubic-bezier(.36,.07,.19,.97); }
-.pin-inputs.error input { border-color: rgba(255, 79, 107, 0.55); background: rgba(255, 79, 107, 0.08); }
-.pin-inputs.success input { border-color: rgba(46, 204, 113, 0.55); background: rgba(46, 204, 113, 0.08); }
+.field-toggle {
+  background: transparent;
+  border: 0;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .15s ease, background .15s ease;
+}
+.field-toggle:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.field-toggle .icon-eye-off { display: none; }
+.field-toggle[aria-pressed="true"] .icon-eye     { display: none; }
+.field-toggle[aria-pressed="true"] .icon-eye-off { display: block; }
+
+.field.shake { animation: shake .45s cubic-bezier(.36,.07,.19,.97); }
+.field.error {
+  border-color: rgba(255, 79, 107, 0.6);
+  background: rgba(255, 79, 107, 0.06);
+  box-shadow: 0 0 0 4px rgba(255, 79, 107, 0.10);
+}
+.field.success {
+  border-color: rgba(46, 204, 113, 0.55);
+  background: rgba(46, 204, 113, 0.06);
+}
 
 @keyframes shake {
   10%, 90% { transform: translateX(-2px); }
@@ -282,7 +315,7 @@ html, body {
 /* ---------- Small screens ---------- */
 @media (max-width: 420px) {
   .login-card { padding: 26px 22px 20px; }
-  .pin-inputs { gap: 8px; }
-  .pin-inputs input { font-size: 20px; border-radius: 10px; }
+  .field { height: 46px; }
+  .field input { font-size: 14px; }
   .login-head h1 { font-size: 20px; }
 }

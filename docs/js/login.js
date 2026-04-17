@@ -1,8 +1,8 @@
 (() => {
   "use strict";
 
-  // Senha de acesso (6 dígitos). Verificação client-side — segurança básica.
-  const ACCESS_PIN = "196148";
+  // Senha de acesso. Verificação client-side — segurança básica.
+  const ACCESS_PASSWORD = "Marketing1961";
   const AUTH_KEY = "vesti.auth.ok";
   const AUTH_TTL_MS = 1000 * 60 * 60 * 8; // 8 horas
 
@@ -18,92 +18,59 @@
     }
   } catch (_) { /* ignore */ }
 
-  const form   = document.getElementById("pin-form");
-  const inputs = Array.from(document.querySelectorAll("#pin-inputs input"));
-  const wrap   = document.getElementById("pin-inputs");
-  const msg    = document.getElementById("pin-msg");
-  const btn    = document.getElementById("btn-enter");
+  const form    = document.getElementById("login-form");
+  const field   = document.getElementById("field-password");
+  const input   = document.getElementById("password");
+  const toggle  = document.getElementById("toggle-pw");
+  const msg     = document.getElementById("pin-msg");
+  const btn     = document.getElementById("btn-enter");
 
-  const getPin = () => inputs.map(i => i.value).join("");
   const setMsg = (text, kind = "") => {
     msg.textContent = text;
     msg.classList.remove("is-error", "is-ok");
     if (kind) msg.classList.add(`is-${kind}`);
   };
-  const updateBtn = () => { btn.disabled = getPin().length !== inputs.length; };
-  const clearAll = () => {
-    inputs.forEach(i => { i.value = ""; i.classList.remove("filled"); });
+  const updateBtn = () => { btn.disabled = input.value.length === 0; };
+
+  input.addEventListener("input", () => {
+    field.classList.remove("error");
+    setMsg("");
     updateBtn();
-  };
+  });
 
-  inputs.forEach((input, idx) => {
-    input.addEventListener("input", (e) => {
-      const v = input.value.replace(/\D/g, "").slice(-1);
-      input.value = v;
-      input.classList.toggle("filled", !!v);
-      wrap.classList.remove("error");
-      setMsg("");
-      if (v && idx < inputs.length - 1) inputs[idx + 1].focus();
-      updateBtn();
-      if (getPin().length === inputs.length) form.requestSubmit();
-    });
-
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Backspace" && !input.value && idx > 0) {
-        inputs[idx - 1].focus();
-        inputs[idx - 1].value = "";
-        inputs[idx - 1].classList.remove("filled");
-        updateBtn();
-        e.preventDefault();
-      }
-      if (e.key === "ArrowLeft"  && idx > 0)                inputs[idx - 1].focus();
-      if (e.key === "ArrowRight" && idx < inputs.length - 1) inputs[idx + 1].focus();
-    });
-
-    input.addEventListener("paste", (e) => {
-      e.preventDefault();
-      const digits = (e.clipboardData || window.clipboardData).getData("text")
-        .replace(/\D/g, "").slice(0, inputs.length);
-      if (!digits) return;
-      digits.split("").forEach((d, i) => {
-        inputs[i].value = d;
-        inputs[i].classList.add("filled");
-      });
-      const next = Math.min(digits.length, inputs.length - 1);
-      inputs[next].focus();
-      updateBtn();
-      if (getPin().length === inputs.length) form.requestSubmit();
-    });
-
-    input.addEventListener("focus", () => input.select());
+  toggle.addEventListener("click", () => {
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    toggle.setAttribute("aria-pressed", show ? "true" : "false");
+    toggle.setAttribute("aria-label", show ? "Ocultar senha" : "Mostrar senha");
+    input.focus();
   });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const pin = getPin();
-    if (pin.length !== inputs.length) return;
+    const pw = input.value;
+    if (!pw) return;
 
-    if (pin === ACCESS_PIN) {
-      wrap.classList.remove("error");
-      wrap.classList.add("success");
+    if (pw === ACCESS_PASSWORD) {
+      field.classList.remove("error");
+      field.classList.add("success");
       setMsg("Acesso liberado. Carregando dashboard…", "ok");
       try {
         sessionStorage.setItem(AUTH_KEY, JSON.stringify({ ts: Date.now() }));
       } catch (_) { /* ignore */ }
       setTimeout(() => window.location.replace("index.html"), 520);
     } else {
-      wrap.classList.add("error", "shake");
-      setMsg("Código incorreto. Tente novamente.", "error");
+      field.classList.add("error", "shake");
+      setMsg("Senha incorreta. Tente novamente.", "error");
       setTimeout(() => {
-        wrap.classList.remove("shake");
-        clearAll();
-        inputs[0].focus();
+        field.classList.remove("shake");
+        input.select();
       }, 480);
     }
   });
 
   // Foco inicial
-  window.addEventListener("load", () => inputs[0]?.focus());
+  window.addEventListener("load", () => input?.focus());
 
   /* ---------- Canvas: rede de leads (conexões) ---------- */
   const canvas = document.getElementById("leads-canvas");
