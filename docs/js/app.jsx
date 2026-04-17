@@ -6,7 +6,7 @@
   const {
     ResponsiveContainer,
     AreaChart, Area,
-    BarChart, Bar,
+    BarChart, Bar, Cell,
     XAxis, YAxis, CartesianGrid, Tooltip,
     Legend,
   } = Recharts;
@@ -68,17 +68,33 @@
     const ref = useRef(null);
     useClickOutside(ref, () => setOpen(false));
 
-    const allSelected = options.length > 0 && selected.length === options.length;
+    // Aceita string[] ou {value,label}[]
+    const opts = useMemo(
+      () => (options || []).map(o =>
+        (o !== null && typeof o === "object")
+          ? { value: o.value, label: o.label }
+          : { value: o, label: String(o) }
+      ),
+      [options]
+    );
+    const values = opts.map(o => o.value);
+    const allSelected  = values.length > 0 && selected.length === values.length;
     const noneSelected = selected.length === 0;
+
+    const getLabel = (v) => {
+      const hit = opts.find(o => o.value === v);
+      return hit ? hit.label : String(v);
+    };
+
     const summary =
       noneSelected || allSelected ? placeholder
-      : selected.length === 1 ? selected[0]
+      : selected.length === 1 ? getLabel(selected[0])
       : `${selected.length} selecionadas`;
 
-    const toggle = (opt) => {
-      onChange(selected.includes(opt) ? selected.filter(s => s !== opt) : [...selected, opt]);
+    const toggle = (v) => {
+      onChange(selected.includes(v) ? selected.filter(s => s !== v) : [...selected, v]);
     };
-    const toggleAll = () => onChange(allSelected ? [] : [...options]);
+    const toggleAll = () => onChange(allSelected ? [] : [...values]);
 
     return (
       <div className="relative" ref={ref}>
@@ -99,52 +115,14 @@
               <span className="text-sm font-medium text-white">Selecionar todas</span>
             </label>
             <div className="max-h-60 overflow-y-auto py-1">
-              {options.map(opt => (
-                <label key={opt}
+              {opts.map(o => (
+                <label key={String(o.value)}
                   className="flex items-center gap-2.5 px-3.5 py-2 hover:bg-white/5 cursor-pointer">
-                  <input type="checkbox" checked={selected.includes(opt)} onChange={() => toggle(opt)} />
-                  <span className="text-sm text-slate-200">{opt}</span>
+                  <input type="checkbox" checked={selected.includes(o.value)} onChange={() => toggle(o.value)} />
+                  <span className="text-sm text-slate-200">{o.label}</span>
                 </label>
               ))}
             </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  function SingleSelect({ label, options, value, onChange, placeholder = "Todos" }) {
-    const [open, setOpen] = useState(false);
-    const ref = useRef(null);
-    useClickOutside(ref, () => setOpen(false));
-
-    const current = options.find(o => o.value === value);
-    const display = current ? current.label : placeholder;
-    const isDefault = value === null || value === undefined || value === "";
-
-    return (
-      <div className="relative" ref={ref}>
-        <label className="block text-[11px] uppercase tracking-[1.2px] text-slate-400 mb-1.5">
-          {label}
-        </label>
-        <button type="button" onClick={() => setOpen(o => !o)}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-left flex items-center justify-between gap-2 hover:border-brand-pink/50 focus:outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 transition">
-          <span className={isDefault ? "text-slate-400" : "text-white"}>{display}</span>
-          <Chevron open={open} />
-        </button>
-        {open && (
-          <div className="absolute left-0 right-0 z-50 mt-1.5 bg-[#1a1d26]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden max-h-72 overflow-y-auto py-1">
-            <button type="button" onClick={() => { onChange(null); setOpen(false); }}
-              className={`w-full text-left px-3.5 py-2 text-sm hover:bg-white/5 ${isDefault ? "text-brand-pink" : "text-slate-200"}`}>
-              {placeholder}
-            </button>
-            {options.map(o => (
-              <button key={String(o.value)} type="button"
-                onClick={() => { onChange(o.value); setOpen(false); }}
-                className={`w-full text-left px-3.5 py-2 text-sm hover:bg-white/5 ${o.value === value ? "text-brand-pink" : "text-slate-200"}`}>
-                {o.label}
-              </button>
-            ))}
           </div>
         )}
       </div>
@@ -218,10 +196,10 @@
     return (
       <section className="card card-gradient-border p-5 lg:p-6 relative z-40">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-          <MultiSelect label="Origem" options={origens} selected={origemSel} onChange={setOrigemSel} />
-          <MultiSelect label="Perfil" options={perfis}  selected={perfilSel} onChange={setPerfilSel} />
-          <SingleSelect label="Ano"   options={yearOptions}  value={year}  onChange={setYear}  placeholder="Todos" />
-          <SingleSelect label="Mês"   options={monthOptions} value={month} onChange={setMonth} placeholder="Todos" />
+          <MultiSelect label="Origem" options={origens}       selected={origemSel} onChange={setOrigemSel} placeholder="Todas" />
+          <MultiSelect label="Perfil" options={perfis}        selected={perfilSel} onChange={setPerfilSel} placeholder="Todos" />
+          <MultiSelect label="Ano"    options={yearOptions}   selected={year}      onChange={setYear}      placeholder="Todos" />
+          <MultiSelect label="Mês"    options={monthOptions}  selected={month}     onChange={setMonth}     placeholder="Todos" />
           <button type="button" onClick={onClear}
             className="h-[42px] w-full text-sm text-slate-300 border border-white/10 rounded-xl px-4 hover:text-white hover:border-brand-pink hover:bg-brand-pink/10 transition">
             Limpar filtros
@@ -306,10 +284,11 @@
   const AXIS_STYLE = { fill: "#8b93a7", fontSize: 11 };
   const GRID_STROKE = "rgba(255,255,255,0.06)";
 
-  function SqlByOriginChart({ data }) {
+  function SqlByOriginChart({ data, onBarClick, activeOrigins }) {
     if (data.length === 0) {
       return <div className="h-[320px] grid place-items-center text-slate-500 text-sm">Sem dados para o filtro atual.</div>;
     }
+    const anyActive = activeOrigins && activeOrigins.length > 0;
     return (
       <div className="h-[320px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -318,6 +297,10 @@
               <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%"  stopColor="#ff5a8a" stopOpacity={1}/>
                 <stop offset="100%" stopColor="#7c5cff" stopOpacity={0.9}/>
+              </linearGradient>
+              <linearGradient id="barGradDim" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"  stopColor="#ff5a8a" stopOpacity={0.35}/>
+                <stop offset="100%" stopColor="#7c5cff" stopOpacity={0.25}/>
               </linearGradient>
             </defs>
             <CartesianGrid stroke={GRID_STROKE} vertical={false} />
@@ -331,21 +314,45 @@
               itemStyle={{ color: "#ff5a8a" }}
               formatter={(v) => [fmtNumber(v), "SQLs"]}
             />
-            <Bar dataKey="sqls" fill="url(#barGrad)" radius={[8,8,0,0]} maxBarSize={52}/>
+            <Bar
+              dataKey="sqls"
+              radius={[8,8,0,0]}
+              maxBarSize={52}
+              onClick={(entry) => onBarClick && entry && onBarClick(entry.origem)}
+              style={{ cursor: onBarClick ? "pointer" : "default" }}
+            >
+              {data.map((entry) => {
+                const active = !anyActive || activeOrigins.includes(entry.origem);
+                return (
+                  <Cell
+                    key={entry.origem}
+                    fill={active ? "url(#barGrad)" : "url(#barGradDim)"}
+                  />
+                );
+              })}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
     );
   }
 
-  function TrendChart({ data, granularity }) {
+  function TrendChart({ data, granularity, onPointClick }) {
     if (data.length === 0) {
       return <div className="h-[320px] grid place-items-center text-slate-500 text-sm">Sem dados para o filtro atual.</div>;
     }
     return (
       <div className="h-[320px]">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 12, right: 12, left: 0, bottom: 6 }}>
+          <AreaChart
+            data={data}
+            margin={{ top: 12, right: 12, left: 0, bottom: 6 }}
+            onClick={(e) => {
+              if (!onPointClick || !e || !e.activePayload || !e.activePayload[0]) return;
+              onPointClick(e.activePayload[0].payload);
+            }}
+            style={{ cursor: onPointClick && granularity !== "week" ? "pointer" : "default" }}
+          >
             <defs>
               <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%"  stopColor="#ff5a8a" stopOpacity={0.55}/>
@@ -440,8 +447,8 @@
 
     const [origemSel, setOrigemSel] = useState([]);
     const [perfilSel, setPerfilSel] = useState([]);
-    const [year, setYear]           = useState(null);
-    const [month, setMonth]         = useState(null);
+    const [year, setYear]           = useState(null); // null = não inicializado; [] = "Todos"
+    const [month, setMonth]         = useState([]);
 
     // Load + parse data
     useEffect(() => {
@@ -468,19 +475,20 @@
     }, [raw]);
 
     useEffect(() => {
-      if (year == null && years.length > 0) setYear(years[0]);
+      if (year === null && years.length > 0) setYear([years[0]]);
     }, [years, year]);
 
     // Filtered leads
     const filtered = useMemo(() => {
       if (!raw) return [];
+      const ySel = Array.isArray(year) ? year : [];
       return raw.leads.filter(l => {
         if (origemSel.length > 0 && !origemSel.includes(l.origem)) return false;
         if (perfilSel.length > 0 && !perfilSel.includes(l.perfil)) return false;
         if (l._d) {
-          if (year  != null && l._d.getFullYear() !== year)  return false;
-          if (month != null && l._d.getMonth() + 1 !== month) return false;
-        } else if (year != null || month != null) {
+          if (ySel.length  > 0 && !ySel.includes(l._d.getFullYear()))      return false;
+          if (month.length > 0 && !month.includes(l._d.getMonth() + 1))    return false;
+        } else if (ySel.length > 0 || month.length > 0) {
           return false;
         }
         return true;
@@ -520,37 +528,42 @@
 
     // Chart 2: trend over time — granularity depends on filters
     const { trendData, trendGranularity, trendSubtitle } = useMemo(() => {
-      if (!raw) return { trendData: [], trendGranularity: "month", trendSubtitle: "" };
+      if (!raw) return { trendData: [], trendGranularity: "month-of-year", trendSubtitle: "" };
+      const ySel = Array.isArray(year) ? year : [];
 
-      if (month != null) {
-        // Week granularity — 5 buckets
+      // Weekly view — exatamente 1 mês selecionado
+      if (month.length === 1) {
         const buckets = [0,0,0,0,0];
         for (const l of filtered) {
           if (!l._d) continue;
           const w = weekOfMonth(l._d);
           if (w >= 1 && w <= 5) buckets[w-1]++;
         }
+        const yearLabel = ySel.length === 1 ? ` · ${ySel[0]}` : "";
         return {
           trendData: buckets.map((v,i) => ({ label: `S${i+1}`, leads: v })),
           trendGranularity: "week",
-          trendSubtitle: `${MONTH_LABELS_FULL[month-1]}${year != null ? " de " + year : ""} · por semana`,
+          trendSubtitle: `${MONTH_LABELS_FULL[month[0]-1]}${yearLabel} · por semana`,
         };
       }
 
-      if (year != null) {
+      // Monthly view — exatamente 1 ano selecionado e nenhum mês específico
+      if (ySel.length === 1 && month.length === 0) {
         const buckets = Array(12).fill(0);
         for (const l of filtered) {
           if (!l._d) continue;
           buckets[l._d.getMonth()]++;
         }
         return {
-          trendData: buckets.map((v,i) => ({ label: MONTH_LABELS_SHORT[i], leads: v })),
-          trendGranularity: "month",
-          trendSubtitle: `${year} · por mês`,
+          trendData: buckets.map((v,i) => ({
+            label: MONTH_LABELS_SHORT[i], leads: v, year: ySel[0], month: i+1,
+          })),
+          trendGranularity: "month-of-year",
+          trendSubtitle: `${ySel[0]} · por mês`,
         };
       }
 
-      // All years → group by year-month
+      // Year-month view — qualquer outro caso
       const m = new Map();
       for (const l of filtered) {
         if (!l._d) continue;
@@ -561,17 +574,37 @@
       return {
         trendData: sorted.map(([k,v]) => {
           const [y,mo] = k.split("-");
-          return { label: `${MONTH_LABELS_SHORT[+mo-1]}/${y.slice(2)}`, leads: v };
+          return { label: `${MONTH_LABELS_SHORT[+mo-1]}/${y.slice(2)}`, leads: v, year: +y, month: +mo };
         }),
-        trendGranularity: "month",
-        trendSubtitle: "Todos os períodos · por mês",
+        trendGranularity: "year-month",
+        trendSubtitle: ySel.length === 0 ? "Todos os períodos · por mês" : `${ySel.join(", ")} · por mês`,
       };
     }, [filtered, year, month, raw]);
 
+    // --- cross-filter handlers ---
+    const toggleOrigem = useCallback((o) => {
+      if (!o) return;
+      setOrigemSel(sel => sel.includes(o) ? sel.filter(x => x !== o) : [...sel, o]);
+    }, []);
+
+    const handleTrendClick = useCallback((payload) => {
+      if (!payload) return;
+      if (trendGranularity === "week") return; // já na menor granularidade
+      if (trendGranularity === "month-of-year" && payload.month != null) {
+        setMonth(m => m.includes(payload.month) ? m.filter(x => x !== payload.month) : [...m, payload.month]);
+        return;
+      }
+      if (trendGranularity === "year-month" && payload.year != null && payload.month != null) {
+        // drill-in: foca naquele período específico
+        setYear([payload.year]);
+        setMonth([payload.month]);
+      }
+    }, [trendGranularity]);
+
     const clear = useCallback(() => {
       setOrigemSel([]); setPerfilSel([]);
-      setYear(years[0] ?? null); setMonth(null);
-    }, [years]);
+      setYear([]);      setMonth([]);
+    }, []);
 
     // --------------------------- render ---------------------------
     if (error) {
@@ -609,8 +642,8 @@
             years={years}
             origemSel={origemSel} setOrigemSel={setOrigemSel}
             perfilSel={perfilSel} setPerfilSel={setPerfilSel}
-            year={year}   setYear={setYear}
-            month={month} setMonth={setMonth}
+            year={year ?? []}  setYear={setYear}
+            month={month}      setMonth={setMonth}
             onClear={clear}
           />
 
@@ -623,11 +656,19 @@
           />
 
           <section className="relative z-0 grid grid-cols-1 gap-5">
-            <ChartCard title="Origem × SQLs" subtitle="Leads qualificados por canal">
-              <SqlByOriginChart data={sqlsByOriginData} />
+            <ChartCard title="Origem × SQLs" subtitle="Clique em uma barra para filtrar">
+              <SqlByOriginChart
+                data={sqlsByOriginData}
+                onBarClick={toggleOrigem}
+                activeOrigins={origemSel}
+              />
             </ChartCard>
             <ChartCard title="Evolução de Leads" subtitle={trendSubtitle}>
-              <TrendChart data={trendData} granularity={trendGranularity} />
+              <TrendChart
+                data={trendData}
+                granularity={trendGranularity}
+                onPointClick={handleTrendClick}
+              />
             </ChartCard>
           </section>
 
