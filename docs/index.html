@@ -3,6 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var AUTH_KEY = "vesti.auth.ok";
+      var TTL = 1000 * 60 * 60 * 8;
+      try {
+        var raw = sessionStorage.getItem(AUTH_KEY);
+        if (raw) {
+          var data = JSON.parse(raw);
+          if (data && data.ts && Date.now() - data.ts < TTL) return;
+        }
+      } catch (e) { /* ignore */ }
+      window.location.replace("login.html");
+    })();
+  </script>
   <title>Vesti · Dashboard de Leads</title>
   <link rel="stylesheet" href="css/style.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>

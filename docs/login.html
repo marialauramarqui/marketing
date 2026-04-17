@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vesti · Acesso</title>
+  <link rel="stylesheet" href="css/login.css" />
+  <script defer src="js/login.js"></script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+  <canvas id="leads-canvas" aria-hidden="true"></canvas>
+
+  <main class="login-wrap">
+    <section class="login-card" role="dialog" aria-labelledby="login-title">
+      <div class="brand">
+        <span class="brand-mark">
+          <span class="brand-dot"></span>
+          <span class="brand-ring"></span>
+        </span>
+        <div class="brand-text">
+          <span class="brand-name">Vesti</span>
+          <span class="brand-sub">Marketing · Leads</span>
+        </div>
+      </div>
+
+      <header class="login-head">
+        <h1 id="login-title">Bem-vinda de volta</h1>
+        <p>Digite o código de acesso para abrir o dashboard.</p>
+      </header>
+
+      <form id="pin-form" class="pin-form" autocomplete="off" novalidate>
+        <div class="pin-inputs" id="pin-inputs">
+          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 1" />
+          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 2" />
+          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 3" />
+          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 4" />
+          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 5" />
+          <input type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 6" />
+        </div>
+
+        <div class="pin-msg" id="pin-msg" aria-live="polite"></div>
+
+        <button type="submit" class="btn-enter" id="btn-enter" disabled>
+          <span>Entrar</span>
+          <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+            <path d="M4 10h11M11 6l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </form>
+
+      <footer class="login-foot">
+        <span class="dot"></span>
+        <span>Dashboard interno · acesso restrito</span>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
