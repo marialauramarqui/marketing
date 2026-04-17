@@ -117,7 +117,7 @@
           const d  = Math.hypot(dx, dy);
           if (d < LINK_DIST) {
             const alpha = (1 - d / LINK_DIST) * 0.35;
-            ctx.strokeStyle = `rgba(155,180,220,${alpha.toFixed(3)})`;
+            ctx.strokeStyle = `rgba(106,82,179,${(alpha * 0.55).toFixed(3)})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);

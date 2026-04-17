@@ -44,19 +44,19 @@
   </script>
 
   <style>
-    html, body { background: #0b0d12; color: #e9ecf3; }
+    html, body { background: #f7f4fb; color: #1a1635; }
     body {
       background:
-        radial-gradient(ellipse at top left, #2B0C55 0%, transparent 55%),
-        radial-gradient(ellipse at bottom right, #1a1635 0%, transparent 55%),
-        #0b0d12;
+        radial-gradient(ellipse at top left, #e9def5 0%, transparent 55%),
+        radial-gradient(ellipse at bottom right, #dff0e8 0%, transparent 55%),
+        #f7f4fb;
       min-height: 100vh;
     }
     .bg-grid {
       position: fixed; inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+        linear-gradient(rgba(43,12,85,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(43,12,85,0.05) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
       -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
@@ -64,22 +64,22 @@
     }
     .orb {
       position: fixed; border-radius: 50%;
-      filter: blur(80px); opacity: 0.5; pointer-events: none; z-index: 0;
+      filter: blur(80px); opacity: 0.28; pointer-events: none; z-index: 0;
       animation: drift 18s ease-in-out infinite;
     }
     .orb-1 { width:420px; height:420px; background: radial-gradient(circle,#6A52B3 0%,transparent 70%); top:-120px; left:-80px; }
     .orb-2 { width:520px; height:520px; background: radial-gradient(circle,#63C19B 0%,transparent 70%); bottom:-160px; right:-120px; animation-delay:-6s; }
-    .orb-3 { width:320px; height:320px; background: radial-gradient(circle,#549E86 0%,transparent 70%); top:40%; left:55%; opacity:0.3; animation-delay:-12s; }
+    .orb-3 { width:320px; height:320px; background: radial-gradient(circle,#549E86 0%,transparent 70%); top:40%; left:55%; opacity:0.2; animation-delay:-12s; }
     @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.08); } }
-    #leads-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.4; }
+    #leads-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.32; }
 
     .card {
-      background: rgba(24,27,34,0.72);
+      background: rgba(255,255,255,0.85);
       backdrop-filter: blur(18px) saturate(140%);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(43,12,85,0.08);
       border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+      box-shadow: 0 20px 60px rgba(43,12,85,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
     }
     .card-gradient-border { position: relative; }
     .card-gradient-border::before {
@@ -88,23 +88,24 @@
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
               mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor; mask-composite: exclude;
-      pointer-events: none; opacity: 0.55;
+      pointer-events: none; opacity: 0.45;
     }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 10px; height: 10px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.16); }
+    ::-webkit-scrollbar-thumb { background: rgba(43,12,85,0.14); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(43,12,85,0.26); }
 
     /* Checkbox accent */
     input[type="checkbox"] { accent-color: #6A52B3; }
 
-    /* Recharts tooltip dark style helper */
+    /* Recharts tooltip light style helper */
     .recharts-default-tooltip {
-      background: rgba(18,21,29,0.95) !important;
-      border: 1px solid rgba(255,255,255,0.08) !important;
+      background: rgba(255,255,255,0.96) !important;
+      border: 1px solid rgba(43,12,85,0.1) !important;
       border-radius: 10px !important;
+      color: #1a1635 !important;
     }
   </style>
 

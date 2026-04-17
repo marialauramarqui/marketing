@@ -1,15 +1,15 @@
 :root {
-  --bg: #0b0d12;
-  --bg-2: #12151d;
-  --surface: rgba(24, 27, 34, 0.72);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --text: #e9ecf3;
-  --text-dim: #8b93a7;
+  --bg: #f7f4fb;
+  --bg-2: #ffffff;
+  --surface: rgba(255, 255, 255, 0.88);
+  --border: rgba(43, 12, 85, 0.08);
+  --border-strong: rgba(43, 12, 85, 0.14);
+  --text: #1a1635;
+  --text-dim: #6473A0;
   --accent: #6A52B3;
   --accent-2: #63C19B;
-  --accent-glow: rgba(106, 82, 179, 0.48);
-  --accent-glow-2: rgba(99, 193, 155, 0.45);
+  --accent-glow: rgba(106, 82, 179, 0.35);
+  --accent-glow-2: rgba(99, 193, 155, 0.32);
   --danger: #ff4f6b;
   --ok: #63C19B;
   --radius: 18px;
@@ -21,8 +21,8 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: radial-gradient(ellipse at top left, #2B0C55 0%, transparent 55%),
-              radial-gradient(ellipse at bottom right, #1a1635 0%, transparent 55%),
+  background: radial-gradient(ellipse at top left, #e9def5 0%, transparent 55%),
+              radial-gradient(ellipse at bottom right, #dff0e8 0%, transparent 55%),
               var(--bg);
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -33,8 +33,8 @@ html, body {
 .bg-grid {
   position: fixed; inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    linear-gradient(rgba(43,12,85,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(43,12,85,0.05) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
   -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
@@ -47,7 +47,7 @@ html, body {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.55;
+  opacity: 0.3;
   animation: drift 18s ease-in-out infinite;
 }
 .orb-1 {
@@ -65,7 +65,7 @@ html, body {
   width: 320px; height: 320px;
   background: radial-gradient(circle, #549E86 0%, transparent 70%);
   top: 40%; left: 55%;
-  opacity: 0.35;
+  opacity: 0.2;
   animation-delay: -12s;
 }
 @keyframes drift {
@@ -78,7 +78,7 @@ html, body {
   width: 100%; height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.55;
+  opacity: 0.35;
 }
 
 /* ---------- Card ---------- */
@@ -101,8 +101,8 @@ html, body {
   border-radius: var(--radius);
   padding: 32px 30px 24px;
   box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 30px 80px rgba(43, 12, 85, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   position: relative;
   overflow: hidden;
   animation: card-in 0.6s cubic-bezier(.2,.9,.25,1) both;
@@ -119,7 +119,7 @@ html, body {
   -webkit-mask-composite: xor;
           mask-composite: exclude;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 @keyframes card-in {
@@ -156,7 +156,7 @@ html, body {
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand-name {
   font-weight: 700; font-size: 18px; letter-spacing: 0.3px;
-  background: linear-gradient(120deg, #fff 0%, #cfe8db 60%, #c0b6e5 100%);
+  background: linear-gradient(120deg, #2B0C55 0%, #6A52B3 60%, #549E86 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .brand-sub {
@@ -184,7 +184,7 @@ html, body {
   position: relative;
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.6);
   border: 1px solid var(--border-strong);
   border-radius: 12px;
   padding: 0 12px;
@@ -219,7 +219,7 @@ html, body {
 .field input::placeholder { color: var(--text-dim); opacity: 0.8; }
 .field input:-webkit-autofill {
   -webkit-text-fill-color: var(--text);
-  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.95) inset;
   transition: background-color 9999s;
 }
 
@@ -235,7 +235,7 @@ html, body {
   justify-content: center;
   transition: color .15s ease, background .15s ease;
 }
-.field-toggle:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.field-toggle:hover { color: var(--text); background: rgba(43,12,85,0.06); }
 .field-toggle .icon-eye-off { display: none; }
 .field-toggle[aria-pressed="true"] .icon-eye     { display: none; }
 .field-toggle[aria-pressed="true"] .icon-eye-off { display: block; }

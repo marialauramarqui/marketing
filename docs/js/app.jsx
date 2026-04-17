@@ -5,10 +5,10 @@
   const { useState, useEffect, useMemo, useRef, useCallback } = React;
   const {
     ResponsiveContainer,
-    AreaChart, Area,
+    LineChart, Line,
     BarChart, Bar, Cell,
     XAxis, YAxis, CartesianGrid, Tooltip,
-    Legend,
+    Legend, LabelList,
   } = Recharts;
 
   // --------------------------- constants ---------------------------
@@ -48,7 +48,7 @@
   function Chevron({ open }) {
     return (
       <svg viewBox="0 0 20 20" width="14" height="14"
-           className={`transition-transform ${open ? "rotate-180" : ""} text-slate-400`}>
+           className={`transition-transform ${open ? "rotate-180" : ""} text-slate-500`}>
         <path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.8"
               strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
@@ -98,28 +98,28 @@
 
     return (
       <div className="relative" ref={ref}>
-        <label className="block text-[11px] uppercase tracking-[1.2px] text-slate-400 mb-1.5">
+        <label className="block text-[11px] uppercase tracking-[1.2px] text-slate-500 mb-1.5">
           {label}
         </label>
         <button type="button" onClick={() => setOpen(o => !o)}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-left flex items-center justify-between gap-2 hover:border-brand-pink/50 focus:outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 transition">
-          <span className={noneSelected || allSelected ? "text-slate-400" : "text-white"}>
+          className="w-full bg-white/70 border border-[#2B0C55]/10 rounded-xl px-3.5 py-2.5 text-sm text-left flex items-center justify-between gap-2 hover:border-brand-pink/50 focus:outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 transition">
+          <span className={noneSelected || allSelected ? "text-slate-500" : "text-slate-900"}>
             {summary}
           </span>
           <Chevron open={open} />
         </button>
         {open && (
-          <div className="absolute left-0 right-0 z-50 mt-1.5 bg-[#1a1d26]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden">
-            <label className="flex items-center gap-2.5 px-3.5 py-2.5 hover:bg-white/5 cursor-pointer border-b border-white/5">
+          <div className="absolute left-0 right-0 z-50 mt-1.5 bg-white backdrop-blur-xl border border-[#2B0C55]/10 rounded-xl shadow-2xl overflow-hidden">
+            <label className="flex items-center gap-2.5 px-3.5 py-2.5 hover:bg-[#6A52B3]/5 cursor-pointer border-b border-[#2B0C55]/5">
               <input type="checkbox" checked={allSelected} onChange={toggleAll} />
-              <span className="text-sm font-medium text-white">Selecionar todas</span>
+              <span className="text-sm font-medium text-slate-900">Selecionar todas</span>
             </label>
             <div className="max-h-60 overflow-y-auto py-1">
               {opts.map(o => (
                 <label key={String(o.value)}
-                  className="flex items-center gap-2.5 px-3.5 py-2 hover:bg-white/5 cursor-pointer">
+                  className="flex items-center gap-2.5 px-3.5 py-2 hover:bg-[#6A52B3]/5 cursor-pointer">
                   <input type="checkbox" checked={selected.includes(o.value)} onChange={() => toggle(o.value)} />
-                  <span className="text-sm text-slate-200">{o.label}</span>
+                  <span className="text-sm text-slate-800">{o.label}</span>
                 </label>
               ))}
             </div>
@@ -136,38 +136,38 @@
       window.location.replace("login.html");
     };
     return (
-      <header className="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-white/5 backdrop-blur-sm">
+      <header className="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-[#2B0C55]/10 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <span className="relative inline-grid place-items-center w-9 h-9">
-            <span className="w-4 h-4 rounded-full shadow-[0_0_22px_rgba(106,82,179,.6),0_0_40px_rgba(99,193,155,.45)]"
+            <span className="w-4 h-4 rounded-full shadow-[0_0_22px_rgba(106,82,179,.55),0_0_40px_rgba(99,193,155,.4)]"
                   style={{ background: "linear-gradient(135deg,#6A52B3,#63C19B)" }} />
-            <span className="absolute inset-0 rounded-full border border-white/10 animate-[pulse_2.6s_ease-out_infinite]" />
+            <span className="absolute inset-0 rounded-full border border-[#2B0C55]/10 animate-[pulse_2.6s_ease-out_infinite]" />
           </span>
           <div className="flex flex-col leading-tight">
             <span className="text-[17px] font-bold tracking-wide"
-                  style={{ background:"linear-gradient(120deg,#fff 0%,#cfe8db 60%,#c0b6e5 100%)",
+                  style={{ background:"linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
                            WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
               Vesti
             </span>
-            <span className="text-[10.5px] uppercase tracking-[1.6px] text-slate-400">Marketing · Leads</span>
+            <span className="text-[10.5px] uppercase tracking-[1.6px] text-slate-500">Marketing · Leads</span>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="hidden md:flex flex-col items-end text-right">
-            <span className="text-xs text-slate-400">
+            <span className="text-xs text-slate-500">
               {total != null
-                ? <>Base atual · <span className="text-white font-medium">{fmtNumber(total)}</span> leads</>
+                ? <>Base atual · <span className="text-slate-900 font-medium">{fmtNumber(total)}</span> leads</>
                 : "Carregando…"}
             </span>
             {updatedAt && (
-              <span className="text-[11px] text-slate-500">
+              <span className="text-[11px] text-slate-400">
                 Atualizado em {new Date(updatedAt).toLocaleString("pt-BR")}
               </span>
             )}
           </div>
           <button onClick={logout}
-            className="inline-flex items-center gap-1.5 text-xs text-slate-300 border border-white/10 rounded-lg px-3 py-2 hover:text-white hover:border-brand-pink hover:bg-brand-pink/10 transition"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-700 border border-[#2B0C55]/10 rounded-lg px-3 py-2 hover:text-slate-900 hover:border-brand-pink hover:bg-brand-pink/10 transition"
             title="Encerrar sessão">
             <svg viewBox="0 0 20 20" width="14" height="14">
               <path d="M12 4H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7M9 10h8m0 0-3-3m3 3-3 3"
@@ -201,7 +201,7 @@
           <MultiSelect label="Ano"    options={yearOptions}   selected={year}      onChange={setYear}      placeholder="Todos" />
           <MultiSelect label="Mês"    options={monthOptions}  selected={month}     onChange={setMonth}     placeholder="Todos" />
           <button type="button" onClick={onClear}
-            className="h-[42px] w-full text-sm text-slate-300 border border-white/10 rounded-xl px-4 hover:text-white hover:border-brand-pink hover:bg-brand-pink/10 transition">
+            className="h-[42px] w-full text-sm text-slate-700 border border-[#2B0C55]/10 rounded-xl px-4 hover:text-slate-900 hover:border-brand-pink hover:bg-brand-pink/10 transition">
             Limpar filtros
           </button>
         </div>
@@ -213,11 +213,11 @@
   function CentralKpi({ total, sql, sqlPct }) {
     return (
       <div className="card card-gradient-border p-6 lg:p-7 flex flex-col justify-between min-h-[220px]"
-           style={{ background: "linear-gradient(145deg, rgba(106,82,179,.14), rgba(99,193,155,.12) 60%, rgba(24,27,34,.72))" }}>
+           style={{ background: "linear-gradient(145deg, rgba(106,82,179,.12), rgba(99,193,155,.10) 60%, rgba(255,255,255,.88))" }}>
         <div>
-          <span className="text-[11px] uppercase tracking-[1.6px] text-slate-300/90">Total de Leads</span>
+          <span className="text-[11px] uppercase tracking-[1.6px] text-slate-600">Total de Leads</span>
           <div className="mt-2 flex items-baseline gap-3">
-            <span className="text-5xl lg:text-6xl font-extrabold text-white leading-none tracking-tight">
+            <span className="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-none tracking-tight">
               {fmtNumber(total)}
             </span>
           </div>
@@ -225,14 +225,14 @@
 
         <div className="mt-6 flex items-center gap-3 flex-wrap">
           <div className="flex items-baseline gap-2">
-            <span className="text-[11px] uppercase tracking-[1.4px] text-slate-300/80">SQL</span>
-            <span className="text-2xl font-bold text-white">{fmtNumber(sql)}</span>
+            <span className="text-[11px] uppercase tracking-[1.4px] text-slate-600">SQL</span>
+            <span className="text-2xl font-bold text-slate-900">{fmtNumber(sql)}</span>
           </div>
           <span className="text-xs font-semibold text-brand-pink bg-brand-pink/10 border border-brand-pink/40 rounded-full px-2.5 py-0.5">
             {sqlPct.toFixed(1).replace(".", ",")}% da base
           </span>
         </div>
-        <span className="mt-1 block text-[11px] text-slate-400">
+        <span className="mt-1 block text-[11px] text-slate-500">
           Starter + Pro + Qualificado (sem faixa)
         </span>
       </div>
@@ -242,14 +242,14 @@
   function OriginCard({ name, value, pct, accent }) {
     return (
       <div className="card p-4 flex flex-col justify-between min-h-[92px]">
-        <span className="text-[10.5px] uppercase tracking-[1.3px] text-slate-400 line-clamp-1" title={name}>
+        <span className="text-[10.5px] uppercase tracking-[1.3px] text-slate-500 line-clamp-1" title={name}>
           {name}
         </span>
         <div className="mt-1.5 flex items-baseline justify-between gap-2">
-          <span className="text-2xl font-bold text-white leading-none">{fmtNumber(value)}</span>
-          <span className="text-[11px] text-slate-400">{pct.toFixed(1).replace(".", ",")}%</span>
+          <span className="text-2xl font-bold text-slate-900 leading-none">{fmtNumber(value)}</span>
+          <span className="text-[11px] text-slate-500">{pct.toFixed(1).replace(".", ",")}%</span>
         </div>
-        <div className="mt-2 h-1 w-full rounded-full bg-white/5 overflow-hidden">
+        <div className="mt-2 h-1 w-full rounded-full bg-[#2B0C55]/10 overflow-hidden">
           <div className="h-full rounded-full"
                style={{ width: `${Math.min(100, pct)}%`, background: accent }} />
         </div>
@@ -281,8 +281,8 @@
   }
 
   // --------------------------- Charts ---------------------------
-  const AXIS_STYLE = { fill: "#8b93a7", fontSize: 11 };
-  const GRID_STROKE = "rgba(255,255,255,0.06)";
+  const AXIS_STYLE = { fill: "#6473A0", fontSize: 11 };
+  const GRID_STROKE = "rgba(43,12,85,0.08)";
 
   function SqlByOriginChart({ data, onBarClick, activeOrigins }) {
     if (data.length === 0) {
@@ -292,26 +292,16 @@
     return (
       <div className="h-[320px]">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 12, right: 12, left: 0, bottom: 6 }}>
-            <defs>
-              <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"  stopColor="#6A52B3" stopOpacity={1}/>
-                <stop offset="100%" stopColor="#63C19B" stopOpacity={0.9}/>
-              </linearGradient>
-              <linearGradient id="barGradDim" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"  stopColor="#6A52B3" stopOpacity={0.35}/>
-                <stop offset="100%" stopColor="#63C19B" stopOpacity={0.25}/>
-              </linearGradient>
-            </defs>
+          <BarChart data={data} margin={{ top: 24, right: 12, left: 0, bottom: 6 }}>
             <CartesianGrid stroke={GRID_STROKE} vertical={false} />
             <XAxis dataKey="origem" tick={AXIS_STYLE} tickLine={false} axisLine={{ stroke: GRID_STROKE }}
                    interval={0} angle={-15} dy={8} height={50}/>
             <YAxis allowDecimals={false} tick={AXIS_STYLE} tickLine={false} axisLine={{ stroke: GRID_STROKE }}/>
             <Tooltip
-              cursor={{ fill: "rgba(106,82,179,0.10)" }}
-              contentStyle={{ background: "rgba(18,21,29,0.96)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10 }}
-              labelStyle={{ color: "#e9ecf3" }}
-              itemStyle={{ color: "#6A52B3" }}
+              cursor={{ fill: "rgba(99,193,155,0.10)" }}
+              contentStyle={{ background: "rgba(255,255,255,0.96)", border: "1px solid rgba(43,12,85,0.1)", borderRadius: 10 }}
+              labelStyle={{ color: "#1a1635" }}
+              itemStyle={{ color: "#549E86" }}
               formatter={(v) => [fmtNumber(v), "SQLs"]}
             />
             <Bar
@@ -326,10 +316,18 @@
                 return (
                   <Cell
                     key={entry.origem}
-                    fill={active ? "url(#barGrad)" : "url(#barGradDim)"}
+                    fill={active ? "#63C19B" : "rgba(99,193,155,0.3)"}
                   />
                 );
               })}
+              <LabelList
+                dataKey="sqls"
+                position="top"
+                fill="#2B0C55"
+                fontSize={11}
+                fontWeight={600}
+                formatter={(v) => fmtNumber(v)}
+              />
             </Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -342,37 +340,60 @@
       return <div className="h-[320px] grid place-items-center text-slate-500 text-sm">Sem dados para o filtro atual.</div>;
     }
     return (
-      <div className="h-[320px]">
+      <div className="h-[340px]">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
+          <LineChart
             data={data}
-            margin={{ top: 12, right: 12, left: 0, bottom: 6 }}
+            margin={{ top: 28, right: 18, left: 0, bottom: 6 }}
             onClick={(e) => {
               if (!onPointClick || !e || !e.activePayload || !e.activePayload[0]) return;
               onPointClick(e.activePayload[0].payload);
             }}
             style={{ cursor: onPointClick && granularity !== "week" ? "pointer" : "default" }}
           >
-            <defs>
-              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"  stopColor="#6A52B3" stopOpacity={0.55}/>
-                <stop offset="100%" stopColor="#63C19B" stopOpacity={0.05}/>
-              </linearGradient>
-            </defs>
             <CartesianGrid stroke={GRID_STROKE} vertical={false}/>
             <XAxis dataKey="label" tick={AXIS_STYLE} tickLine={false} axisLine={{ stroke: GRID_STROKE }}/>
             <YAxis allowDecimals={false} tick={AXIS_STYLE} tickLine={false} axisLine={{ stroke: GRID_STROKE }}/>
             <Tooltip
               cursor={{ stroke: "rgba(106,82,179,0.35)", strokeWidth: 1 }}
-              contentStyle={{ background: "rgba(18,21,29,0.96)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10 }}
-              labelStyle={{ color: "#e9ecf3" }}
-              itemStyle={{ color: "#6A52B3" }}
-              formatter={(v) => [fmtNumber(v), "Leads"]}
+              contentStyle={{ background: "rgba(255,255,255,0.96)", border: "1px solid rgba(43,12,85,0.1)", borderRadius: 10 }}
+              labelStyle={{ color: "#1a1635" }}
+              formatter={(v, name) => [fmtNumber(v), name]}
               labelFormatter={(l) => `${granularity === "week" ? "Semana " : ""}${l}`}
             />
-            <Area type="monotone" dataKey="leads" stroke="#6A52B3" strokeWidth={2.2}
-                  fill="url(#areaGrad)" activeDot={{ r: 5, stroke: "#fff", strokeWidth: 1.5 }}/>
-          </AreaChart>
+            <Legend
+              verticalAlign="top"
+              height={28}
+              iconType="circle"
+              wrapperStyle={{ fontSize: 12, color: "#4A467A" }}
+            />
+            <Line type="monotone" dataKey="leads" name="Leads totais"
+                  stroke="#6A52B3" strokeWidth={2.4}
+                  dot={{ r: 3, fill: "#6A52B3", stroke: "#6A52B3" }}
+                  activeDot={{ r: 5, stroke: "#fff", strokeWidth: 1.5 }}>
+              <LabelList
+                dataKey="leads"
+                position="top"
+                fill="#2B0C55"
+                fontSize={11}
+                fontWeight={600}
+                formatter={(v) => fmtNumber(v)}
+              />
+            </Line>
+            <Line type="monotone" dataKey="sqls" name="SQLs"
+                  stroke="#549E86" strokeWidth={2.4}
+                  dot={{ r: 3, fill: "#549E86", stroke: "#549E86" }}
+                  activeDot={{ r: 5, stroke: "#fff", strokeWidth: 1.5 }}>
+              <LabelList
+                dataKey="sqls"
+                position="bottom"
+                fill="#549E86"
+                fontSize={11}
+                fontWeight={600}
+                formatter={(v) => fmtNumber(v)}
+              />
+            </Line>
+          </LineChart>
         </ResponsiveContainer>
       </div>
     );
@@ -382,7 +403,7 @@
     return (
       <div className="card p-5 lg:p-6">
         <div className="mb-3 flex items-baseline justify-between">
-          <h2 className="text-[13px] uppercase tracking-[1.2px] text-slate-300">{title}</h2>
+          <h2 className="text-[13px] uppercase tracking-[1.2px] text-slate-700">{title}</h2>
           {subtitle && <span className="text-[11px] text-slate-500">{subtitle}</span>}
         </div>
         {children}
@@ -424,7 +445,7 @@
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < LINK_DIST) {
             const alpha = (1 - d / LINK_DIST) * 0.3;
-            ctx.strokeStyle = `rgba(155,180,220,${alpha.toFixed(3)})`;
+            ctx.strokeStyle = `rgba(106,82,179,${(alpha * 0.55).toFixed(3)})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
           }
@@ -533,15 +554,18 @@
 
       // Weekly view — exatamente 1 mês selecionado
       if (month.length === 1) {
-        const buckets = [0,0,0,0,0];
+        const buckets = Array(5).fill(null).map(() => ({ leads: 0, sqls: 0 }));
         for (const l of filtered) {
           if (!l._d) continue;
           const w = weekOfMonth(l._d);
-          if (w >= 1 && w <= 5) buckets[w-1]++;
+          if (w >= 1 && w <= 5) {
+            buckets[w-1].leads++;
+            if (isSqlLead(l)) buckets[w-1].sqls++;
+          }
         }
         const yearLabel = ySel.length === 1 ? ` · ${ySel[0]}` : "";
         return {
-          trendData: buckets.map((v,i) => ({ label: `S${i+1}`, leads: v })),
+          trendData: buckets.map((b,i) => ({ label: `S${i+1}`, leads: b.leads, sqls: b.sqls })),
           trendGranularity: "week",
           trendSubtitle: `${MONTH_LABELS_FULL[month[0]-1]}${yearLabel} · por semana`,
         };
@@ -549,14 +573,16 @@
 
       // Monthly view — exatamente 1 ano selecionado e nenhum mês específico
       if (ySel.length === 1 && month.length === 0) {
-        const buckets = Array(12).fill(0);
+        const buckets = Array(12).fill(null).map(() => ({ leads: 0, sqls: 0 }));
         for (const l of filtered) {
           if (!l._d) continue;
-          buckets[l._d.getMonth()]++;
+          const mo = l._d.getMonth();
+          buckets[mo].leads++;
+          if (isSqlLead(l)) buckets[mo].sqls++;
         }
         return {
-          trendData: buckets.map((v,i) => ({
-            label: MONTH_LABELS_SHORT[i], leads: v, year: ySel[0], month: i+1,
+          trendData: buckets.map((b,i) => ({
+            label: MONTH_LABELS_SHORT[i], leads: b.leads, sqls: b.sqls, year: ySel[0], month: i+1,
           })),
           trendGranularity: "month-of-year",
           trendSubtitle: `${ySel[0]} · por mês`,
@@ -568,13 +594,16 @@
       for (const l of filtered) {
         if (!l._d) continue;
         const key = `${l._d.getFullYear()}-${String(l._d.getMonth()+1).padStart(2,"0")}`;
-        m.set(key, (m.get(key) || 0) + 1);
+        const b = m.get(key) || { leads: 0, sqls: 0 };
+        b.leads++;
+        if (isSqlLead(l)) b.sqls++;
+        m.set(key, b);
       }
       const sorted = [...m.entries()].sort(([a],[b]) => a.localeCompare(b));
       return {
-        trendData: sorted.map(([k,v]) => {
+        trendData: sorted.map(([k,b]) => {
           const [y,mo] = k.split("-");
-          return { label: `${MONTH_LABELS_SHORT[+mo-1]}/${y.slice(2)}`, leads: v, year: +y, month: +mo };
+          return { label: `${MONTH_LABELS_SHORT[+mo-1]}/${y.slice(2)}`, leads: b.leads, sqls: b.sqls, year: +y, month: +mo };
         }),
         trendGranularity: "year-month",
         trendSubtitle: ySel.length === 0 ? "Todos os períodos · por mês" : `${ySel.join(", ")} · por mês`,
@@ -612,9 +641,9 @@
         <>
           <Header total={null} updatedAt={null} />
           <main className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8">
-            <div className="card p-8 text-center text-slate-300">
+            <div className="card p-8 text-center text-slate-700">
               <p className="text-brand-pink font-medium mb-2">Falha ao carregar os dados</p>
-              <p className="text-sm text-slate-400">{error}</p>
+              <p className="text-sm text-slate-500">{error}</p>
             </div>
           </main>
         </>
@@ -626,7 +655,7 @@
         <>
           <Header total={null} updatedAt={null} />
           <main className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8">
-            <div className="card p-12 text-center text-slate-400 text-sm">Carregando dados…</div>
+            <div className="card p-12 text-center text-slate-500 text-sm">Carregando dados…</div>
           </main>
         </>
       );
@@ -672,7 +701,7 @@
             </ChartCard>
           </section>
 
-          <footer className="text-center text-[11px] text-slate-500 pt-4 pb-6">
+          <footer className="text-center text-[11px] text-slate-400 pt-4 pb-6">
             Atualizado automaticamente todo dia às 04:30 BRT.
           </footer>
         </main>
