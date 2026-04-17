@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-04-17T15:27:56.435Z",
+  "generated_at": "2026-04-17T17:38:58.752Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "Leads",
-  "total_leads": 763,
+  "total_leads": 765,
   "total_sql": 79,
-  "sql_pct": 10.35,
+  "sql_pct": 10.33,
   "perfis": [
     "Pro",
     "Starter",
@@ -19,32 +19,30 @@
     "[SALES] Chanel",
     "Bio Instagram",
     "Evento Denim",
-    "Número BIO",
     "Orgânico",
     "Site"
   ],
   "perfil_counts": {
-    "Qualificação incompleta": 514,
+    "Qualificação incompleta": 513,
     "Multimarca": 64,
     "Qualificado (Sem Faixa)": 3,
     "Starter": 58,
-    "Suporte": 43,
+    "Suporte": 45,
     "Pro": 18,
     "Desqualificado": 41,
-    "Em atendimento": 22
+    "Em atendimento": 23
   },
   "origem_counts": {
     "[SALES] Chanel": 42,
-    "Site": 181,
-    "Número BIO": 16,
+    "Site": 183,
+    "Bio Instagram": 22,
     "Orgânico": 51,
-    "Evento Denim": 467,
-    "Bio Instagram": 6
+    "Evento Denim": 467
   },
   "sql_by_origem": {
     "Site": 51,
     "Orgânico": 9,
-    "Número BIO": 2,
+    "Bio Instagram": 2,
     "Evento Denim": 9,
     "[SALES] Chanel": 8
   },
@@ -71,7 +69,7 @@
     },
     {
       "data": "23/03/2026 10:13:48",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Multimarca"
     },
     {
@@ -111,7 +109,7 @@
     },
     {
       "data": "23/03/2026 22:51:48",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Multimarca"
     },
     {
@@ -341,7 +339,7 @@
     },
     {
       "data": "25/03/2026 22:37:06",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Qualificação incompleta"
     },
     {
@@ -351,7 +349,7 @@
     },
     {
       "data": "26/03/2026 07:56:21",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Qualificação incompleta"
     },
     {
@@ -576,7 +574,7 @@
     },
     {
       "data": "29/03/2026 10:25:50",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Multimarca"
     },
     {
@@ -586,7 +584,7 @@
     },
     {
       "data": "29/03/2026 12:12:07",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Qualificação incompleta"
     },
     {
@@ -596,7 +594,7 @@
     },
     {
       "data": "29/03/2026 17:37:50",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Starter"
     },
     {
@@ -691,7 +689,7 @@
     },
     {
       "data": "31/03/2026 09:07:13",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Qualificação incompleta"
     },
     {
@@ -701,7 +699,7 @@
     },
     {
       "data": "31/03/2026 13:15:48",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Starter"
     },
     {
@@ -726,7 +724,7 @@
     },
     {
       "data": "31/03/2026 15:50:44",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Multimarca"
     },
     {
@@ -826,12 +824,12 @@
     },
     {
       "data": "03/04/2026 10:16:14",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Qualificação incompleta"
     },
     {
       "data": "03/04/2026 10:46:28",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Qualificação incompleta"
     },
     {
@@ -922,7 +920,7 @@
     {
       "data": "05/04/2026 13:12:54",
       "origem": "[SALES] Chanel",
-      "perfil": "Qualificação incompleta"
+      "perfil": "Em atendimento"
     },
     {
       "data": "05/04/2026 15:08:19",
@@ -936,12 +934,12 @@
     },
     {
       "data": "05/04/2026 18:10:16",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Qualificação incompleta"
     },
     {
       "data": "05/04/2026 19:25:38",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Multimarca"
     },
     {
@@ -951,7 +949,7 @@
     },
     {
       "data": "06/04/2026 08:39:37",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Qualificação incompleta"
     },
     {
@@ -3471,7 +3469,7 @@
     },
     {
       "data": "09/04/2026 17:33:55",
-      "origem": "Número BIO",
+      "origem": "Bio Instagram",
       "perfil": "Multimarca"
     },
     {
@@ -3868,6 +3866,16 @@
       "data": "17/04/2026 09:59:24",
       "origem": "Site",
       "perfil": "Em atendimento"
+    },
+    {
+      "data": "17/04/2026 12:37:20",
+      "origem": "Site",
+      "perfil": "Suporte"
+    },
+    {
+      "data": "17/04/2026 13:46:58",
+      "origem": "Site",
+      "perfil": "Suporte"
     }
   ]
 }
