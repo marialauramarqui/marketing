@@ -265,9 +265,21 @@
     );
   }
 
-  function PerfilSqlCard({ name, value, pct, accent }) {
+  function PerfilSqlCard({ name, value, pct, accent, active, onClick }) {
+    const clickable = typeof onClick === "function";
     return (
-      <div className="card p-4 flex flex-col justify-between min-h-[104px]">
+      <div
+        className="card p-4 flex flex-col justify-between min-h-[104px] transition-all"
+        style={{
+          cursor: clickable ? "pointer" : "default",
+          boxShadow: active ? `0 0 0 2px ${accent}` : undefined,
+          opacity: active === false ? 0.55 : 1,
+        }}
+        onClick={clickable ? () => onClick(name) : undefined}
+        role={clickable ? "button" : undefined}
+        tabIndex={clickable ? 0 : undefined}
+        onKeyDown={clickable ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(name); } } : undefined}
+      >
         <span className="text-[10.5px] uppercase tracking-[1.3px] text-slate-500" title={name}>
           {name}
         </span>
@@ -696,6 +708,11 @@
       setOrigemSel(sel => sel.includes(o) ? sel.filter(x => x !== o) : [...sel, o]);
     }, []);
 
+    const togglePerfil = useCallback((p) => {
+      if (!p) return;
+      setPerfilSel(sel => sel.includes(p) ? sel.filter(x => x !== p) : [...sel, p]);
+    }, []);
+
     const handleTrendClick = useCallback((payload) => {
       if (!payload) return;
       if (trendGranularity === "week" && payload.week != null) {
@@ -783,18 +800,24 @@
                 value={sqlBreakdown["Pro"]}
                 pct={sqlLeads > 0 ? (sqlBreakdown["Pro"] / sqlLeads) * 100 : 0}
                 accent="#549E86"
+                active={perfilSel.length === 0 ? undefined : perfilSel.includes("Pro")}
+                onClick={togglePerfil}
               />
               <PerfilSqlCard
                 name="Starter"
                 value={sqlBreakdown["Starter"]}
                 pct={sqlLeads > 0 ? (sqlBreakdown["Starter"] / sqlLeads) * 100 : 0}
                 accent="#63C19B"
+                active={perfilSel.length === 0 ? undefined : perfilSel.includes("Starter")}
+                onClick={togglePerfil}
               />
               <PerfilSqlCard
                 name="Qualificado (Sem Faixa)"
                 value={sqlBreakdown["Qualificado (Sem Faixa)"]}
                 pct={sqlLeads > 0 ? (sqlBreakdown["Qualificado (Sem Faixa)"] / sqlLeads) * 100 : 0}
                 accent="#6A52B3"
+                active={perfilSel.length === 0 ? undefined : perfilSel.includes("Qualificado (Sem Faixa)")}
+                onClick={togglePerfil}
               />
             </div>
 
