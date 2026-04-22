@@ -2,8 +2,8 @@ name: Daily data update + Pages deploy
 
 on:
   schedule:
-    # 04:30 BRT (UTC-3) = 07:30 UTC
-    - cron: '30 7 * * *'
+    # 06:00 BRT (UTC-3) = 09:00 UTC
+    - cron: '0 9 * * *'
   push:
     branches: [main]
   workflow_dispatch: {}

@@ -3,7 +3,7 @@
 Dashboard interativo dos leads de marketing, alimentado pela planilha `Monitoramento de leads` (Google Sheets).
 
 **Site:** servido pelo GitHub Pages a partir da pasta `docs/`.
-**Atualização:** diária às **04:30 BRT** via GitHub Actions (`.github/workflows/daily-update.yml`).
+**Atualização:** diária às **06:00 BRT** via GitHub Actions (`.github/workflows/daily-update.yml`).
 
 ## Componentes
 
