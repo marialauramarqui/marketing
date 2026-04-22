@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-22T19:16:10.704Z",
+  "generated_at": "2026-04-22T20:28:58.587Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "Leads",
   "total_leads": 818,
@@ -13,8 +13,7 @@
     "Desqualificado",
     "Suporte",
     "Em atendimento",
-    "Qualificação incompleta",
-    "CS"
+    "Qualificação incompleta"
   ],
   "origens": [
     "[SALES] Chanel",
@@ -31,15 +30,14 @@
     "Starter": 65,
     "Suporte": 53,
     "Pro": 20,
-    "Em atendimento": 7,
-    "Desqualificado": 45,
-    "CS": 1
+    "Em atendimento": 9,
+    "Desqualificado": 45
   },
   "origem_counts": {
-    "[SALES] Chanel": 52,
+    "[SALES] Chanel": 53,
     "Site": 210,
     "Bio Instagram": 29,
-    "Orgânico": 60,
+    "Orgânico": 59,
     "Evento": 9,
     "Evento Denim": 458
   },
@@ -4132,19 +4130,19 @@
       "perfil": "Multimarca"
     },
     {
-      "data": "22/04/2026 14:58:47",
-      "origem": "Orgânico",
-      "perfil": "CS"
-    },
-    {
       "data": "22/04/2026 15:54:31",
       "origem": "Orgânico",
       "perfil": "Em atendimento"
     },
     {
-      "data": "22/04/2026 16:12:08",
+      "data": "22/04/2026 16:59:54",
       "origem": "Orgânico",
-      "perfil": ""
+      "perfil": "Em atendimento"
+    },
+    {
+      "data": "22/04/2026 17:05:01",
+      "origem": "[SALES] Chanel",
+      "perfil": "Em atendimento"
     }
   ]
 }
