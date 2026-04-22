@@ -423,9 +423,10 @@
           fetch(`data/metas.json${bust}`).then(r => r.json()),
         ])
         .then(([d, m]) => {
-          setLeads(d.leads || []);
+          const filtered = (d.leads || []).filter(l => (l.origem || "").trim() !== "Evento Denim");
+          setLeads(filtered);
           setMetas(m);
-          const months = availableMonths(d.leads || []);
+          const months = availableMonths(filtered);
           if (months.length) {
             const today = new Date();
             const ty = today.getFullYear(), tm = today.getMonth() + 1;
@@ -467,7 +468,7 @@
                   Metas mensais
                 </h1>
                 <p className="text-sm text-slate-500 mt-1">
-                  Comparativo entre o realizado e a meta em {MESES_LONG[month-1]}/{year}.
+                  Comparativo entre o realizado e a meta em {MESES_LONG[month-1]}/{year}. <span className="text-slate-400">(Origem <strong>Evento Denim</strong> excluída)</span>
                 </p>
               </div>
               <MonthSelector months={months} year={year} month={month}
