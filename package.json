@@ -8,6 +8,6 @@
     "serve": "npx --yes http-server docs -p 8080 -c-1"
   },
   "dependencies": {
-    "googleapis": "^144.0.0"
+    "googleapis": "^171.4.0"
   }
 }
