@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-04-27T09:41:21.637Z",
+  "generated_at": "2026-04-28T09:44:03.310Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "Leads",
-  "total_leads": 855,
-  "total_sql": 99,
-  "sql_pct": 11.58,
+  "total_leads": 861,
+  "total_sql": 100,
+  "sql_pct": 11.61,
   "perfis": [
     "Pro",
     "Starter",
@@ -13,7 +13,8 @@
     "Desqualificado",
     "Suporte",
     "Em atendimento",
-    "Qualificação incompleta"
+    "Qualificação incompleta",
+    "CS"
   ],
   "origens": [
     "[SALES] Chanel",
@@ -24,25 +25,26 @@
     "Site"
   ],
   "perfil_counts": {
-    "Qualificação incompleta": 555,
+    "Qualificação incompleta": 566,
     "Multimarca": 85,
     "Qualificado (Sem Faixa)": 4,
-    "Starter": 72,
-    "Suporte": 57,
+    "Starter": 73,
+    "Suporte": 58,
     "Pro": 23,
-    "Em atendimento": 15,
-    "Desqualificado": 44
+    "Em atendimento": 7,
+    "Desqualificado": 44,
+    "CS": 1
   },
   "origem_counts": {
-    "[SALES] Chanel": 55,
-    "Site": 235,
+    "[SALES] Chanel": 56,
+    "Site": 240,
     "Bio Instagram": 36,
     "Orgânico": 62,
     "Evento": 9,
     "Evento Denim": 458
   },
   "sql_by_origem": {
-    "Site": 62,
+    "Site": 63,
     "Orgânico": 12,
     "Bio Instagram": 7,
     "Evento": 9,
@@ -4177,7 +4179,7 @@
     {
       "data": "23/04/2026 13:24:04",
       "origem": "Site",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "23/04/2026 16:09:21",
@@ -4192,17 +4194,17 @@
     {
       "data": "23/04/2026 23:07:17",
       "origem": "Orgânico",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "24/04/2026 07:15:15",
       "origem": "Site",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "24/04/2026 07:25:11",
       "origem": "Site",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "24/04/2026 09:17:30",
@@ -4242,7 +4244,7 @@
     {
       "data": "24/04/2026 19:02:31",
       "origem": "Site",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "24/04/2026 19:18:45",
@@ -4257,12 +4259,12 @@
     {
       "data": "24/04/2026 23:23:28",
       "origem": "Site",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "25/04/2026 02:04:36",
       "origem": "Site",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "25/04/2026 07:34:24",
@@ -4272,12 +4274,12 @@
     {
       "data": "25/04/2026 07:38:58",
       "origem": "Site",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "25/04/2026 10:50:53",
       "origem": "Bio Instagram",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "25/04/2026 10:54:14",
@@ -4287,7 +4289,7 @@
     {
       "data": "25/04/2026 14:34:57",
       "origem": "Orgânico",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "25/04/2026 18:10:21",
@@ -4302,7 +4304,7 @@
     {
       "data": "26/04/2026 00:58:15",
       "origem": "[SALES] Chanel",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "26/04/2026 06:39:07",
@@ -4328,6 +4330,36 @@
       "data": "26/04/2026 23:09:47",
       "origem": "Site",
       "perfil": "Multimarca"
+    },
+    {
+      "data": "27/04/2026 07:27:25",
+      "origem": "Site",
+      "perfil": "CS"
+    },
+    {
+      "data": "27/04/2026 10:19:50",
+      "origem": "Site",
+      "perfil": "Suporte"
+    },
+    {
+      "data": "27/04/2026 12:19:37",
+      "origem": "Site",
+      "perfil": "Em atendimento"
+    },
+    {
+      "data": "27/04/2026 14:03:47",
+      "origem": "Site",
+      "perfil": "Starter"
+    },
+    {
+      "data": "27/04/2026 18:35:18",
+      "origem": "[SALES] Chanel",
+      "perfil": "Em atendimento"
+    },
+    {
+      "data": "27/04/2026 20:33:16",
+      "origem": "Site",
+      "perfil": "Em atendimento"
     }
   ]
 }
