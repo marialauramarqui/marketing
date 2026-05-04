@@ -4,7 +4,7 @@ const path = require('path');
 const { google } = require('googleapis');
 
 const SHEET_ID = process.env.SHEET_ID || '1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE';
-const TAB = process.env.SHEET_TAB || 'Leads';
+const TAB = process.env.SHEET_TAB || 'Cópia de Leads';
 const RANGE = `${TAB}!A:I`;
 const OUT_PATH = path.join(__dirname, '..', 'docs', 'data', 'data.json');
 
