@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-12T17:34:12.071Z",
+  "generated_at": "2026-05-12T17:51:00.120Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "LeadsV2",
   "total_leads": 985,
@@ -25,14 +25,14 @@
     "Site"
   ],
   "perfil_counts": {
-    "Qualificação incompleta": 587,
+    "Qualificação incompleta": 589,
     "Multimarca": 119,
     "Qualificado (Sem Faixa)": 14,
     "Starter": 96,
     "Suporte": 76,
     "Pro": 27,
     "Desqualificado": 49,
-    "Em atendimento": 12,
+    "Em atendimento": 10,
     "CS": 3
   },
   "origem_counts": {
@@ -61,36 +61,37 @@
       "total": 73,
       "total_sql": 11,
       "sql_pct": 15.07,
-      "sem_criativo": 4,
-      "sem_anuncio": 2,
-      "pct_sem_criativo": 5.48,
+      "sem_criativo": 0,
+      "sem_anuncio": 0,
+      "pct_sem_criativo": 0,
       "criativos": [
         {
           "name": "Carrossel 2 - Plataforma",
-          "total": 38,
+          "total": 41,
           "sql": 10,
           "by_perfil": {
             "Qualificação incompleta": 13,
             "Multimarca": 11,
             "Desqualificado": 4,
+            "Suporte": 3,
             "Qualificado (Sem Faixa)": 1,
             "Pro": 4,
             "Starter": 5
           },
-          "sql_pct": 26.32
+          "sql_pct": 24.39
         },
         {
           "name": "Carrossel 1 - Oráculo",
-          "total": 25,
+          "total": 26,
           "sql": 1,
           "by_perfil": {
-            "Qualificação incompleta": 18,
+            "Qualificação incompleta": 20,
             "Starter": 1,
+            "Suporte": 1,
             "Multimarca": 2,
-            "Desqualificado": 2,
-            "Em atendimento": 2
+            "Desqualificado": 2
           },
-          "sql_pct": 4
+          "sql_pct": 3.85
         },
         {
           "name": "Teste Mari 2 - B",
@@ -150,19 +151,18 @@
       "anuncios": [
         {
           "name": "[F] Captação de novos clientes - Filtro — Carrosséis",
-          "total": 68,
+          "total": 70,
           "sql": 11,
           "by_perfil": {
-            "Qualificação incompleta": 33,
+            "Qualificação incompleta": 35,
             "Multimarca": 14,
             "Desqualificado": 6,
-            "Suporte": 2,
+            "Suporte": 4,
             "Qualificado (Sem Faixa)": 1,
             "Starter": 6,
-            "Pro": 4,
-            "Em atendimento": 2
+            "Pro": 4
           },
-          "sql_pct": 16.18
+          "sql_pct": 15.71
         },
         {
           "name": "[F] Captação de novos clientes - Filtro",
@@ -5075,7 +5075,7 @@
     {
       "data": "11/05/2026 18:33:00",
       "origem": "[SALES] Chanel",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "11/05/2026 20:08:00",
@@ -5090,7 +5090,7 @@
     {
       "data": "11/05/2026 22:24:00",
       "origem": "[SALES] Chanel",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "12/05/2026 09:40:00",
