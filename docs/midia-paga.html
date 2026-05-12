@@ -3,20 +3,286 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var AUTH_KEY = "vesti.auth.ok";
+      var TTL = 1000 * 60 * 60 * 8;
+      try {
+        var raw = sessionStorage.getItem(AUTH_KEY);
+        if (raw) {
+          var data = JSON.parse(raw);
+          if (data && data.ts && Date.now() - data.ts < TTL) return;
+        }
+      } catch (e) { /* ignore */ }
+      window.location.replace("login.html");
+    })();
+  </script>
   <title>Vesti · Mídia Paga</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
-  <header class="flex items-center justify-between px-6 py-4 bg-white border-b border-slate-200">
-    <h1 class="text-lg font-semibold">Mídia Paga</h1>
-    <a href="index.html"
-       class="inline-flex items-center gap-1.5 text-xs text-slate-700 border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-100 transition">
-      ← Voltar ao dashboard
-    </a>
-  </header>
 
-  <main class="px-6 py-10">
-    <!-- conteúdo será adicionado nos próximos passos -->
-  </main>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-pink':   '#6A52B3',
+            'brand-purple': '#63C19B',
+            'brand-peach':  '#549E86',
+          },
+          fontFamily: {
+            sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Roboto','"Helvetica Neue"','Arial','sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body { background: #f7f4fb; color: #1a1635; }
+    body {
+      background:
+        radial-gradient(ellipse at top left, #e9def5 0%, transparent 55%),
+        radial-gradient(ellipse at bottom right, #dff0e8 0%, transparent 55%),
+        #f7f4fb;
+      min-height: 100vh;
+    }
+    .bg-grid {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(43,12,85,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(43,12,85,0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+      pointer-events: none; z-index: 0;
+    }
+    .orb {
+      position: fixed; border-radius: 50%;
+      filter: blur(80px); opacity: 0.28; pointer-events: none; z-index: 0;
+      animation: drift 18s ease-in-out infinite;
+    }
+    .orb-1 { width:420px; height:420px; background: radial-gradient(circle,#6A52B3 0%,transparent 70%); top:-120px; left:-80px; }
+    .orb-2 { width:520px; height:520px; background: radial-gradient(circle,#63C19B 0%,transparent 70%); bottom:-160px; right:-120px; animation-delay:-6s; }
+    @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.08); } }
+
+    .card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid rgba(43,12,85,0.08);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(43,12,85,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(43,12,85,0.14); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(43,12,85,0.26); }
+  </style>
+
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div id="root" class="relative z-10"></div>
+
+  <script type="text/babel" data-presets="react">
+    const { useState, useEffect, useMemo } = React;
+
+    const AUTH_KEY = "vesti.auth.ok";
+    const fmtNumber = (n) => (n == null ? "—" : new Intl.NumberFormat("pt-BR").format(n));
+    const fmtPct = (n) => (n == null || !isFinite(n) ? "—" : `${n.toFixed(1).replace(".", ",")}%`);
+
+    function Header() {
+      const logout = () => {
+        try { sessionStorage.removeItem(AUTH_KEY); } catch (_) {}
+        window.location.replace("login.html");
+      };
+      return (
+        <header className="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-[#2B0C55]/10 backdrop-blur-sm">
+          <div className="flex items-center gap-3">
+            <span className="relative inline-grid place-items-center w-9 h-9">
+              <span className="w-4 h-4 rounded-full"
+                    style={{ background: "linear-gradient(135deg,#6A52B3,#63C19B)",
+                             boxShadow: "0 0 22px rgba(106,82,179,.55), 0 0 40px rgba(99,193,155,.4)" }} />
+            </span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-[17px] font-bold tracking-wide"
+                    style={{ background:"linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
+                             WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
+                Vesti
+              </span>
+              <span className="text-[10.5px] uppercase tracking-[1.6px] text-slate-500">Mídia Paga · Performance</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a href="index.html"
+               className="inline-flex items-center gap-1.5 text-xs text-slate-700 border border-[#2B0C55]/10 rounded-lg px-3 py-2 hover:text-slate-900 hover:border-brand-pink hover:bg-brand-pink/10 transition"
+               title="Voltar ao dashboard">
+              <svg viewBox="0 0 20 20" width="14" height="14">
+                <path d="M12 5l-5 5 5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Dashboard
+            </a>
+            <button onClick={logout}
+              className="inline-flex items-center gap-1.5 text-xs text-slate-700 border border-[#2B0C55]/10 rounded-lg px-3 py-2 hover:text-slate-900 hover:border-brand-pink hover:bg-brand-pink/10 transition"
+              title="Encerrar sessão">
+              <svg viewBox="0 0 20 20" width="14" height="14">
+                <path d="M12 4H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7M9 10h8m0 0-3-3m3 3-3 3"
+                      fill="none" stroke="currentColor" strokeWidth="1.8"
+                      strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Sair
+            </button>
+          </div>
+        </header>
+      );
+    }
+
+    function KpiCard({ label, value, sub, accent }) {
+      return (
+        <div className="card p-5">
+          <div className="text-[11px] uppercase tracking-[1.4px] text-slate-500">{label}</div>
+          <div className="mt-1 text-3xl font-semibold tabular-nums"
+               style={accent ? { background: "linear-gradient(120deg,#6A52B3 0%,#63C19B 100%)",
+                                 WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" } : {}}>
+            {value}
+          </div>
+          {sub && <div className="mt-1 text-xs text-slate-500">{sub}</div>}
+        </div>
+      );
+    }
+
+    function RateBar({ pct }) {
+      const w = Math.max(0, Math.min(100, pct || 0));
+      // gradiente brand pra qualquer taxa, mas a saturação cresce com a taxa
+      const opacity = w === 0 ? 0.25 : 0.55 + Math.min(0.4, w / 200);
+      return (
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-2 rounded-full bg-[#2B0C55]/8 overflow-hidden">
+            <div className="h-full rounded-full"
+                 style={{
+                   width: `${w}%`,
+                   background: "linear-gradient(90deg,#6A52B3 0%,#63C19B 100%)",
+                   opacity,
+                 }} />
+          </div>
+          <span className="text-xs text-slate-700 tabular-nums w-14 text-right">{fmtPct(pct)}</span>
+        </div>
+      );
+    }
+
+    function CriativosTable({ rows }) {
+      if (!rows.length) {
+        return (
+          <div className="px-6 py-10 text-center text-sm text-slate-400">
+            Nenhum criativo identificado para esta origem.
+          </div>
+        );
+      }
+      return (
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-[1.4px] text-slate-500 border-b border-[#2B0C55]/8">
+                <th className="text-left px-6 py-3 font-medium">Criativo</th>
+                <th className="text-right px-6 py-3 font-medium">Leads</th>
+                <th className="text-right px-6 py-3 font-medium">SQL</th>
+                <th className="text-left px-6 py-3 font-medium w-2/5">Taxa SQL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((c, i) => (
+                <tr key={c.name} className={i % 2 ? "bg-white/40" : "bg-transparent"}>
+                  <td className="px-6 py-3 font-medium text-slate-800">{c.name}</td>
+                  <td className="px-6 py-3 text-right tabular-nums">{fmtNumber(c.total)}</td>
+                  <td className="px-6 py-3 text-right tabular-nums">{fmtNumber(c.sql)}</td>
+                  <td className="px-6 py-3"><RateBar pct={c.sql_pct} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    function App() {
+      const [data, setData] = useState(null);
+      const [err, setErr] = useState(null);
+
+      useEffect(() => {
+        fetch("data/data.json?t=" + Date.now())
+          .then(r => r.json())
+          .then(setData)
+          .catch(e => setErr(e.message));
+      }, []);
+
+      const m = data && data.midia_paga && data.midia_paga.chanel;
+
+      return (
+        <>
+          <Header />
+          <main className="px-6 lg:px-10 py-8 max-w-6xl mx-auto space-y-6">
+            <div className="flex items-center justify-between flex-wrap gap-3">
+              <div>
+                <h1 className="text-xl font-semibold">[SALES] Chanel</h1>
+                <p className="text-sm text-slate-500">Performance dos criativos sobre os leads gerados.</p>
+              </div>
+              {data && (
+                <div className="text-xs text-slate-500">
+                  Atualizado em {new Date(data.generated_at).toLocaleString("pt-BR")} · fonte: {data.sheet_tab}
+                </div>
+              )}
+            </div>
+
+            {err && (
+              <div className="card p-5 text-sm text-rose-700 border-rose-200">Erro ao carregar dados: {err}</div>
+            )}
+
+            {!data && !err && (
+              <div className="card p-10 text-center text-slate-400 text-sm">Carregando…</div>
+            )}
+
+            {m && (
+              <>
+                <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <KpiCard label="Leads" value={fmtNumber(m.total)} sub="origem [SALES] Chanel" />
+                  <KpiCard label="SQL" value={fmtNumber(m.total_sql)} sub="Pro · Starter · Qualificado" accent />
+                  <KpiCard label="Taxa SQL" value={fmtPct(m.sql_pct)} sub="SQL ÷ Leads" accent />
+                  <KpiCard label="Sem criativo" value={fmtPct(m.pct_sem_criativo)}
+                           sub={`${fmtNumber(m.sem_criativo)} leads sem preenchimento`} />
+                </section>
+
+                <section className="card">
+                  <div className="px-6 py-4 border-b border-[#2B0C55]/8 flex items-center justify-between">
+                    <div>
+                      <h2 className="text-base font-semibold">Taxa de SQL por criativo</h2>
+                      <p className="text-xs text-slate-500">
+                        Quantos leads cada criativo gerou e quantos viraram SQL.
+                      </p>
+                    </div>
+                    <span className="text-xs text-slate-500">{m.criativos.length} criativo(s)</span>
+                  </div>
+                  <CriativosTable rows={m.criativos} />
+                  {m.sem_criativo > 0 && (
+                    <div className="px-6 py-3 border-t border-amber-200/60 bg-amber-50/70 text-xs text-amber-800 rounded-b-2xl">
+                      ⚠️ <strong>{fmtNumber(m.sem_criativo)} leads ({fmtPct(m.pct_sem_criativo)})</strong> dessa origem não têm criativo preenchido na planilha — esses ficam fora da tabela acima.
+                    </div>
+                  )}
+                </section>
+              </>
+            )}
+          </main>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
 </body>
 </html>

@@ -78,6 +78,8 @@ async function main() {
     data: header.indexOf('DATA'),
     origem: header.indexOf('ORIGEM'),
     perfil: header.indexOf('PERFIL'),
+    anuncio: header.indexOf('ANUNCIO'),
+    criativo: header.indexOf('NOME CRIATIVO'),
   };
   if (idx.origem < 0 || idx.perfil < 0) {
     throw new Error(`Header esperado nao encontrado. Header lido: ${JSON.stringify(header)}`);
@@ -89,6 +91,22 @@ async function main() {
   const sqlByOrigem = {};
   const origemSet = new Set();
   const perfilSet = new Set();
+
+  const chanel = {
+    total: 0,
+    total_sql: 0,
+    sem_criativo: 0,
+    sem_anuncio: 0,
+    by_criativo: new Map(),
+    by_anuncio: new Map(),
+  };
+  const bumpAgg = (map, key, perfil) => {
+    if (!map.has(key)) map.set(key, { name: key, total: 0, sql: 0, by_perfil: {} });
+    const e = map.get(key);
+    e.total++;
+    if (SQL_PERFIS.has(perfil)) e.sql++;
+    if (perfil) e.by_perfil[perfil] = (e.by_perfil[perfil] || 0) + 1;
+  };
 
   for (let i = 1; i < rows.length; i++) {
     const r = rows[i];
@@ -105,7 +123,34 @@ async function main() {
     if (SQL_PERFIS.has(perfil)) {
       sqlByOrigem[origem || '(sem origem)'] = (sqlByOrigem[origem || '(sem origem)'] || 0) + 1;
     }
+
+    if (origem === '[SALES] Chanel') {
+      chanel.total++;
+      if (SQL_PERFIS.has(perfil)) chanel.total_sql++;
+      const anuncio = idx.anuncio >= 0 ? normalize(r[idx.anuncio]) : '';
+      const criativo = idx.criativo >= 0 ? normalize(r[idx.criativo]) : '';
+      if (criativo) bumpAgg(chanel.by_criativo, criativo, perfil);
+      else chanel.sem_criativo++;
+      if (anuncio) bumpAgg(chanel.by_anuncio, anuncio, perfil);
+      else chanel.sem_anuncio++;
+    }
   }
+
+  const finalizeList = (map) => [...map.values()]
+    .map(e => ({ ...e, sql_pct: e.total ? +(100 * e.sql / e.total).toFixed(2) : 0 }))
+    .sort((a, b) => b.total - a.total);
+  const midia_paga = {
+    chanel: {
+      total: chanel.total,
+      total_sql: chanel.total_sql,
+      sql_pct: chanel.total ? +(100 * chanel.total_sql / chanel.total).toFixed(2) : 0,
+      sem_criativo: chanel.sem_criativo,
+      sem_anuncio: chanel.sem_anuncio,
+      pct_sem_criativo: chanel.total ? +(100 * chanel.sem_criativo / chanel.total).toFixed(2) : 0,
+      criativos: finalizeList(chanel.by_criativo),
+      anuncios: finalizeList(chanel.by_anuncio),
+    },
+  };
 
   const totalLeads = leads.length;
   const totalSql = Object.values(sqlByOrigem).reduce((a, b) => a + b, 0);
@@ -126,6 +171,7 @@ async function main() {
     origem_counts: origemCounts,
     sql_by_origem: sqlByOrigem,
     sql_perfis: Array.from(SQL_PERFIS),
+    midia_paga,
     leads,
   };
 
