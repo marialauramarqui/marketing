@@ -166,6 +166,174 @@
     );
   }
 
+  // --------------------------- Calendar (Range Picker) ---------------------------
+  const DOW_HEADERS = ["D","S","T","Q","Q","S","S"];
+  const fmtDateShort = (d) => d ? `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}` : "";
+  const dateOnly = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const dayKey = (d) => d.getFullYear()*10000 + (d.getMonth()+1)*100 + d.getDate();
+  const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+
+  function CalendarPopover({ from, to, onApply, onClose, onClear }) {
+    const today = useMemo(() => dateOnly(new Date()), []);
+    const initView = from || to || today;
+    const [viewY, setViewY] = useState(initView.getFullYear());
+    const [viewM, setViewM] = useState(initView.getMonth());
+    const [draftFrom, setDraftFrom] = useState(from);
+    const [draftTo, setDraftTo]     = useState(to);
+
+    const prev = () => { const m = viewM-1; if (m < 0) { setViewY(viewY-1); setViewM(11); } else setViewM(m); };
+    const next = () => { const m = viewM+1; if (m > 11) { setViewY(viewY+1); setViewM(0); } else setViewM(m); };
+
+    const onPick = (d) => {
+      if (!draftFrom || (draftFrom && draftTo)) { setDraftFrom(d); setDraftTo(null); return; }
+      if (d < draftFrom) { setDraftTo(draftFrom); setDraftFrom(d); return; }
+      setDraftTo(d);
+    };
+
+    const grid = useMemo(() => {
+      const first = new Date(viewY, viewM, 1);
+      const startDow = first.getDay();
+      const cells = [];
+      // dias do mês anterior para preencher
+      for (let i = 0; i < startDow; i++) cells.push(addDays(first, i - startDow));
+      const lastDay = new Date(viewY, viewM+1, 0).getDate();
+      for (let d = 1; d <= lastDay; d++) cells.push(new Date(viewY, viewM, d));
+      while (cells.length % 7 !== 0) cells.push(addDays(cells[cells.length-1], 1));
+      while (cells.length < 42) cells.push(addDays(cells[cells.length-1], 1));
+      return cells;
+    }, [viewY, viewM]);
+
+    const inRange = (d) => {
+      if (!draftFrom) return false;
+      const dk = dayKey(d), a = dayKey(draftFrom);
+      const b = draftTo ? dayKey(draftTo) : a;
+      return dk >= a && dk <= b;
+    };
+
+    const presetRange = (days) => {
+      const end = today;
+      const start = addDays(end, -(days-1));
+      setDraftFrom(start); setDraftTo(end);
+      setViewY(end.getFullYear()); setViewM(end.getMonth());
+    };
+    const presetMonth = (offset) => {
+      const ref = new Date(today.getFullYear(), today.getMonth()+offset, 1);
+      const end = new Date(ref.getFullYear(), ref.getMonth()+1, 0);
+      setDraftFrom(ref); setDraftTo(end);
+      setViewY(ref.getFullYear()); setViewM(ref.getMonth());
+    };
+
+    return (
+      <div className="absolute right-0 mt-2 w-[320px] bg-white border border-[#2B0C55]/10 rounded-xl shadow-xl p-3"
+           style={{ zIndex: 60 }}>
+        <div className="flex items-center justify-between mb-2">
+          <button onClick={prev} className="p-1.5 rounded-md hover:bg-[#6A52B3]/10" aria-label="Mês anterior">
+            <svg width="14" height="14" viewBox="0 0 20 20"><path d="M12 5l-5 5 5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+          <div className="text-sm font-semibold text-slate-800">{MONTH_LABELS_FULL[viewM]} {viewY}</div>
+          <button onClick={next} className="p-1.5 rounded-md hover:bg-[#6A52B3]/10" aria-label="Próximo mês">
+            <svg width="14" height="14" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+        </div>
+
+        <div className="grid grid-cols-7 gap-1 text-[10px] text-slate-400 uppercase tracking-[1.4px] text-center mb-1">
+          {DOW_HEADERS.map((d,i) => <div key={i}>{d}</div>)}
+        </div>
+
+        <div className="grid grid-cols-7 gap-1 text-xs">
+          {grid.map((d, i) => {
+            const isCurMonth = d.getMonth() === viewM;
+            const isToday    = dayKey(d) === dayKey(today);
+            const sel        = inRange(d);
+            const isStart    = draftFrom && dayKey(d) === dayKey(draftFrom);
+            const isEnd      = draftTo   && dayKey(d) === dayKey(draftTo);
+            const isEdge     = isStart || isEnd;
+            return (
+              <button key={i} onClick={() => onPick(d)}
+                      className={[
+                        "h-8 rounded-md tabular-nums transition",
+                        !isCurMonth ? "text-slate-300" : "text-slate-700",
+                        sel && !isEdge ? "bg-[#6A52B3]/15 text-[#2B0C55]" : "",
+                        isEdge ? "text-white font-semibold" : "",
+                        !sel && !isEdge ? "hover:bg-slate-100" : "",
+                        isToday && !isEdge ? "ring-1 ring-[#6A52B3]/30" : "",
+                      ].join(" ")}
+                      style={isEdge ? { background: "linear-gradient(135deg,#6A52B3,#549E86)" } : {}}>
+                {d.getDate()}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {[
+            { label: "Hoje",        run: () => { setDraftFrom(today); setDraftTo(today); } },
+            { label: "Últimos 7d",  run: () => presetRange(7) },
+            { label: "Últimos 30d", run: () => presetRange(30) },
+            { label: "Este mês",    run: () => presetMonth(0) },
+            { label: "Mês passado", run: () => presetMonth(-1) },
+          ].map(p => (
+            <button key={p.label} onClick={p.run}
+                    className="text-[11px] px-2 py-1 rounded-md border border-[#2B0C55]/10 text-slate-600 hover:bg-[#6A52B3]/10 hover:text-[#2B0C55] transition">
+              {p.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-3 flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
+          <button onClick={() => { onClear(); onClose(); }}
+                  className="text-xs text-slate-500 hover:text-slate-700 underline-offset-2 hover:underline">
+            Limpar
+          </button>
+          <div className="flex items-center gap-2">
+            <button onClick={onClose}
+                    className="text-xs px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100">
+              Cancelar
+            </button>
+            <button onClick={() => { onApply(draftFrom, draftTo); onClose(); }}
+                    disabled={!draftFrom}
+                    className="text-xs px-3 py-1.5 rounded-md text-white font-semibold disabled:opacity-50"
+                    style={{ background: "linear-gradient(120deg,#6A52B3,#63C19B)" }}>
+              Aplicar
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function CalendarButton({ from, to, onChange }) {
+    const [open, setOpen] = useState(false);
+    const ref = useRef(null);
+    useClickOutside(ref, () => setOpen(false));
+    const hasRange = from || to;
+    const label = hasRange
+      ? (from && to && dayKey(from) === dayKey(to) ? fmtDateShort(from) : `${fmtDateShort(from)} – ${fmtDateShort(to || from)}`)
+      : "Calendário";
+    return (
+      <div ref={ref} className="relative w-full">
+        <label className="text-[10.5px] uppercase tracking-[1.4px] text-slate-500 block mb-1.5">Calendário</label>
+        <button type="button" onClick={() => setOpen(o => !o)}
+                className="h-[42px] w-full text-left text-sm bg-white/80 border border-[#2B0C55]/10 rounded-xl px-3 hover:border-brand-pink focus:border-brand-pink flex items-center justify-between gap-2 truncate transition">
+          <span className={`flex items-center gap-2 truncate ${hasRange ? "text-slate-800 font-medium" : "text-slate-400"}`}>
+            <svg viewBox="0 0 20 20" width="14" height="14" className="shrink-0 text-[#6A52B3]">
+              <path d="M5 4v2M15 4v2M3 8h14M4 6h12a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+            </svg>
+            <span className="truncate">{label}</span>
+          </span>
+          <Chevron open={open} />
+        </button>
+        {open && (
+          <CalendarPopover
+            from={from} to={to}
+            onApply={(a, b) => onChange(a, b || a)}
+            onClose={() => setOpen(false)}
+            onClear={() => onChange(null, null)} />
+        )}
+      </div>
+    );
+  }
+
   // --------------------------- Header ---------------------------
   function Header({ total, updatedAt }) {
     const logout = () => {
@@ -246,21 +414,20 @@
     perfilSel, setPerfilSel,
     year, setYear,
     month, setMonth,
-    dowSel, setDowSel,
+    dateFrom, dateTo, setDateRange,
     onClear,
   }) {
     const yearOptions  = years.map(y => ({ value: y, label: String(y) }));
     const monthOptions = MONTH_LABELS_FULL.map((l, i) => ({ value: i + 1, label: l }));
-    const dowOptions   = DOW_LABELS.map((l, i) => ({ value: i, label: l }));
 
     return (
       <section className="card card-gradient-border p-5 lg:p-6 relative z-40">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 items-end">
-          <MultiSelect label="Origem"         options={origens}       selected={origemSel} onChange={setOrigemSel} placeholder="Todas" />
-          <MultiSelect label="Perfil"         options={perfis}        selected={perfilSel} onChange={setPerfilSel} placeholder="Todos" />
-          <MultiSelect label="Ano"            options={yearOptions}   selected={year}      onChange={setYear}      placeholder="Todos" />
-          <MultiSelect label="Mês"            options={monthOptions}  selected={month}     onChange={setMonth}     placeholder="Todos" />
-          <MultiSelect label="Dia da semana"  options={dowOptions}    selected={dowSel}    onChange={setDowSel}    placeholder="Todos" />
+          <MultiSelect label="Origem"        options={origens}      selected={origemSel} onChange={setOrigemSel} placeholder="Todas" />
+          <MultiSelect label="Perfil"        options={perfis}       selected={perfilSel} onChange={setPerfilSel} placeholder="Todos" />
+          <MultiSelect label="Ano"           options={yearOptions}  selected={year}      onChange={setYear}      placeholder="Todos" />
+          <MultiSelect label="Mês"           options={monthOptions} selected={month}     onChange={setMonth}     placeholder="Todos" />
+          <CalendarButton from={dateFrom} to={dateTo} onChange={(a, b) => setDateRange(a, b)} />
           <button type="button" onClick={onClear}
             className="h-[42px] w-full text-sm text-slate-700 border border-[#2B0C55]/10 rounded-xl px-4 hover:text-slate-900 hover:border-brand-pink hover:bg-brand-pink/10 transition">
             Limpar filtros
@@ -650,9 +817,11 @@
     const [perfilSel, setPerfilSel] = useState([]);
     const [year, setYear]           = useState(null); // null = não inicializado; [] = "Todos"
     const [month, setMonth]         = useState([]);
-    const [dowSel, setDowSel]       = useState([]);   // 0..6 (dom..sáb)
     const [weekSel, setWeekSel]     = useState(null); // 1..6 ou null
     const [daySel, setDaySel]       = useState(null); // 1..31 ou null
+    const [dateFrom, setDateFrom]   = useState(null); // Date | null
+    const [dateTo, setDateTo]       = useState(null); // Date | null
+    const setDateRange = useCallback((a, b) => { setDateFrom(a); setDateTo(b); }, []);
 
     // Load + parse data
     useEffect(() => {
@@ -700,19 +869,26 @@
     const baseFiltered = useMemo(() => {
       if (!raw) return [];
       const ySel = Array.isArray(year) ? year : [];
+      const fromK = dateFrom ? dayKey(dateFrom) : null;
+      const toK   = dateTo   ? dayKey(dateTo)   : null;
+      const hasDateFilter = fromK != null || toK != null;
       return raw.leads.filter(l => {
         if (origemSel.length > 0 && !origemSel.includes(l.origem)) return false;
         if (perfilSel.length > 0 && !perfilSel.includes(l.perfil)) return false;
         if (l._d) {
           if (ySel.length  > 0 && !ySel.includes(l._d.getFullYear()))      return false;
           if (month.length > 0 && !month.includes(l._d.getMonth() + 1))    return false;
-          if (dowSel.length > 0 && !dowSel.includes(l._d.getDay()))        return false;
-        } else if (ySel.length > 0 || month.length > 0 || dowSel.length > 0) {
+          if (hasDateFilter) {
+            const k = dayKey(l._d);
+            if (fromK != null && k < fromK) return false;
+            if (toK   != null && k > toK)   return false;
+          }
+        } else if (ySel.length > 0 || month.length > 0 || hasDateFilter) {
           return false;
         }
         return true;
       });
-    }, [raw, origemSel, perfilSel, year, month, dowSel]);
+    }, [raw, origemSel, perfilSel, year, month, dateFrom, dateTo]);
 
     // Reset de seleções quando perdem contexto
     useEffect(() => {
@@ -781,20 +957,27 @@
     const filteredIgnoringOrigem = useMemo(() => {
       if (!raw) return [];
       const ySel = Array.isArray(year) ? year : [];
+      const fromK = dateFrom ? dayKey(dateFrom) : null;
+      const toK   = dateTo   ? dayKey(dateTo)   : null;
+      const hasDateFilter = fromK != null || toK != null;
       return raw.leads.filter(l => {
         if (perfilSel.length > 0 && !perfilSel.includes(l.perfil)) return false;
         if (l._d) {
           if (ySel.length  > 0 && !ySel.includes(l._d.getFullYear()))      return false;
           if (month.length > 0 && !month.includes(l._d.getMonth() + 1))    return false;
-          if (dowSel.length > 0 && !dowSel.includes(l._d.getDay()))        return false;
+          if (hasDateFilter) {
+            const k = dayKey(l._d);
+            if (fromK != null && k < fromK) return false;
+            if (toK   != null && k > toK)   return false;
+          }
           if (weekSel != null && month.length === 1 && weekOfMonth(l._d) !== weekSel) return false;
           if (daySel != null && month.length === 1 && l._d.getDate() !== daySel) return false;
-        } else if (ySel.length > 0 || month.length > 0 || dowSel.length > 0) {
+        } else if (ySel.length > 0 || month.length > 0 || hasDateFilter) {
           return false;
         }
         return true;
       });
-    }, [raw, perfilSel, year, month, dowSel, weekSel, daySel]);
+    }, [raw, perfilSel, year, month, weekSel, daySel, dateFrom, dateTo]);
 
     const sqlsByOriginData = useMemo(() => {
       const m = {};
@@ -935,6 +1118,39 @@
       };
     }, [raw, withWeek, baseFiltered, year, month, daySel]);
 
+    // Range chart — quando o filtro de calendário está ativo
+    const rangeInfo = useMemo(() => {
+      if (!dateFrom && !dateTo) return null;
+      const from = dateOnly(dateFrom || dateTo);
+      const to   = dateOnly(dateTo   || dateFrom);
+      const totalDays = Math.round((to - from) / 86400000) + 1;
+      if (totalDays <= 0 || totalDays > 366) return null;
+      const buckets = Array(totalDays).fill(null).map((_, i) => {
+        const d = addDays(from, i);
+        return { date: d, leads: 0, sqls: 0 };
+      });
+      for (const l of baseFiltered) {
+        if (!l._d) continue;
+        const idx = Math.round((dateOnly(l._d) - from) / 86400000);
+        if (idx < 0 || idx >= totalDays) continue;
+        buckets[idx].leads++;
+        if (isSqlLead(l)) buckets[idx].sqls++;
+      }
+      const crossMonth = from.getMonth() !== to.getMonth() || from.getFullYear() !== to.getFullYear();
+      return {
+        data: buckets.map(b => ({
+          label: crossMonth
+            ? `${String(b.date.getDate()).padStart(2,"0")}/${String(b.date.getMonth()+1).padStart(2,"0")}`
+            : String(b.date.getDate()).padStart(2,"0"),
+          day: b.date.getDate(),
+          dow: DOW_SHORT[b.date.getDay()],
+          leads: b.leads,
+          sqls: b.sqls,
+        })),
+        subtitle: `${fmtDateShort(from)} – ${fmtDateShort(to)} · por dia${totalDays > 1 ? ` · ${totalDays} dias` : ""}`,
+      };
+    }, [baseFiltered, dateFrom, dateTo]);
+
     // --- cross-filter handlers ---
     const toggleOrigem = useCallback((o) => {
       if (!o) return;
@@ -971,9 +1187,9 @@
     const clear = useCallback(() => {
       setOrigemSel([]); setPerfilSel([]);
       setYear([]);      setMonth([]);
-      setDowSel([]);
       setWeekSel(null);
       setDaySel(null);
+      setDateFrom(null); setDateTo(null);
     }, []);
 
     // --------------------------- render ---------------------------
@@ -1014,7 +1230,7 @@
             perfilSel={perfilSel} setPerfilSel={setPerfilSel}
             year={year ?? []}  setYear={setYear}
             month={month}      setMonth={setMonth}
-            dowSel={dowSel}    setDowSel={setDowSel}
+            dateFrom={dateFrom} dateTo={dateTo} setDateRange={setDateRange}
             onClear={clear}
           />
 
@@ -1062,23 +1278,34 @@
               />
             </div>
 
-            <ChartCard title="Evolução de Leads" subtitle={trendSubtitle}>
-              <TrendChart
-                data={trendData}
-                granularity={trendGranularity}
-                onPointClick={handleTrendClick}
-                selectedWeek={weekSel}
-              />
-            </ChartCard>
-
-            {dailyInfo && (
-              <ChartCard title="Evolução diária" subtitle={dailyInfo.subtitle}>
+            {rangeInfo ? (
+              <ChartCard title="Evolução do período" subtitle={rangeInfo.subtitle}>
                 <DailyChart
-                  data={dailyInfo.data}
-                  onPointClick={handleDailyClick}
-                  selectedDay={daySel}
+                  data={rangeInfo.data}
+                  selectedDay={null}
                 />
               </ChartCard>
+            ) : (
+              <>
+                <ChartCard title="Evolução de Leads" subtitle={trendSubtitle}>
+                  <TrendChart
+                    data={trendData}
+                    granularity={trendGranularity}
+                    onPointClick={handleTrendClick}
+                    selectedWeek={weekSel}
+                  />
+                </ChartCard>
+
+                {dailyInfo && (
+                  <ChartCard title="Evolução diária" subtitle={dailyInfo.subtitle}>
+                    <DailyChart
+                      data={dailyInfo.data}
+                      onPointClick={handleDailyClick}
+                      selectedDay={daySel}
+                    />
+                  </ChartCard>
+                )}
+              </>
             )}
           </section>
 
