@@ -99,6 +99,7 @@ async function main() {
     sem_anuncio: 0,
     by_criativo: new Map(),
     by_anuncio: new Map(),
+    leads: [],
   };
   const bumpAgg = (map, key, perfil) => {
     if (!map.has(key)) map.set(key, { name: key, total: 0, sql: 0, by_perfil: {} });
@@ -133,6 +134,7 @@ async function main() {
       else chanel.sem_criativo++;
       if (anuncio) bumpAgg(chanel.by_anuncio, anuncio, perfil);
       else chanel.sem_anuncio++;
+      chanel.leads.push({ data, perfil, anuncio, criativo });
     }
   }
 
@@ -149,6 +151,7 @@ async function main() {
       pct_sem_criativo: chanel.total ? +(100 * chanel.sem_criativo / chanel.total).toFixed(2) : 0,
       criativos: finalizeList(chanel.by_criativo),
       anuncios: finalizeList(chanel.by_anuncio),
+      leads: chanel.leads,
     },
   };
 

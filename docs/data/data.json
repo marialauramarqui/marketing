@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-12T17:51:21.450Z",
+  "generated_at": "2026-05-12T18:32:45.774Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "LeadsV2",
   "total_leads": 985,
@@ -172,6 +172,446 @@
             "Qualificação incompleta": 3
           },
           "sql_pct": 0
+        }
+      ],
+      "leads": [
+        {
+          "data": "23/03/2026 03:17:11",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "25/03/2026 11:12:29",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "25/03/2026 13:55:13",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro",
+          "criativo": "Teste Mari 2 - B"
+        },
+        {
+          "data": "25/03/2026 19:22:34",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "27/03/2026 05:48:13",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "27/03/2026 09:42:06",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 3 - Reconhecimento"
+        },
+        {
+          "data": "28/03/2026 13:21:22",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "28/03/2026 14:36:53",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro",
+          "criativo": "Teste Neto 2 - B"
+        },
+        {
+          "data": "03/04/2026 10:57:34",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "03/04/2026 12:34:32",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "03/04/2026 16:53:27",
+          "perfil": "Desqualificado",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "03/04/2026 20:02:43",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "04/04/2026 14:33:26",
+          "perfil": "Suporte",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "05/04/2026 13:12:54",
+          "perfil": "Qualificado (Sem Faixa)",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "05/04/2026 15:08:19",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "06/04/2026 15:12:29",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "06/04/2026 19:39:10",
+          "perfil": "Starter",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "07/04/2026 07:20:02",
+          "perfil": "Suporte",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "08/04/2026 15:36:27",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "08/04/2026 21:48:13",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "08/04/2026 22:30:15",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "09/04/2026 07:41:26",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "10/04/2026 10:09:32",
+          "perfil": "Pro",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "10/04/2026 12:01:14",
+          "perfil": "Starter",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "10/04/2026 12:31:48",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "10/04/2026 10:09:41",
+          "perfil": "Pro",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "10/04/2026 12:01:23",
+          "perfil": "Starter",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "10/04/2026 12:31:58",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "11/04/2026 12:40:15",
+          "perfil": "Suporte",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "11/04/2026 13:53:41",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "11/04/2026 15:49:15",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro",
+          "criativo": "Teste Mari B — AD ORÁCULO"
+        },
+        {
+          "data": "11/04/2026 22:43:46",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "12/04/2026 06:39:25",
+          "perfil": "Suporte",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "12/04/2026 08:50:52",
+          "perfil": "Starter",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "12/04/2026 21:33:20",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "13/04/2026 17:18:16",
+          "perfil": "Desqualificado",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "14/04/2026 05:53:09",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "14/04/2026 16:15:24",
+          "perfil": "Starter",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "14/04/2026 16:47:28",
+          "perfil": "Pro",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "15/04/2026 11:41:35",
+          "perfil": "Desqualificado",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "16/04/2026 19:47:15",
+          "perfil": "Desqualificado",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "17/04/2026 23:59:21",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "19/04/2026 12:06:49",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "19/04/2026 13:59:38",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "19/04/2026 14:16:53",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "20/04/2026 16:23:15",
+          "perfil": "Pro",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "20/04/2026 22:17:37",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "21/04/2026 12:23:24",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "21/04/2026 13:30:21",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "22/04/2026 13:40:36",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "22/04/2026 17:05:01",
+          "perfil": "Starter",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 2 - Plataforma"
+        },
+        {
+          "data": "26/04/2026 00:58:15",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "26/04/2026 21:40:01",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "27/04/2026 18:35:18",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "28/04/2026 12:29:59",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "28/04/2026 13:27:11",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "28/04/2026 18:49:24",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "28/04/2026 21:41:20",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "29/04/2026 13:47:38",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "29/04/2026 15:10:08",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "01/05/2026 00:29:00",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "01/05/2026 15:00:24",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "02/05/2026 08:04:19",
+          "perfil": "Desqualificado",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "02/05/2026 11:50:21",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "02/05/2026 16:27:25",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "02/05/2026 17:24:46",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "02/05/2026 20:47:30",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "03/05/2026 17:06:18",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "03/05/2026 22:59:10",
+          "perfil": "Desqualificado",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "05/05/2026 09:31:00",
+          "perfil": "Multimarca",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "estatica_RFV_04052026"
+        },
+        {
+          "data": "08/05/2026 05:37:00",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "carrolssel_07052026"
+        },
+        {
+          "data": "11/05/2026 18:33:00",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
+        },
+        {
+          "data": "11/05/2026 22:24:00",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "[F] Captação de novos clientes - Filtro — Carrosséis",
+          "criativo": "Carrossel 1 - Oráculo"
         }
       ]
     }
