@@ -203,6 +203,16 @@
               </span>
             )}
           </div>
+          <a href="midia-paga.html"
+            className="relative inline-flex items-center gap-1.5 text-xs font-semibold text-white rounded-lg px-3.5 py-2 shadow-[0_8px_20px_rgba(106,82,179,.35)] hover:shadow-[0_10px_26px_rgba(106,82,179,.5)] hover:-translate-y-0.5 transition"
+            style={{ background: "linear-gradient(120deg,#6A52B3 0%,#8A6DD1 55%,#63C19B 100%)" }}
+            title="Ver dados de mídia paga">
+            <svg viewBox="0 0 20 20" width="14" height="14">
+              <path d="M3 8v4l10 4V4L3 8Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+              <path d="M13 7c1.5 1 1.5 5 0 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            </svg>
+            Mídia Paga
+          </a>
           <a href="meta.html"
             className="relative inline-flex items-center gap-1.5 text-xs font-semibold text-white rounded-lg px-3.5 py-2 shadow-[0_8px_20px_rgba(106,82,179,.35)] hover:shadow-[0_10px_26px_rgba(106,82,179,.5)] hover:-translate-y-0.5 transition"
             style={{ background: "linear-gradient(120deg,#6A52B3 0%,#8A6DD1 55%,#63C19B 100%)" }}
