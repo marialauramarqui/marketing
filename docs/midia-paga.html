@@ -163,7 +163,7 @@
       });
     }
 
-    function aggregate(leads, spendDaily, filters) {
+    function aggregate(leads, spendDaily, thumbnails, filters) {
       const byCriativo = new Map();
       let total = 0, sql = 0;
       for (const l of leads) {
@@ -189,6 +189,7 @@
             anuncios: [...e.anuncios].sort((a, b) => a.localeCompare(b, "pt-BR")),
             sql_pct: e.total ? +(100 * e.sql / e.total).toFixed(2) : 0,
             spend, cpl, cpsql,
+            thumbnail: thumbnails ? (thumbnails[e.name] || null) : null,
           };
         })
         .sort((a, b) => b.total - a.total);
@@ -303,7 +304,15 @@
       const anunciosLabel = c.anuncios.length ? c.anuncios.join(" · ") : "(sem anúncio)";
       return (
         <div className="card p-5 space-y-4 flex flex-col">
-          <h3 className="text-sm font-semibold text-slate-800 leading-snug" title={c.name}>{c.name}</h3>
+          <div className="flex items-start gap-3">
+            {c.thumbnail && (
+              <img src={c.thumbnail} alt=""
+                   className="w-[84px] h-[84px] rounded-md object-cover border border-[#2B0C55]/10 shrink-0 bg-slate-100"
+                   loading="lazy"
+                   onError={(e) => { e.currentTarget.style.display = "none"; }} />
+            )}
+            <h3 className="text-sm font-semibold text-slate-800 leading-snug min-w-0" title={c.name}>{c.name}</h3>
+          </div>
           <div className="grid grid-cols-3 gap-3">
             <div className="rounded-lg bg-[#6A52B3]/5 border border-[#6A52B3]/10 px-3 py-2">
               <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Leads</div>
@@ -666,6 +675,7 @@
       }, [leadsForAnuncios, selectedAnuncios]);
 
       const spendDaily = (data && data.midia_paga && data.midia_paga.spend_daily) || null;
+      const thumbnails = (data && data.midia_paga && data.midia_paga.thumbnails) || null;
 
       const m = useMemo(() => {
         if (!chanelLeads.length) return null;
@@ -674,8 +684,8 @@
           criativos: selectedCriativos, anuncios: selectedAnuncios,
           dateFrom, dateTo,
         };
-        return aggregate(applyFilters(chanelLeads, filters), spendDaily, filters);
-      }, [chanelLeads, spendDaily, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, dateFrom, dateTo]);
+        return aggregate(applyFilters(chanelLeads, filters), spendDaily, thumbnails, filters);
+      }, [chanelLeads, spendDaily, thumbnails, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, dateFrom, dateTo]);
 
       return (
         <>

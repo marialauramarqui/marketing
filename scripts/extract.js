@@ -59,6 +59,31 @@ function loadMetaCreds() {
   return { token, acct };
 }
 
+async function fetchMetaAdThumbnails(creds) {
+  // Pede thumbnail em 400x400 via field modifier — sem isso, vem fixo em 64x64.
+  const params = new URLSearchParams({
+    fields: 'name,creative.thumbnail_width(400).thumbnail_height(400){thumbnail_url}',
+    limit: '500',
+    access_token: creds.token,
+  });
+  let url = `https://graph.facebook.com/${META_API_VERSION}/${creds.acct}/ads?${params}`;
+  const thumbs = {};
+  let pages = 0;
+  while (url) {
+    const r = await fetch(url);
+    const j = await r.json();
+    if (j.error) throw new Error(`Meta API (ads): ${j.error.message}`);
+    for (const ad of (j.data || [])) {
+      const t = ad.creative && ad.creative.thumbnail_url;
+      if (ad.name && t) thumbs[ad.name] = t;
+    }
+    pages++;
+    url = j.paging && j.paging.next;
+    if (pages > 50) break;
+  }
+  return thumbs;
+}
+
 async function fetchMetaSpendDaily(creds, since, until) {
   const fields = 'ad_name,spend,date_start';
   const params = new URLSearchParams({
@@ -231,6 +256,14 @@ async function main() {
       midia_paga.spend_window = { since, until };
       const totalSpend = Object.values(spendDaily).reduce((s, ad) => s + Object.values(ad).reduce((a, b) => a + b, 0), 0);
       console.log(`OK Meta: ${Object.keys(spendDaily).length} ad(s), gasto total no período R$ ${totalSpend.toFixed(2)}`);
+
+      try {
+        const thumbs = await fetchMetaAdThumbnails(metaCreds);
+        midia_paga.thumbnails = thumbs;
+        console.log(`OK Meta thumbnails: ${Object.keys(thumbs).length} criativo(s) com imagem`);
+      } catch (e) {
+        console.warn('AVISO: falha ao buscar thumbnails (' + e.message + ') — seguindo sem imagens.');
+      }
     } catch (e) {
       console.warn('AVISO: falha ao buscar Meta Ads (' + e.message + ') — seguindo sem gasto.');
     }
