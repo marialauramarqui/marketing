@@ -199,16 +199,17 @@ async function main() {
       sqlByOrigem[origem || '(sem origem)'] = (sqlByOrigem[origem || '(sem origem)'] || 0) + 1;
     }
 
-    if (origem === '[SALES] Chanel') {
+    // Mídia paga = qualquer lead com ANUNCIO ou NOME CRIATIVO preenchido (independente de ORIGEM).
+    const anuncio = idx.anuncio >= 0 ? normalize(r[idx.anuncio]) : '';
+    const criativo = idx.criativo >= 0 ? normalize(r[idx.criativo]) : '';
+    if (anuncio || criativo) {
       chanel.total++;
       if (SQL_PERFIS.has(perfil)) chanel.total_sql++;
-      const anuncio = idx.anuncio >= 0 ? normalize(r[idx.anuncio]) : '';
-      const criativo = idx.criativo >= 0 ? normalize(r[idx.criativo]) : '';
       if (criativo) bumpAgg(chanel.by_criativo, criativo, perfil);
       else chanel.sem_criativo++;
       if (anuncio) bumpAgg(chanel.by_anuncio, anuncio, perfil);
       else chanel.sem_anuncio++;
-      chanel.leads.push({ data, perfil, anuncio, criativo });
+      chanel.leads.push({ data, perfil, anuncio, criativo, origem });
     }
   }
 
