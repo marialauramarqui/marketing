@@ -95,6 +95,7 @@
 
     const AUTH_KEY = "vesti.auth.ok";
     const SQL_PERFIS = new Set(["Pro", "Starter", "Qualificado (Sem Faixa)"]);
+    const PERFIL_ORDER = ["Pro", "Starter", "Qualificado (Sem Faixa)", "Multimarca", "Suporte", "Desqualificado", "Qualificação incompleta"];
     const MESES_LONG = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 
     const fmtNumber = (n) => (n == null ? "—" : new Intl.NumberFormat("pt-BR").format(n));
@@ -140,26 +141,27 @@
 
     function aggregate(leads) {
       const byCriativo = new Map();
-      let total = 0, sql = 0, semCriativo = 0;
+      let total = 0, sql = 0;
       for (const l of leads) {
         total++;
         const isSql = SQL_PERFIS.has(l.perfil);
         if (isSql) sql++;
-        if (!l.criativo) { semCriativo++; continue; }
-        if (!byCriativo.has(l.criativo)) byCriativo.set(l.criativo, { name: l.criativo, total: 0, sql: 0 });
+        if (!l.criativo) continue;
+        if (!byCriativo.has(l.criativo)) byCriativo.set(l.criativo, { name: l.criativo, total: 0, sql: 0, perfis: {}, anuncios: new Set() });
         const e = byCriativo.get(l.criativo);
         e.total++;
         if (isSql) e.sql++;
+        const p = l.perfil || "(sem perfil)";
+        e.perfis[p] = (e.perfis[p] || 0) + 1;
+        if (l.anuncio) e.anuncios.add(l.anuncio);
       }
       const criativos = [...byCriativo.values()]
-        .map(e => ({ ...e, sql_pct: e.total ? +(100 * e.sql / e.total).toFixed(2) : 0 }))
+        .map(e => ({ ...e, anuncios: [...e.anuncios].sort((a, b) => a.localeCompare(b, "pt-BR")), sql_pct: e.total ? +(100 * e.sql / e.total).toFixed(2) : 0 }))
         .sort((a, b) => b.total - a.total);
       return {
         total,
         total_sql: sql,
         sql_pct: total ? +(100 * sql / total).toFixed(2) : 0,
-        sem_criativo: semCriativo,
-        pct_sem_criativo: total ? +(100 * semCriativo / total).toFixed(2) : 0,
         criativos,
       };
     }
@@ -256,62 +258,50 @@
       );
     }
 
-    // Cor da barra cresce de vermelho (ruim) → âmbar → roxo → verde (ótimo) conforme a taxa SQL aumenta.
-    function rateColor(pct) {
-      if (pct == null || pct <= 0) return "#fb7185";   // rose-400  (0%: nenhum SQL)
-      if (pct < 5)   return "#fb7185";                  // rose-400  (< 5%)
-      if (pct < 10)  return "#fbbf24";                  // amber-400 (5–10%)
-      if (pct < 20)  return "#a78bfa";                  // violet-400 (10–20%, neutro/brand)
-      if (pct < 30)  return "#34d399";                  // emerald-400 (20–30%, bom)
-      return "#059669";                                  // emerald-600 (≥ 30%, ótimo)
-    }
-
-    function RateBar({ pct }) {
-      const w = Math.max(0, Math.min(100, pct || 0));
-      const color = rateColor(pct);
+    function CriativoCard({ c }) {
+      const knownPerfis = new Set(PERFIL_ORDER);
+      const extras = Object.keys(c.perfis).filter(p => !knownPerfis.has(p)).sort((x, y) => x.localeCompare(y, "pt-BR"));
+      const perfis = [...PERFIL_ORDER, ...extras].filter(p => (c.perfis[p] || 0) > 0);
+      const anunciosLabel = c.anuncios.length ? c.anuncios.join(" · ") : "(sem anúncio)";
       return (
-        <div className="flex items-center gap-3">
-          <div className="flex-1 h-2 rounded-full bg-[#2B0C55]/8 overflow-hidden">
-            <div className="h-full rounded-full transition-[width,background-color] duration-300"
-                 style={{ width: `${w}%`, background: color }} />
+        <div className="card p-5 space-y-4 flex flex-col">
+          <h3 className="text-sm font-semibold text-slate-800 leading-snug" title={c.name}>{c.name}</h3>
+          <div className="grid grid-cols-3 gap-3">
+            <div className="rounded-lg bg-[#6A52B3]/5 border border-[#6A52B3]/10 px-3 py-2">
+              <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Leads</div>
+              <div className="mt-0.5 text-2xl font-semibold tabular-nums text-slate-800">{fmtNumber(c.total)}</div>
+            </div>
+            <div className="rounded-lg bg-[#63C19B]/8 border border-[#63C19B]/15 px-3 py-2">
+              <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">SQL</div>
+              <div className="mt-0.5 text-2xl font-semibold tabular-nums"
+                   style={{ background: "linear-gradient(120deg,#6A52B3 0%,#63C19B 100%)",
+                            WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                {fmtNumber(c.sql)}
+              </div>
+            </div>
+            <div className="rounded-lg bg-white/60 border border-[#2B0C55]/10 px-3 py-2">
+              <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Taxa SQL</div>
+              <div className="mt-0.5 text-2xl font-semibold tabular-nums text-slate-800">{fmtPct(c.sql_pct)}</div>
+            </div>
           </div>
-          <span className="text-xs tabular-nums w-14 text-right font-semibold" style={{ color }}>
-            {fmtPct(pct)}
-          </span>
-        </div>
-      );
-    }
-
-    function CriativosTable({ rows }) {
-      if (!rows.length) {
-        return (
-          <div className="px-6 py-10 text-center text-sm text-slate-400">
-            Nenhum criativo identificado para esta origem.
+          <div>
+            <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500 mb-2">Perfis</div>
+            <ul className="space-y-1 text-sm">
+              {perfis.map(p => {
+                const isSql = SQL_PERFIS.has(p);
+                return (
+                  <li key={p} className="flex items-center justify-between gap-3">
+                    <span className={`truncate ${isSql ? "text-[#2B0C55] font-medium" : "text-slate-600"}`}>{p}</span>
+                    <span className={`tabular-nums font-semibold ${isSql ? "text-[#2B0C55]" : "text-slate-700"}`}>{fmtNumber(c.perfis[p])}</span>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        );
-      }
-      return (
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="text-[11px] uppercase tracking-[1.4px] text-slate-500 border-b border-[#2B0C55]/8">
-                <th className="text-left px-6 py-3 font-medium">Criativo</th>
-                <th className="text-right px-6 py-3 font-medium">Leads</th>
-                <th className="text-right px-6 py-3 font-medium">SQL</th>
-                <th className="text-left px-6 py-3 font-medium w-2/5">Taxa SQL</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((c, i) => (
-                <tr key={c.name} className={i % 2 ? "bg-white/40" : "bg-transparent"}>
-                  <td className="px-6 py-3 font-medium text-slate-800">{c.name}</td>
-                  <td className="px-6 py-3 text-right tabular-nums">{fmtNumber(c.total)}</td>
-                  <td className="px-6 py-3 text-right tabular-nums">{fmtNumber(c.sql)}</td>
-                  <td className="px-6 py-3"><RateBar pct={c.sql_pct} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="mt-auto pt-3 border-t border-[#2B0C55]/8">
+            <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Anúncio</div>
+            <div className="mt-0.5 text-xs text-slate-600 leading-snug" title={anunciosLabel}>{anunciosLabel}</div>
+          </div>
         </div>
       );
     }
@@ -716,20 +706,23 @@
                   <KpiCard label="Taxa SQL" value={fmtPct(m.sql_pct)} sub="SQL ÷ Leads" accent />
                 </section>
 
-                <section className="card">
-                  <div className="px-6 py-4 border-b border-[#2B0C55]/8 flex items-center justify-between">
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-base font-semibold">Taxa de SQL por criativo</h2>
+                      <h2 className="text-base font-semibold">Resumo por criativo</h2>
                       <p className="text-xs text-slate-500">
-                        Quantos leads cada criativo gerou e quantos viraram SQL.
+                        Composição de perfis, total de leads e SQL para cada criativo.
                       </p>
                     </div>
                     <span className="text-xs text-slate-500">{m.criativos.length} criativo(s)</span>
                   </div>
-                  <CriativosTable rows={m.criativos} />
-                  {m.sem_criativo > 0 && (
-                    <div className="px-6 py-3 border-t border-amber-200/60 bg-amber-50/70 text-xs text-amber-800 rounded-b-2xl">
-                      ⚠️ <strong>{fmtNumber(m.sem_criativo)} leads ({fmtPct(m.pct_sem_criativo)})</strong> dessa origem não têm criativo preenchido na planilha — esses ficam fora da tabela acima.
+                  {m.criativos.length === 0 ? (
+                    <div className="card px-6 py-10 text-center text-sm text-slate-400">
+                      Nenhum criativo identificado para esta seleção.
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {m.criativos.map(c => <CriativoCard key={c.name} c={c} />)}
                     </div>
                   )}
                 </section>
