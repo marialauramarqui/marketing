@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-12T20:20:48.683Z",
+  "generated_at": "2026-05-13T09:51:20.002Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "LeadsV2",
-  "total_leads": 987,
-  "total_sql": 137,
-  "sql_pct": 13.88,
+  "total_leads": 993,
+  "total_sql": 138,
+  "sql_pct": 13.9,
   "perfis": [
     "Pro",
     "Starter",
@@ -26,25 +26,25 @@
   ],
   "perfil_counts": {
     "Qualificação incompleta": 589,
-    "Multimarca": 119,
+    "Multimarca": 121,
     "Qualificado (Sem Faixa)": 14,
-    "Starter": 96,
-    "Suporte": 76,
+    "Starter": 97,
+    "Suporte": 78,
     "Pro": 27,
     "Desqualificado": 49,
-    "Em atendimento": 12,
+    "Em atendimento": 13,
     "CS": 3
   },
   "origem_counts": {
     "[SALES] Chanel": 73,
-    "Site": 323,
+    "Site": 329,
     "Bio Instagram": 50,
     "Orgânico": 82,
     "Evento": 9,
     "Evento Denim": 450
   },
   "sql_by_origem": {
-    "Site": 90,
+    "Site": 91,
     "Orgânico": 13,
     "Bio Instagram": 13,
     "[SALES] Chanel": 11,
@@ -5551,6 +5551,36 @@
       "data": "12/05/2026 17:00:00",
       "origem": "Site",
       "perfil": "Em atendimento"
+    },
+    {
+      "data": "12/05/2026 19:47:00",
+      "origem": "Site",
+      "perfil": "Suporte"
+    },
+    {
+      "data": "12/05/2026 20:31:00",
+      "origem": "Site",
+      "perfil": "Em atendimento"
+    },
+    {
+      "data": "12/05/2026 21:16:00",
+      "origem": "Site",
+      "perfil": "Suporte"
+    },
+    {
+      "data": "12/05/2026 22:21:00",
+      "origem": "Site",
+      "perfil": "Starter"
+    },
+    {
+      "data": "12/05/2026 22:57:00",
+      "origem": "Site",
+      "perfil": "Multimarca"
+    },
+    {
+      "data": "12/05/2026 23:09:00",
+      "origem": "Site",
+      "perfil": "Multimarca"
     }
   ]
 }
