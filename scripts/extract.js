@@ -185,10 +185,16 @@ async function main() {
 
   for (let i = 1; i < rows.length; i++) {
     const r = rows[i];
-    const origem = normalize(r[idx.origem]);
+    const rawOrigem = normalize(r[idx.origem]);
     const perfil = canonicalPerfil(r[idx.perfil]);
-    if (!origem && !perfil) continue;
+    if (!rawOrigem && !perfil) continue;
     const data = normalize(r[idx.data] || '');
+    const anuncio = idx.anuncio >= 0 ? normalize(r[idx.anuncio]) : '';
+    const criativo = idx.criativo >= 0 ? normalize(r[idx.criativo]) : '';
+
+    // Reclassifica como "Mídia paga" qualquer lead com ANUNCIO ou NOME CRIATIVO preenchido,
+    // independente do valor original da coluna ORIGEM. Mantém o rawOrigem só nos leads de mídia paga.
+    const origem = (anuncio || criativo) ? 'Mídia paga' : rawOrigem;
 
     leads.push({ data, origem, perfil });
     if (origem) origemSet.add(origem);
@@ -199,9 +205,6 @@ async function main() {
       sqlByOrigem[origem || '(sem origem)'] = (sqlByOrigem[origem || '(sem origem)'] || 0) + 1;
     }
 
-    // Mídia paga = qualquer lead com ANUNCIO ou NOME CRIATIVO preenchido (independente de ORIGEM).
-    const anuncio = idx.anuncio >= 0 ? normalize(r[idx.anuncio]) : '';
-    const criativo = idx.criativo >= 0 ? normalize(r[idx.criativo]) : '';
     if (anuncio || criativo) {
       chanel.total++;
       if (SQL_PERFIS.has(perfil)) chanel.total_sql++;
@@ -209,7 +212,7 @@ async function main() {
       else chanel.sem_criativo++;
       if (anuncio) bumpAgg(chanel.by_anuncio, anuncio, perfil);
       else chanel.sem_anuncio++;
-      chanel.leads.push({ data, perfil, anuncio, criativo, origem });
+      chanel.leads.push({ data, perfil, anuncio, criativo, origem: rawOrigem });
     }
   }
 
