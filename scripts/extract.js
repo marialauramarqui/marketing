@@ -7,6 +7,8 @@ const SHEET_ID = process.env.SHEET_ID || '1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1
 const TAB = process.env.SHEET_TAB || 'LeadsV2';
 const RANGE = `${TAB}!A:I`;
 const OUT_PATH = path.join(__dirname, '..', 'docs', 'data', 'data.json');
+const META_API_VERSION = 'v21.0';
+const META_LOCAL_CREDS = path.join(process.env.USERPROFILE || process.env.HOME || '', '.secrets', 'meta.json');
 
 const KNOWN_PERFIS = [
   'Pro',
@@ -40,6 +42,53 @@ function canonicalPerfil(raw) {
     if (known.toLowerCase() === lower) return known;
   }
   return v;
+}
+
+function loadMetaCreds() {
+  let token = process.env.META_ACCESS_TOKEN;
+  let acct = process.env.META_AD_ACCOUNT_ID;
+  if ((!token || !acct) && fs.existsSync(META_LOCAL_CREDS)) {
+    try {
+      const j = JSON.parse(fs.readFileSync(META_LOCAL_CREDS, 'utf8'));
+      token = token || j.access_token;
+      acct = acct || j.ad_account_id;
+    } catch (e) { /* ignore */ }
+  }
+  if (!token || !acct) return null;
+  if (!acct.startsWith('act_')) acct = 'act_' + acct;
+  return { token, acct };
+}
+
+async function fetchMetaSpendDaily(creds, since, until) {
+  const fields = 'ad_name,spend,date_start';
+  const params = new URLSearchParams({
+    level: 'ad',
+    time_increment: '1',
+    time_range: JSON.stringify({ since, until }),
+    fields,
+    limit: '500',
+    access_token: creds.token,
+  });
+  let url = `https://graph.facebook.com/${META_API_VERSION}/${creds.acct}/insights?${params}`;
+  const series = {};
+  let pages = 0;
+  while (url) {
+    const r = await fetch(url);
+    const j = await r.json();
+    if (j.error) throw new Error(`Meta API: ${j.error.message} (code ${j.error.code})`);
+    for (const row of (j.data || [])) {
+      const ad = row.ad_name;
+      const day = row.date_start;
+      const spend = parseFloat(row.spend) || 0;
+      if (!ad || !day) continue;
+      if (!series[ad]) series[ad] = {};
+      series[ad][day] = +(spend.toFixed(2));
+    }
+    pages++;
+    url = j.paging && j.paging.next;
+    if (pages > 50) break; // hard guard
+  }
+  return series;
 }
 
 async function getAuth() {
@@ -160,6 +209,34 @@ async function main() {
 
   const perfis = Array.from(new Set([...KNOWN_PERFIS, ...perfilSet])).filter(p => perfilSet.has(p) || perfilCounts[p]);
   const origens = Array.from(origemSet).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+  const metaCreds = loadMetaCreds();
+  if (metaCreds) {
+    try {
+      // Determina janela: do lead mais antigo (ou 90 dias atrás, o que vier antes) até hoje.
+      let earliestIso = null;
+      for (const l of leads) {
+        const m = String(l.data).match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+        if (!m) continue;
+        const iso = `${m[3]}-${m[2]}-${m[1]}`;
+        if (!earliestIso || iso < earliestIso) earliestIso = iso;
+      }
+      const today = new Date();
+      const fallback = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+      const since = earliestIso && earliestIso < fallback ? earliestIso : fallback;
+      const until = today.toISOString().slice(0, 10);
+      console.log(`Buscando gasto diário no Meta Ads (${since} → ${until})...`);
+      const spendDaily = await fetchMetaSpendDaily(metaCreds, since, until);
+      midia_paga.spend_daily = spendDaily;
+      midia_paga.spend_window = { since, until };
+      const totalSpend = Object.values(spendDaily).reduce((s, ad) => s + Object.values(ad).reduce((a, b) => a + b, 0), 0);
+      console.log(`OK Meta: ${Object.keys(spendDaily).length} ad(s), gasto total no período R$ ${totalSpend.toFixed(2)}`);
+    } catch (e) {
+      console.warn('AVISO: falha ao buscar Meta Ads (' + e.message + ') — seguindo sem gasto.');
+    }
+  } else {
+    console.warn('AVISO: credenciais Meta nao definidas (META_ACCESS_TOKEN/META_AD_ACCOUNT_ID ou ~/.secrets/meta.json) — pulando.');
+  }
 
   const out = {
     generated_at: new Date().toISOString(),

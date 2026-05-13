@@ -100,6 +100,7 @@
 
     const fmtNumber = (n) => (n == null ? "—" : new Intl.NumberFormat("pt-BR").format(n));
     const fmtPct = (n) => (n == null || !isFinite(n) ? "—" : `${n.toFixed(1).replace(".", ",")}%`);
+    const fmtBRL = (n) => (n == null || !isFinite(n) ? "—" : new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(n));
 
     // dd/mm/aaaa hh:mm:ss  → "YYYY-MM" ou null
     function leadMonthKey(str) {
@@ -117,6 +118,29 @@
     const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
     const fmtDateShort = (d) => d ? `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}` : "";
     const DOW_HEADERS = ["D","S","T","Q","Q","S","S"];
+
+    // Soma gasto diário de UM ad respeitando os filtros de período (anos/meses/range).
+    // Os filtros de criativo/anuncio não se aplicam aqui — eles selecionam *qual* card aparece, não o range temporal.
+    function spendInRange(daily, { years, months, dateFrom, dateTo } = {}) {
+      if (!daily) return 0;
+      const fromK = dateFrom ? dayKey(dateFrom) : null;
+      const toK   = dateTo   ? dayKey(dateTo)   : null;
+      let s = 0;
+      for (const day in daily) {
+        const m = day.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (!m) continue;
+        const [, y, mm, dd] = m;
+        if (years && years.size > 0 && !years.has(y)) continue;
+        if (months && months.size > 0 && !months.has(mm)) continue;
+        if (fromK != null || toK != null) {
+          const dk = +y * 10000 + +mm * 100 + +dd;
+          if (fromK != null && dk < fromK) continue;
+          if (toK   != null && dk > toK)   continue;
+        }
+        s += daily[day];
+      }
+      return +s.toFixed(2);
+    }
 
     function applyFilters(leads, { years, months, criativos, anuncios, dateFrom, dateTo } = {}) {
       const fromK = dateFrom ? dayKey(dateFrom) : null;
@@ -139,7 +163,7 @@
       });
     }
 
-    function aggregate(leads) {
+    function aggregate(leads, spendDaily, filters) {
       const byCriativo = new Map();
       let total = 0, sql = 0;
       for (const l of leads) {
@@ -156,12 +180,26 @@
         if (l.anuncio) e.anuncios.add(l.anuncio);
       }
       const criativos = [...byCriativo.values()]
-        .map(e => ({ ...e, anuncios: [...e.anuncios].sort((a, b) => a.localeCompare(b, "pt-BR")), sql_pct: e.total ? +(100 * e.sql / e.total).toFixed(2) : 0 }))
+        .map(e => {
+          const spend = spendDaily ? spendInRange(spendDaily[e.name], filters) : null;
+          const cpl   = spend != null && e.total > 0 ? +(spend / e.total).toFixed(2) : null;
+          const cpsql = spend != null && e.sql   > 0 ? +(spend / e.sql).toFixed(2)   : null;
+          return {
+            ...e,
+            anuncios: [...e.anuncios].sort((a, b) => a.localeCompare(b, "pt-BR")),
+            sql_pct: e.total ? +(100 * e.sql / e.total).toFixed(2) : 0,
+            spend, cpl, cpsql,
+          };
+        })
         .sort((a, b) => b.total - a.total);
+      const totalSpend = spendDaily ? criativos.reduce((s, c) => s + (c.spend || 0), 0) : null;
       return {
         total,
         total_sql: sql,
         sql_pct: total ? +(100 * sql / total).toFixed(2) : 0,
+        total_spend: totalSpend != null ? +totalSpend.toFixed(2) : null,
+        cpl_avg:   totalSpend != null && total > 0 ? +(totalSpend / total).toFixed(2) : null,
+        cpsql_avg: totalSpend != null && sql   > 0 ? +(totalSpend / sql).toFixed(2)   : null,
         criativos,
       };
     }
@@ -284,6 +322,26 @@
               <div className="mt-0.5 text-2xl font-semibold tabular-nums text-slate-800">{fmtPct(c.sql_pct)}</div>
             </div>
           </div>
+          {c.spend != null && (
+            <div className="grid grid-cols-3 gap-2 rounded-lg border border-[#2B0C55]/8 bg-white/40 p-3">
+              <div>
+                <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Custo</div>
+                <div className="mt-0.5 text-sm font-semibold tabular-nums text-slate-800">{fmtBRL(c.spend)}</div>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Custo/Lead</div>
+                <div className="mt-0.5 text-sm font-semibold tabular-nums text-slate-800">{fmtBRL(c.cpl)}</div>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Custo/SQL</div>
+                <div className="mt-0.5 text-sm font-semibold tabular-nums"
+                     style={c.cpsql != null ? { background: "linear-gradient(120deg,#6A52B3 0%,#63C19B 100%)",
+                                                WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" } : { color: "#94a3b8" }}>
+                  {fmtBRL(c.cpsql)}
+                </div>
+              </div>
+            </div>
+          )}
           <div>
             <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500 mb-2">Perfis</div>
             <ul className="space-y-1 text-sm">
@@ -607,14 +665,17 @@
         return unionSorted([...s], selectedAnuncios, (a, b) => a.localeCompare(b, "pt-BR"));
       }, [leadsForAnuncios, selectedAnuncios]);
 
+      const spendDaily = (data && data.midia_paga && data.midia_paga.spend_daily) || null;
+
       const m = useMemo(() => {
         if (!chanelLeads.length) return null;
-        return aggregate(applyFilters(chanelLeads, {
+        const filters = {
           years: selectedYears, months: selectedMonths,
           criativos: selectedCriativos, anuncios: selectedAnuncios,
           dateFrom, dateTo,
-        }));
-      }, [chanelLeads, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, dateFrom, dateTo]);
+        };
+        return aggregate(applyFilters(chanelLeads, filters), spendDaily, filters);
+      }, [chanelLeads, spendDaily, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, dateFrom, dateTo]);
 
       return (
         <>
@@ -705,6 +766,14 @@
                   <KpiCard label="SQL" value={fmtNumber(m.total_sql)} sub="Pro · Starter · Qualificado" accent />
                   <KpiCard label="Taxa SQL" value={fmtPct(m.sql_pct)} sub="SQL ÷ Leads" accent />
                 </section>
+
+                {m.total_spend != null && (
+                  <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <KpiCard label="Investimento" value={fmtBRL(m.total_spend)} sub="Meta Ads no período" accent />
+                    <KpiCard label="CPL médio" value={fmtBRL(m.cpl_avg)} sub="Investimento ÷ Leads" />
+                    <KpiCard label="CPSQL médio" value={fmtBRL(m.cpsql_avg)} sub="Investimento ÷ SQL" />
+                  </section>
+                )}
 
                 <section className="space-y-3">
                   <div className="flex items-center justify-between">

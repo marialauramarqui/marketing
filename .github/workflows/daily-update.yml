@@ -32,9 +32,11 @@ jobs:
       - name: Install deps
         run: npm ci || npm install
 
-      - name: Extract data from Google Sheet
+      - name: Extract data from Google Sheet + Meta Ads
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_AD_ACCOUNT_ID: ${{ secrets.META_AD_ACCOUNT_ID }}
         run: node scripts/extract.js
 
       - name: Commit updated data.json (if changed)
