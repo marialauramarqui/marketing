@@ -200,6 +200,26 @@
         e.perfis[p] = (e.perfis[p] || 0) + 1;
         if (l.anuncio) e.anuncios.add(l.anuncio);
       }
+
+      // Anúncios da Meta com gasto > 0 no período mas ainda sem lead na planilha.
+      // Aparecem como cards "vazios" (0 leads) só com o valor investido. Quando
+      // um lead com NOME CRIATIVO = ad.name entrar, o card preenche naturalmente.
+      // Ocultados quando há filtro de anúncio ativo (não dá pra cruzar com ANUNCIO da planilha).
+      if (spendDaily) {
+        const criativosFilter = filters && filters.criativos;
+        const anunciosFilter  = filters && filters.anuncios;
+        const hasAnuncioFilter = anunciosFilter && anunciosFilter.size > 0;
+        if (!hasAnuncioFilter) {
+          for (const adName in spendDaily) {
+            if (byCriativo.has(adName)) continue;
+            if (criativosFilter && criativosFilter.size > 0 && !criativosFilter.has(adName)) continue;
+            const spend = spendInRange(spendDaily[adName], filters);
+            if (spend <= 0) continue;
+            byCriativo.set(adName, { name: adName, total: 0, sql: 0, perfis: {}, anuncios: new Set() });
+          }
+        }
+      }
+
       const criativos = [...byCriativo.values()]
         .map(e => {
           const spend = spendDaily ? spendInRange(spendDaily[e.name], filters) : null;
@@ -216,7 +236,7 @@
             days_running: daysSince(firstDay),
           };
         })
-        .sort((a, b) => b.total - a.total);
+        .sort((a, b) => (b.total - a.total) || ((b.spend || 0) - (a.spend || 0)));
       const totalSpend = spendDaily ? criativos.reduce((s, c) => s + (c.spend || 0), 0) : null;
       return {
         total,
@@ -384,17 +404,21 @@
           )}
           <div>
             <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500 mb-2">Perfis</div>
-            <ul className="space-y-1 text-sm">
-              {perfis.map(p => {
-                const isSql = SQL_PERFIS.has(p);
-                return (
-                  <li key={p} className="flex items-center justify-between gap-3">
-                    <span className={`truncate ${isSql ? "text-[#2B0C55] font-medium" : "text-slate-600"}`}>{p}</span>
-                    <span className={`tabular-nums font-semibold ${isSql ? "text-[#2B0C55]" : "text-slate-700"}`}>{fmtNumber(c.perfis[p])}</span>
-                  </li>
-                );
-              })}
-            </ul>
+            {perfis.length === 0 ? (
+              <div className="text-sm italic text-slate-400">Ainda sem leads</div>
+            ) : (
+              <ul className="space-y-1 text-sm">
+                {perfis.map(p => {
+                  const isSql = SQL_PERFIS.has(p);
+                  return (
+                    <li key={p} className="flex items-center justify-between gap-3">
+                      <span className={`truncate ${isSql ? "text-[#2B0C55] font-medium" : "text-slate-600"}`}>{p}</span>
+                      <span className={`tabular-nums font-semibold ${isSql ? "text-[#2B0C55]" : "text-slate-700"}`}>{fmtNumber(c.perfis[p])}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
           <div className="mt-auto pt-3 border-t border-[#2B0C55]/8">
             <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Anúncio</div>
@@ -681,6 +705,11 @@
         return [...set].filter(Boolean).sort(cmp);
       };
 
+      // Dados da Meta precisam estar declarados antes dos available* porque
+      // availableCriativos lê spendDaily (e também passa como dep do useMemo).
+      const spendDaily = (data && data.midia_paga && data.midia_paga.spend_daily) || null;
+      const thumbnails = (data && data.midia_paga && data.midia_paga.thumbnails) || null;
+
       const availableYears = useMemo(() => {
         const s = new Set();
         for (const l of leadsForYears) { const k = leadMonthKey(l.data); if (k) s.add(k.split("-")[0]); }
@@ -696,17 +725,23 @@
       const availableCriativos = useMemo(() => {
         const s = new Set();
         for (const l of leadsForCriativos) { if (l.criativo) s.add(l.criativo); }
+        // Inclui ad names da Meta com gasto > 0 no período cascateado mesmo sem lead.
+        // Mesma regra dos cards: sem filtro de anúncio ativo (não tem como cruzar).
+        if (spendDaily && selectedAnuncios.size === 0) {
+          const f = { years: selectedYears, months: selectedMonths, dateFrom, dateTo };
+          for (const adName in spendDaily) {
+            if (s.has(adName)) continue;
+            if (spendInRange(spendDaily[adName], f) > 0) s.add(adName);
+          }
+        }
         return unionSorted([...s], selectedCriativos, (a, b) => a.localeCompare(b, "pt-BR"));
-      }, [leadsForCriativos, selectedCriativos]);
+      }, [leadsForCriativos, selectedCriativos, spendDaily, selectedYears, selectedMonths, selectedAnuncios, dateFrom, dateTo]);
 
       const availableAnuncios = useMemo(() => {
         const s = new Set();
         for (const l of leadsForAnuncios) { if (l.anuncio) s.add(l.anuncio); }
         return unionSorted([...s], selectedAnuncios, (a, b) => a.localeCompare(b, "pt-BR"));
       }, [leadsForAnuncios, selectedAnuncios]);
-
-      const spendDaily = (data && data.midia_paga && data.midia_paga.spend_daily) || null;
-      const thumbnails = (data && data.midia_paga && data.midia_paga.thumbnails) || null;
 
       const m = useMemo(() => {
         if (!chanelLeads.length) return null;
