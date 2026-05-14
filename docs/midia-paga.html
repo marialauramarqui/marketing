@@ -192,12 +192,23 @@
     }
 
     function aggregate(leads, meta, filters) {
-      const spendDaily       = meta && meta.spendDaily       || null;
-      const impressionsDaily = meta && meta.impressionsDaily || null;
-      const reachDaily       = meta && meta.reachDaily       || null;
-      const msgContactsDaily = meta && meta.msgContactsDaily || null;
-      const thumbnails       = meta && meta.thumbnails       || null;
-      const adAdset          = meta && meta.adAdset          || null;
+      const spendDaily          = meta && meta.spendDaily          || null;
+      const impressionsDaily    = meta && meta.impressionsDaily    || null;
+      const reachDaily          = meta && meta.reachDaily          || null;
+      const reachMonthly        = meta && meta.reachMonthly        || null;
+      const newMsgContactsDaily = meta && meta.newMsgContactsDaily || null;
+      const thumbnails          = meta && meta.thumbnails          || null;
+      const adAdset             = meta && meta.adAdset             || null;
+
+      // Quando o filtro de tempo é exatamente UM ano + UM mês (sem calendário), conseguimos
+      // usar reach_monthly (alcance único de calendário, vindo direto da Meta — bate com o Ads Manager).
+      // Outros filtros (multi-mês, custom range) caem na soma diária aproximada.
+      const singleMonthKey = (
+        filters &&
+        filters.years   && filters.years.size   === 1 &&
+        filters.months  && filters.months.size  === 1 &&
+        !filters.dateFrom && !filters.dateTo
+      ) ? `${[...filters.years][0]}-${[...filters.months][0]}` : null;
 
       const byCriativo = new Map();
       let total = 0, sql = 0;
@@ -245,10 +256,15 @@
         .map(e => {
           const spend       = spendDaily       ? spendInRange(spendDaily[e.name],       filters) : null;
           const impressions = impressionsDaily ? spendInRange(impressionsDaily[e.name], filters) : null;
-          // reach: soma dos alcances diários. Não é o reach único do período (mesmo user pode
-          // estar no reach de dias diferentes), mas é o melhor que dá pra fazer respeitando filtros.
-          const reach        = reachDaily       ? spendInRange(reachDaily[e.name],       filters) : null;
-          const msgContacts  = msgContactsDaily ? spendInRange(msgContactsDaily[e.name], filters) : null;
+          // reach: usa reach_monthly[ad][YYYY-MM] quando o filtro é exatamente 1 mês de calendário
+          // (vem da Meta como alcance único). Senão soma daily (aproximado).
+          let reach;
+          if (singleMonthKey && reachMonthly && reachMonthly[e.name]) {
+            reach = reachMonthly[e.name][singleMonthKey] ?? 0;
+          } else {
+            reach = reachDaily ? spendInRange(reachDaily[e.name], filters) : null;
+          }
+          const newMsgContacts = newMsgContactsDaily ? spendInRange(newMsgContactsDaily[e.name], filters) : null;
           const cpl   = spend != null && e.total > 0 ? +(spend / e.total).toFixed(2) : null;
           const cpsql = spend != null && e.sql   > 0 ? +(spend / e.sql).toFixed(2)   : null;
           const firstDay = spendDaily ? firstSpendDay(spendDaily[e.name]) : null;
@@ -257,7 +273,7 @@
             anuncios: [...e.anuncios].sort((a, b) => a.localeCompare(b, "pt-BR")),
             sql_pct: e.total ? +(100 * e.sql / e.total).toFixed(2) : 0,
             spend, cpl, cpsql,
-            impressions, reach, msg_contacts: msgContacts,
+            impressions, reach, new_msg_contacts: newMsgContacts,
             adset: adAdset ? (adAdset[e.name] || null) : null,
             thumbnail: thumbnails ? (thumbnails[e.name] || null) : null,
             first_spend_day: firstDay,
@@ -430,7 +446,7 @@
               </div>
             </div>
           )}
-          {(c.impressions != null || c.reach != null || c.msg_contacts != null) && (
+          {(c.impressions != null || c.reach != null || c.new_msg_contacts != null) && (
             <div className="grid grid-cols-3 gap-2 rounded-lg border border-[#2B0C55]/8 bg-white/40 p-3">
               <div>
                 <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Impressões</div>
@@ -441,8 +457,8 @@
                 <div className="mt-0.5 text-sm font-semibold tabular-nums text-slate-800">{fmtNumber(c.reach)}</div>
               </div>
               <div>
-                <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Cliques no link</div>
-                <div className="mt-0.5 text-sm font-semibold tabular-nums text-slate-800">{fmtNumber(c.msg_contacts)}</div>
+                <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Novos contatos de mensagem</div>
+                <div className="mt-0.5 text-sm font-semibold tabular-nums text-slate-800">{fmtNumber(c.new_msg_contacts)}</div>
               </div>
             </div>
           )}
@@ -762,7 +778,8 @@
       const spendDaily       = (data && data.midia_paga && data.midia_paga.spend_daily)        || null;
       const impressionsDaily = (data && data.midia_paga && data.midia_paga.impressions_daily)  || null;
       const reachDaily       = (data && data.midia_paga && data.midia_paga.reach_daily)        || null;
-      const msgContactsDaily = (data && data.midia_paga && data.midia_paga.msg_contacts_daily) || null;
+      const reachMonthly     = (data && data.midia_paga && data.midia_paga.reach_monthly)      || null;
+      const newMsgContactsDaily = (data && data.midia_paga && data.midia_paga.new_msg_contacts_daily) || null;
       const thumbnails       = (data && data.midia_paga && data.midia_paga.thumbnails)         || null;
       const campaigns        = (data && data.midia_paga && data.midia_paga.campaigns)          || [];
       const campaignByName = useMemo(() => {
@@ -839,9 +856,9 @@
           campanhas: selectedCampanhas, adCampaign,
           dateFrom, dateTo,
         };
-        const meta = { spendDaily, impressionsDaily, reachDaily, msgContactsDaily, thumbnails, adAdset };
+        const meta = { spendDaily, impressionsDaily, reachDaily, reachMonthly, newMsgContactsDaily, thumbnails, adAdset };
         return aggregate(applyFilters(chanelLeads, filters), meta, filters);
-      }, [chanelLeads, spendDaily, impressionsDaily, reachDaily, msgContactsDaily, thumbnails, adAdset, adCampaign, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, selectedCampanhas, dateFrom, dateTo]);
+      }, [chanelLeads, spendDaily, impressionsDaily, reachDaily, reachMonthly, newMsgContactsDaily, thumbnails, adAdset, adCampaign, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, selectedCampanhas, dateFrom, dateTo]);
 
       return (
         <>
