@@ -61,15 +61,17 @@ function loadMetaCreds() {
 
 async function fetchMetaAdsMetadata(creds) {
   // Pede thumbnail em 400x400 via field modifier — sem isso, vem fixo em 64x64.
-  // Também traz a campanha pai (id/nome/status) para alimentar o filtro de campanha.
+  // Também traz a campanha pai (id/nome/status) e o adset pai (id/nome) para
+  // alimentar o filtro de campanha e o rodapé "Conjunto de anúncio" do card.
   const params = new URLSearchParams({
-    fields: 'name,creative.thumbnail_width(400).thumbnail_height(400){thumbnail_url},campaign{id,name,status,effective_status}',
+    fields: 'name,creative.thumbnail_width(400).thumbnail_height(400){thumbnail_url},campaign{id,name,status,effective_status},adset{id,name}',
     limit: '500',
     access_token: creds.token,
   });
   let url = `https://graph.facebook.com/${META_API_VERSION}/${creds.acct}/ads?${params}`;
   const thumbs = {};
   const adCampaign = {};
+  const adAdset = {};
   const campaignsById = new Map();
   let pages = 0;
   while (url) {
@@ -89,12 +91,15 @@ async function fetchMetaAdsMetadata(creds) {
           });
         }
       }
+      if (ad.name && ad.adset && ad.adset.name) {
+        adAdset[ad.name] = ad.adset.name;
+      }
     }
     pages++;
     url = j.paging && j.paging.next;
     if (pages > 50) break;
   }
-  return { thumbs, adCampaign, campaigns: [...campaignsById.values()] };
+  return { thumbs, adCampaign, adAdset, campaigns: [...campaignsById.values()] };
 }
 
 async function fetchMetaInsightsDaily(creds, since, until) {
@@ -295,14 +300,15 @@ async function main() {
       console.log(`OK Meta: ${Object.keys(insights.spend).length} ad(s), gasto R$ ${totalSpend.toFixed(2)}, ${totalImpr.toLocaleString('pt-BR')} impressões, ${totalMsg.toLocaleString('pt-BR')} contatos por mensagem`);
 
       try {
-        const { thumbs, adCampaign, campaigns } = await fetchMetaAdsMetadata(metaCreds);
+        const { thumbs, adCampaign, adAdset, campaigns } = await fetchMetaAdsMetadata(metaCreds);
         midia_paga.thumbnails = thumbs;
         midia_paga.ad_campaign = adCampaign;
+        midia_paga.ad_adset = adAdset;
         midia_paga.campaigns = campaigns;
         const ativas = campaigns.filter(c => c.effective_status === 'ACTIVE').length;
-        console.log(`OK Meta ads metadata: ${Object.keys(thumbs).length} com imagem, ${Object.keys(adCampaign).length} mapeados a campanhas (${campaigns.length} campanhas; ${ativas} ativa(s))`);
+        console.log(`OK Meta ads metadata: ${Object.keys(thumbs).length} com imagem, ${Object.keys(adCampaign).length} mapeados a campanhas (${campaigns.length} campanhas; ${ativas} ativa(s)), ${Object.keys(adAdset).length} mapeados a adsets`);
       } catch (e) {
-        console.warn('AVISO: falha ao buscar metadata dos ads (' + e.message + ') — seguindo sem imagens/campanhas.');
+        console.warn('AVISO: falha ao buscar metadata dos ads (' + e.message + ') — seguindo sem imagens/campanhas/adsets.');
       }
     } catch (e) {
       console.warn('AVISO: falha ao buscar Meta Ads (' + e.message + ') — seguindo sem gasto.');

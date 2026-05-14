@@ -197,6 +197,7 @@
       const reachDaily       = meta && meta.reachDaily       || null;
       const msgContactsDaily = meta && meta.msgContactsDaily || null;
       const thumbnails       = meta && meta.thumbnails       || null;
+      const adAdset          = meta && meta.adAdset          || null;
 
       const byCriativo = new Map();
       let total = 0, sql = 0;
@@ -257,6 +258,7 @@
             sql_pct: e.total ? +(100 * e.sql / e.total).toFixed(2) : 0,
             spend, cpl, cpsql,
             impressions, reach, msg_contacts: msgContacts,
+            adset: adAdset ? (adAdset[e.name] || null) : null,
             thumbnail: thumbnails ? (thumbnails[e.name] || null) : null,
             first_spend_day: firstDay,
             days_running: daysSince(firstDay),
@@ -371,7 +373,7 @@
       const knownPerfis = new Set(PERFIL_ORDER);
       const extras = Object.keys(c.perfis).filter(p => !knownPerfis.has(p)).sort((x, y) => x.localeCompare(y, "pt-BR"));
       const perfis = [...PERFIL_ORDER, ...extras].filter(p => (c.perfis[p] || 0) > 0);
-      const anunciosLabel = c.anuncios.length ? c.anuncios.join(" · ") : "(sem anúncio)";
+      const adsetLabel = c.adset || "—";
       return (
         <div className="card p-5 space-y-4 flex flex-col">
           <div className="flex items-start gap-3">
@@ -463,8 +465,8 @@
             )}
           </div>
           <div className="mt-auto pt-3 border-t border-[#2B0C55]/8">
-            <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Anúncio</div>
-            <div className="mt-0.5 text-xs text-slate-600 leading-snug" title={anunciosLabel}>{anunciosLabel}</div>
+            <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Conjunto de anúncio</div>
+            <div className="mt-0.5 text-xs text-slate-600 leading-snug" title={adsetLabel}>{adsetLabel}</div>
           </div>
         </div>
       );
@@ -724,6 +726,7 @@
       }, [months]);
 
       const adCampaign = (data && data.midia_paga && data.midia_paga.ad_campaign) || {};
+      const adAdset    = (data && data.midia_paga && data.midia_paga.ad_adset)    || {};
 
       // Cada lista de opções é calculada a partir dos leads filtrados pelos *outros* filtros.
       // Isso torna os dropdowns cascateados: filtrar por mês reduz criativos/anúncios disponíveis.
@@ -836,9 +839,9 @@
           campanhas: selectedCampanhas, adCampaign,
           dateFrom, dateTo,
         };
-        const meta = { spendDaily, impressionsDaily, reachDaily, msgContactsDaily, thumbnails };
+        const meta = { spendDaily, impressionsDaily, reachDaily, msgContactsDaily, thumbnails, adAdset };
         return aggregate(applyFilters(chanelLeads, filters), meta, filters);
-      }, [chanelLeads, spendDaily, impressionsDaily, reachDaily, msgContactsDaily, thumbnails, adCampaign, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, selectedCampanhas, dateFrom, dateTo]);
+      }, [chanelLeads, spendDaily, impressionsDaily, reachDaily, msgContactsDaily, thumbnails, adAdset, adCampaign, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, selectedCampanhas, dateFrom, dateTo]);
 
       return (
         <>
