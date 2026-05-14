@@ -59,15 +59,18 @@ function loadMetaCreds() {
   return { token, acct };
 }
 
-async function fetchMetaAdThumbnails(creds) {
+async function fetchMetaAdsMetadata(creds) {
   // Pede thumbnail em 400x400 via field modifier — sem isso, vem fixo em 64x64.
+  // Também traz a campanha pai (id/nome/status) para alimentar o filtro de campanha.
   const params = new URLSearchParams({
-    fields: 'name,creative.thumbnail_width(400).thumbnail_height(400){thumbnail_url}',
+    fields: 'name,creative.thumbnail_width(400).thumbnail_height(400){thumbnail_url},campaign{id,name,status,effective_status}',
     limit: '500',
     access_token: creds.token,
   });
   let url = `https://graph.facebook.com/${META_API_VERSION}/${creds.acct}/ads?${params}`;
   const thumbs = {};
+  const adCampaign = {};
+  const campaignsById = new Map();
   let pages = 0;
   while (url) {
     const r = await fetch(url);
@@ -76,16 +79,31 @@ async function fetchMetaAdThumbnails(creds) {
     for (const ad of (j.data || [])) {
       const t = ad.creative && ad.creative.thumbnail_url;
       if (ad.name && t) thumbs[ad.name] = t;
+      if (ad.name && ad.campaign && ad.campaign.name) {
+        adCampaign[ad.name] = ad.campaign.name;
+        if (!campaignsById.has(ad.campaign.id)) {
+          campaignsById.set(ad.campaign.id, {
+            name: ad.campaign.name,
+            status: ad.campaign.status || null,
+            effective_status: ad.campaign.effective_status || null,
+          });
+        }
+      }
     }
     pages++;
     url = j.paging && j.paging.next;
     if (pages > 50) break;
   }
-  return thumbs;
+  return { thumbs, adCampaign, campaigns: [...campaignsById.values()] };
 }
 
-async function fetchMetaSpendDaily(creds, since, until) {
-  const fields = 'ad_name,spend,date_start';
+async function fetchMetaInsightsDaily(creds, since, until) {
+  // Traz spend + impressions + reach + contatos-por-mensagem por ad por dia numa única chamada.
+  // "Contatos por mensagem" vem do array actions, action_type =
+  // onsite_conversion.messaging_conversation_started_7d (bate com a coluna "Contatos por
+  // mensagem" no Ads Manager — gente que efetivamente iniciou conversa, NÃO apenas cliques).
+  const MSG_ACTION = 'onsite_conversion.messaging_conversation_started_7d';
+  const fields = 'ad_name,spend,impressions,reach,actions,date_start';
   const params = new URLSearchParams({
     level: 'ad',
     time_increment: '1',
@@ -95,7 +113,10 @@ async function fetchMetaSpendDaily(creds, since, until) {
     access_token: creds.token,
   });
   let url = `https://graph.facebook.com/${META_API_VERSION}/${creds.acct}/insights?${params}`;
-  const series = {};
+  const spend = {};
+  const impressions = {};
+  const reach = {};
+  const msgContacts = {};
   let pages = 0;
   while (url) {
     const r = await fetch(url);
@@ -104,16 +125,23 @@ async function fetchMetaSpendDaily(creds, since, until) {
     for (const row of (j.data || [])) {
       const ad = row.ad_name;
       const day = row.date_start;
-      const spend = parseFloat(row.spend) || 0;
       if (!ad || !day) continue;
-      if (!series[ad]) series[ad] = {};
-      series[ad][day] = +(spend.toFixed(2));
+      const action = (row.actions || []).find(a => a.action_type === MSG_ACTION);
+      const contacts = action ? parseInt(action.value, 10) : 0;
+      if (!spend[ad])        spend[ad]        = {};
+      if (!impressions[ad])  impressions[ad]  = {};
+      if (!reach[ad])        reach[ad]        = {};
+      if (!msgContacts[ad])  msgContacts[ad]  = {};
+      spend[ad][day]        = +((parseFloat(row.spend) || 0).toFixed(2));
+      impressions[ad][day]  = parseInt(row.impressions || 0, 10);
+      reach[ad][day]        = parseInt(row.reach || 0, 10);
+      msgContacts[ad][day]  = contacts;
     }
     pages++;
     url = j.paging && j.paging.next;
     if (pages > 50) break; // hard guard
   }
-  return series;
+  return { spend, impressions, reach, msgContacts };
 }
 
 async function getAuth() {
@@ -254,19 +282,27 @@ async function main() {
       const fallback = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
       const since = earliestIso && earliestIso < fallback ? earliestIso : fallback;
       const until = today.toISOString().slice(0, 10);
-      console.log(`Buscando gasto diário no Meta Ads (${since} → ${until})...`);
-      const spendDaily = await fetchMetaSpendDaily(metaCreds, since, until);
-      midia_paga.spend_daily = spendDaily;
+      console.log(`Buscando insights diários no Meta Ads (${since} → ${until})...`);
+      const insights = await fetchMetaInsightsDaily(metaCreds, since, until);
+      midia_paga.spend_daily          = insights.spend;
+      midia_paga.impressions_daily    = insights.impressions;
+      midia_paga.reach_daily          = insights.reach;
+      midia_paga.msg_contacts_daily   = insights.msgContacts;
       midia_paga.spend_window = { since, until };
-      const totalSpend = Object.values(spendDaily).reduce((s, ad) => s + Object.values(ad).reduce((a, b) => a + b, 0), 0);
-      console.log(`OK Meta: ${Object.keys(spendDaily).length} ad(s), gasto total no período R$ ${totalSpend.toFixed(2)}`);
+      const totalSpend = Object.values(insights.spend).reduce((s, ad) => s + Object.values(ad).reduce((a, b) => a + b, 0), 0);
+      const totalImpr  = Object.values(insights.impressions).reduce((s, ad) => s + Object.values(ad).reduce((a, b) => a + b, 0), 0);
+      const totalMsg   = Object.values(insights.msgContacts).reduce((s, ad) => s + Object.values(ad).reduce((a, b) => a + b, 0), 0);
+      console.log(`OK Meta: ${Object.keys(insights.spend).length} ad(s), gasto R$ ${totalSpend.toFixed(2)}, ${totalImpr.toLocaleString('pt-BR')} impressões, ${totalMsg.toLocaleString('pt-BR')} contatos por mensagem`);
 
       try {
-        const thumbs = await fetchMetaAdThumbnails(metaCreds);
+        const { thumbs, adCampaign, campaigns } = await fetchMetaAdsMetadata(metaCreds);
         midia_paga.thumbnails = thumbs;
-        console.log(`OK Meta thumbnails: ${Object.keys(thumbs).length} criativo(s) com imagem`);
+        midia_paga.ad_campaign = adCampaign;
+        midia_paga.campaigns = campaigns;
+        const ativas = campaigns.filter(c => c.effective_status === 'ACTIVE').length;
+        console.log(`OK Meta ads metadata: ${Object.keys(thumbs).length} com imagem, ${Object.keys(adCampaign).length} mapeados a campanhas (${campaigns.length} campanhas; ${ativas} ativa(s))`);
       } catch (e) {
-        console.warn('AVISO: falha ao buscar thumbnails (' + e.message + ') — seguindo sem imagens.');
+        console.warn('AVISO: falha ao buscar metadata dos ads (' + e.message + ') — seguindo sem imagens/campanhas.');
       }
     } catch (e) {
       console.warn('AVISO: falha ao buscar Meta Ads (' + e.message + ') — seguindo sem gasto.');

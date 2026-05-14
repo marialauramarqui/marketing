@@ -163,9 +163,10 @@
       return +s.toFixed(2);
     }
 
-    function applyFilters(leads, { years, months, criativos, anuncios, dateFrom, dateTo } = {}) {
+    function applyFilters(leads, { years, months, criativos, anuncios, campanhas, adCampaign, dateFrom, dateTo } = {}) {
       const fromK = dateFrom ? dayKey(dateFrom) : null;
       const toK   = dateTo   ? dayKey(dateTo)   : null;
+      const hasCampanhaFilter = campanhas && campanhas.size > 0;
       return leads.filter(l => {
         const k = leadMonthKey(l.data);
         const [ky, km] = k ? k.split("-") : [null, null];
@@ -173,6 +174,12 @@
         if (months && months.size > 0 && (!km || !months.has(km))) return false;
         if (criativos && criativos.size > 0 && !criativos.has(l.criativo)) return false;
         if (anuncios && anuncios.size > 0 && !anuncios.has(l.anuncio)) return false;
+        if (hasCampanhaFilter) {
+          // O lead só conhece NOME CRIATIVO (= ad.name na Meta). A campanha vem da Meta via adCampaign.
+          // Se não der pra mapear (criativo ausente na Meta), o lead fica fora quando o filtro está ativo.
+          const camp = (adCampaign && l.criativo) ? adCampaign[l.criativo] : null;
+          if (!camp || !campanhas.has(camp)) return false;
+        }
         if (fromK != null || toK != null) {
           const dd = parseLeadDay(l.data);
           if (!dd) return false;
@@ -184,7 +191,13 @@
       });
     }
 
-    function aggregate(leads, spendDaily, thumbnails, filters) {
+    function aggregate(leads, meta, filters) {
+      const spendDaily       = meta && meta.spendDaily       || null;
+      const impressionsDaily = meta && meta.impressionsDaily || null;
+      const reachDaily       = meta && meta.reachDaily       || null;
+      const msgContactsDaily = meta && meta.msgContactsDaily || null;
+      const thumbnails       = meta && meta.thumbnails       || null;
+
       const byCriativo = new Map();
       let total = 0, sql = 0;
       for (const l of leads) {
@@ -208,11 +221,18 @@
       if (spendDaily) {
         const criativosFilter = filters && filters.criativos;
         const anunciosFilter  = filters && filters.anuncios;
-        const hasAnuncioFilter = anunciosFilter && anunciosFilter.size > 0;
+        const campanhasFilter = filters && filters.campanhas;
+        const adCampaign      = (filters && filters.adCampaign) || {};
+        const hasAnuncioFilter  = anunciosFilter  && anunciosFilter.size > 0;
+        const hasCampanhaFilter = campanhasFilter && campanhasFilter.size > 0;
         if (!hasAnuncioFilter) {
           for (const adName in spendDaily) {
             if (byCriativo.has(adName)) continue;
             if (criativosFilter && criativosFilter.size > 0 && !criativosFilter.has(adName)) continue;
+            if (hasCampanhaFilter) {
+              const camp = adCampaign[adName];
+              if (!camp || !campanhasFilter.has(camp)) continue;
+            }
             const spend = spendInRange(spendDaily[adName], filters);
             if (spend <= 0) continue;
             byCriativo.set(adName, { name: adName, total: 0, sql: 0, perfis: {}, anuncios: new Set() });
@@ -222,7 +242,12 @@
 
       const criativos = [...byCriativo.values()]
         .map(e => {
-          const spend = spendDaily ? spendInRange(spendDaily[e.name], filters) : null;
+          const spend       = spendDaily       ? spendInRange(spendDaily[e.name],       filters) : null;
+          const impressions = impressionsDaily ? spendInRange(impressionsDaily[e.name], filters) : null;
+          // reach: soma dos alcances diários. Não é o reach único do período (mesmo user pode
+          // estar no reach de dias diferentes), mas é o melhor que dá pra fazer respeitando filtros.
+          const reach        = reachDaily       ? spendInRange(reachDaily[e.name],       filters) : null;
+          const msgContacts  = msgContactsDaily ? spendInRange(msgContactsDaily[e.name], filters) : null;
           const cpl   = spend != null && e.total > 0 ? +(spend / e.total).toFixed(2) : null;
           const cpsql = spend != null && e.sql   > 0 ? +(spend / e.sql).toFixed(2)   : null;
           const firstDay = spendDaily ? firstSpendDay(spendDaily[e.name]) : null;
@@ -231,6 +256,7 @@
             anuncios: [...e.anuncios].sort((a, b) => a.localeCompare(b, "pt-BR")),
             sql_pct: e.total ? +(100 * e.sql / e.total).toFixed(2) : 0,
             spend, cpl, cpsql,
+            impressions, reach, msg_contacts: msgContacts,
             thumbnail: thumbnails ? (thumbnails[e.name] || null) : null,
             first_spend_day: firstDay,
             days_running: daysSince(firstDay),
@@ -399,6 +425,22 @@
                                                 WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" } : { color: "#94a3b8" }}>
                   {fmtBRL(c.cpsql)}
                 </div>
+              </div>
+            </div>
+          )}
+          {(c.impressions != null || c.reach != null || c.msg_contacts != null) && (
+            <div className="grid grid-cols-3 gap-2 rounded-lg border border-[#2B0C55]/8 bg-white/40 p-3">
+              <div>
+                <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Impressões</div>
+                <div className="mt-0.5 text-sm font-semibold tabular-nums text-slate-800">{fmtNumber(c.impressions)}</div>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Alcance</div>
+                <div className="mt-0.5 text-sm font-semibold tabular-nums text-slate-800">{fmtNumber(c.reach)}</div>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Contatos por mensagem</div>
+                <div className="mt-0.5 text-sm font-semibold tabular-nums text-slate-800">{fmtNumber(c.msg_contacts)}</div>
               </div>
             </div>
           )}
@@ -650,6 +692,7 @@
       const [selectedMonths, setSelectedMonths] = useState(new Set());
       const [selectedCriativos, setSelectedCriativos] = useState(new Set());
       const [selectedAnuncios, setSelectedAnuncios] = useState(new Set());
+      const [selectedCampanhas, setSelectedCampanhas] = useState(new Set());
       const [dateFrom, setDateFrom] = useState(null);
       const [dateTo, setDateTo] = useState(null);
 
@@ -680,23 +723,29 @@
         }
       }, [months]);
 
+      const adCampaign = (data && data.midia_paga && data.midia_paga.ad_campaign) || {};
+
       // Cada lista de opções é calculada a partir dos leads filtrados pelos *outros* filtros.
       // Isso torna os dropdowns cascateados: filtrar por mês reduz criativos/anúncios disponíveis.
       const leadsForYears = useMemo(
-        () => applyFilters(chanelLeads, { months: selectedMonths, criativos: selectedCriativos, anuncios: selectedAnuncios, dateFrom, dateTo }),
-        [chanelLeads, selectedMonths, selectedCriativos, selectedAnuncios, dateFrom, dateTo]
+        () => applyFilters(chanelLeads, { months: selectedMonths, criativos: selectedCriativos, anuncios: selectedAnuncios, campanhas: selectedCampanhas, adCampaign, dateFrom, dateTo }),
+        [chanelLeads, selectedMonths, selectedCriativos, selectedAnuncios, selectedCampanhas, adCampaign, dateFrom, dateTo]
       );
       const leadsForMonths = useMemo(
-        () => applyFilters(chanelLeads, { years: selectedYears, criativos: selectedCriativos, anuncios: selectedAnuncios, dateFrom, dateTo }),
-        [chanelLeads, selectedYears, selectedCriativos, selectedAnuncios, dateFrom, dateTo]
+        () => applyFilters(chanelLeads, { years: selectedYears, criativos: selectedCriativos, anuncios: selectedAnuncios, campanhas: selectedCampanhas, adCampaign, dateFrom, dateTo }),
+        [chanelLeads, selectedYears, selectedCriativos, selectedAnuncios, selectedCampanhas, adCampaign, dateFrom, dateTo]
       );
       const leadsForCriativos = useMemo(
-        () => applyFilters(chanelLeads, { years: selectedYears, months: selectedMonths, anuncios: selectedAnuncios, dateFrom, dateTo }),
-        [chanelLeads, selectedYears, selectedMonths, selectedAnuncios, dateFrom, dateTo]
+        () => applyFilters(chanelLeads, { years: selectedYears, months: selectedMonths, anuncios: selectedAnuncios, campanhas: selectedCampanhas, adCampaign, dateFrom, dateTo }),
+        [chanelLeads, selectedYears, selectedMonths, selectedAnuncios, selectedCampanhas, adCampaign, dateFrom, dateTo]
       );
       const leadsForAnuncios = useMemo(
-        () => applyFilters(chanelLeads, { years: selectedYears, months: selectedMonths, criativos: selectedCriativos, dateFrom, dateTo }),
-        [chanelLeads, selectedYears, selectedMonths, selectedCriativos, dateFrom, dateTo]
+        () => applyFilters(chanelLeads, { years: selectedYears, months: selectedMonths, criativos: selectedCriativos, campanhas: selectedCampanhas, adCampaign, dateFrom, dateTo }),
+        [chanelLeads, selectedYears, selectedMonths, selectedCriativos, selectedCampanhas, adCampaign, dateFrom, dateTo]
+      );
+      const leadsForCampanhas = useMemo(
+        () => applyFilters(chanelLeads, { years: selectedYears, months: selectedMonths, criativos: selectedCriativos, anuncios: selectedAnuncios, dateFrom, dateTo }),
+        [chanelLeads, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, dateFrom, dateTo]
       );
 
       // Inclui sempre o que está selecionado (mesmo se filtrar pra zero), para a usuária conseguir desmarcar.
@@ -707,8 +756,17 @@
 
       // Dados da Meta precisam estar declarados antes dos available* porque
       // availableCriativos lê spendDaily (e também passa como dep do useMemo).
-      const spendDaily = (data && data.midia_paga && data.midia_paga.spend_daily) || null;
-      const thumbnails = (data && data.midia_paga && data.midia_paga.thumbnails) || null;
+      const spendDaily       = (data && data.midia_paga && data.midia_paga.spend_daily)        || null;
+      const impressionsDaily = (data && data.midia_paga && data.midia_paga.impressions_daily)  || null;
+      const reachDaily       = (data && data.midia_paga && data.midia_paga.reach_daily)        || null;
+      const msgContactsDaily = (data && data.midia_paga && data.midia_paga.msg_contacts_daily) || null;
+      const thumbnails       = (data && data.midia_paga && data.midia_paga.thumbnails)         || null;
+      const campaigns        = (data && data.midia_paga && data.midia_paga.campaigns)          || [];
+      const campaignByName = useMemo(() => {
+        const m = {};
+        for (const c of campaigns) m[c.name] = c;
+        return m;
+      }, [campaigns]);
 
       const availableYears = useMemo(() => {
         const s = new Set();
@@ -729,13 +787,18 @@
         // Mesma regra dos cards: sem filtro de anúncio ativo (não tem como cruzar).
         if (spendDaily && selectedAnuncios.size === 0) {
           const f = { years: selectedYears, months: selectedMonths, dateFrom, dateTo };
+          const hasCampanhaFilter = selectedCampanhas.size > 0;
           for (const adName in spendDaily) {
             if (s.has(adName)) continue;
+            if (hasCampanhaFilter) {
+              const c = adCampaign[adName];
+              if (!c || !selectedCampanhas.has(c)) continue;
+            }
             if (spendInRange(spendDaily[adName], f) > 0) s.add(adName);
           }
         }
         return unionSorted([...s], selectedCriativos, (a, b) => a.localeCompare(b, "pt-BR"));
-      }, [leadsForCriativos, selectedCriativos, spendDaily, selectedYears, selectedMonths, selectedAnuncios, dateFrom, dateTo]);
+      }, [leadsForCriativos, selectedCriativos, spendDaily, adCampaign, selectedYears, selectedMonths, selectedAnuncios, selectedCampanhas, dateFrom, dateTo]);
 
       const availableAnuncios = useMemo(() => {
         const s = new Set();
@@ -743,15 +806,39 @@
         return unionSorted([...s], selectedAnuncios, (a, b) => a.localeCompare(b, "pt-BR"));
       }, [leadsForAnuncios, selectedAnuncios]);
 
+      const availableCampanhas = useMemo(() => {
+        const s = new Set();
+        // Campanhas dos leads no recorte cascateado (exceto filtro de campanha em si).
+        for (const l of leadsForCampanhas) {
+          const c = l.criativo ? adCampaign[l.criativo] : null;
+          if (c) s.add(c);
+        }
+        // Campanhas de ads Meta-only com gasto no período (cascateado por ano/mês/calendário e criativo).
+        // Mesma regra do availableCriativos: só conta quando não há filtro de anúncio ativo.
+        if (spendDaily && selectedAnuncios.size === 0) {
+          const f = { years: selectedYears, months: selectedMonths, dateFrom, dateTo };
+          const hasCriativoFilter = selectedCriativos.size > 0;
+          for (const adName in spendDaily) {
+            const c = adCampaign[adName];
+            if (!c) continue;
+            if (hasCriativoFilter && !selectedCriativos.has(adName)) continue;
+            if (spendInRange(spendDaily[adName], f) > 0) s.add(c);
+          }
+        }
+        return unionSorted([...s], selectedCampanhas, (a, b) => a.localeCompare(b, "pt-BR"));
+      }, [leadsForCampanhas, selectedCampanhas, spendDaily, adCampaign, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, dateFrom, dateTo]);
+
       const m = useMemo(() => {
         if (!chanelLeads.length) return null;
         const filters = {
           years: selectedYears, months: selectedMonths,
           criativos: selectedCriativos, anuncios: selectedAnuncios,
+          campanhas: selectedCampanhas, adCampaign,
           dateFrom, dateTo,
         };
-        return aggregate(applyFilters(chanelLeads, filters), spendDaily, thumbnails, filters);
-      }, [chanelLeads, spendDaily, thumbnails, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, dateFrom, dateTo]);
+        const meta = { spendDaily, impressionsDaily, reachDaily, msgContactsDaily, thumbnails };
+        return aggregate(applyFilters(chanelLeads, filters), meta, filters);
+      }, [chanelLeads, spendDaily, impressionsDaily, reachDaily, msgContactsDaily, thumbnails, adCampaign, selectedYears, selectedMonths, selectedCriativos, selectedAnuncios, selectedCampanhas, dateFrom, dateTo]);
 
       return (
         <>
@@ -809,15 +896,29 @@
                     minWidth={220}
                     popoverWidth="w-80"
                   />
+                  <MultiSelectDropdown
+                    allLabel="Todas as campanhas"
+                    pluralLabel="campanhas selecionadas"
+                    options={availableCampanhas}
+                    selected={selectedCampanhas}
+                    onChange={setSelectedCampanhas}
+                    displayFn={(name) => {
+                      const c = campaignByName[name];
+                      return (c && c.effective_status && c.effective_status !== "ACTIVE") ? `${name} · pausada` : name;
+                    }}
+                    minWidth={220}
+                    popoverWidth="w-80"
+                  />
                   <CalendarButton from={dateFrom} to={dateTo}
                     onChange={(a, b) => { setDateFrom(a); setDateTo(b); }} />
                 </div>
-                {(selectedYears.size > 0 || selectedMonths.size > 0 || selectedCriativos.size > 0 || selectedAnuncios.size > 0 || dateFrom || dateTo) && (
+                {(selectedYears.size > 0 || selectedMonths.size > 0 || selectedCriativos.size > 0 || selectedAnuncios.size > 0 || selectedCampanhas.size > 0 || dateFrom || dateTo) && (
                   <button onClick={() => {
                             setSelectedYears(new Set());
                             setSelectedMonths(new Set());
                             setSelectedCriativos(new Set());
                             setSelectedAnuncios(new Set());
+                            setSelectedCampanhas(new Set());
                             setDateFrom(null); setDateTo(null);
                           }}
                           className="text-xs text-slate-600 underline-offset-2 hover:underline">
