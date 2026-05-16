@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-15T17:28:22.551Z",
+  "generated_at": "2026-05-16T09:29:35.697Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "LeadsV2",
-  "total_leads": 1043,
+  "total_leads": 1047,
   "total_sql": 152,
-  "sql_pct": 14.57,
+  "sql_pct": 14.52,
   "perfis": [
     "Pro",
     "Starter",
@@ -25,27 +25,27 @@
     "Site"
   ],
   "perfil_counts": {
-    "Qualificação incompleta": 594,
-    "Multimarca": 135,
+    "Qualificação incompleta": 602,
+    "Multimarca": 136,
     "Qualificado (Sem Faixa)": 17,
     "Starter": 104,
     "Suporte": 86,
     "Pro": 31,
     "Desqualificado": 50,
-    "CS": 6,
-    "Em atendimento": 19
+    "CS": 5,
+    "Em atendimento": 15
   },
   "origem_counts": {
-    "Mídia paga": 90,
-    "Site": 350,
+    "Mídia paga": 92,
+    "Site": 352,
     "Bio Instagram": 51,
     "Orgânico": 93,
     "Evento": 9,
     "Evento Denim": 450
   },
   "sql_by_origem": {
-    "Site": 100,
-    "Orgânico": 15,
+    "Site": 101,
+    "Orgânico": 14,
     "Bio Instagram": 14,
     "Mídia paga": 13,
     "Evento": 9,
@@ -58,9 +58,9 @@
   ],
   "midia_paga": {
     "chanel": {
-      "total": 90,
+      "total": 92,
       "total_sql": 13,
-      "sql_pct": 14.44,
+      "sql_pct": 14.13,
       "sem_criativo": 0,
       "sem_anuncio": 0,
       "pct_sem_criativo": 0,
@@ -100,18 +100,19 @@
           "by_perfil": {
             "Suporte": 1,
             "Pro": 1,
-            "Em atendimento": 7,
-            "Multimarca": 1
+            "Qualificação incompleta": 3,
+            "Multimarca": 1,
+            "Em atendimento": 4
           },
           "sql_pct": 10
         },
         {
           "name": "carrossel_ecommerce_interactions_vestioficial_29042026",
-          "total": 4,
+          "total": 5,
           "sql": 0,
           "by_perfil": {
             "Multimarca": 1,
-            "Em atendimento": 3
+            "Em atendimento": 4
           },
           "sql_pct": 0
         },
@@ -187,6 +188,15 @@
             "Multimarca": 1
           },
           "sql_pct": 0
+        },
+        {
+          "name": "estatica-rfv_look_a_like_clientes(1)",
+          "total": 1,
+          "sql": 0,
+          "by_perfil": {
+            "Em atendimento": 1
+          },
+          "sql_pct": 0
         }
       ],
       "anuncios": [
@@ -212,18 +222,19 @@
           "by_perfil": {
             "Suporte": 1,
             "Pro": 1,
-            "Em atendimento": 7,
-            "Multimarca": 1
+            "Qualificação incompleta": 3,
+            "Multimarca": 1,
+            "Em atendimento": 4
           },
           "sql_pct": 10
         },
         {
           "name": "interactions_vestioficial_29042026",
-          "total": 4,
+          "total": 5,
           "sql": 0,
           "by_perfil": {
             "Multimarca": 1,
-            "Em atendimento": 3
+            "Em atendimento": 4
           },
           "sql_pct": 0
         },
@@ -238,13 +249,13 @@
         },
         {
           "name": "look_a_like_clientes(1)",
-          "total": 2,
+          "total": 3,
           "sql": 1,
           "by_perfil": {
-            "Em atendimento": 1,
+            "Em atendimento": 2,
             "Starter": 1
           },
-          "sql_pct": 50
+          "sql_pct": 33.33
         },
         {
           "name": "PageView_25percent_last90Days",
@@ -791,21 +802,21 @@
         },
         {
           "data": "13/05/2026 16:48:00",
-          "perfil": "Em atendimento",
+          "perfil": "Qualificação incompleta",
           "anuncio": "interesses_moda",
           "criativo": "carrossel_ecommerce_interesses_moda",
           "origem": "WA_leads_08052026"
         },
         {
           "data": "13/05/2026 18:30:00",
-          "perfil": "Em atendimento",
+          "perfil": "Qualificação incompleta",
           "anuncio": "interesses_moda",
           "criativo": "carrossel_ecommerce_interesses_moda",
           "origem": "WA_leads_08052026"
         },
         {
           "data": "13/05/2026 19:59:00",
-          "perfil": "Em atendimento",
+          "perfil": "Qualificação incompleta",
           "anuncio": "interesses_moda",
           "criativo": "carrossel_ecommerce_interesses_moda",
           "origem": "WA_leads_08052026"
@@ -886,12 +897,25 @@
           "anuncio": "interesses_moda",
           "criativo": "carrossel_ecommerce_interesses_moda",
           "origem": "WA_leads_08052026"
+        },
+        {
+          "data": "15/05/2026 21:26:00",
+          "perfil": "Em atendimento",
+          "anuncio": "interactions_vestioficial_29042026",
+          "criativo": "carrossel_ecommerce_interactions_vestioficial_29042026",
+          "origem": "WA_leads_08052026"
+        },
+        {
+          "data": "15/05/2026 22:31:00",
+          "perfil": "Em atendimento",
+          "anuncio": "look_a_like_clientes(1)",
+          "criativo": "estatica-rfv_look_a_like_clientes(1)",
+          "origem": "WA_leads_08052026"
         }
       ]
     },
     "spend_daily": {
       "Teste Neto A — AD ORÁCULO": {
-        "2026-02-14": 11.76,
         "2026-02-15": 26.36,
         "2026-02-16": 24.66,
         "2026-02-17": 24.28,
@@ -933,7 +957,6 @@
         "2026-04-01": 0.46
       },
       "Teste Neto B — AD ORÁCULO": {
-        "2026-02-14": 12.74,
         "2026-02-15": 26.64,
         "2026-02-16": 24.26,
         "2026-02-17": 24.44,
@@ -1434,7 +1457,8 @@
         "2026-05-12": 12.92,
         "2026-05-13": 16.63,
         "2026-05-14": 17.15,
-        "2026-05-15": 7.45
+        "2026-05-15": 18.06,
+        "2026-05-16": 1.48
       },
       "estatica_RFV_04052026": {
         "2026-05-04": 32.85,
@@ -1463,7 +1487,8 @@
       "carrossel_ecommerce_interactions_vestioficial_29042026": {
         "2026-05-13": 13.3,
         "2026-05-14": 20.19,
-        "2026-05-15": 2.14
+        "2026-05-15": 18.84,
+        "2026-05-16": 0.81
       },
       "estatica-rfv_interactions_vestioficial_29042026": {
         "2026-05-13": 1.18,
@@ -1472,10 +1497,13 @@
       "carrossel_ecommerce_look_a_like_clientes(1)": {
         "2026-05-13": 3.69,
         "2026-05-14": 3.74,
-        "2026-05-15": 0.11
+        "2026-05-15": 0.11,
+        "2026-05-16": 0.14
       },
       "estatica-rfv_look_a_like_clientes(1)": {
-        "2026-05-13": 0.01
+        "2026-05-13": 0.01,
+        "2026-05-15": 0.48,
+        "2026-05-16": 0.01
       },
       "estatica-rfv_PageView_25percent_last90Days": {
         "2026-05-13": 1.27
@@ -1483,32 +1511,35 @@
       "carrossel_ecommerce_PageView_25percent_last90Days": {
         "2026-05-13": 5.86,
         "2026-05-14": 9.07,
-        "2026-05-15": 0.58
+        "2026-05-15": 0.99,
+        "2026-05-16": 0.17
       },
       "carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 21.45,
         "2026-05-14": 19.12,
-        "2026-05-15": 12.34
+        "2026-05-15": 12.65,
+        "2026-05-16": 0.23
       },
       "estatica-rfv_carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 0.42,
-        "2026-05-15": 0.08
+        "2026-05-15": 1.09,
+        "2026-05-16": 0.02
       },
       "carrossel_13052026_look_a_like_clientes(1)": {
         "2026-05-13": 0.39,
         "2026-05-14": 1.33,
-        "2026-05-15": 0.09
+        "2026-05-15": 0.18
       },
       "carrossel_13052026_interesses_moda": {
-        "2026-05-14": 0.33
+        "2026-05-14": 0.33,
+        "2026-05-15": 0.01
       },
       "carrossel_13052026_PageView_25percent_last90Days": {
-        "2026-05-15": 0.06
+        "2026-05-15": 0.17
       }
     },
     "impressions_daily": {
       "Teste Neto A — AD ORÁCULO": {
-        "2026-02-14": 466,
         "2026-02-15": 1099,
         "2026-02-16": 1173,
         "2026-02-17": 1075,
@@ -1550,7 +1581,6 @@
         "2026-04-01": 13
       },
       "Teste Neto B — AD ORÁCULO": {
-        "2026-02-14": 445,
         "2026-02-15": 1298,
         "2026-02-16": 1307,
         "2026-02-17": 1253,
@@ -2051,7 +2081,8 @@
         "2026-05-12": 654,
         "2026-05-13": 560,
         "2026-05-14": 601,
-        "2026-05-15": 265
+        "2026-05-15": 628,
+        "2026-05-16": 49
       },
       "estatica_RFV_04052026": {
         "2026-05-04": 4666,
@@ -2080,7 +2111,8 @@
       "carrossel_ecommerce_interactions_vestioficial_29042026": {
         "2026-05-13": 249,
         "2026-05-14": 372,
-        "2026-05-15": 51
+        "2026-05-15": 301,
+        "2026-05-16": 17
       },
       "estatica-rfv_interactions_vestioficial_29042026": {
         "2026-05-13": 34,
@@ -2089,10 +2121,13 @@
       "carrossel_ecommerce_look_a_like_clientes(1)": {
         "2026-05-13": 67,
         "2026-05-14": 57,
-        "2026-05-15": 5
+        "2026-05-15": 5,
+        "2026-05-16": 5
       },
       "estatica-rfv_look_a_like_clientes(1)": {
-        "2026-05-13": 4
+        "2026-05-13": 4,
+        "2026-05-15": 21,
+        "2026-05-16": 1
       },
       "estatica-rfv_PageView_25percent_last90Days": {
         "2026-05-13": 44
@@ -2100,32 +2135,35 @@
       "carrossel_ecommerce_PageView_25percent_last90Days": {
         "2026-05-13": 101,
         "2026-05-14": 176,
-        "2026-05-15": 24
+        "2026-05-15": 35,
+        "2026-05-16": 2
       },
       "carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 640,
         "2026-05-14": 567,
-        "2026-05-15": 8431
+        "2026-05-15": 8467,
+        "2026-05-16": 5
       },
       "estatica-rfv_carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 36,
-        "2026-05-15": 5
+        "2026-05-15": 36,
+        "2026-05-16": 3
       },
       "carrossel_13052026_look_a_like_clientes(1)": {
         "2026-05-13": 12,
         "2026-05-14": 31,
-        "2026-05-15": 1
+        "2026-05-15": 6
       },
       "carrossel_13052026_interesses_moda": {
-        "2026-05-14": 18
+        "2026-05-14": 18,
+        "2026-05-15": 6
       },
       "carrossel_13052026_PageView_25percent_last90Days": {
-        "2026-05-15": 3
+        "2026-05-15": 5
       }
     },
     "reach_daily": {
       "Teste Neto A — AD ORÁCULO": {
-        "2026-02-14": 423,
         "2026-02-15": 964,
         "2026-02-16": 1044,
         "2026-02-17": 912,
@@ -2167,7 +2205,6 @@
         "2026-04-01": 12
       },
       "Teste Neto B — AD ORÁCULO": {
-        "2026-02-14": 361,
         "2026-02-15": 1121,
         "2026-02-16": 1191,
         "2026-02-17": 1046,
@@ -2668,7 +2705,8 @@
         "2026-05-12": 654,
         "2026-05-13": 557,
         "2026-05-14": 592,
-        "2026-05-15": 258
+        "2026-05-15": 624,
+        "2026-05-16": 48
       },
       "estatica_RFV_04052026": {
         "2026-05-04": 4274,
@@ -2697,7 +2735,8 @@
       "carrossel_ecommerce_interactions_vestioficial_29042026": {
         "2026-05-13": 208,
         "2026-05-14": 315,
-        "2026-05-15": 48
+        "2026-05-15": 253,
+        "2026-05-16": 17
       },
       "estatica-rfv_interactions_vestioficial_29042026": {
         "2026-05-13": 30,
@@ -2706,10 +2745,13 @@
       "carrossel_ecommerce_look_a_like_clientes(1)": {
         "2026-05-13": 61,
         "2026-05-14": 47,
-        "2026-05-15": 5
+        "2026-05-15": 5,
+        "2026-05-16": 5
       },
       "estatica-rfv_look_a_like_clientes(1)": {
-        "2026-05-13": 4
+        "2026-05-13": 4,
+        "2026-05-15": 19,
+        "2026-05-16": 1
       },
       "estatica-rfv_PageView_25percent_last90Days": {
         "2026-05-13": 37
@@ -2717,32 +2759,35 @@
       "carrossel_ecommerce_PageView_25percent_last90Days": {
         "2026-05-13": 88,
         "2026-05-14": 134,
-        "2026-05-15": 18
+        "2026-05-15": 28,
+        "2026-05-16": 2
       },
       "carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 585,
         "2026-05-14": 512,
-        "2026-05-15": 154
+        "2026-05-15": 159,
+        "2026-05-16": 5
       },
       "estatica-rfv_carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 36,
-        "2026-05-15": 4
+        "2026-05-15": 34,
+        "2026-05-16": 2
       },
       "carrossel_13052026_look_a_like_clientes(1)": {
         "2026-05-13": 12,
         "2026-05-14": 28,
-        "2026-05-15": 1
+        "2026-05-15": 5
       },
       "carrossel_13052026_interesses_moda": {
-        "2026-05-14": 18
+        "2026-05-14": 18,
+        "2026-05-15": 6
       },
       "carrossel_13052026_PageView_25percent_last90Days": {
-        "2026-05-15": 3
+        "2026-05-15": 5
       }
     },
     "new_msg_contacts_daily": {
       "Teste Neto A — AD ORÁCULO": {
-        "2026-02-14": 0,
         "2026-02-15": 0,
         "2026-02-16": 0,
         "2026-02-17": 0,
@@ -2784,7 +2829,6 @@
         "2026-04-01": 0
       },
       "Teste Neto B — AD ORÁCULO": {
-        "2026-02-14": 0,
         "2026-02-15": 1,
         "2026-02-16": 0,
         "2026-02-17": 0,
@@ -3285,7 +3329,8 @@
         "2026-05-12": 0,
         "2026-05-13": 0,
         "2026-05-14": 0,
-        "2026-05-15": 0
+        "2026-05-15": 0,
+        "2026-05-16": 0
       },
       "estatica_RFV_04052026": {
         "2026-05-04": 1,
@@ -3314,7 +3359,8 @@
       "carrossel_ecommerce_interactions_vestioficial_29042026": {
         "2026-05-13": 2,
         "2026-05-14": 3,
-        "2026-05-15": 1
+        "2026-05-15": 2,
+        "2026-05-16": 0
       },
       "estatica-rfv_interactions_vestioficial_29042026": {
         "2026-05-13": 0,
@@ -3323,10 +3369,13 @@
       "carrossel_ecommerce_look_a_like_clientes(1)": {
         "2026-05-13": 1,
         "2026-05-14": 1,
-        "2026-05-15": 0
+        "2026-05-15": 0,
+        "2026-05-16": 0
       },
       "estatica-rfv_look_a_like_clientes(1)": {
-        "2026-05-13": 0
+        "2026-05-13": 0,
+        "2026-05-15": 1,
+        "2026-05-16": 0
       },
       "estatica-rfv_PageView_25percent_last90Days": {
         "2026-05-13": 0
@@ -3334,16 +3383,19 @@
       "carrossel_ecommerce_PageView_25percent_last90Days": {
         "2026-05-13": 0,
         "2026-05-14": 1,
-        "2026-05-15": 0
+        "2026-05-15": 0,
+        "2026-05-16": 0
       },
       "carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 6,
         "2026-05-14": 3,
-        "2026-05-15": 0
+        "2026-05-15": 0,
+        "2026-05-16": 0
       },
       "estatica-rfv_carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 0,
-        "2026-05-15": 0
+        "2026-05-15": 0,
+        "2026-05-16": 0
       },
       "carrossel_13052026_look_a_like_clientes(1)": {
         "2026-05-13": 0,
@@ -3351,15 +3403,16 @@
         "2026-05-15": 0
       },
       "carrossel_13052026_interesses_moda": {
-        "2026-05-14": 0
+        "2026-05-14": 0,
+        "2026-05-15": 0
       },
       "carrossel_13052026_PageView_25percent_last90Days": {
         "2026-05-15": 0
       }
     },
     "spend_window": {
-      "since": "2026-02-14",
-      "until": "2026-05-15"
+      "since": "2026-02-15",
+      "until": "2026-05-16"
     },
     "reach_monthly": {
       "AD ORÁCULO": {
@@ -3385,12 +3438,12 @@
         "2026-05": 9568
       },
       "Teste Neto A — AD ORÁCULO": {
-        "2026-02": 3495,
+        "2026-02": 3237,
         "2026-03": 1328,
         "2026-04": 12
       },
       "Teste Neto B — AD ORÁCULO": {
-        "2026-02": 12589,
+        "2026-02": 12352,
         "2026-03": 3670,
         "2026-04": 21
       },
@@ -3438,7 +3491,7 @@
         "2026-04": 1682
       },
       "carrossel_RFV_04052026": {
-        "2026-05": 7739
+        "2026-05": 8052
       },
       "estatica_RFV_04052026": {
         "2026-05": 6741
@@ -3450,134 +3503,134 @@
         "2026-05": 3283
       },
       "carrossel_ecommerce_interactions_vestioficial_29042026": {
-        "2026-05": 533
+        "2026-05": 721
       },
       "estatica-rfv_interactions_vestioficial_29042026": {
         "2026-05": 33
       },
       "carrossel_ecommerce_look_a_like_clientes(1)": {
-        "2026-05": 102
+        "2026-05": 106
       },
       "estatica-rfv_look_a_like_clientes(1)": {
-        "2026-05": 4
+        "2026-05": 24
       },
       "estatica-rfv_PageView_25percent_last90Days": {
         "2026-05": 37
       },
       "carrossel_ecommerce_PageView_25percent_last90Days": {
-        "2026-05": 218
+        "2026-05": 228
       },
       "carrossel_ecommerce_interesses_moda": {
-        "2026-05": 1184
+        "2026-05": 1189
       },
       "estatica-rfv_carrossel_ecommerce_interesses_moda": {
-        "2026-05": 40
+        "2026-05": 72
       },
       "carrossel_13052026_interesses_moda": {
-        "2026-05": 18
+        "2026-05": 24
       },
       "carrossel_13052026_look_a_like_clientes(1)": {
-        "2026-05": 39
+        "2026-05": 42
       },
       "carrossel_13052026_PageView_25percent_last90Days": {
-        "2026-05": 3
+        "2026-05": 5
       }
     },
     "thumbnails": {
-      "estatica-rfv_interactions_vestioficial_29042026": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/10489802976825164809?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIpzhODAtZ0X7XwW7jsBnc-KXdjRj-yodFl5VMhqDrjdPpHtqswS1xmTH_7XGczFP0wcAamNu6izVfEyW8ar-N33MpUGxtnMUsAS_QyVI1iWCY180-RdEvZKf767XpjnPIeXPwJTU0LlMF1mIazEdrc&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdqcYmzM0CD6tX_cTyvpAX-2Vwlp3JDpd0UHyEG6Jt-RXgWVZTGl7RzI0e6m2I5rafw&ccb=13-1&oh=06_Q3-_AQONLcv9e_iKCavnQmyiYfVJYDulEohLY10KtkGLMD1R&oe=6A093712&_nc_sid=58080a",
-      "carrossel_ecommerce_interactions_vestioficial_29042026": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/12311953454165342655?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQLdlYHIl8HtxTE7W2wsNTPYEYFMd8Pd0LJdC7w6sWkfJqbzec0PaYEsT6x0mcZR-67gTNXYZCMqXMbt2-nzTFyiY57IcRD7c8TgMPMn1LcLC9-9MnS8WeOSreGgCXvkVHZ7lQgW1JTdNwj0ULxm8qe1&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=Adrhfs2sW1UEYIyOO67agxInZb2hw_vsRpIcevhI9iPXBpQ3CGRs1pyHhDahQzCRN9g&ccb=13-1&oh=06_Q3-_AaMq474n7UHEr_gBZmIfHYeEUQWfGAVr8WCbje5nleGw&oe=6A092CF7&_nc_sid=58080a",
-      "carrossel_13052026_look_a_like_clientes(1)": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/3138658367216280802?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKPMhCes3ZFhnpZMsVyuTaQPY90pGOcGjVZYhTEVIabLd0edaQ3f53sujoauFWwuDb7q7kw0WpMfUFBctCy_h-2ebBYDKT5LK-3utTb24QdNNv1CirRLpPbi5wxaGr23hvmwuE-u-T39376SvheYsw_&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdpXQJTZC9lNEbq2WncHp-4All1NPMcj7W6Tt2atIP3hq0g4Lnia9lTQM0HGTCMHecE&ccb=13-1&oh=06_Q3-_ATP5e-3i0pYj1gWKnUuv5k13uuxN2fV39EudyravST-R&oe=6A093AE4&_nc_sid=58080a",
-      "carrossel_ecommerce_look_a_like_clientes(1)": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/9709458818204824390?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIKN7eC6VQkK7UDmj7djlxu230SiKEPjY1QXVKbBXfJKqvb5Wj2zT9FGJgisarRmkc_esZUBeshcJhUF8Ig55xn6EYRjaJFv8prfo18LPYTic33kKhZ0LStFqdEvHKMCoB8HjsG-gqjgmqHOZOF53YO&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdohTF_fvaRpYXafXiOmGkBTpAtVcDhZImUd5DwSDlM802vHde1Mr7NSKbXNaZDLMAA&ccb=13-1&oh=06_Q3-_ATJ5BVHrfaR-FtYsw5sqOAqMwqyAJ-3oYytwUQF6no6v&oe=6A094CB6&_nc_sid=58080a",
-      "estatica-rfv_look_a_like_clientes(1)": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/9417260040677359862?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQLRHtsruKo5lm6m1f0Ds6H1ZRiRpRj03JBKOaQW_qpznIz2xmKJyx8CMVZ_PiaS4Cs-hygb7dYTVMWj0Llf17RcEO8BPqt4NVBXFjemXzJ8kZJNWR4NGE4tZQSyZkVlR_3IYZ2qLQa-fydzEq2vuAN1&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdrlsnZ1CC4T76UVbR2ZOrCEPVNVm0HK25vvQ6kd9LuSh_ei1I_JtPxseOxwbC17RHM&ccb=13-1&oh=06_Q3-_ARxrc-flQSc-fTpU4NLylnJXYyiKy5J1HQi2FHLfeVF4&oe=6A0926B8&_nc_sid=58080a",
-      "estatica-rfv_PageView_25percent_last90Days": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/14443620623815143887?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKT-FMWy1WPIezEmrZ4jbad4vXYFuJVR8mqF_zQ1xZSaF1vl_D7HnGmiaNa-wthk2QhCJZ7wK5DyKmM_tjKk_pBRB2EqDSXGuXV5iA0XAoKjikyPeqTcFzXwGlbBoEBocePew4teQ1kBJtJd1TTOXit&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=Adr_xSGf8FULZB4H37GEetqn1FQIv2xtT1W1Ij4L26XMpjAcgJn7yMwe_Fh2l5ED1-o&ccb=13-1&oh=06_Q3-_AV8bCNu8hn5wxUHJIcy5-r9HM0wjPqLLcTMYR9k9RpAn&oe=6A092820&_nc_sid=58080a",
-      "carrossel_ecommerce_PageView_25percent_last90Days": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/3870157870069416252?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJf2kZybgaxtAJqli2B8pt2Fky19SxOchYA7nRYR4U4nTesc3MsteTpqr6Rkh3clFmB4lmxrO5lTTWIUjpZDKrRiKaigj3xVJ3ngee7SAGxKydVHyb-i4_XeRNGv6jjHrUYTm8mrnvDkSCgMhmp34NG&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdouYH4r4CSMlvh_ULasl30WSjSDCyr8mYbhBFPMKot-C6xviKccjhUIM9Nde6bnK_I&ccb=13-1&oh=06_Q3-_AZdMXGWDBWcuOvBaOXEWrIANQmC6MmKpJOnuSCAKfDff&oe=6A092504&_nc_sid=58080a",
-      "estatica-rfv_carrossel_ecommerce_interesses_moda": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/9235027545305752959?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIl0gzWcP9X2VriYUBKoGtW7UOtRqcjd_2jGMu5UqCPh7FjOsZyT_7LB6IowVAes4EVzzaQZW_72slRzAWjo4rqQAUbZrQaIYAYB3jQBWSXczXbKt-gdYfw6vU8Nx00zGJkyYvxwQ5ClfXNsNeJGh1Q&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=Ado5l7s69CYiSzCicww_ns3XuYg61FPAhHPoktUPYp9_2Bm-FhW7vB6ptnHdLT4Qxt8&ccb=13-1&oh=06_Q3-_AQacZE5JxiEVKKttWbeEQidwZSel-raQxM5eM9oPC1dz&oe=6A093E85&_nc_sid=58080a",
-      "carrossel_13052026_PageView_25percent_last90Days": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/3421743554903842299?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJB9DNvqqy8F6KDw8LDrjzowGcDc8Dd3F_n0U0_Hhj_4T9nVtSTk769TJ2o6HSluGbUocp3RK7pGUsP4ZFmUHWbrFQQf3ofw8NhZgp0VeZztYiGO-AYEo7gdAO8-8iFK_51y0dC4ZvC6u4NK0lJtw8t&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdrPfWob_dHATQzulV5Z7UdHXodtQ9DlavCqrI3pN2XBP6MNxCh4JXdtxai01LZcfGA&ccb=13-1&oh=06_Q3-_ARoC_S9tPplIBHstcTgfhKr9xZuv6esMOcmHJMl285J1&oe=6A093ADA&_nc_sid=58080a",
-      "carrossel_ecommerce_interesses_moda": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/17092592761846502702?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKvPaLI9SuRGqxuaebMOSbTWpeuFYVpSpBt6TrFJPt0THxsA0C1SIW6o5NA_k2pFAtFqusvE4cwjnX_y1vLsGnI1nbfvi7iSqVZa1RlxgcjELYjrntIb5_5PSKQuvYeQ2Th0vyyWlfw6XZmIKVsMFcQ&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdomzyQWyCUbBDMwmB5VzMesCBdfNUomhDuvf5aNx9O5MmqQJMmlgyFZLt2jXv9zd9E&ccb=13-1&oh=06_Q3-_AQl34XFIpTn4-z8wo9znqhrdWymfYtAMtx2dojX0t-IX&oe=6A09258D&_nc_sid=58080a",
-      "carrossel_13052026_interesses_moda": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/11908039302038099480?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKm_yQVkcjpEoqazo0m1CEdmWNaPOflEofem4ef3gGGBbEww4ocwYJ489KywrIbqdE0o6C6WTWB8dJrxcRGGN-7UhXMiPhiLfUXgJcxWBcr5z6q7QV9BWevifDt_D-OepFIHQMWhnhtOQGnxbGHbmsq&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=Ado2XXTmxzqb-E_V-nHIO_MxpxIjihx62Cpa26n4gpv2_z52882UGAZX2ZZSZRjwnm8&ccb=13-1&oh=06_Q3-_AbjoDW-BEHTMF2J9OwcoCmx_HS4xMEY7Nwp5dWeOkubV&oe=6A093AEE&_nc_sid=58080a",
-      "estatica_RFV_04052026 — Cópia": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/13470474875040265870?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJJ6KthdC1D8w2mheXtfyNOTjE9Rw1HQIaYPvsRp2UEPSUJ3jRNmz3UdOkhi_kqEYy5CB2C5cIPU0xdyA1o4GG8cd-6_me5c9PlYVkGUsf5ksw4W0UB6-eyQsdXC-1HBJtUzPPnwynfCDAJJzLHFdn-&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdoWiWF79wZ_JDGrVg4SOPwxeH9GiHJFx0QYfIaayOn55yPnYJc5eCMfrTkQHdYuCcQ&ccb=13-1&oh=06_Q3-_AdNS4GDHA4Jq2URQ-an_sV5WvOQbRwRoOjhwHpCdd4xQ&oe=6A094AB7&_nc_sid=58080a",
-      "carrolssel_07052026": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/655512010_26395145673456412_2793297701023293367_n.png?_nc_cat=108&ccb=1-7&_nc_ohc=JRjm-KbRTwkQ7kNvwH8i5LP&_nc_oc=AdoFzaQbToMJNIY8i0HYL4TYrmq8sL57ZYfcbv06JkvSsyTY9I_JcehooEqz9Xt5Cfo&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEQ0JnETg_jO1ElbkP-epQJ9MgkCMli41SSJ7MgVPQO8m0EJ7tlTolvshWbAVWNoG_RxsYQQiRK8gA&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af6ShYBQo55ySGkdYjNlcpTvjiw9fRCh70b-3r8ZZSNL3g&oe=6A0D3DCE",
-      "carrolssel_07052026 — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/655512010_26395145673456412_2793297701023293367_n.png?_nc_cat=108&ccb=1-7&_nc_ohc=JRjm-KbRTwkQ7kNvwH8i5LP&_nc_oc=AdoFzaQbToMJNIY8i0HYL4TYrmq8sL57ZYfcbv06JkvSsyTY9I_JcehooEqz9Xt5Cfo&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQF1tOPLGfzYZQsEEtnS42Xgfb74-0Iuwy3IGNKKfoj659DQCjaqZwBDGNT25IRcX79X_hAv4IBdiuA&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af6s0kNqzRnAEFCJh76vVgH1RtFAAwAL5UMKZamzqKp02w&oe=6A0D3DCE",
-      "Carrossel 1 - Oráculo — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/656029680_26395087516795561_2726179912906645689_n.png?_nc_cat=107&ccb=1-7&_nc_ohc=ZCt3pZ6-Hl0Q7kNvwGaexkT&_nc_oc=Adp0BSkhxgZYy3GUGGZnCilfCQclHvioLjJihQh3MSoHBl_5Pu8EV8zhYHr5U4nQbn4&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQE8PrwY02nlXFmeO7Jn2zRr934UfijdsOMIIVEQ-yYC22PLtDLjGYfeJuGw8Qpjlq9Dr_xNwTKA1Ws&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af4gzztXFLmootmxIWoe1RuXCLKGlE1VBxzJc53RKuXV1g&oe=6A0D2E13",
-      "estatica_RFV_04052026": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/7767821423125173448?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIEgGSL_mQByMzPfKJ7L2asIaijPIJsXHwme6NkfEI_ghQMaWdSzyiXVEsnmP7K31ICL4CmvcUGybXwxaC8r6QtL-7HX8VEEmRZbC-70WpTvYq8J4GC7rBQgeAGrKbnIt2yLX-B2Ev29KIoPfOovg33&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdopHhZQQEnK8_sVIDnQyVZFeXfOjEsBy1dxW6m1uVJdQWlTpxUnS6SNMeE5lwD5fCc&ccb=13-1&oh=06_Q3-_AaDWOsmyQeFPygiSEYJZjgA465YwTu9GQwMy-GoYF6mh&oe=6A094F8D&_nc_sid=58080a",
-      "carrossel_RFV_04052026": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/5038455081392809852?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIqfgqM32JSpo70PP-KY2gd6eBiqOrbczsopFRq3YUR_cVKJTXMAWsHLN9bMmGOlQ67t80WmRumxXMnhLAK42ybeRnViJnBnwWh_bkg7L_bXrVhgribWwNvryzT2bxNZ-a2ZqnPoefGOhyfnUxpqpjT&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=Adr8DY93-Mt2kYAe8E2QYfJNXurd4MfkCm9Z4uA5jufFs42n6uT1qaw3pUvygyscfoM&ccb=13-1&oh=06_Q3-_AbyrocguawskU7QDb8TwNvpAbGE7LUINUfpIXi8_svZq&oe=6A093C03&_nc_sid=58080a",
-      "Carrossel 2 - Plataforma": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/655588526_26395279513443028_8790197140238032930_n.png?_nc_cat=101&ccb=1-7&_nc_ohc=hdYrHlgsd6QQ7kNvwGwHsbo&_nc_oc=AdpBovIvN_4armDnPBHcwhEqVrpn5ybG2E5dzVdCc7H8chxcb3l1vWpRa9nLYKdlOXo&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGOnvJqjkK_Ko1o7_9X9HcgAYmtL0jDumGBAXs36QSfrvP2bRJkbv2jB_3-05ZxtcHUIusWqFijgew&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5dagFr-FCxWfvsGTCbyhQAf4cuukXfgGWlWQsScvm4xg&oe=6A0D0F66",
-      "Carrossel 1 - Oráculo": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/656029680_26395087516795561_2726179912906645689_n.png?_nc_cat=107&ccb=1-7&_nc_ohc=ZCt3pZ6-Hl0Q7kNvwGaexkT&_nc_oc=Adp0BSkhxgZYy3GUGGZnCilfCQclHvioLjJihQh3MSoHBl_5Pu8EV8zhYHr5U4nQbn4&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGg7Iy47XGiVpwNOMBNDUQj1zUNwHc-EMP2YgA7t0XzHmwxJJl8C3a3eINsh4X3Ru8-AXmDTyv6cSQ&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5eZ2DL7hKEBJQ-kDRY4eKpspgjEFrcHJpzZrS37NqjDQ&oe=6A0D2E13",
-      "Carrossel 3 - Reconhecimento": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/654052411_26395334033437576_4477212420952764755_n.png?_nc_cat=108&ccb=1-7&_nc_ohc=Hcb1-cD33TMQ7kNvwGp2_uq&_nc_oc=Adrs_oAu7fjNht8DqyAxvDpdAD72jPQMD2Nq2a31TZpfMB5OAYHeWRBXcSDfahBdx7g&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGx-bhd0nY5h-Yfl2xrAEvEkIRdeW7TP-0Ja1kENr9FRTOH4LAo17FEZemZf0-B4r-JRwJYkQy9664&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af7x_t7yYodoh0do441Wc5A7S9vtfMGmnlDsUfoVLQT-Hg&oe=6A0D32B7",
-      "AD INSTITUCIONAL": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/623014770_1442265720830023_9003207527724157752_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=H9YW-R9fru0Q7kNvwEc4cCO&_nc_oc=AdojFW0ZwEYqwlqDVY6nhQlThVOSxOVv9mHYPkfMQ7zJSq5ak73LkzRGGxiidmyGx94&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEE6j01yGoZL0HmPXuc1qXyNmFquFmUv7HzpXJ1XOrR2_DkRVEKLw6OMRdN5Y-bCiXJROAaFlVguqY&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af5M3YRom39OarmptGZ4P2-d45_jtBjlyaxG3bPLTIkYJw&oe=6A0D3842",
-      "Teste Neto 2 - B": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/638298345_1824335831606924_1411429300128511122_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=-hQ3kCBhasYQ7kNvwFClhXY&_nc_oc=AdpSSU7z2w9spCe9vONefw98TpkcvySP8TeIiFBgpu_6-DabmiQaxJF6Ns3p-95O_Hs&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFK6H2-ji7qUUHAjuDeJKrAvYZuLzh_DB4qEyd35SERZAvue0BXRCoFSBa4ClalHmBuWveXOiXvyqo&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6mN_TvkLerAgH9LIAgakJV0mvhZnxwDK7eDl70k3yuWg&oe=6A0D220F",
-      "Teste Mari B — AD ORÁCULO": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/629372143_829345053500294_4511595025410107091_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=i43TG9kvyYkQ7kNvwExXmDO&_nc_oc=AdpFw-FibiPPuzVUsnWNl4qYwXLm5RlEiDg6IOwfXutw7qBNCAp76pMPR1Wu3bS99uk&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHASj8VCNg0NKmddyfq2JjGHkiO6NahxuNDNkMyH9kDAalvSSYw655t94LnwKJL7uBn_fzI3MeMx7I&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af540Tyo_h53AYvHabZIAXkMhfGybmPLXYb0T8ScLdCN2g&oe=6A0D29EB",
-      "Teste Mari A — AD ORÁCULO": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/630608023_1289410686575875_4418310176613118328_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=iMtLoQtapvoQ7kNvwFyLVfB&_nc_oc=Ado-EXSU6zwfzCCK_SrYdAT6U988WlMDvPT6e09iz1q-gm6qIy-4aRVKdObTW7aNGQI&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFEd1V2hVn8fKhj-LZtNgu1ButdOzYMaVIcsj4DG15biHOvd9IFhXIyOxuoLdhcFFhZfDrnATjH7cU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4qShzWDuBsEkHv47QuIJyfD_Aoml0dKNfkFh49oFcTyw&oe=6A0D1B9A",
-      "AD FAT PRO": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/584566245_25572749259015590_6541859892414319889_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=m9YoSOuGNdMQ7kNvwG57EZY&_nc_oc=AdrCrMJLWMYq1RCJu9pMtA67p4DopQC3LIyB3Zb0L29khU_5-mbhEet1sfoMZxxMm_s&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHj0f_EyBsgi_JbOSm16iC98ly-OpopFmS6v_OKqzYHll4ORbqgiU-7UH9Vrf-IdB3tId1KqddIRt4&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af6tA1yO1gryIaEmmcGlw21zcqlJyuCkV371PzWowBmGfg&oe=6A0D3C72",
-      "Teste Neto A — AD ORÁCULO": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/628780629_1808238996532811_7410668396467639187_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=xLr7D-ijLr0Q7kNvwHgj86W&_nc_oc=Adrlt-d8tAukxWiA3FXxvXb1e-3eOvvpak4qbz_0uPjG4_chH5kGRAJYFIEqv54E3cg&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGVkuBZWuybn-abmW0PmUmVuCyGSsLCq0-963jHt65jyGEgOXqKVqkQ2pr1KkT14xoAN3g34M87uMc&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4sagcgkjyFBP_CNB7Kkiqo8xj3WvKsSV4RvOIJqjdqXw&oe=6A0D17BF",
-      "AD Carrossel 4": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/7741166931410009544?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJwBSFVnkKK2VlbsuuHEXtcVPqi8W5VezjOt26r7MwfJBrnJeFGyr49jl2suxxd9LDPsgxBlViXqafLrM80Nfn5e09DDK87O7M0SCO-6qK8kA7YTeAN7t6oid_bv7TKXhXmA6ONidjXe8j7JYF-zym2&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdpdP38AsGVExSwx4ygN-QvxuIPh0-3SDy2wylRXorbwmwS7pfI1FLwL0dQF8hhLR94&ccb=13-1&oh=06_Q3-_AaCAWzF_gz5t5OzgEwFPfPMK43s5WPEZYuLsIqb3gOzE&oe=6A093F17&_nc_sid=58080a",
-      "Teste Neto B — AD ORÁCULO": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/629283049_4448703332017686_3410964294093450344_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=iTsjn3jlSpEQ7kNvwFsHab9&_nc_oc=Adp5QKgxpX8ngI8GKt1KdFrBNBqA-fon-vlmjew3QRCG2mxsXHqd7tNJpFyOkA1ZHpI&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHAg-0yttyFjhkuB_aHXzQ4G78g3UvY3i-dXa7Qd0Zp_7xZK8869SVMuZrwuiElg9CIkzpyax3bV1E&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7yU2xECbkFbG0bjh4eVz-FkJ5GHtP9kj6o2ft6QebmHQ&oe=6A0D2693",
-      "Teste Mari 2 - A": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/640834264_1847054612688336_6231846739083341006_n.jpg?_nc_cat=109&ccb=1-7&_nc_ohc=15fIIj6SQ8QQ7kNvwEzinif&_nc_oc=AdqlGwqVV4mL8dZoKxZnIMHTUvorfciQ1wOGidUhrI1_kqRwtu4DLKxVQs2eJB6MftE&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGh9B9DDL5_Mc4L2wjgQpL_sLX09LvmG2dpvnS8o9GY_4fFr_jrrhZfMudh0fczmFoFS8Ah3-bGfo0&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af71X5lDM7T7twT_ii3kc0QAF8CFYHQfqwRfKAzRDYNMzQ&oe=6A0D4094",
-      "AD Carrossel 2": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/2302913670307750896?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQLoU44S2gTmXvtHjzh9N8pXjvSVjczXcPr_2A7gEJjuy4oQoxp0DSC3RNPfXbi_tbskKd5cdYlTtUm4rYdR4oOtsZPsrZPt1xxYr1OZMDVYZGtZafSmPbqmasyuXSKa3wR2GdTQ0VqSQ8RaTxSIeKVH&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=Adpwi_0ZsRi5DH-PKD6GC6kuczCOA6-y-4H7QbWEopxOkJhg9sScQKgOm-HJ09xNmmQ&ccb=13-1&oh=06_Q3-_ATTZpRoYO2qUgpTcGr9kCioaAQLf5bqQ2TeB9SfU8dhx&oe=6A0936A8&_nc_sid=58080a",
-      "Teste Neto 2 - A": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/635160418_1414953546189709_6533603526803773197_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=HCvv6hL0D8gQ7kNvwFvEB6f&_nc_oc=AdqHJjw_gSLrVACxdh3LV4NmiVsFxsYBiO1NQvL1ZsU4fvX2VY_bZLMq0sXyR5KQJPM&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHkhNC9Fw9MH2Sq2X1dzCY-ltWXivuslyDAMZFJlxw3KlxAIWMlEUzFjhnJ-_0oWpRYaVOC-WIhzZk&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5PnzBn28TN-VBIrHCFRegZb8CED-AmNmAhs9U2H_2IBw&oe=6A0D1FA8",
-      "AD Carrossel 1": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/3295202988992467478?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIGkrRBI87Iba75NYQpp3l0lW-62Jeq64-MO3460o97nZ6UJgrcChWCmXUJI-MzbQTZEYG0Al4heq0n8FOGo5OLnbRxhnFnaXkBOnVUzqFFeTbKendiQLGE3yHCZ9GinhQdtmKsCtF32uFy-VFEt4UU&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=Adq9Ng15M1D3Ndpk8zij7LDL_yczRA_INI3y141RELlRyddNIxcFi3sCeg-Q_aQ26e0&ccb=13-1&oh=06_Q3-_Afx0rW9t1gHYkWhjixnK4VrjztumRMWKV6aIBIdKFkJh&oe=6A092301&_nc_sid=58080a",
-      "Teste Mari 2 - B": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/639580499_1240399890894168_1282405759454073730_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=aWysSJGwzDcQ7kNvwHxI_Gw&_nc_oc=AdqNsYaj8eVf93aa0lwtMXW7uZ5d6SWpdeLplyFDu_3jLbTZNIn4xHDUYaSEuEaUOX0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEML8AeGRel03afnEHKtfVMiAD04mp3N7pgXK2fr7oRYdzTAZ-tEsrgepE1Grgsn9Pu69QtQR2dgUo&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5sxxIkjiQ0-fzTNELtVhVQnTD2SV3BzdnUiJ1mLxYI3g&oe=6A0D10A3",
-      "AD ORÁCULO": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/584892333_1265201632293569_2440393459524936392_n.jpg?_nc_cat=101&ccb=1-7&_nc_ohc=DV1J5ImwaIcQ7kNvwF4aW9n&_nc_oc=Adp53ukq7ZJ2f4LTNLkBf2m93VBnxfl93Q_s6ULA3uYJX8Tt_wKfzBEemSlUiL_v3BM&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEvE-QmahSWi1peiS-rKVpADz_7yJSeJjTTneW-dS9McjSC-C0T_8UkQJK0U3zCnoH_tMA6JRiAqzo&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af4oywzRcUvZOePCYoMAmlGzyz5bEeq8a5MVWOoNI1XZbA&oe=6A0D3691",
-      "AD Carrossel 3": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/7624115170263037117?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJFjwyIlIzjW0rVZx35Dm1tKohAqPjETO1K6bM20Xe9tahFjnZN9qEX_bFgm4l1ZYuPsV902IWmjMYdT4d9NyBFT3STSLAt0fhJLcLGkiajXItzpRArR60ZVWIHHVxfqO9ZeRTIrtbBCvt5ilrUDxxN&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=Adptdot-ynr249A1mDl_7wD2TEjPIvzHe0aBRmr0hKReVuglQKicAp6HEYNB3zGLm7I&ccb=13-1&oh=06_Q3-_AcxXr8D_pqYbQ8FD7Y44JV53_sX-Tl78ysyQtlto1PNg&oe=6A091A6C&_nc_sid=58080a",
-      "INSTITUCIONAL — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.13418-10/503979073_2179395819156557_5856272147366558750_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=m0S4fZYTGmkQ7kNvwEzhwf6&_nc_oc=Adr9K4odQtmSzs3jT22e_JDaHKoIiSR8ci2rpoxWTYycyWPJ4aPGRKPzMnznOh-LCQ0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGwO2S3Kzpx1BDU5KibvtDpVFor04X5tiKr43wJ4_FySBw9JYJdBnJBv82KAV8lIou_NLQ1-hmCV1s&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af45WEXGTHcoSSYqIq5qWi33G5nqIUFsjhwS7tyakH0WbQ&oe=6A0D2221",
-      "Treinamento Optmist — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/584955508_711599628178145_4856067096178441700_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=xZMMVeABn0EQ7kNvwGupFZs&_nc_oc=AdosxqvHWa13JbCyTUtXhCxkkp_b_XWvCH59HHFah58wn76ROMrIibvlK1ED935Hp6M&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQE6pj3p0VbxVvEf3Xc5iuQrew7nLbs9AP4A_p8Up1MwajdAj8h7xHCEsRq3IeGVaVjHmmA74mEJzD8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af432clE8RFuEpyMdHaMt1K4YAT_edmbfW414Vek9dRgRw&oe=6A0D2724",
-      "Treinamento Maria Chica — Cópia": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/566381610_841459318831926_3705941296527402050_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=aFzYbkd_BYAQ7kNvwE8PL7d&_nc_oc=AdrhUZbUUDtRLWYX2TfiiOQOdxcuSvXXfNhKEVmpKxCTu3Ad900FGFkA0ComDcKUClM&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFfSg9o9ks9K5xYG_uY0rz0FcrnAq58_H3yz9vIXfnuLa8h5Nx7Csu9cLWVraLXdAAjH3PnElzq3xg&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af78SD6F-tJidhBTwlq01ZjMldJzevln7Wcesk_9hpoJhA&oe=6A0D3CB7",
-      "AD IA 3 - Como funciona o agente de IA?": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/582427562_840726758648284_7855229371971458114_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=FBYpDGHpcEwQ7kNvwE5TjeI&_nc_oc=AdokF1PstNC6MwoQgCHqjLCl1IPlKT8xpDHEUU7CvKBOmLMZf4krp8e_nlxAVdeeJ0I&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEPduRwlGsjmD0use11Kjj3leqgGTZ868-NEdXi-USWXlyie4gYYpwY0c2Lr6NGf8pm-FalokILEew&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5ueEEQg7wXSzWDbGlPbssaurIqMxc3D4sCcj2Oa26F2A&oe=6A0D3A62",
-      "AD Black Friday": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/590816748_25033610426331901_657065321968319991_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=Efaoht26_zAQ7kNvwEUNf-X&_nc_oc=Adqk9R0iag3znQhyWT2ag3mRA49Ftwvlw7f9KVySaV_Aun6zELyiZROqlkzsLwQixaA&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEfGzaX10V1OVwZWC-Ti3toqaFngVykVqRz9JTqiro3zvFbyI-eX38tU_qVeVPRqElHv46x6DyqdK8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af6uI5GqwLktiFd8K2Luc4oqN6Ym_7d5buLvdOJ6XNGpkw&oe=6A0D25D7",
-      "AD Black Friday 2": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/591993755_25343752805262376_6002702127229124763_n.png?_nc_cat=109&ccb=1-7&_nc_ohc=5Gs0lFwzxn8Q7kNvwHoAkec&_nc_oc=Ado3eUWJ3Zmxkc1DxwwC9VKcQYd4eW2Ifk3b96-Ep7qMIaAc5hao1TNOnE1SnzPdLvg&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQF73ObXrkCLzxRc94kfD8rsJjfGmj5mEEr9J4H9njFpOAxpV391uugPVaGpvCYzbrO7GH1OB3Sjfp8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af4l9M4oZLqzL84JiQwJqEXC20zdWQdxXIsX3B99l_K_GQ&oe=6A0D3956",
-      "ADT 03/12/25": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/588897642_2004098297050627_8315253308504458118_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=s4UxtkT_BogQ7kNvwH-gVkX&_nc_oc=AdrlMWmPA_0quBNT5EL3_Ty4ydttc9Of2VIltpQiyoc101tkWvlamKIXVaF_sw1CJCU&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFgAYbrh0RJ314r18OFjBVJJXLKnKmXM-Ln_qT0Gb178dYgeT525VZT0WPfhrx8Kph27bMcZR4xhic&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4QhPjutqdbfMUCF9JuEv5CDAkPnsgxMPoRwdrVVrOTUQ&oe=6A0D382A",
-      "AD ESTOQUE 1 - Como posso controlar o estoque? — Cópia — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/583696647_676519248656989_3831058226702493036_n.jpg?_nc_cat=101&ccb=1-7&_nc_ohc=esn1LHX3ScEQ7kNvwGDPtPL&_nc_oc=Adqr8XH-zOjqZ1i9MW-eT2NpnCc9Be5wX1yAuD6V8_bsI3EPUET3kEJ9DN2cpJMPWog&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGUKPz-iiK6nfsa45DJViDd8MZ789nS0i7gDEETsjSmyIiHMIyAAIYBoxFiN1InpcCWPmwjo5JaOOg&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af4rha_-C0md_vqTnyhrz73mWLCbB0kWM_z9DwryyxOYLA&oe=6A0D1341",
-      "AD IA 3 - Como funciona o agente de IA? — Cópia — Cópia": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/585067407_713820771762672_8370943296497894230_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=VJ68uGs8gmcQ7kNvwGiW6Z_&_nc_oc=Adq_OmJvBE600BCzspq0HPqo5GUDP-CeDZ5dwrpGLqtVTkw3AceqluMeE8wOekDnBnQ&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHxW-ZL1IeoaHF0nF-AvD931jUetH5VBVkIpUXZgOvvN6rPkW2xiJDhyN70mHvjtXHE92m--vG1PK0&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af7Aj6cDSviZEv2q602t3g3fZQeqmP1cPqfpFwo-XU6DwQ&oe=6A0D40B3",
-      "INSTITUCIONAL": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.13418-10/503984665_1671175470270693_5180333899595380757_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=8MIkuuLTfxkQ7kNvwFozFzj&_nc_oc=Adp_jcyotM2fVeA0u5Ij-weCB-THjUl_Asqkt4gXMjnFHX5d5vZsZnoqHR-ikfY9yLM&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEhL6Hh6jGWTwUnZ8wFM0Lu94flnhnrHSqP95KYWaHVcf_vWWHGM6KrYIHBy97IlAHsx1J6MoOIBo4&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af5-2QkRBA0bJkDkb6rkce5xpZ0yG3n0FSUia0euu_9LSg&oe=6A0D1EC7",
-      "Treinamento Optmist": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/577165585_872484898588331_8477874309617909724_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=raXoggZ66WsQ7kNvwEYgfpZ&_nc_oc=Adr-KdsbvN3ADlDAVhgfXmW83usl7Xbv3DcyBiflLFUWyb-IGnbsEYousHD4tqwwqjg&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHtieee3oQV135GbaaSXv8u6KunBSwJeDFsTlpmIHg-sciAgQo6v9Q028-RRi-j5eZHsQyyYtl6ZEg&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4OfzG3gv9DBpjc1iJv2wKVjHiX2yJ3tMeHNqGF1TiYfA&oe=6A0D256E",
-      "COMO SE DIGITALIZAR COM A VESTI": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/567480511_819722497441273_4925093202104423252_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=aLzSo5kN_eQQ7kNvwGJ9rQk&_nc_oc=AdpZgUPjQyzN3U0XvDrGnPSZ-kSnm5TObYL2OsVMHmmbX2T6voGKUF7S6iPelsECVCw&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQF9hHUfys7VEE7YOvTrn-tuoEBWaXQsrN6996sjzQUzcUodQpDgZFwj5DNF7kiuwutY6HwILG1ohf8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=afbe02&_nc_sid=58080a&oh=00_Af6Me2o2g41_pcVkcghwV3-YNrr-ytGgXtsfzOnISFzuuA&oe=6A0D22C7",
-      "Treinamento Maria Chica": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/566381610_841459318831926_3705941296527402050_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=aFzYbkd_BYAQ7kNvwE8PL7d&_nc_oc=AdrhUZbUUDtRLWYX2TfiiOQOdxcuSvXXfNhKEVmpKxCTu3Ad900FGFkA0ComDcKUClM&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGh434ibj-b0CMQOSIAXwTRgGID9sajRwW3U5WnT-8Do0V18lgajg0ez2k4AR57AIGlPvHMlTLW8lk&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5prthUDlEijp1qvXeJqWVRESjZvaGQem0IUr3L0bc74A&oe=6A0D3CB7",
-      "AD 13 - Como posso começar": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/546728390_2482893822112545_4973065386148680216_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=1VPq281N87MQ7kNvwHEdspy&_nc_oc=AdpYgJIritrnT0gJiAHXHF6kBrIdkqp4QSuHU-50pQbhFs27ipHCMZfYPHwmlpw-s30&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQG1QfMkw3vnueFdhjAgoq1Hk-9lRcKxduDT7FfBEtTtsVfmxB6xhB3zl2mDe-idDb0VVVZLaLQLPhw&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5A7lbvdqsd33T14AS1weP60tWlhxSB8PejMbe6IVVKOw&oe=6A0D2C96",
-      "AD CAT 2 - Como funciona o catálogo — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/579834451_1971331780101286_770474734194972212_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=WpCubWzV5qgQ7kNvwH0FicS&_nc_oc=AdqXC0gWfijtiUhEc_GxywKz2V-5J67Zpk8B5l9nYX7UyqGGrKs_0oxEbdPC1Eb3cPw&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEzhECvtr_JM0f7eU6ruon-DARwI2yR8DlvNH1tsZrGm356vUJrPwBwxO9JGD8SeDws7zcSvT32J-M&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4omG4WIT8XSFq55fuci3TTaBglKy8rEfCjq3TpdVRoeg&oe=6A0D31CC",
-      "AD IA 2 - Como funciona o agente de IA? — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/581837382_840104401753035_4339640119420003278_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=-E9ChLtrcLQQ7kNvwEWHWcJ&_nc_oc=AdpdJ79Bp8BGc5JzhxJcMEUPl9KGBK0wc8bbHqcxbdAvMNxalC2K5scHFQKqVtpaZE0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEG-mPp2CYbyFxBaSDQzjqEc0KRfECvvgaxsMvQ3OqgQ1B18irDdlJfgyrBuDunivzW-TASrLD2U5o&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6p1vMW55q1kqJ-Z6Z98sv-i0jQArsXG9jg2VsxiEWMrw&oe=6A0D4526",
-      "AD IA 3 - Como funciona o agente de IA? — Cópia": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/582427562_840726758648284_7855229371971458114_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=FBYpDGHpcEwQ7kNvwE5TjeI&_nc_oc=AdokF1PstNC6MwoQgCHqjLCl1IPlKT8xpDHEUU7CvKBOmLMZf4krp8e_nlxAVdeeJ0I&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHQpISuIE11j6d24bcq2ld9QDMkJnn6kSs-CacGdvLHL36qIAa3HbmxINYqPqGxxnRUpMWkUZnliJs&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6VtprRylEBdgefP51ki6f_tlFWybZMwqAQO3Aky2bL5g&oe=6A0D3A62",
-      "AD IA 1 - Como funciona o agente de IA? — Cópia": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/580059600_2024387548361715_7327480579616931109_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=b-rE99CnXqQQ7kNvwH2eB1Q&_nc_oc=AdpItz-hfK1IRiaDyytKoDR2436m6bXebVBQ4guMrUrrekuuMTB-viWP22AWgHLFwZU&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFVmHgrWyKGNdi9cNQ0ARUy3GgO6VpIKD3JO4HSeyFJS6wqAYLUAIzzOzR1zcSNqeaFpzS2M7y-kvA&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4KlUW0wMuEiFMFBiXHKzcgHp83I7QQWnm-NrQ9qKKUpA&oe=6A0D35CE",
-      "AD ESTOQUE 1 - Como posso controlar o estoque? — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/579095578_1170077311923599_7918774356904111592_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=A4f_6RNcXrcQ7kNvwFR_Yik&_nc_oc=Adq_GUGVEgHfG-asgFeSo_hIiNmodpNcuHtg_26a6xPdSzMMBU2ByYk05gnHv4rBLBM&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHNwtRU0RU3zanaYltZphUnXdgExwsjmK_q49nAXydPWn17gIhsT0kbyKVJLff_FSsD91Zu1NIOLZQ&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af55HFVWYUSFil86NVadktUf8botBC2DozOb0JhEnPVIVw&oe=6A0D400C",
-      "AD CAT 1 - Como funciona o catálogo — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/581118137_1133449005624497_6961817585513607344_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=cpYkkNwAIksQ7kNvwFeOq_h&_nc_oc=Adp7pUhzXCLnq1WFPaKGhvslpDhOP81DFF25Xgwlg6rioK5ZjfKLjf9BFt9Saf4r3mM&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHSLPlq0mdsG-Jn5XH_z9S5D81LzYylbKeALyuxe2NY0mup0MSguwsCCwgCszl7gb6n7o0Ns20owEY&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af49-nBiy1heTEC0fNNoZuJODQRTCMe0CMSvmezjyMxyQQ&oe=6A0D2212",
-      "Anúncio 1": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/566779805_1878492813050643_2463152623773064462_n.jpg?_nc_cat=109&ccb=1-7&_nc_ohc=fqZkc056EqkQ7kNvwFkJGYM&_nc_oc=AdpWCjANF2Am2bjbQNnp4ouCsop9jJ5WrlkjQTB6C3zRWHM9bqsfM_E9VPBGj7y86Q8&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGOANKrSmzX9yqgWHTKKn23HKcaVCzxPJSzMHBB47EW14N4AGLUFtd7mFBeWuAtfKu9XnREyvwVHOs&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6hHEsWuaIk3poCDPZN8A7mrtFD7YPCBeuWKzZE_YkHZA&oe=6A0D1B3D",
-      "Anúncio 2": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/566625179_1137017118617284_7818620340967355666_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=LgExPj0u02gQ7kNvwGR-GyN&_nc_oc=Adr6Xc2O7u0-BKxxF8-4gb-rsXw8OchJqil7heP233mL_47HEBYdsOO3NejIGcLoHU0&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEn8SaC_6MZucLnY2DwjqnK-FdIVQtwqjValRIsbIkYC_luPfjktam510tNKH_xG6t566xo-LDAsdg&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af70D_BKoYTW7IBMDKIQxp2HZzhqgofvE6seiem21vtAlg&oe=6A0D37C2",
-      "AD CAT 2 - Como funciona o catálogo": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/579834451_1971331780101286_770474734194972212_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=WpCubWzV5qgQ7kNvwH0FicS&_nc_oc=AdqXC0gWfijtiUhEc_GxywKz2V-5J67Zpk8B5l9nYX7UyqGGrKs_0oxEbdPC1Eb3cPw&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGQLE1bVWOSWGQsvQ8-B2zV9aWT91LFZD3vqpCEtzjLhR_eBPEWdRJmIU0EblNBVr6RFZEA7LIiNZk&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7RwuFUM_QCQ_q7MU7gP5ZD-JJihsnEOtduADr5PjsjNA&oe=6A0D31CC",
-      "ADP 3  - Quero ir pro digital": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/563192686_833831835740172_1958777128066125192_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=kXNrF2q8yFsQ7kNvwHaTjYB&_nc_oc=AdrMkzXcsTSGbDytCHoyPJsNZRyOgIEECZDOgv0jW_9JdJixhqitT-CvcJq9O2xPAGQ&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHv3bbccVtyQlLzao33zsJsXEm0sx9eJpT27VePqx3zq0vidrjRcLeFctackO1zoRytz5cf9avoLy0&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6EtSV0gjV8nW7h1Xs5Gv5PAgp8mK8fwDbgE52QeMi7Aw&oe=6A0D3C6D",
-      "AD 14 - Como a Vesti funciona?": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/577038148_1410722577328444_6418705765268197541_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=69eyTVuEI2UQ7kNvwFZ7r6k&_nc_oc=AdoisN_lsOlWEbmaekkgEHjOJgpRndIKBJzc4neXpj0g1UqCeNF-kbmZOr7bDZH7tyM&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHKbE9_sCy8tYgxkYBnzJOQYPzxOJfLAUvUJjg7EcGgYUHdeVGQMbm8DcdVMocKPFhoAUmwOSTuPl0&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=4c1fc5&_nc_sid=58080a&oh=00_Af4MauF-Ngoxe2wYeKOTL3w5-c70eWYqHFizlHP48YcIVQ&oe=6A0D1E14",
-      "AD 10 - Quero vender no digital": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.13418-10/544880298_767328645938838_6126541105052380777_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=pszg2iTpsqIQ7kNvwGVuGGj&_nc_oc=AdqRTfXpX-RiQ1mnxQeVLW1sJAi6GLWu9-8IF43DPMBhMDLgYeARnrS_DGyspW3zw4Q&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFZN8I3mXJb5LUB8QyjSl3YSkp2nSRCrm2ShKoWs22rfSIAAXc17-MqiQBNPU7lS6F07gqOSUyArkU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af5X_mp57hw7I2GuD7XX4qo3StPm8ujbgOtYHZ1cnXhQzA&oe=6A0D3E64",
-      "AD CAT 1 - Como funciona o catálogo": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/581118137_1133449005624497_6961817585513607344_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=cpYkkNwAIksQ7kNvwFeOq_h&_nc_oc=Adp7pUhzXCLnq1WFPaKGhvslpDhOP81DFF25Xgwlg6rioK5ZjfKLjf9BFt9Saf4r3mM&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFPSvg7lz8axd62l9N8S5Erre6VWUnIqE-W0OQQL19cyNQa_nGR21837om0qJRbM7ZG-Ppzq9udVaY&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4s5AcsiIFzUxG5yXJ02a_gBttg2YaEM6wP0ZjQm1ACWw&oe=6A0D2212",
-      "AD ESTOQUE 1 - Como posso controlar o estoque?": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/579095578_1170077311923599_7918774356904111592_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=A4f_6RNcXrcQ7kNvwFR_Yik&_nc_oc=Adq_GUGVEgHfG-asgFeSo_hIiNmodpNcuHtg_26a6xPdSzMMBU2ByYk05gnHv4rBLBM&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFPGhcxMeYvAUzWTSgIXhNAWG_bDv5Df0vUIU4RuYmLxt7AI6nuEBTGrU-MNVahwxAZclDfAJHze6M&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7OAtEYZc9nuxuIAvVnrc82ah0-KDZhBnLeQu3UjXkSbw&oe=6A0D400C",
-      "ADP 2  - Como a Vesti pode me ajudar": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/559242986_1346229937107811_7473972089372485524_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=sAy4keSSuHYQ7kNvwE8vW1Q&_nc_oc=AdqLJRdafHdH13-WxF2yD5-XHOAnTaNgpz60ZVUMGnXPIQsMUGnxMw9TVu2YlxiDvMw&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQG19IYR398pR1BiSgsErBmxx-gnxEtC78KO2Qo9LA3drlSIOeqPvesnFw78VK1WasfOmbM4WJyIebM&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4X6rYGANBeAyAwqVdlzXxawjZXZoEAd5JAvBpCk9k9Uw&oe=6A0D2ED1",
-      "AD 14 -  Quero mais informações": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/568281099_1509281610267661_6839446284788035317_n.jpg?_nc_cat=109&ccb=1-7&_nc_ohc=akyuKcwEabcQ7kNvwFyt1bc&_nc_oc=Adr2KMOSd-GsLf6eeSrOLampwXgWIKy6kq8kMU0-q0fZYWVrYITIrQLjNUMKK8YE_m0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHQcxnFeZpUW3f0e4L6lul1-2w53UaBIDUMljnZ22W9ABhrg7OuJPie-odTU0PHHOS3MDVHJ8hhqe4&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6DOJeR7bD9VGL-WYo5W3_5Vi03N0RKhynDPaDmYf_P6A&oe=6A0D0E6B",
-      "AD IA 1 - Como funciona o agente de IA?": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/580059600_2024387548361715_7327480579616931109_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=b-rE99CnXqQQ7kNvwH2eB1Q&_nc_oc=AdpItz-hfK1IRiaDyytKoDR2436m6bXebVBQ4guMrUrrekuuMTB-viWP22AWgHLFwZU&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHklb0sy0abHNz25vqBzRF8z5WF1dqQmpZRTSwoXMIIlxykxGsD5pyNaeVvF2MltFEuBtrNC0g0HoY&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5nuce5qva5QYCm0YD47ccwZoNaTDqlabZCw8Ca9jBxrw&oe=6A0D35CE",
-      "AD IA 2 - Como funciona o agente de IA?": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/581837382_840104401753035_4339640119420003278_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=-E9ChLtrcLQQ7kNvwEWHWcJ&_nc_oc=AdpdJ79Bp8BGc5JzhxJcMEUPl9KGBK0wc8bbHqcxbdAvMNxalC2K5scHFQKqVtpaZE0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHPZe3iJhlJtMVr87ugSxg6hAvd4yqAuITKxOYh5LhNEZhMFDCgV3BpW62nOpOL2N4GrzVMivIbhuo&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6L6804BkzxicwruuN2fSk_EURpbFfhOEjm8ZedkMCIow&oe=6A0D4526",
-      "Treinamento Vila Sol": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/566487687_640555425655245_4591602903634663592_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=sNKHCGwWjDgQ7kNvwFPxrgD&_nc_oc=Adrr1LLlt7twm6_bKplsGvLdA7RFJV25pnW506BIquuoqLCMvW_1QQo86Rc1K2VICh4&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQH0RMoLJhfGzlOr3oxag0-GjIgSfT35BxtxMk1qhqpjhJ3uEYFpthMpIO93wz79WpvvIWBFXXziJJo&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6Dw_kvXJxc9xVNPDnQaFTVrpSjf6dcdrybNuudoF2RLA&oe=6A0D43ED",
-      "AD 01 - Quero vender no digital": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/504145686_689892660670908_8406699869510464305_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=FFaOBV14rqsQ7kNvwEiazAV&_nc_oc=AdqKEU5761ntjKIKQae3_bmyUMI-XV7eQMa-y73aMgBBseajwffnVqDd0wosJV1osjo&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEInCapJDlu6w8g6QA2bfp8pv_1jJhsj1fG2N93R-yriBdii_zM_AJPhGDMtA3YlJwSTRz7ZHYGhos&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4UCmKxPvkpKemcZOa6jbOJbA33Eb0dmUmSGZMbDMgvVQ&oe=6A0D4474",
-      "AD 08 - Quero vender no digital": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.13418-10/514783177_1454489135909433_3276544703093116986_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=7ncrv4m9buAQ7kNvwHl33WB&_nc_oc=Adpnj1aRR8xmArbGoO9lcTRSbB_E8ZUPIQjsTIj60qzwsmg7Xd48L5Ri8Ow0O_31UgM&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEzFVvb5-YWlQqSwgqD7pDyDbP2QT8hMQ0SzmYSLc_Id0fx9R_IMaG0-pxHJ5BgBPMT4b16bH6Zcl4&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af5IaiA_1dznBggyC7MQCw-RYHNMYL55pPwVzMMDly2E4A&oe=6A0D4473",
-      "AD 06 - Quero tirar minhas dúvidas": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.13418-10/509263319_1468987087879068_5862374632879625833_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=saeLJJE6yk0Q7kNvwGBmYrX&_nc_oc=AdpYZaqfMTAIpKgGVO2ZhTOnXW4c3Q0o8o7VumQsS-zM-nCchx5AztostqIjVn4W33g&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFkirUfNH5c1MaF1skU9sSSmLKHDUmFh8Hm7WH8u70jIvlfio06Ska9RRQ1Oe1nLZ91eMX8ZR1kbEI&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af7uDK-8eqwcO1ApQ2T1KB51Yh12v4vhP6aOdA-kqXWt1A&oe=6A0D25FB",
-      "AD 02 - Como a Vesti pode me ajudar": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.13418-10/503984665_1671175470270693_5180333899595380757_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=8MIkuuLTfxkQ7kNvwFozFzj&_nc_oc=Adp_jcyotM2fVeA0u5Ij-weCB-THjUl_Asqkt4gXMjnFHX5d5vZsZnoqHR-ikfY9yLM&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEon0gg8LBTXvi32EmZJSvWWPagmQYg_UPLqyGkLHHkhOm4jsn-WPPojNL6PK-1xRV5wRdaU0oQOks&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af4nAkznWp0XmIgF2cizmw8KmmiJHITfeDsBux6OQ0_XwQ&oe=6A0D1EC7",
-      "AD 04 - Como a Vesti funciona": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.13418-10/503326751_1231891835096583_7402137259282131648_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=MbmdSRL-ejcQ7kNvwGVtYbV&_nc_oc=AdrhglkppzLTmByK-ON9GFMxXX03Ey_esSWwr-yBoVKVtV5KEKZpjZftr4Dbcvmq9uo&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGykf5ZZUuxdq8qY89xPoHVAEqKSXJV6emWf8U50KSY4YAI_LiJ-ydhxGFVlrv5TwKxCEK0wT0W-Wo&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af7rcvnbECrT-bson3RRrCv-1E_BwxO_Bcd8ACuBWiAtWg&oe=6A0D167C",
-      "AD 09 - Quero tirar minhas dúvidas": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.13418-10/528367606_1560476554915502_3512832233577766940_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=RrLXznpXhhMQ7kNvwH5kdKx&_nc_oc=AdqlssxhD84R3gwinnIFwqMDoXmnVbPmDr3nR5m0yN_D1ueTdkiimnX6M3i-KxAvBkQ&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGPz-3Dg9-ONwx6RWjJnhXQoSKJjSGE5pV8ZksNeLKmAuRFIfqSSxsT9s-fOqh0zOmF8Jn_a1Cj4oo&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=7ca6ff&_nc_sid=58080a&oh=00_Af5NCI-EfWOXz64Mc5hU9KgAetTBQrsX-nVNfxSoPQ7yXQ&oe=6A0D3D8C",
-      "AD 03 - Me envie mais informações": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.13418-10/502392549_3091633157671894_5302824361704767703_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=un-8vlL4_WUQ7kNvwEmwxud&_nc_oc=AdoYi0c6G1OwcFicHP2mmgnuh2dFXuk7PiRFFCvEZgybJ12oij2lYI2Bb7No3VEwpb4&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEatFukZIMSSDgNavZkFE9OXSmQpHOpxwgkDQZCe6JbofBA9jLDqKHzmdpikFcUyr584VhhYxj2QIA&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af62snMTjhxsqYrb8svVpAkBd8uAmFR7ab7I7ht4cA4_8w&oe=6A0D28C7",
-      "ADP 2  - Como a Vesti pode me ajudar — Cópia": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/559242986_1346229937107811_7473972089372485524_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=sAy4keSSuHYQ7kNvwE8vW1Q&_nc_oc=AdqLJRdafHdH13-WxF2yD5-XHOAnTaNgpz60ZVUMGnXPIQsMUGnxMw9TVu2YlxiDvMw&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQG19IYR398pR1BiSgsErBmxx-gnxEtC78KO2Qo9LA3drlSIOeqPvesnFw78VK1WasfOmbM4WJyIebM&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4X6rYGANBeAyAwqVdlzXxawjZXZoEAd5JAvBpCk9k9Uw&oe=6A0D2ED1",
-      "AD 05 - Como posso começar": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.13418-10/510744127_1245431470559774_3085625968789678461_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=S9KotHPer98Q7kNvwG0vkOd&_nc_oc=AdqNzRrdr4noaMRPy8e4-fptWzbctoA2MaMhpOCVJd-9T_eNiY1RlR6djowvjAIJ4fw&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFhVnNIcDq9GhO9NRhZEyvXKrEdodhfIogE1EMtWLlyJzl44VgS4j94Gs3QHtHYT9nlIibv-PqKwVU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af47STqI3bFy9kJ9OUAQbuR-nm1cWMvhJI-x-s5b2R1xwA&oe=6A0D428A",
-      "ADP 1  - Quero impulsionar minhas vendas — Cópia": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/558223850_1360233315687538_2003181013477814297_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=49LiQKHThacQ7kNvwGOCnVY&_nc_oc=AdpfUhIaC9ym399tQeOPgLHL4mxmZHLgvplJOpO_pIUM2yGXeBEtms4DDJTekxlrqiQ&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFY9BPgqrg5usEpNRQ1YvvZHWv3JAzk9kmvdbOCvf0QjSQF-yfAmF2BYX8GjvenqnOygVOP2dcOpFQ&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af72V9amFSYrTK6Ewt5NVCaR8dOIuCRxGzxxeNaKMkmdQQ&oe=6A0D25F7",
-      "AD 07 - Como a Vesti pode me ajudar": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.13418-10/514483863_2129896657485651_9218965419215835664_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=GcBHjR157OYQ7kNvwHFDweI&_nc_oc=AdqaYUgYcpxYUa8IvUPDRlFiJhUyVgYKutL2MM1Hqyu9wL-bQfznxJHQ83O-Ox88J6U&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEUebPwSK3dTSOmgny3n2b4ke0904eG06VyORiZIYwDyhhJ83pmIX6WAVb8wOPh2QEnc4mdx8rkLo4&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af6svPQT7-armOzw3UFmwU8k2b4ca_KaLm_4AHiXpDICFA&oe=6A0D3E3E",
-      "AD 12 - Como a Vesti funciona": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/546941968_750293657828356_6597520806533618429_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=pFUD9QHRegMQ7kNvwG5RMiW&_nc_oc=AdrqyQklA6uZgkje9tltjBFXS-cTgITPefJ4thslf1gXDNcDmUZPrvVav_lkZeznaLE&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEhVGClCqwI88tyzxbkzZdmvtjm-QeRSXTDPSYUOnTb1cts96Xbd-a1TzqKJPPoy_kdXDxNWJ0CYZw&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7mXDbDDgdf6I0nPE6V3I3B-AyLVwD_09rvxh82NsxJAQ&oe=6A0D4373",
-      "ADI 02 - Como a vesti funciona 09/10/25": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/563085639_24891294123841582_7007061039843704028_n.png?_nc_cat=102&ccb=1-7&_nc_ohc=5Drke1WOqhkQ7kNvwFx73Kn&_nc_oc=AdpCHuKAqLKeZL6ZA1cMCLD9mWsWQsNfTu-WBTalWHOh70dhNWfGAGDPWtSbqyULH9Q&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEUyXTLWToqeejLDAR82EtMe7QKgUbtqPvE19jPskz2gtrC2VvCrhS0yx0B1slMNr5fdpmgGuic1Qk&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5zViyGmSWsU50iRRlrMTLHmsXktXp5z29X-8Wqo1Sp_A&oe=6A0D2580",
-      "test": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/564151244_24891290827175245_6270939120402145618_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=NA5AttPNPb4Q7kNvwHII-Lq&_nc_oc=AdoyI4uacFo4l3ItANLz2dYq7Kms3wWhkuTy1xU1bhuzuplcF0t6VoVGqfCEHj7b3wE&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQEU7hZPwCCnnUOrG1i4B5YKrxxcuX7w2FPbv3ZeD3sa8iK-AKrdgyXpH0pDxUg2jS8Sbwf4dUyo_oE&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af6ClUsBJDCmDDm55MAstDnWOysl8XX3mv-TeryBVD0CYA&oe=6A0D1A39",
-      "ADI 01 - Quero mais info 09/10/25": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/561249150_24890631550574506_4001299244627553028_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=Kb-TI7XWuJcQ7kNvwFNKXZg&_nc_oc=AdoEuPH1lBh_90ccG3j6SUotPQ9w8-ncBAtX8tF1AFrv8Htd_TgJajsI4wuwXF0Hdoc&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGjI6tzJ9F_XRoI1R7Wv2u20IwJ5-s90IcRKXbD1pqRVKwTq80vouotxPfLVrhJrnA5CxVWZIvvudQ&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af4S-2oTC2flnGVbtVp3MNUX6C8CATpEwi5EjzRGrfW7Cg&oe=6A0D1065",
-      "ADP 3  - Como a Vesti pode me ajudar": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/563192686_833831835740172_1958777128066125192_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=kXNrF2q8yFsQ7kNvwHaTjYB&_nc_oc=AdrMkzXcsTSGbDytCHoyPJsNZRyOgIEECZDOgv0jW_9JdJixhqitT-CvcJq9O2xPAGQ&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQHfHZhZW-S21bO3vR0kPXx5COhOWrk5TqsC-rUfZ5rHzLq_Ui1cCP8APyIrK1Ax5EX0vJRwOO-J3t4&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af68mU8nS1Td2_M6QtZ84dH3TJ9GT0KU3M52Up_2qENWzQ&oe=6A0D3C6D",
-      "ADP 1  - Quero impulsionar minhas vendas": "https://scontent-sjc3-1.xx.fbcdn.net/v/t15.5256-10/558223850_1360233315687538_2003181013477814297_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=49LiQKHThacQ7kNvwGOCnVY&_nc_oc=AdpfUhIaC9ym399tQeOPgLHL4mxmZHLgvplJOpO_pIUM2yGXeBEtms4DDJTekxlrqiQ&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFY9BPgqrg5usEpNRQ1YvvZHWv3JAzk9kmvdbOCvf0QjSQF-yfAmF2BYX8GjvenqnOygVOP2dcOpFQ&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af72V9amFSYrTK6Ewt5NVCaR8dOIuCRxGzxxeNaKMkmdQQ&oe=6A0D25F7",
-      "ADI 03 - Otimize a gestão de vendas 22/09/25 — Cópia": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/5296230028557274217?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIEw8w2o3mptEukC3XZf9lUiti3vv6kOAIpjT65ppqWhFD1zPSWlNfW0wgJPwPJoCug5mqN1mT-bfz8wFDDxR1Qcr0zGSA3vMA1Pn0yRqeg_l4dxq5LR14nMqxEesSjv3zzBGhkE04YhFm7jjIbGcvK&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdqxL9zNzxmhIEa-Tz6Js6Sg1lUeyXLwaFGiQ7byXJggPEZTNebeVRgp_KXgFe133kU&ccb=13-1&oh=06_Q3-_AcbfmYNJmoY-Ao7pu2fB0fGJnIdkjoYwGJEUyqpPwzOK&oe=6A09413F&_nc_sid=58080a",
-      "ADI 01 - Invista no seu negócio 22/09/25 — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/502851753_10097598670304371_2289872687186779632_n.png?_nc_cat=100&ccb=1-7&_nc_ohc=iG5x5mJFFT8Q7kNvwFPFeyc&_nc_oc=Adrf2xwfM6luC-qDms3YjYpUIMp7Dd84rWJ4hHiT2Ay3GrJKJa8pIbF8iEmuR7gHSAY&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFAvBYHgtgwiAvnTWb4Q8-Aa3GZIFeOsAdaPSwAB6jCg-T--rA8ze77fyg3HZgbdSIfZFnxOoMkxLc&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af4up5Tvqqh9lqb4cfkx54zEfy2gRBXDyf4MnId8CmoLIA&oe=6A0D4379",
-      "ADI 02 - Conheça a Vesti 22/09/25 — Cópia": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/502906633_10093470314050540_4284163363499260854_n.png?_nc_cat=101&ccb=1-7&_nc_ohc=SG5xbJNWQTEQ7kNvwEq_fzx&_nc_oc=AdoCkj6jK_2kagLFe-uX8y9PR68P551LH2gOqCX1naCzbfeEA9_IPdiHjgtkqEyxszs&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGLafBaK4c4ry-0cVEMBO2pGRdkdSpXvC6G0d9_pLJEYKPizp5e4hAY8JBrQsvETba8MVJwrYpF05I&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af6HaxbimrPx6nAuvDtZ8bmUyDeNujv0QQ3tdy_bS5S_eA&oe=6A0D3AE5",
-      "ADI 01 - Invista no seu negócio 22/09/25": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/502851753_10097598670304371_2289872687186779632_n.png?_nc_cat=100&ccb=1-7&_nc_ohc=iG5x5mJFFT8Q7kNvwFPFeyc&_nc_oc=Adrf2xwfM6luC-qDms3YjYpUIMp7Dd84rWJ4hHiT2Ay3GrJKJa8pIbF8iEmuR7gHSAY&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQFAvBYHgtgwiAvnTWb4Q8-Aa3GZIFeOsAdaPSwAB6jCg-T--rA8ze77fyg3HZgbdSIfZFnxOoMkxLc&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af4up5Tvqqh9lqb4cfkx54zEfy2gRBXDyf4MnId8CmoLIA&oe=6A0D4379",
-      "ADI 02 - Conheça a Vesti 22/09/25": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/502906633_10093470314050540_4284163363499260854_n.png?_nc_cat=101&ccb=1-7&_nc_ohc=SG5xbJNWQTEQ7kNvwEq_fzx&_nc_oc=AdoCkj6jK_2kagLFe-uX8y9PR68P551LH2gOqCX1naCzbfeEA9_IPdiHjgtkqEyxszs&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQGLafBaK4c4ry-0cVEMBO2pGRdkdSpXvC6G0d9_pLJEYKPizp5e4hAY8JBrQsvETba8MVJwrYpF05I&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af6HaxbimrPx6nAuvDtZ8bmUyDeNujv0QQ3tdy_bS5S_eA&oe=6A0D3AE5",
-      "ADI 03 - Otimize a gestão de vendas 22/09/25": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/5296230028557274217?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIEw8w2o3mptEukC3XZf9lUiti3vv6kOAIpjT65ppqWhFD1zPSWlNfW0wgJPwPJoCug5mqN1mT-bfz8wFDDxR1Qcr0zGSA3vMA1Pn0yRqeg_l4dxq5LR14nMqxEesSjv3zzBGhkE04YhFm7jjIbGcvK&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdqxL9zNzxmhIEa-Tz6Js6Sg1lUeyXLwaFGiQ7byXJggPEZTNebeVRgp_KXgFe133kU&ccb=13-1&oh=06_Q3-_AcbfmYNJmoY-Ao7pu2fB0fGJnIdkjoYwGJEUyqpPwzOK&oe=6A09413F&_nc_sid=58080a",
-      "AD 03  IMG - Quero ir pro digital": "https://scontent-sjc6-1.xx.fbcdn.net/v/t45.1600-4/502906633_10093470314050540_4284163363499260854_n.png?_nc_cat=101&ccb=1-7&_nc_ohc=SG5xbJNWQTEQ7kNvwEq_fzx&_nc_oc=AdoCkj6jK_2kagLFe-uX8y9PR68P551LH2gOqCX1naCzbfeEA9_IPdiHjgtkqEyxszs&_nc_zt=1&_nc_ht=scontent-sjc6-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_tpa=Q5bMBQG6dcTg33ahYOnU14feyoHAjZnUv8ldXicabanum9prMgBTTZn6_MhNe-qZJeKBnlbTnext1qa87N8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5Dsz8M22t14LcMOWIfPqiYOqKqZZ3e6_npwIasQRetlw&oe=6A0D3AE5",
-      "AD 01  IMG - Quero mais informações": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/13025076891467502921?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQLNfmLvR4IW8xm_jy_FL_mw9JyyVZujGZ6duEANEMEpmG-zaA1hxua6oKlYjMFY38l74hvIISX6Bb7FbiSy6Up3Ay4R3JSjFP4haz_-YPc0d_-LUllBz6gcp098w1hpPLbwAEa-ZdHQqNlIloApIito&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdoLyNhhMZjsaMcih14eJoOnKS2JnWPRcOuRDZY92kgOCLc_Ks6NlNIDUDINt3LSUus&ccb=13-1&oh=06_Q3-_AVGeV2ort_-gEhwE2gTbdCJJgLX388hsub06uDeZyiSQ&oe=6A093285&_nc_sid=58080a",
-      "AD 02  IMG - Quero impulsionar minhas vendas": "https://external-sjc6-1.xx.fbcdn.net/emg1/v/t13/16276552496392310672?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKdg-a0gi49at2tmov7ls7qGHjiiX13MizrhNic7EIUKv0onGnuIJU4bX0my74MOKf0B3hzxxfneBIm0ewE1EcCrhpcAReipfcTtf1YH7V5T-Bepaj3JrnAWjMs-axgc_5dKp6R1pSlsGxap4o0xTai&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=7E-5k_TLosO1hSz1ax2tvA&_nc_oc=AdruG3z0Ki6eOuIhJew5qch2P301DXGHyymMMdgrXrzJG9BZdnk2VTVAdQZSlcW5jds&ccb=13-1&oh=06_Q3-_AZLQXp1NQyvIREoO7rDTd1-x9BDXlPrev29AI4WvxhLt&oe=6A092FEE&_nc_sid=58080a"
+      "estatica-rfv_interactions_vestioficial_29042026": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/10489802976825164809?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIpzhODAtZ0X7XwW7jsBnc-KXdjRj-yodFl5VMhqDrjdPpHtqswS1xmTH_7XGczFP0wcAamNu6izVfEyW8ar-N33MpUGxtnMUsAS_QyVI1iWCY180-RdEvZKf767XpjnPIeXPwJTU0LlMF1mIazEdrc&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdpbGXpijwt1a6-YyAvsf3gdGfoOgoqmJqLsntvUrXam9NyfUfjCUR6O4MFo_vetW1I&ccb=13-1&oh=06_Q3-_AWDX5M8NLfUlMys6c0nfMxWYgVpUAInQJXzU_CaBRSCt&oe=6A0A1812&_nc_sid=58080a",
+      "carrossel_ecommerce_interactions_vestioficial_29042026": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/12311953454165342655?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQLdlYHIl8HtxTE7W2wsNTPYEYFMd8Pd0LJdC7w6sWkfJqbzec0PaYEsT6x0mcZR-67gTNXYZCMqXMbt2-nzTFyiY57IcRD7c8TgMPMn1LcLC9-9MnS8WeOSreGgCXvkVHZ7lQgW1JTdNwj0ULxm8qe1&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=Adp0YRx6y5KF-koqLn3cGiFQeBTciLZW_XgcDM3hxM80kkDAVwD2D78Tya200j8EqC4&ccb=13-1&oh=06_Q3-_Afy_7HdpsyLAaWB-T59lUROLo3sbWq4si5FzEPnymiGx&oe=6A0A0DF7&_nc_sid=58080a",
+      "carrossel_13052026_look_a_like_clientes(1)": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/3138658367216280802?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKPMhCes3ZFhnpZMsVyuTaQPY90pGOcGjVZYhTEVIabLd0edaQ3f53sujoauFWwuDb7q7kw0WpMfUFBctCy_h-2ebBYDKT5LK-3utTb24QdNNv1CirRLpPbi5wxaGr23hvmwuE-u-T39376SvheYsw_&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=Adp2uJLYr2kufZKxrS01Y0ZTtpEpPU3K2ROAjHRo4n9BCkR2SAD8S6lhWytJIUPUXzQ&ccb=13-1&oh=06_Q3-_AV3ylcxUIK-fbdZmieW1Iwj-Dp2CuZbGAZbL2CVJ_YZH&oe=6A0A1BE4&_nc_sid=58080a",
+      "carrossel_ecommerce_look_a_like_clientes(1)": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/9709458818204824390?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIKN7eC6VQkK7UDmj7djlxu230SiKEPjY1QXVKbBXfJKqvb5Wj2zT9FGJgisarRmkc_esZUBeshcJhUF8Ig55xn6EYRjaJFv8prfo18LPYTic33kKhZ0LStFqdEvHKMCoB8HjsG-gqjgmqHOZOF53YO&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdoNp9ifz8jHQojW-yfsIoskxpSbkhwvBqJqeuYovLamRJFtbh5yIMQRAXLrL-OPa0U&ccb=13-1&oh=06_Q3-_AahE0wfEkdtiG1wgZZNVKjPjSYS8CDAjHmzSlSo81usm&oe=6A0A2DB6&_nc_sid=58080a",
+      "estatica-rfv_look_a_like_clientes(1)": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/9417260040677359862?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQLRHtsruKo5lm6m1f0Ds6H1ZRiRpRj03JBKOaQW_qpznIz2xmKJyx8CMVZ_PiaS4Cs-hygb7dYTVMWj0Llf17RcEO8BPqt4NVBXFjemXzJ8kZJNWR4NGE4tZQSyZkVlR_3IYZ2qLQa-fydzEq2vuAN1&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdoBFHWfOFrn9X5ULfET0we0HVdQ-46uuIfvF4se1E1LduVQOxvN1ucUws3bN1sI3cc&ccb=13-1&oh=06_Q3-_AffRjkqrBobcEL5EB6N81xpiDaZfR5tuBnza-NsstXiz&oe=6A0A07B8&_nc_sid=58080a",
+      "estatica-rfv_PageView_25percent_last90Days": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/14443620623815143887?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKT-FMWy1WPIezEmrZ4jbad4vXYFuJVR8mqF_zQ1xZSaF1vl_D7HnGmiaNa-wthk2QhCJZ7wK5DyKmM_tjKk_pBRB2EqDSXGuXV5iA0XAoKjikyPeqTcFzXwGlbBoEBocePew4teQ1kBJtJd1TTOXit&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdrsTEkEmLL3fo0gdPKgLsHhHZLech_q-YD0pKriZ1zcq3CscyIE-JbyZBIGnPSyT78&ccb=13-1&oh=06_Q3-_Ad2YyYHjcLTxDSbEGXgrxaY3HGZzmRuStsVElpR7MAGr&oe=6A0A0920&_nc_sid=58080a",
+      "carrossel_ecommerce_PageView_25percent_last90Days": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/3870157870069416252?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJf2kZybgaxtAJqli2B8pt2Fky19SxOchYA7nRYR4U4nTesc3MsteTpqr6Rkh3clFmB4lmxrO5lTTWIUjpZDKrRiKaigj3xVJ3ngee7SAGxKydVHyb-i4_XeRNGv6jjHrUYTm8mrnvDkSCgMhmp34NG&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=Ado_D2Q-FweRMzhdoQ7xBPbnsli3TbvzYJb16mp9oOx5LdYmqQk_u6pROwLw5V7lJwM&ccb=13-1&oh=06_Q3-_AUtX2EVSGDj34gEOOK2uV7uwa-6R6XM3u1lkf7nZsqgu&oe=6A0A0604&_nc_sid=58080a",
+      "estatica-rfv_carrossel_ecommerce_interesses_moda": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/9235027545305752959?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIl0gzWcP9X2VriYUBKoGtW7UOtRqcjd_2jGMu5UqCPh7FjOsZyT_7LB6IowVAes4EVzzaQZW_72slRzAWjo4rqQAUbZrQaIYAYB3jQBWSXczXbKt-gdYfw6vU8Nx00zGJkyYvxwQ5ClfXNsNeJGh1Q&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdoaUJNePZpA9rCWyHj26PnZOHhANF_vqExKHNytFUEcBswR0vf-VZdNySIPdWi_oM4&ccb=13-1&oh=06_Q3-_ATBwPFffa_NwkjtL2fIr4bt_4n0rFlQ5EOrekMpTFXJZ&oe=6A0A1F85&_nc_sid=58080a",
+      "carrossel_13052026_PageView_25percent_last90Days": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/3421743554903842299?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJB9DNvqqy8F6KDw8LDrjzowGcDc8Dd3F_n0U0_Hhj_4T9nVtSTk769TJ2o6HSluGbUocp3RK7pGUsP4ZFmUHWbrFQQf3ofw8NhZgp0VeZztYiGO-AYEo7gdAO8-8iFK_51y0dC4ZvC6u4NK0lJtw8t&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdonC5VnVolKpj8O-zXISWBNxKDeRfj_9q6tgnI9Gtf63dFVjHPTjzOQIUSgGDa9_88&ccb=13-1&oh=06_Q3-_AX6PXG7ft_MVCnKFgIyAT_qeYN1xI334Xw5ne2aLAIl4&oe=6A0A1BDA&_nc_sid=58080a",
+      "carrossel_ecommerce_interesses_moda": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/17092592761846502702?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKvPaLI9SuRGqxuaebMOSbTWpeuFYVpSpBt6TrFJPt0THxsA0C1SIW6o5NA_k2pFAtFqusvE4cwjnX_y1vLsGnI1nbfvi7iSqVZa1RlxgcjELYjrntIb5_5PSKQuvYeQ2Th0vyyWlfw6XZmIKVsMFcQ&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdoMw5X15KHJfP6rnz_QxT74HzC5VCY1hgLtkfr4weVQydfBraggAREfTH4eynlQW24&ccb=13-1&oh=06_Q3-_AUGB-MqLlq9gx8bF82cyeeLiRK4ECM5LgpRacvr_-T0k&oe=6A0A068D&_nc_sid=58080a",
+      "carrossel_13052026_interesses_moda": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/11908039302038099480?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKm_yQVkcjpEoqazo0m1CEdmWNaPOflEofem4ef3gGGBbEww4ocwYJ489KywrIbqdE0o6C6WTWB8dJrxcRGGN-7UhXMiPhiLfUXgJcxWBcr5z6q7QV9BWevifDt_D-OepFIHQMWhnhtOQGnxbGHbmsq&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdrokXZYLzr2ZYa62TXjW727zBvOSAGmuXyb21eCHUtco-xYGXb9-O_edeMUnxJX-N8&ccb=13-1&oh=06_Q3-_AeRWzz9ViCueS-FIvVaHmNewEzN0R-PLPncE4RGFq4vw&oe=6A0A1BEE&_nc_sid=58080a",
+      "estatica_RFV_04052026 — Cópia": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/13470474875040265870?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJJ6KthdC1D8w2mheXtfyNOTjE9Rw1HQIaYPvsRp2UEPSUJ3jRNmz3UdOkhi_kqEYy5CB2C5cIPU0xdyA1o4GG8cd-6_me5c9PlYVkGUsf5ksw4W0UB6-eyQsdXC-1HBJtUzPPnwynfCDAJJzLHFdn-&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdreqAemD5Ospv61UQGzYBp9tLwrqbOmjNRyj80eWkz-96ya-MxWikrpWt59MRra1KM&ccb=13-1&oh=06_Q3-_AW1s9WWGYUO3XEUiZYZ74Q7ZSq6M0322-eVFyf4po_sq&oe=6A0A2BB7&_nc_sid=58080a",
+      "carrolssel_07052026": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/655512010_26395145673456412_2793297701023293367_n.png?_nc_cat=108&ccb=1-7&_nc_ohc=JRjm-KbRTwkQ7kNvwEn65XR&_nc_oc=Adr50RO2z7SXJdTcPJi0l-2mY1pnUDBb3yPonIYVTZ8YKbWZlrDkAt7g1iNUBXPCYt4&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHMFcQ4x5DIuwQlsEI5blzmRttTwA46Nion8YuihYWJkTiCbSF_vZ97I89GFHXeiD9U0uvf1yWsXoY&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af6EkHWTk2Xzcq6nWc4XLjp4S_KvtAAeqEVqxa_4q3oa0A&oe=6A0E1ECE",
+      "carrolssel_07052026 — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/655512010_26395145673456412_2793297701023293367_n.png?_nc_cat=108&ccb=1-7&_nc_ohc=JRjm-KbRTwkQ7kNvwEn65XR&_nc_oc=Adr50RO2z7SXJdTcPJi0l-2mY1pnUDBb3yPonIYVTZ8YKbWZlrDkAt7g1iNUBXPCYt4&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQF4YJeJob-yYMQsM3exX-BGvEY0wNmntfFMBlU_XSHRRC8I8VKPY-0dFKU8KHP-rLxUFLoi9KsPQbE&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af70xfm7pXl5TA-6MqZIowMe-9Zgw1XxF4APIuOQ8bvZHw&oe=6A0E1ECE",
+      "Carrossel 1 - Oráculo — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/656029680_26395087516795561_2726179912906645689_n.png?_nc_cat=107&ccb=1-7&_nc_ohc=ZCt3pZ6-Hl0Q7kNvwH5Q0Xn&_nc_oc=Adpq4lQ6Io7uFRDZikePEUvCJHqoIEASG-LrFbAfZdhpXM6X63ajIndnCL4Jn3bWiYM&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHSRxAuvfrj54FPfWsmcGvVD5z0lt0U2pqG1FOFqp_AO5IOtDeHfYh6E4wU0Z-AkX77YkRbs_4d58o&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5xap4TZKukglA8fN_1iFbYZyJXm-Za6ozu04_coV5hag&oe=6A0E0F13",
+      "estatica_RFV_04052026": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/7767821423125173448?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIEgGSL_mQByMzPfKJ7L2asIaijPIJsXHwme6NkfEI_ghQMaWdSzyiXVEsnmP7K31ICL4CmvcUGybXwxaC8r6QtL-7HX8VEEmRZbC-70WpTvYq8J4GC7rBQgeAGrKbnIt2yLX-B2Ev29KIoPfOovg33&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdoZjroP0iRvrwrrZIHFnrbMsf66GTq7r4VdV4X4T3T84WMVNPVDGTsSxFSOrfhVD3A&ccb=13-1&oh=06_Q3-_ASQtX4WvB7vAoATYjnvoY3SlskbY1v5ytamYPZIkzda2&oe=6A0A308D&_nc_sid=58080a",
+      "carrossel_RFV_04052026": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/5038455081392809852?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIqfgqM32JSpo70PP-KY2gd6eBiqOrbczsopFRq3YUR_cVKJTXMAWsHLN9bMmGOlQ67t80WmRumxXMnhLAK42ybeRnViJnBnwWh_bkg7L_bXrVhgribWwNvryzT2bxNZ-a2ZqnPoefGOhyfnUxpqpjT&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdoAe_KGqcDAtgOYJHEx8OD-NajpGoBJ40OszjtLyrJU5QrS_ULyro6SMsQW6uI3O84&ccb=13-1&oh=06_Q3-_AYWha6LxKINanpyvJ_hQUNcWl88EvWZTizPExdWQmTgY&oe=6A0A1D03&_nc_sid=58080a",
+      "Carrossel 2 - Plataforma": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/655588526_26395279513443028_8790197140238032930_n.png?_nc_cat=101&ccb=1-7&_nc_ohc=yzcq4rj2B3oQ7kNvwF08arQ&_nc_oc=AdqB6sjgd2VIhr_2RDeaPKm-lC_ZmXQe-W7ffXCDq_kiqTlzfE9cnlxbN5yzQmAzH4g&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQH50oQl7zvlxCbvaonpplndaTBXRC4tnGQlMsbbhL3vpPRFs0-_-B_tXyV8ERmicmG6_sAS-hFnBiQ&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5r1z1xjHPOAbD2cS4pse_0uRrYukGbsHHoV2G_VujSNw&oe=6A0DF066",
+      "Carrossel 1 - Oráculo": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/656029680_26395087516795561_2726179912906645689_n.png?_nc_cat=107&ccb=1-7&_nc_ohc=ZCt3pZ6-Hl0Q7kNvwH5Q0Xn&_nc_oc=Adpq4lQ6Io7uFRDZikePEUvCJHqoIEASG-LrFbAfZdhpXM6X63ajIndnCL4Jn3bWiYM&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQG-X-TrzODCzAnff-P9_6L2JtXt8kejZ0Zh0u9PEBz2iPaXNgTZE9AiErZNjZuLbn972u34MHmaG8Q&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af6GDzxXLbJJW0wKRvadfKbj1czo8896VKtJBUG7wLISJA&oe=6A0E0F13",
+      "Carrossel 3 - Reconhecimento": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/654052411_26395334033437576_4477212420952764755_n.png?_nc_cat=108&ccb=1-7&_nc_ohc=Hcb1-cD33TMQ7kNvwEEc5aJ&_nc_oc=Ado3IHrg167SEbqPRSkPErwuWzIKXn4az93XE8LLcAPeYEPNw5xpc71BDQbZPjTqXs8&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQE5s2WfQMC1YYRKXZMjkBcyzXyrzbmrJoM4X5e3D9RfMjBRC6LRgC81lpP0lnZlnEqbM7IRygSMLRI&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af6EwmmBG7U-zIZA0Ezb_3SpV9DFo4tS_ENtsiuQBUzgqg&oe=6A0E13B7",
+      "AD INSTITUCIONAL": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/623014770_1442265720830023_9003207527724157752_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=H9YW-R9fru0Q7kNvwE9e5Pn&_nc_oc=AdopxcaYaWBTAGcUGPDF_duVnnTHyRB4daBQHK3__-chcDbNTSCjNcZUbWNPLYpUczQ&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGSrSKiT7pK3I3lzY85zaceZ2EZkXKAfnJ1Ws3s2osVrrbkQdS1saziHcyhRxHiUvdV5DBO7jLS4aU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af4m7FoA7dg6JsMRiI5YvzVNPKogvvfuLZGxZ891B02osg&oe=6A0E1942",
+      "Teste Neto 2 - B": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/638298345_1824335831606924_1411429300128511122_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=-hQ3kCBhasYQ7kNvwEv6RKa&_nc_oc=Adon4Es_pa6ldBARx_j9rIDIGI6y95fJ3lHz7e7SpisuwleZY5NCYVi8W8H7Zp95Jwc&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQF7aeK7Qpu4VZpoTafEFFSUZoobQHEwOPU7A4KKXRpetU1yrTQi0IlTYH-SfBpMSq23-oZrWCdlcc4&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5w0y0bQCKwtRmDmVMRs75UulCqQZWVeUdOQZOZsm207Q&oe=6A0E030F",
+      "Teste Mari B — AD ORÁCULO": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/629372143_829345053500294_4511595025410107091_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=i43TG9kvyYkQ7kNvwF1iodT&_nc_oc=Adod4L9RW5Pes-uQ6ex1dsfasdXZicTvMlFzBG0Rqn14EJ7yizcPz-tfLxuq_HgQXLc&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQH4AXKW2CEmxviakLVda74akUNvmcbC4ig7_68DDYSkZiEoA7BmvBfl0BvzBdBGTKmNUIkCxb_mW8s&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5VVW3_KaWUDLwuZjx-113hlsttUBj_MG8YsddVlZj_2g&oe=6A0E0AEB",
+      "Teste Mari A — AD ORÁCULO": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/630608023_1289410686575875_4418310176613118328_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=fYxg-ztx5qkQ7kNvwEllU0v&_nc_oc=AdpVAS8GFGN7QxWWLyJZpsLd0Kj0Cqjkdu5L4i4qNGj3Vkam27_lHlSB-6MAKSY42tE&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQG24CHk_zAEy0VU9kuZhyFJ0rbhHsRG1X0uITbkuSSot_3mf0WntgAe4m9xu9hJsGVVNoHZDrLf7Vs&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af486I-xfn7i8Kv-GwnXwIpatrndnNmm24eGBkLT810t-Q&oe=6A0DFC9A",
+      "AD FAT PRO": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/584566245_25572749259015590_6541859892414319889_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=m9YoSOuGNdMQ7kNvwE6RhLQ&_nc_oc=AdrV4-KtE5tsDSWawwR1IngAGjhusjXuizTLu2c-i_zgsX71pYNoIAxuYyobVFnGR8Y&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHOGX26SqT5aynDrXNYIh_B9PooN3BfSSQvZm8XO0Ovwx-g-77fCrPfbfgsm4m8LpBfulW3RPaRwJU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af65lpZEfgmDF08veeENawDzYBIoehl3KSuBREOrrhCW5w&oe=6A0E1D72",
+      "Teste Neto A — AD ORÁCULO": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/628780629_1808238996532811_7410668396467639187_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=xLr7D-ijLr0Q7kNvwEqh-jk&_nc_oc=Adple4fcu3pDqtnswEtuqL_5y9DTbhEd4qL39SwK9b_9Ir4STDZ0ISNwfujAdoo1QYg&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGCDuqs973cw1HxZPqAVYODOh4l1RE7NAmDHxba22f6LMXnmzh0afPOUk3jBjJIDqZPFca-A0CIju4&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4x6v9Ik4Yb6icN2tPAazCsjHIK00yRrs2PdHfRNPdQUQ&oe=6A0DF8BF",
+      "AD Carrossel 4": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/7741166931410009544?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJwBSFVnkKK2VlbsuuHEXtcVPqi8W5VezjOt26r7MwfJBrnJeFGyr49jl2suxxd9LDPsgxBlViXqafLrM80Nfn5e09DDK87O7M0SCO-6qK8kA7YTeAN7t6oid_bv7TKXhXmA6ONidjXe8j7JYF-zym2&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=Adrflz12MqyIk7HgCeU9YfcoSapMcfhcke-QZEspZmB1jZcF_xtgcZWWI9pQNfoaC9s&ccb=13-1&oh=06_Q3-_AVTcsGNy_UyuAiYlHGF_ho55lsSQeA85hh-I-QQkgGYK&oe=6A0A2017&_nc_sid=58080a",
+      "Teste Neto B — AD ORÁCULO": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/629283049_4448703332017686_3410964294093450344_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=6r1tesjZzVIQ7kNvwFxzfGx&_nc_oc=Adrnd4SEahr-E3GmuSOJ945DZOg3WEOk1JyP5BpJ4__6Lg3xSbZ2yJkAFORrWCQ63Nc&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEPaFb6PWuaNSveXdTIopyIoYeRsuPtPBUHg5eYgPEL9bEmp2BXgTeuTBvReCcehyWeKbpGk_qgJ3U&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6GGvJAEQiBkUC8RZ3d9cZsqIHJI4moAGZKm8nqlAW6qg&oe=6A0E0793",
+      "Teste Mari 2 - A": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/640834264_1847054612688336_6231846739083341006_n.jpg?_nc_cat=109&ccb=1-7&_nc_ohc=15fIIj6SQ8QQ7kNvwGgYMOZ&_nc_oc=Adq2hNj2KvyAHREZbAOnBtLa0M1xjNRDj52jzoBPKOdVadOEMmIoJgyy0qmyXbc4i-M&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFunnckHLtin2OZW_Ui4Hxxttf4iAs9Uby25r8tagH3E2lEXWwCqcF3prVQXc-zW5Edwhe6I9fNTz8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5Md69sD5r2Mv6b4nMNfye2HHleVJKRj4lS1jNiJ0iefQ&oe=6A0E2194",
+      "AD Carrossel 2": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/2302913670307750896?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQLoU44S2gTmXvtHjzh9N8pXjvSVjczXcPr_2A7gEJjuy4oQoxp0DSC3RNPfXbi_tbskKd5cdYlTtUm4rYdR4oOtsZPsrZPt1xxYr1OZMDVYZGtZafSmPbqmasyuXSKa3wR2GdTQ0VqSQ8RaTxSIeKVH&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdoAppWaO2PRrH3swFSQpdwkAZLP3BdKcla8mgE18jYDbIfQn8V_x-MYpvPBiJlCinM&ccb=13-1&oh=06_Q3-_AefT_t1G9MQpDs_rEaCuf9McqGnwmRLfyUoC9MTfAS2f&oe=6A0A17A8&_nc_sid=58080a",
+      "Teste Neto 2 - A": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/635160418_1414953546189709_6533603526803773197_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=B98IcTGGNqwQ7kNvwEz2YNN&_nc_oc=AdpJ4wQ3Xw_bZJynSjSJ56pSdX_P4_MOh-HeAWaNZIospJiFFv3PzqNn9zliW_gRigA&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHJeb4MpfI1rJmycnb-3uDIwBtuBIZFqBwEZMxjxju7ZYQ7D2d_vGhJWv0WXLC-_h0zE3LOvXGX8fg&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7anc5dV77DwiVmweEa8cv5BzE2vVW_jzn9P9S7f2CTiA&oe=6A0E00A8",
+      "AD Carrossel 1": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/3295202988992467478?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIGkrRBI87Iba75NYQpp3l0lW-62Jeq64-MO3460o97nZ6UJgrcChWCmXUJI-MzbQTZEYG0Al4heq0n8FOGo5OLnbRxhnFnaXkBOnVUzqFFeTbKendiQLGE3yHCZ9GinhQdtmKsCtF32uFy-VFEt4UU&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdrLnyH4yiG4VMSin25q8QG9sAPTLBaK5AIJrHe91L5bGurWQiqsBv6onP1-sa2u5gw&ccb=13-1&oh=06_Q3-_AXsslq5lElqCix4pnIR2WIkQ-sOzwaRGwmay4egSOTFX&oe=6A0A0401&_nc_sid=58080a",
+      "Teste Mari 2 - B": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/639580499_1240399890894168_1282405759454073730_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=9ADjM-h6Op8Q7kNvwEtPf2Q&_nc_oc=AdrSKuYQHPCC8eAyfeWwFNA18LWa9xaNN45-6QkCh5pXGUyOw_Kpe48WLI1sUwDDteQ&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFwT3yrT8C5ty3JdLBeAZs7Rl0ELrX1OfA3wXvkI_ZYlea6Q5xja2WbvCf6NTpaKmwEh3yvm_vH-bo&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af74G5Z7jMkgBtY7-1zG8XG1i5AdUqkNXfmBL_nWG25O8w&oe=6A0DF1A3",
+      "AD ORÁCULO": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/584892333_1265201632293569_2440393459524936392_n.jpg?_nc_cat=101&ccb=1-7&_nc_ohc=6Ft8viEYp6MQ7kNvwGBTC7Q&_nc_oc=AdrbCYoUs00H0PHpIDEdsKh1ASmx86kl-j9bfMYAoe1Ct16_tj3MyKZFvxg0kDl5aZ4&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQE5SQga_MrzQR0I_p9LpxeXTXOR6WpA9KIUdaiXI0lYCnr2imyyfMYzV5iqHlR7sPt-3wNWaEmP2WM&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af5EJy8pM4QurPHawzdxykrMLrwnA2ZnXnYWw3yGbd_vYg&oe=6A0E1791",
+      "AD Carrossel 3": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/7624115170263037117?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQJFjwyIlIzjW0rVZx35Dm1tKohAqPjETO1K6bM20Xe9tahFjnZN9qEX_bFgm4l1ZYuPsV902IWmjMYdT4d9NyBFT3STSLAt0fhJLcLGkiajXItzpRArR60ZVWIHHVxfqO9ZeRTIrtbBCvt5ilrUDxxN&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdpOPzjU6aDRBiS5KWfulH4tbN8cShEln10eZBMrp5LPgOWFFbksKgMALNeDRadIjJo&ccb=13-1&oh=06_Q3-_AW3jMMyYauXRTB7KTFY4IKNBhw54JkY8OAygq3pugt-M&oe=6A09FB6C&_nc_sid=58080a",
+      "INSTITUCIONAL — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/503979073_2179395819156557_5856272147366558750_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=m0S4fZYTGmkQ7kNvwFy0lUU&_nc_oc=Adrv8MZoTM1c3u_-CfMrjXeXqyAY7I7sdVhtYeXVWBN1fEFbfWEnGj89BIaxKmQjrp4&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGd4KeD87C6w5eB0oTGdNhf6PTXiZutcDBH6IrLvp0qI4ucRG7yY4tvbZE2IcUdakVHH1iOd2e98xc&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af6L5MjrupGxJr_7RfWhDvcKQayvWuIpMkrBaPF-1WFdvA&oe=6A0E0321",
+      "Treinamento Optmist — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/584955508_711599628178145_4856067096178441700_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=xZMMVeABn0EQ7kNvwGLoltB&_nc_oc=AdqXJB8A0PKDL_rN8BtWJHaHJdyc2-zkk9k5dORQHFEonmiTUgYIVrAdpLFUxAcFbtQ&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGzZ7fZ0Nk5n6RwTk39SU6CCLaC-tB4qOJ1hKXbnauIJ2kWiCM2547nnIANP3MNA6_IHpzvjZRRHAw&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af5F1qBykWTjG3dC0IkdQFMJm-C_ktYjRVXVcmHuf4ZguQ&oe=6A0E0824",
+      "Treinamento Maria Chica — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/566381610_841459318831926_3705941296527402050_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=WPOl1zQYlsYQ7kNvwHu8UBz&_nc_oc=AdpDLd4eM9lKp7BYhcl_wFRJemAPxKzBxqmFFI5Y2cxRK9m02VjkANVNZwFc2B3XAfY&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQH4AYkstDWkUYmuZaNBlRSUlT4tYejxFwZde9niBp_QLMy-cd-Gl9r7BgfrQa0MTpjd0DdVN7ek_9Y&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6lC26r9z2PQvyU2zttRmoa4pop5uUQ220lzqKPe0zEyw&oe=6A0E1DB7",
+      "AD IA 3 - Como funciona o agente de IA?": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/582427562_840726758648284_7855229371971458114_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=FBYpDGHpcEwQ7kNvwGlbzR_&_nc_oc=Adovhi6vwOOGhlgBLYT338VY4eB_8wlnyMFwovIcTlnK0M2egUe5-cG5GgJA1W9mOIs&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFjBkPh8naVSgG8fpHHiJ3f5qX7ZAnjCjSnF9bNTry7hqkIjvWanTetLynMwKy72BY2iBVgIVsreJE&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af751Kjou2nF3JDfBVY2I2kDrNh6-S0k9_A0YwWWhEWrpQ&oe=6A0E1B62",
+      "AD Black Friday": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/590816748_25033610426331901_657065321968319991_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=dSHzmskeF28Q7kNvwEoodF4&_nc_oc=AdqhjjOX2sndoyJKhAK7TPImAl_pD1ptXFcx4F_NGJpa-yCE-ZcXv0MuGyjVfLovnVQ&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEbeGjJtiSuSZCsZEdNMwuuVB7bnDK2vmiNkdHT_k-U1ltTOJrAfjzwO8Rzpq5RV5BdE3ObJs3xsjU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af5QTcvNXSLQZzveySVxxlwuJv09x4p3H1ExLYgnBAc9BA&oe=6A0E06D7",
+      "AD Black Friday 2": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/591993755_25343752805262376_6002702127229124763_n.png?_nc_cat=109&ccb=1-7&_nc_ohc=5Gs0lFwzxn8Q7kNvwGDa24l&_nc_oc=AdrK02M7_kIrW2XhGQc6p7Oym3CgR09QZh5DkGKwQ06lckUaUjCZ7KqdDH8XYV3cOxw&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQH9VhR3qdhYBkyEtnsFk95BSEtE-Ca7wKfjcg0nUJTCCnB4cAlpO-l1dkXRQ4ORs3S5BVlpw5MXbmI&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af63D-7_jWq2QJmmh67BOjjcOr-kJ4PP47zFOcCFTeSVsA&oe=6A0E1A56",
+      "ADT 03/12/25": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/588897642_2004098297050627_8315253308504458118_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=s4UxtkT_BogQ7kNvwHhRIh-&_nc_oc=AdpIHHnVgKXyShURvlgGzm549up4EguE-Q07Y0kBxENATQafvvd72CS1dlvUDrz3f9g&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHq4pE779Q76u7bqQHjjiZJOK56GzBBNKG1Cv1x6G1rlclApuK3DT5vOT4B3RjVYSeXCyAfUC4KDE8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5WA7-LX7k7AvjTgW751pocDWPVcWOLvNuY4dG3tVHs5A&oe=6A0E192A",
+      "AD ESTOQUE 1 - Como posso controlar o estoque? — Cópia — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/583696647_676519248656989_3831058226702493036_n.jpg?_nc_cat=101&ccb=1-7&_nc_ohc=esn1LHX3ScEQ7kNvwEhzTi0&_nc_oc=AdqC204Zl_E5naMv8eRinH-TCX3r7ga3DTUdYEunZw2fPLQQf3UVP5aoB2xQfoALfTg&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGV8e2TKY90DG_GpML6r8Yz3UCJH7nB3j9o2W7K1qPP9lQlwS5XHE0Sc8G-S6NbhP1-LHrY53h0JrE&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af4_QXcm2VC8YZ7GITwR3h3QNECiCjV9AL50AGoAN89y5Q&oe=6A0DF441",
+      "AD IA 3 - Como funciona o agente de IA? — Cópia — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/585067407_713820771762672_8370943296497894230_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=VJ68uGs8gmcQ7kNvwFznVS2&_nc_oc=AdpfH5nR6Nn0GlcihoJN2lq1EKTv1tlNEbY-19ovJh8dgUoaQWZCPWV2VZ6nQxmBwtk&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFP8pF0nVA3m-qUwCJg08nb2UX9SbM5FVD8gLbMqwPsZXNb5VyGMH0B9xD1e71u1FzBRSepXIdXVtU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=d2b52d&_nc_sid=58080a&oh=00_Af78EOu9Nvkju5zydeP1ODxEEf85ywpqCloIEu2QqcIRnQ&oe=6A0E21B3",
+      "INSTITUCIONAL": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/503984665_1671175470270693_5180333899595380757_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=8MIkuuLTfxkQ7kNvwHVqB4r&_nc_oc=AdpBsf2b1Mlru0nbx0DwM3xKqrRhrJ2VT-I3hUt-Z_0fnusp9r1O9XMeRD912oi8Ac4&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHdU4TGbZrIujGtvdjk8iQfrR0-Sd48wGxT5FTEbuVyDK9u0PCInBIHFaiCYqL0Enn3bor0Y_Nc3B0&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af43uBX78z_h0nhdYVh974P-wnUTq0cyPk1RKcLtEHJo8Q&oe=6A0DFFC7",
+      "Treinamento Optmist": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/577165585_872484898588331_8477874309617909724_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=raXoggZ66WsQ7kNvwGbbGd-&_nc_oc=Adr6Id8Z0scbl5BVzM4kLeV6nx_kTfaFTYmpZ-y1VnLAh4MIO0szDcZG3lQu2m7-E3Y&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQF8qoVgn8oTWnwqYYtjDUQinfWxdQmBMT9IBYGbgTpIRA3IZRrpfXR722P7AD8vVCx0epYA2VRyRNA&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5c-iHWN82h5CVLp3bEtHY-Gm9T2nqDuM-Dc7szxXY5uQ&oe=6A0E066E",
+      "COMO SE DIGITALIZAR COM A VESTI": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/567480511_819722497441273_4925093202104423252_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=aLzSo5kN_eQQ7kNvwEjdYoa&_nc_oc=AdpZ2OgPsZPmGQ13G92_tifU2sGzabWFJZLZkXdRDUEh7b36c3CxBVy436RBNfpXnyg&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFMM2i-Q-ubVYbiddwW8P0qPqfsauo3RsRsNbPlL173qbDYfsdUfuuk1R85ASVxzI-QcGvRS3mPx1E&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=afbe02&_nc_sid=58080a&oh=00_Af4xqtCNyz7JMI3cJz5u1-ptHdTNRuZCAm-D4n4--Y2YJQ&oe=6A0E03C7",
+      "Treinamento Maria Chica": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/566381610_841459318831926_3705941296527402050_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=WPOl1zQYlsYQ7kNvwHu8UBz&_nc_oc=AdpDLd4eM9lKp7BYhcl_wFRJemAPxKzBxqmFFI5Y2cxRK9m02VjkANVNZwFc2B3XAfY&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFgvZPmOdfyyKpR_3KL2Xbtr7vDJMV8K-k5g90XjMOmIFLrutjI8l3s1ObWOhL2BJ4cLadrnxIZPNg&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6y-_4PNprgM87MJyTOW7DVT6KUhnbWykMizFO830t-rQ&oe=6A0E1DB7",
+      "AD 13 - Como posso começar": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/546728390_2482893822112545_4973065386148680216_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=1VPq281N87MQ7kNvwHKpb7E&_nc_oc=AdrxpoAg7ETne9u-4lHrjRJmADdIk686jUw6xgo47j-IcOa1MUCOmhaA32jHdS8JzaI&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQF2S3fPVSxyH7fzMQlLY-2g-vps-YLBfkiNh0JopWbw_4GfYgr9dt_CSZjnqvPExSnsbNkCuOEnATk&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6LT8Ay34wcwaMHORYNyirg4JG1lENGFrsHpcsvfb6thA&oe=6A0E0D96",
+      "AD CAT 2 - Como funciona o catálogo — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/579834451_1971331780101286_770474734194972212_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=WpCubWzV5qgQ7kNvwFEXV-T&_nc_oc=AdrZrDmVSpt9uIkm_tX99XtCYQakcTEEh11v-VBj0H4v7mxGtOf5PohC4BcaNWVyfS0&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGHuKQZscBdvD9ZPY46kZXiX0o-d631uExE2uE_OT-MoAL-J8cnAOuRwqUjUmkqHBPeftEwT3dcil8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7oand5fQbPusqkTylqqT2-UH5zt66h_gEXWyRMhB5u2g&oe=6A0E12CC",
+      "AD IA 2 - Como funciona o agente de IA? — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/581837382_840104401753035_4339640119420003278_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=-E9ChLtrcLQQ7kNvwEjv95s&_nc_oc=Adqk-t6flsxbkSwY9e7rwTw_hq8CDaKi_6MhqL6l_zUXtZFpzQNA2EfMKf-sdRzqeOo&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEHmiCmra54LYXfmD0nz9mcLqtg2TxjqkUdAkv-CstK6vc9VQl77SxRfgRdb7yJZPfUOOF0fZNLkdE&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7E3iBray54-5ul-HE1vx9CSW-itE3JDiZlM3OZll4tcg&oe=6A0E2626",
+      "AD IA 3 - Como funciona o agente de IA? — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/582427562_840726758648284_7855229371971458114_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=FBYpDGHpcEwQ7kNvwGlbzR_&_nc_oc=Adovhi6vwOOGhlgBLYT338VY4eB_8wlnyMFwovIcTlnK0M2egUe5-cG5GgJA1W9mOIs&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEx0h1iJCF-COJIYuo16s-bPnff3N0P1ExxsrgwmYA55yD-IlUtpVSw84hidPetl1fh73380DY2xp8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af58qs3Tb9LHKDmmRbXICiHtVG0emPChCf0aMPLWBnmJdA&oe=6A0E1B62",
+      "AD IA 1 - Como funciona o agente de IA? — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/580059600_2024387548361715_7327480579616931109_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=b-rE99CnXqQQ7kNvwGqqsSm&_nc_oc=AdocT1p0Vt7Y_oad6mRquWZ71WeDnqlrCR1zPH9Lxf8L_PG0CF9c8k7dDrtJ7n8_rIc&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGitNQisb_rUn3aB4EwWOmkiT4d4k6J4XOdVqKGUy75QtjQVpvD-nGW6TqVmSwDMacPW1lKCUwVW9Y&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6coaLrzXb6TBCNask9JkwWQxlKkdgSM5beB9kNM5rk9w&oe=6A0E16CE",
+      "AD ESTOQUE 1 - Como posso controlar o estoque? — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/579095578_1170077311923599_7918774356904111592_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=A4f_6RNcXrcQ7kNvwEuSLmi&_nc_oc=Adq7HKGwiHTjk_kno9CPB3l9-KZR5oI8FuqIRi0rYWUNeCMOugZNezt60SQIttJbB2k&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEbTHTxtGaR6NX-hMYImWA1TtLs8Ye4TjlprlkVinu_yi9bW5DnxjvMJzSpQBL7v1wRZAp4DcJ6rBk&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5w7cq5Ns_kIU5xrbOzOQf3fBu_xsWnSqWcMMA7Kkg70w&oe=6A0E210C",
+      "AD CAT 1 - Como funciona o catálogo — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/581118137_1133449005624497_6961817585513607344_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=cpYkkNwAIksQ7kNvwEaiR48&_nc_oc=Adq7iptBgiUPPAzBADrud6yBSnep4Ied15-08V6JDZxuANKceWo5weTnbXx9fAtgNLM&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQF7effw_Ob564VPwPWosTnTXMLqmn2S9Vasz94gzxJ7G-bpcEdK0l7fxOx_28ortV51hx7Oi2OijtY&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6D9vYlOMCqms1n3vu49kV1bMiMrisbrHCSA6POi07qfQ&oe=6A0E0312",
+      "Anúncio 1": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/566779805_1878492813050643_2463152623773064462_n.jpg?_nc_cat=109&ccb=1-7&_nc_ohc=fqZkc056EqkQ7kNvwG5qcaw&_nc_oc=Adohjvo27T-s747n4AJkAVgksuXZ7-kxenRL_mPuaaGW6gDq8uB69rzZqcUMDKSS41U&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQG3INaKCsmlgV0dKBH07NiebWpqAuhs5Ve6FvM0m_ho2DBjzlGnEpo-cpWBX2S5dhx8Z8mXfoWbK_c&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5jNI7pkBZAGC_0MplQKCBWcjDb1JpjJwWwWsvzwcUQeA&oe=6A0DFC3D",
+      "Anúncio 2": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/566625179_1137017118617284_7818620340967355666_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=LgExPj0u02gQ7kNvwFBlUp0&_nc_oc=AdqEzemclai0mj47TIVkYXnYrrQntLHLy6M8gTubPxlKAQPpH-sav2sKL8Zasco9_oc&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEn_LXsFimMxKskHhabkyjEXoeP5M37855kqucpKXyW_BtNBLTbApPPL_TsILHRp7LOwg5qDzhrlEM&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7efiMqSceW__EXLGuguvAmGusBZc0D5WZuhsrNKbGCQQ&oe=6A0E18C2",
+      "AD CAT 2 - Como funciona o catálogo": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/579834451_1971331780101286_770474734194972212_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=WpCubWzV5qgQ7kNvwFEXV-T&_nc_oc=AdrZrDmVSpt9uIkm_tX99XtCYQakcTEEh11v-VBj0H4v7mxGtOf5PohC4BcaNWVyfS0&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFar_MHXjLNeh2c5BDWuec8cWbLvL0sMRKN0GWB_qg7f6Vo9Pli_MS4yCdd-d9k2W_MA0hhFun9B1M&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7KZ85rtoj8ix_15ky5Gr5vxT3nOsnv_waH2B_e__T-sQ&oe=6A0E12CC",
+      "ADP 3  - Quero ir pro digital": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/563192686_833831835740172_1958777128066125192_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=kXNrF2q8yFsQ7kNvwE1iNHk&_nc_oc=AdrwCbnB_4SyehJDNBe4-_UwkIblY7NU6PdOE-k9eQpG4ilg-2i5Ux1h0UenNGmH5YI&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFQxVvnDOigS0pUh8P0TDaZxsTuPcVDraMLJIEPgdlI_i8x7ctRMf0ZDxPgDZg4pYRfzcUObFZSjRM&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6BL2zJzP867UKblu6hQxrMkVBDRpCK5QOLnYP_os6alw&oe=6A0E1D6D",
+      "AD 14 - Como a Vesti funciona?": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/577038148_1410722577328444_6418705765268197541_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=69eyTVuEI2UQ7kNvwFARQhd&_nc_oc=AdqV_4eZGI3_aiPJ7TzAhv6zFjaQd-lmIRu91pKHzRqIHnl4y73yFQerIJUO8LfxUJc&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGhxua9I9VUp9uQXcBsz-XwcDommyuWr76RzNTwYBdfhvUBJ2XIopU0UqOlkb1CedtxamPuxVJK6-0&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=4c1fc5&_nc_sid=58080a&oh=00_Af54cNen-IahF1ZhgaHCj7g5xgyT_-b5Rmf9SsjT2FM8KA&oe=6A0DFF14",
+      "AD 10 - Quero vender no digital": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/544880298_767328645938838_6126541105052380777_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=pszg2iTpsqIQ7kNvwElHjfm&_nc_oc=AdrYzoUfMe5XO9VLHjqHGqCHFxpcLP08yCUTIBJwMy_npkEA8cQn5Xw9zmHW0u-uLIM&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGEqpC8fhWDiZNMKiHOerVVY_vZExkMeSNVSAnLzw5ad084g6LsDl-IlZLVbbOpJjgDgLoi1VVqg4w&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af6A82gS3cWx4j8z80bWU6VifHTJy90YVjzwz3dAQK0rfA&oe=6A0E1F64",
+      "AD CAT 1 - Como funciona o catálogo": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/581118137_1133449005624497_6961817585513607344_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=cpYkkNwAIksQ7kNvwEaiR48&_nc_oc=Adq7iptBgiUPPAzBADrud6yBSnep4Ied15-08V6JDZxuANKceWo5weTnbXx9fAtgNLM&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEKqiIN7daCZDr_SrPF1ylIqZqsePWKWfLQ20ckR_mr_WzHrqL61W0es6T9g-RWkkFGVQXrj6ZMh10&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6PT0jutD8Y5Sw77qy69tXXOQLM3sdjx6rEBEszrXxtOA&oe=6A0E0312",
+      "AD ESTOQUE 1 - Como posso controlar o estoque?": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/579095578_1170077311923599_7918774356904111592_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=A4f_6RNcXrcQ7kNvwEuSLmi&_nc_oc=Adq7HKGwiHTjk_kno9CPB3l9-KZR5oI8FuqIRi0rYWUNeCMOugZNezt60SQIttJbB2k&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEgsIxyCHRgKMxHhUF7_3qUwLaRCJ-kLFGh5VAzOmQ-7a7e5AeCR0Agvfz0jH85uXE4mDGl02DsBfI&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5cFebSZg_E3QDz8w1HmVjzsviTua9eSvE_OlYsdZBDtg&oe=6A0E210C",
+      "ADP 2  - Como a Vesti pode me ajudar": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/559242986_1346229937107811_7473972089372485524_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=sAy4keSSuHYQ7kNvwHEL9KH&_nc_oc=AdrUNA_9OwEaHXpWMYhVSi0kVcf0MVGqIpDec_RFBWfDbf1U3Wt5KPBB6wPW0Vrz9cw&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGMljhyW9A-3wUoIrsUab7GAB7GTVz4tIj0mApTw540-XubB4p8d3RWtqGL4wApOTTMFprsjl9_bao&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4PK2JLxjsb2R76aL98fi7wPTL3xiqbPUqbNAsvipTjCA&oe=6A0E0FD1",
+      "AD 14 -  Quero mais informações": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/568281099_1509281610267661_6839446284788035317_n.jpg?_nc_cat=109&ccb=1-7&_nc_ohc=akyuKcwEabcQ7kNvwEmKC_V&_nc_oc=AdrndQ4QAGdTI3xo3P7wxImygR2rmhQzvQrsOGhH3XMqQhJN0izPomm7vr_vjkm8BhI&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHwwLF1NSg4bhVkw_0yuJSS9y2E-5023n-NkdJq2ZSUYaBM4M4J8jzlfJFoZEinO21_Mco7rFe4B70&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6enmwQ7ufzJFhO7bZ2xoH0BD-NHMpKFHylq2ZcxMudrA&oe=6A0E27AB",
+      "AD IA 1 - Como funciona o agente de IA?": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/580059600_2024387548361715_7327480579616931109_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=b-rE99CnXqQQ7kNvwGqqsSm&_nc_oc=AdocT1p0Vt7Y_oad6mRquWZ71WeDnqlrCR1zPH9Lxf8L_PG0CF9c8k7dDrtJ7n8_rIc&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGED69WShSoateDNPd4we-Ivk4uab4ZLW60B9_k3usGpAl-5hXWpQ5TGVo7eH5L0zX4wu4hb6aJGbA&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5FdRwXedEqSZSOBhVjM72a0ZUVyyD-QndPH8NtTl4-Xw&oe=6A0E16CE",
+      "AD IA 2 - Como funciona o agente de IA?": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/581837382_840104401753035_4339640119420003278_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=-E9ChLtrcLQQ7kNvwEjv95s&_nc_oc=Adqk-t6flsxbkSwY9e7rwTw_hq8CDaKi_6MhqL6l_zUXtZFpzQNA2EfMKf-sdRzqeOo&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQH3lRerTw8FbtOXEHMy9-d8dHIFL2zbaBTrX0OZZDE8b3D0SrjLy5Noq315o2uEF-gc1-K0GRJWQFk&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af75Co0w1o43hP5q17pAZswHWslfcfFiGgKbNCAeCRkeig&oe=6A0E2626",
+      "Treinamento Vila Sol": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/566487687_640555425655245_4591602903634663592_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=sNKHCGwWjDgQ7kNvwHV1Ix4&_nc_oc=AdrUzsgzqxxaWUljYvHRcsdA6jqU6FnK5sPUj0P5J1KPMF6N5DaX9eBJ02w0AbumchY&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHEY_2_GqK-MuKRwJryusCi1f5lVWfrgfkKYo3G2ifFFFR8w6IUvMja6x9S7LBDdsymwOsgSuo7c90&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7q2zMf5RypjegpG8IdwgbB8ON8e9liPgGE67AUswKoNQ&oe=6A0E24ED",
+      "AD 01 - Quero vender no digital": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/504145686_689892660670908_8406699869510464305_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=hRghkOkx6lsQ7kNvwF6xsFi&_nc_oc=Adpeo6gRKJX8KO77Rb75aSlZRc3q-zCfKqRnZ-xEK0AmskODcz6VLMHpzvIfbxntHzA&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEQnkoXog1D7eI24c-mRomkeebrqv_Cbaz2J2UKcglHRpbnyz7lWRokfLU6CpxMB0poD4z4ecdm94w&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af6CBwGENKG3lrbwhgYomQtFndYDfWEBqZ26znoTk21sEQ&oe=6A0E2574",
+      "AD 08 - Quero vender no digital": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/514783177_1454489135909433_3276544703093116986_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=7ncrv4m9buAQ7kNvwHylUT0&_nc_oc=AdrY4AMKO7SPTEwRXGvGZUrXGS0r9mE7z7Fe9Lvl-ckab55DobCljnLsNcCnDOrUNbM&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHpYFcskrEtDfWAhPLW7s6fVt3gils_V3ancd0RQP2k6R4i-LOhrwf_0hqB8zkdmgmRe_Qvu-k8D5A&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af43DYvSjy2ENpfXgJ5-YQsvUu33dNiIUOWYmVNmgqBabg&oe=6A0E2573",
+      "AD 06 - Quero tirar minhas dúvidas": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/509263319_1468987087879068_5862374632879625833_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=saeLJJE6yk0Q7kNvwEYIyBS&_nc_oc=AdrT5NgTnnExsxDVHTW2iZ9eFPaQ8n-dbfLas6iVOa2it0PBMKXnLp3OYdgxEAzPT_4&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEdmAjIW65Om8wGz53-MxZKA5HRn9YDbar6bzLr2xwRGtWW23hPsw8q2Ttr3fXV5uTjhgWT8LpJhnA&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af6EMwJvJ9OQBRcVnE7G9QWIF9emkDKp6vGYmmoZAfwYVw&oe=6A0E06FB",
+      "AD 02 - Como a Vesti pode me ajudar": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/503984665_1671175470270693_5180333899595380757_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=8MIkuuLTfxkQ7kNvwHVqB4r&_nc_oc=AdpBsf2b1Mlru0nbx0DwM3xKqrRhrJ2VT-I3hUt-Z_0fnusp9r1O9XMeRD912oi8Ac4&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHLWn7tq2Y0YuXVv3rZexwxaFyHKmf_QlXaa_e3yT7WabURHduhX3CPzbeLe9TZEIbwy7GunlMCO3c&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af4-xbIAbqEZGgfhmg7-KHG7Uxj2vIIJUCGMxE0Ly9CzEg&oe=6A0DFFC7",
+      "AD 04 - Como a Vesti funciona": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/503326751_1231891835096583_7402137259282131648_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=MbmdSRL-ejcQ7kNvwFGfugU&_nc_oc=AdrKE3P6zrLIghczpNna0iixaszhkbieHthW5h0CMPFTUBvEkw3UJNgCRHrv9BJQFwQ&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHK1NxVPn8_3ZGsFHPUgUtLQqaO2rPzseNAZEWrEif9yetIlggI2DF7YCn-lcgEKOxJ9OslrMcj1LM&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af7nxnWHbzJD41lzcqZ2osBuruzhw_d0EUd7gGuHWGOclA&oe=6A0DF77C",
+      "AD 09 - Quero tirar minhas dúvidas": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/528367606_1560476554915502_3512832233577766940_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=3ycAZ6k158QQ7kNvwGLiUS2&_nc_oc=AdpvRFNjQuuqCULeD0j9V_A6mJIFTc5lyt-bCeWqjrj3UguCil-gQHxnnBY2Fu-5SDA&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHXgjcPPKwpoLVs0VI5AxIy2rOh0bBitR15tlWld_WbL9MqP5LbqUfrU6y42pKzVREcmEemuPLaZqg&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=7ca6ff&_nc_sid=58080a&oh=00_Af6fhied8UJrCRHeplrK7kySgXMN4ZyLcqDpekGdEF3a2A&oe=6A0E1E8C",
+      "AD 03 - Me envie mais informações": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/502392549_3091633157671894_5302824361704767703_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=un-8vlL4_WUQ7kNvwGSJGVU&_nc_oc=AdqfDw9nDXQssthyo-RHnZdp6WL5AToP8XxjPYj02rOFuHAUvR9RGmoZetGIc3iSdgY&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHwyH_0nWmIFlM1qwJ0KGh5vQn9VJqAMnEWOFD1mvvnmzyTfVD_xEI_awmcUf1LzDcyXwsKOf2ypjs&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af7H_-1wP57QJqJBsfEgJLA38tkTSg2xQfhLVeAhdxX2lA&oe=6A0E09C7",
+      "ADP 2  - Como a Vesti pode me ajudar — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/559242986_1346229937107811_7473972089372485524_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=sAy4keSSuHYQ7kNvwHEL9KH&_nc_oc=AdrUNA_9OwEaHXpWMYhVSi0kVcf0MVGqIpDec_RFBWfDbf1U3Wt5KPBB6wPW0Vrz9cw&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGMljhyW9A-3wUoIrsUab7GAB7GTVz4tIj0mApTw540-XubB4p8d3RWtqGL4wApOTTMFprsjl9_bao&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af4PK2JLxjsb2R76aL98fi7wPTL3xiqbPUqbNAsvipTjCA&oe=6A0E0FD1",
+      "AD 05 - Como posso começar": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/510744127_1245431470559774_3085625968789678461_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=S9KotHPer98Q7kNvwEYWBH5&_nc_oc=AdqP0OjxYIXUPLLK0qU2-_cXMj5fkSis_seIRNx4uQabXpC8wj4axavi0qyjmRKQEpo&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFVVFn2HlI0gqX1HxMsmfsbQVdLGnZvrMZe5vWsGjLlXNiMOctTeK9el0jlJNP_3_usuHOoIMgbA-8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af4ckocUlQeO-_nPrS6ih2LJVIT9O2viyixZV6Tmb_VrHw&oe=6A0E238A",
+      "ADP 1  - Quero impulsionar minhas vendas — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/558223850_1360233315687538_2003181013477814297_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=49LiQKHThacQ7kNvwG3_m08&_nc_oc=Adqq1_adljbtTgm5UjSDfwZvC8Zy1aIFXngC8rQrju8BVHgarjg4Ay4hGONbbnAgb3U&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGO_noc_QjqZv_haF4btxJNpGDHwL6ABA9d5WyxmfDSFyr_44iRwO84e6DMNdmVerUvLsXkrEwdUU8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7iOusrCepoZ3vFagI6EZYoqw8ntuVEdbPv5lzrvFYpFw&oe=6A0E06F7",
+      "AD 07 - Como a Vesti pode me ajudar": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.13418-10/514483863_2129896657485651_9218965419215835664_n.jpg?_nc_cat=111&ccb=1-7&_nc_ohc=GcBHjR157OYQ7kNvwF0Xsv-&_nc_oc=AdpdaeIxqq9Ev3Mk81FgYmrio2FiDzwn7_dWzkud8kX9r2_VMU7Mp8sO-ZxwdOHUCf4&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHkE6ktni3ePe-lyLPE-vjNyY-vDqvJG9T4MUxRPBu8vUisC2043j0RdrNAg3aBHnSVpu47zpM_hX4&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=aaa768&_nc_sid=58080a&oh=00_Af6ERgN-mD8yJUCtWgTXooTQa1YdcCgXfwVZWDZ-EU7Iwg&oe=6A0E1F3E",
+      "AD 12 - Como a Vesti funciona": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/546941968_750293657828356_6597520806533618429_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=pFUD9QHRegMQ7kNvwGIsV7R&_nc_oc=Adqc2PmlwO2lKAikAs86qtaoA_-QBxD6DHLc3g2nRSBz7Mgf4vzI3o3R9DmwYPvaQxQ&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFJ98agflMD-yAvbHZt2fxGj0IbY-024Cfsf4nK6w0B0iJfL5VGtrOKt3_KQJsCHCdsZGoPwSe1iMg&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af5k9ex0tHlnOj0Kkg0Ku0ptr8UOx3fax1UJIkdX6sV_eQ&oe=6A0E2473",
+      "ADI 02 - Como a vesti funciona 09/10/25": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/563085639_24891294123841582_7007061039843704028_n.png?_nc_cat=102&ccb=1-7&_nc_ohc=dGsFxnwykPIQ7kNvwGfWxLf&_nc_oc=AdrIJ0XptbBm3gSgq0bOa8TU32RV7x06k6TV_MYDBXK7oDW62kydUjkqz4uU4s0UHb4&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGybF3t65aZm3Do2S6Vbqk4naS0akIDbrDViH0KSIPMFudx2yRf-uvQ-P2IZGpwyL0qrgF7FoXL7fE&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af6k35LpgthWY4KcYodvfXj2cKc1bWbpopzk1kLokmguag&oe=6A0E0680",
+      "test": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/564151244_24891290827175245_6270939120402145618_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=NA5AttPNPb4Q7kNvwHgy_R3&_nc_oc=AdoV_i0X9nVIa1VNI2HWof1IaMa27Fn4LsaQwzQkB0Ai8q4JF2z-QDEM377hfidgD7k&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQH_6YcdN-3jZW-kJIvTIweaZt0knue8FOdnmfGeAV5KpDLlscWZdMcw35CdzY5uzpH6pRh2s8tSCmU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af4brPGg0k4kpQzQ1pdx-dqd3HG58zJafPAAXTjZSKmClA&oe=6A0DFB39",
+      "ADI 01 - Quero mais info 09/10/25": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/561249150_24890631550574506_4001299244627553028_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=Kb-TI7XWuJcQ7kNvwEGpY7D&_nc_oc=Ado40pQmSml4fEn2RsztSgc8A_z4HXoTDxQtTYjyiwlflFbOH-jxMH1ag3fYAxJDXlM&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQEM1AzBrP7ccFXX31nQMcI7gO6cH96lBYlvn4Y1-q1vM0sy_9FAcrnTURV2PJnv5DxiPLby-sc5yRw&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5VbWNER2B8jvjJMTtj5Se3oke0VX_fGDk4MrdaLNZfJw&oe=6A0DF165",
+      "ADP 3  - Como a Vesti pode me ajudar": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/563192686_833831835740172_1958777128066125192_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=kXNrF2q8yFsQ7kNvwE1iNHk&_nc_oc=AdrwCbnB_4SyehJDNBe4-_UwkIblY7NU6PdOE-k9eQpG4ilg-2i5Ux1h0UenNGmH5YI&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQHV4BdyDqSmDBhyibTekrqqyoxGFXQD4nvVgJZ2K4NN4Bw2nGWbofCf2yofXNh7FY-Tv_zmyB_xP-U&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7l7gaGQ6bb8S99ROwcsH3lSqrHtIC0UHFB-EByDxa3IA&oe=6A0E1D6D",
+      "ADP 1  - Quero impulsionar minhas vendas": "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/558223850_1360233315687538_2003181013477814297_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=49LiQKHThacQ7kNvwG3_m08&_nc_oc=Adqq1_adljbtTgm5UjSDfwZvC8Zy1aIFXngC8rQrju8BVHgarjg4Ay4hGONbbnAgb3U&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQGO_noc_QjqZv_haF4btxJNpGDHwL6ABA9d5WyxmfDSFyr_44iRwO84e6DMNdmVerUvLsXkrEwdUU8&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_Af7iOusrCepoZ3vFagI6EZYoqw8ntuVEdbPv5lzrvFYpFw&oe=6A0E06F7",
+      "ADI 03 - Otimize a gestão de vendas 22/09/25 — Cópia": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/5296230028557274217?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIEw8w2o3mptEukC3XZf9lUiti3vv6kOAIpjT65ppqWhFD1zPSWlNfW0wgJPwPJoCug5mqN1mT-bfz8wFDDxR1Qcr0zGSA3vMA1Pn0yRqeg_l4dxq5LR14nMqxEesSjv3zzBGhkE04YhFm7jjIbGcvK&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=Adrh35j6EKhfarBGnnt2WALIuNU3C-Zr3pQBF5qjcfDBk5F4Yk9jBJawgm3dFZCI7Qg&ccb=13-1&oh=06_Q3-_AYY1Xcb9QDjHQ8KFNVyYgqloGvozIIY2yok6bxVy3aOx&oe=6A0A223F&_nc_sid=58080a",
+      "ADI 01 - Invista no seu negócio 22/09/25 — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/502851753_10097598670304371_2289872687186779632_n.png?_nc_cat=100&ccb=1-7&_nc_ohc=iG5x5mJFFT8Q7kNvwEh0tZE&_nc_oc=AdpJglXyGM3h0kvClmRGSDMlnyFaRzuGafDQTeOh8FpvaQ65TT-hADiEtf7meaBPlE0&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFvTWTF0neXicTd0gpLdxyc2YgRvlfMSn2LPi9Szd8U-9Eevx8Q8Lo8vs-U42DhgSjdR6igjsqCiHU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5JzTHNnRNclMXR2JdqFWA7iLAGB0QBHm9ODRxPsTTojA&oe=6A0E2479",
+      "ADI 02 - Conheça a Vesti 22/09/25 — Cópia": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/502906633_10093470314050540_4284163363499260854_n.png?_nc_cat=101&ccb=1-7&_nc_ohc=SG5xbJNWQTEQ7kNvwHV6-k-&_nc_oc=Adr32HH8CAl0UZWUKZcxGu-6oJhA5ANt47ir7mA1TXCjB2cuAxe1IcuX0rZPnh9wCWY&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQG6A1xGt52bo83QZEDxaaguipyh1y5WvYuzimecFfCfDPXEdc0nzNVcqGEFRH5I5TVT18UBQxxEIpM&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5KXGH-tQmpUEoKevaNvvOavJTfUkLgcgkRT5APpbLKrg&oe=6A0E1BE5",
+      "ADI 01 - Invista no seu negócio 22/09/25": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/502851753_10097598670304371_2289872687186779632_n.png?_nc_cat=100&ccb=1-7&_nc_ohc=iG5x5mJFFT8Q7kNvwEh0tZE&_nc_oc=AdpJglXyGM3h0kvClmRGSDMlnyFaRzuGafDQTeOh8FpvaQ65TT-hADiEtf7meaBPlE0&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQFvTWTF0neXicTd0gpLdxyc2YgRvlfMSn2LPi9Szd8U-9Eevx8Q8Lo8vs-U42DhgSjdR6igjsqCiHU&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5JzTHNnRNclMXR2JdqFWA7iLAGB0QBHm9ODRxPsTTojA&oe=6A0E2479",
+      "ADI 02 - Conheça a Vesti 22/09/25": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/502906633_10093470314050540_4284163363499260854_n.png?_nc_cat=101&ccb=1-7&_nc_ohc=SG5xbJNWQTEQ7kNvwHV6-k-&_nc_oc=Adr32HH8CAl0UZWUKZcxGu-6oJhA5ANt47ir7mA1TXCjB2cuAxe1IcuX0rZPnh9wCWY&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQG6A1xGt52bo83QZEDxaaguipyh1y5WvYuzimecFfCfDPXEdc0nzNVcqGEFRH5I5TVT18UBQxxEIpM&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5KXGH-tQmpUEoKevaNvvOavJTfUkLgcgkRT5APpbLKrg&oe=6A0E1BE5",
+      "ADI 03 - Otimize a gestão de vendas 22/09/25": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/5296230028557274217?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQIEw8w2o3mptEukC3XZf9lUiti3vv6kOAIpjT65ppqWhFD1zPSWlNfW0wgJPwPJoCug5mqN1mT-bfz8wFDDxR1Qcr0zGSA3vMA1Pn0yRqeg_l4dxq5LR14nMqxEesSjv3zzBGhkE04YhFm7jjIbGcvK&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=Adrh35j6EKhfarBGnnt2WALIuNU3C-Zr3pQBF5qjcfDBk5F4Yk9jBJawgm3dFZCI7Qg&ccb=13-1&oh=06_Q3-_AYY1Xcb9QDjHQ8KFNVyYgqloGvozIIY2yok6bxVy3aOx&oe=6A0A223F&_nc_sid=58080a",
+      "AD 03  IMG - Quero ir pro digital": "https://scontent-ams2-1.xx.fbcdn.net/v/t45.1600-4/502906633_10093470314050540_4284163363499260854_n.png?_nc_cat=101&ccb=1-7&_nc_ohc=SG5xbJNWQTEQ7kNvwHV6-k-&_nc_oc=Adr32HH8CAl0UZWUKZcxGu-6oJhA5ANt47ir7mA1TXCjB2cuAxe1IcuX0rZPnh9wCWY&_nc_zt=1&_nc_ht=scontent-ams2-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_tpa=Q5bMBQF2srraGx6KFRA8GqMCL2kyp3CzOgRIbV2K7NyquYOmpaENlg1wDjiIRW80NEaEYcGjKxaRXZkeRGQ&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_Af5Fo2jkmRS26CO_OAxQeKrC_TT5BzDagHhm5Qy5UWk0Yw&oe=6A0E1BE5",
+      "AD 01  IMG - Quero mais informações": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/13025076891467502921?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQLNfmLvR4IW8xm_jy_FL_mw9JyyVZujGZ6duEANEMEpmG-zaA1hxua6oKlYjMFY38l74hvIISX6Bb7FbiSy6Up3Ay4R3JSjFP4haz_-YPc0d_-LUllBz6gcp098w1hpPLbwAEa-ZdHQqNlIloApIito&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=AdqACr_tAvsvWTj3qDhuaIWtYjs3Utipr4HW4UNUHubt3DbUJgwsLzsNt2l1gldYgQ0&ccb=13-1&oh=06_Q3-_AfsRfp6Kj_XNg5Y3R4csyARmLe6CO5qz_D03i_BzI5Ha&oe=6A0A1385&_nc_sid=58080a",
+      "AD 02  IMG - Quero impulsionar minhas vendas": "https://external-ams2-1.xx.fbcdn.net/emg1/v/t13/16276552496392310672?url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQKdg-a0gi49at2tmov7ls7qGHjiiX13MizrhNic7EIUKv0onGnuIJU4bX0my74MOKf0B3hzxxfneBIm0ewE1EcCrhpcAReipfcTtf1YH7V5T-Bepaj3JrnAWjMs-axgc_5dKp6R1pSlsGxap4o0xTai&fb_obo=1&utld=facebook.com&stp=c0.5000x0.5000f_dst-emg0_p400x400_q75_tt6&edm=AOgd6ZUEAAAA&_nc_gid=V2RRkx1tjryt9LCYJjbV1g&_nc_oc=Adq1R64CD2lziDxohbwHaMl5y4XUJ2si1GV9plz2GVA3C-v8UF56XnMkpHLZnT1ChxQ&ccb=13-1&oh=06_Q3-_ARkMGIFzrkZNMMjovtzLtx8FsI3yqukjj3wiKIoMk81Q&oe=6A0A10EE&_nc_sid=58080a"
     },
     "ad_campaign": {
       "estatica-rfv_interactions_vestioficial_29042026": "WA_leads_08052026",
@@ -8638,7 +8691,7 @@
     {
       "data": "08/05/2026 12:18:00",
       "origem": "Site",
-      "perfil": "CS"
+      "perfil": "Qualificado (Sem Faixa)"
     },
     {
       "data": "08/05/2026 13:19:00",
@@ -8803,7 +8856,7 @@
     {
       "data": "13/05/2026 08:06:00",
       "origem": "Orgânico",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "13/05/2026 08:12:00",
@@ -8813,17 +8866,17 @@
     {
       "data": "13/05/2026 08:21:00",
       "origem": "Orgânico",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "13/05/2026 08:23:00",
       "origem": "Orgânico",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "13/05/2026 08:32:00",
       "origem": "Orgânico",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "13/05/2026 08:39:00",
@@ -8838,7 +8891,7 @@
     {
       "data": "13/05/2026 09:57:00",
       "origem": "Orgânico",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "13/05/2026 10:22:00",
@@ -8888,12 +8941,12 @@
     {
       "data": "13/05/2026 16:48:00",
       "origem": "Mídia paga",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "13/05/2026 18:30:00",
       "origem": "Mídia paga",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "13/05/2026 19:21:00",
@@ -8903,7 +8956,7 @@
     {
       "data": "13/05/2026 19:59:00",
       "origem": "Mídia paga",
-      "perfil": "Em atendimento"
+      "perfil": "Qualificação incompleta"
     },
     {
       "data": "13/05/2026 20:01:00",
@@ -9048,7 +9101,7 @@
     {
       "data": "15/05/2026 11:28:00",
       "origem": "Orgânico",
-      "perfil": "Qualificado (Sem Faixa)"
+      "perfil": "Em atendimento"
     },
     {
       "data": "15/05/2026 11:38:00",
@@ -9059,6 +9112,26 @@
       "data": "15/05/2026 11:50:00",
       "origem": "Site",
       "perfil": "Multimarca"
+    },
+    {
+      "data": "15/05/2026 16:33:00",
+      "origem": "Site",
+      "perfil": "Em atendimento"
+    },
+    {
+      "data": "15/05/2026 17:44:00",
+      "origem": "Site",
+      "perfil": "Multimarca"
+    },
+    {
+      "data": "15/05/2026 21:26:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento"
+    },
+    {
+      "data": "15/05/2026 22:31:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento"
     }
   ]
 }
