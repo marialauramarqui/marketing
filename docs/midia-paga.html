@@ -211,17 +211,19 @@
       ) ? `${[...filters.years][0]}-${[...filters.months][0]}` : null;
 
       const byCriativo = new Map();
+      const perfisTotal = {};
       let total = 0, sql = 0;
       for (const l of leads) {
         total++;
         const isSql = SQL_PERFIS.has(l.perfil);
         if (isSql) sql++;
+        const p = l.perfil || "(sem perfil)";
+        perfisTotal[p] = (perfisTotal[p] || 0) + 1;
         if (!l.criativo) continue;
         if (!byCriativo.has(l.criativo)) byCriativo.set(l.criativo, { name: l.criativo, total: 0, sql: 0, perfis: {}, anuncios: new Set() });
         const e = byCriativo.get(l.criativo);
         e.total++;
         if (isSql) e.sql++;
-        const p = l.perfil || "(sem perfil)";
         e.perfis[p] = (e.perfis[p] || 0) + 1;
         if (l.anuncio) e.anuncios.add(l.anuncio);
       }
@@ -290,6 +292,7 @@
         cpl_avg:   totalSpend != null && total > 0 ? +(totalSpend / total).toFixed(2) : null,
         cpsql_avg: totalSpend != null && sql   > 0 ? +(totalSpend / sql).toFixed(2)   : null,
         criativos,
+        perfis_total: perfisTotal,
       };
     }
 
@@ -382,6 +385,78 @@
             {sub && <div className="mt-1 text-xs text-slate-500">{sub}</div>}
           </div>
         </div>
+      );
+    }
+
+    function PerfilChart({ perfis, total }) {
+      const knownPerfis = new Set(PERFIL_ORDER);
+      const extras = Object.keys(perfis || {}).filter(p => !knownPerfis.has(p)).sort((x, y) => x.localeCompare(y, "pt-BR"));
+      const ordered = [...PERFIL_ORDER, ...extras].filter(p => (perfis[p] || 0) > 0);
+      if (ordered.length === 0) return null;
+      // Comprimento visual da barra é proporcional ao maior perfil (para a barra mais alta
+      // preencher a faixa). A % mostrada dentro da barra continua sendo fatia do TOTAL de leads.
+      const max = Math.max(...ordered.map(p => perfis[p]));
+      return (
+        <section className="card p-5">
+          <div className="flex items-center justify-between mb-1">
+            <h2 className="text-base font-semibold">Distribuição por perfil</h2>
+            <span className="text-xs text-slate-500">{ordered.length} perfil(is)</span>
+          </div>
+          <p className="text-xs text-slate-500 mb-5">Composição dos leads de mídia paga por tipo de perfil no recorte atual.</p>
+          <div className="space-y-3">
+            {ordered.map(p => {
+              const count = perfis[p];
+              const pct = total > 0 ? (100 * count / total) : 0;
+              const widthPct = max > 0 ? (count / max) * 100 : 0;
+              const isSql = SQL_PERFIS.has(p);
+              return (
+                <div key={p}
+                     className="grid items-center gap-3"
+                     style={{ gridTemplateColumns: "minmax(140px, 200px) 1fr auto" }}
+                     title={`${p}: ${fmtNumber(count)} (${fmtPct(pct)})`}>
+                  <div className={`text-sm truncate ${isSql ? "text-[#549E86] font-medium" : "text-slate-600"}`}>
+                    {p}
+                  </div>
+                  <div className="h-6 flex items-center">
+                    {/* % sempre dentro da barra. Min-width garante espaço para "100,0%".
+                        Para barras realmente minúsculas (visual < min-width), o min-width inflaria
+                        a fatia — então só caímos no fallback "fora" quando a fatia real for tão
+                        pequena que mostrar dentro distorceria muito (< 4% do max). */}
+                    {widthPct >= 4 ? (
+                      <div className="h-full rounded-md transition-all flex items-center justify-end px-2"
+                           style={{
+                             width: `${widthPct}%`,
+                             minWidth: "56px",
+                             background: isSql ? "#63C19B" : "rgba(148,163,184,0.55)",
+                             boxShadow: isSql ? "0 2px 8px rgba(99,193,155,0.25)" : "none",
+                           }}>
+                        <span className="text-[11px] font-semibold tabular-nums text-white whitespace-nowrap">
+                          {fmtPct(pct)}
+                        </span>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="h-full rounded-md transition-all"
+                             style={{
+                               width: `${widthPct}%`,
+                               minWidth: count > 0 ? "4px" : "0",
+                               background: isSql ? "#63C19B" : "rgba(148,163,184,0.55)",
+                               boxShadow: isSql ? "0 2px 8px rgba(99,193,155,0.25)" : "none",
+                             }} />
+                        <span className="ml-2 text-[11px] font-semibold tabular-nums text-slate-600 whitespace-nowrap">
+                          {fmtPct(pct)}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                  <div className={`text-sm font-semibold tabular-nums text-right min-w-[3ch] ${isSql ? "text-[#549E86]" : "text-slate-700"}`}>
+                    {fmtNumber(count)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
       );
     }
 
@@ -971,6 +1046,8 @@
                     <KpiCard label="CPSQL médio" value={fmtBRL(m.cpsql_avg)} sub="Investimento ÷ SQL" />
                   </section>
                 )}
+
+                <PerfilChart perfis={m.perfis_total} total={m.total} />
 
                 <section className="space-y-3">
                   <div className="flex items-center justify-between">
