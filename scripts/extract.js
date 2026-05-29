@@ -23,6 +23,69 @@ const KNOWN_PERFIS = [
 
 const SQL_PERFIS = new Set(['Pro', 'Starter', 'Qualificado (Sem Faixa)']);
 
+// Ordem oficial do funil de vendas (Etapa 1 → Etapa 6) + etapas fora do funil.
+// Usadas para ordenar visualizações e calcular taxa de conversão entre estágios.
+const FUNNEL_ETAPAS = [
+  'Etapa 1 - inicial',
+  'Etapa 2 - Identificado',
+  'Etapa 3 - concluído',
+  'Etapa 4 - reunião agendada',
+  'Etapa 5 - em negociação',
+  'Etapa 6 - Ganho',
+];
+const OUT_OF_FUNNEL_ETAPAS = ['Etapa cliente', 'Etapa desqualificado', 'Etapa perdido'];
+
+// Mapeia tanto os códigos da integração (ETAPA_X_NOME) quanto os labels humanos.
+const ETAPA_ALIASES = {
+  'etapa_1_inicial': 'Etapa 1 - inicial',
+  'etapa 1': 'Etapa 1 - inicial',
+  'etapa 1 - inicial': 'Etapa 1 - inicial',
+  'etapa_2_identificado': 'Etapa 2 - Identificado',
+  'etapa 2': 'Etapa 2 - Identificado',
+  'etapa 2 - identificado': 'Etapa 2 - Identificado',
+  'etapa_3_concluido': 'Etapa 3 - concluído',
+  'etapa_3_concluído': 'Etapa 3 - concluído',
+  'etapa 3': 'Etapa 3 - concluído',
+  'etapa 3 - concluido': 'Etapa 3 - concluído',
+  'etapa 3 - concluído': 'Etapa 3 - concluído',
+  'etapa_4_reuniao_agendada': 'Etapa 4 - reunião agendada',
+  'etapa_4_reunião_agendada': 'Etapa 4 - reunião agendada',
+  'etapa 4': 'Etapa 4 - reunião agendada',
+  'etapa 4 - reuniao agendada': 'Etapa 4 - reunião agendada',
+  'etapa 4 - reunião agendada': 'Etapa 4 - reunião agendada',
+  'etapa_5_em_negociacao': 'Etapa 5 - em negociação',
+  'etapa_5_em_negociação': 'Etapa 5 - em negociação',
+  'etapa 5': 'Etapa 5 - em negociação',
+  'etapa 5 - em negociacao': 'Etapa 5 - em negociação',
+  'etapa 5 - em negociação': 'Etapa 5 - em negociação',
+  'etapa_6_ganho': 'Etapa 6 - Ganho',
+  'etapa 6': 'Etapa 6 - Ganho',
+  'etapa 6 - ganho': 'Etapa 6 - Ganho',
+  // Out-of-funnel: a integração usa o prefixo "ETAPA_0_" (Cliente vem só como ETAPA_CLIENTE).
+  'etapa_cliente': 'Etapa cliente',
+  'etapa_0_cliente': 'Etapa cliente',
+  'etapa cliente': 'Etapa cliente',
+  'etapa_desqualificado': 'Etapa desqualificado',
+  'etapa_0_desqualificado': 'Etapa desqualificado',
+  'etapa desqualificado': 'Etapa desqualificado',
+  'etapa_perdido': 'Etapa perdido',
+  'etapa_0_perdido': 'Etapa perdido',
+  'etapa perdido': 'Etapa perdido',
+};
+
+const UNMAPPED_ETAPAS = new Set();
+function canonicalEtapa(raw) {
+  const v = normalize(raw);
+  if (!v) return '';
+  const lower = v.toLowerCase();
+  if (ETAPA_ALIASES[lower]) return ETAPA_ALIASES[lower];
+  for (const known of [...FUNNEL_ETAPAS, ...OUT_OF_FUNNEL_ETAPAS]) {
+    if (known.toLowerCase() === lower) return known;
+  }
+  UNMAPPED_ETAPAS.add(v);
+  return v;
+}
+
 const PERFIL_ALIASES = {
   'desqualficado': 'Desqualificado',
   'qualificado (sem faixa )': 'Qualificado (Sem Faixa)',
@@ -232,6 +295,7 @@ async function main() {
     data: header.indexOf('DATA'),
     origem: header.indexOf('ORIGEM'),
     perfil: header.indexOf('PERFIL'),
+    etapa: header.indexOf('ETAPA'),
     anuncio: header.indexOf('ANUNCIO'),
     criativo: header.indexOf('NOME CRIATIVO'),
   };
@@ -245,6 +309,11 @@ async function main() {
   const sqlByOrigem = {};
   const origemSet = new Set();
   const perfilSet = new Set();
+  const etapaSet = new Set();
+  const etapaCounts = {};
+  const etapaByOrigem = {};
+  const etapaByPerfil = {};
+  const etapaByMonth = {};
 
   const chanel = {
     total: 0,
@@ -269,6 +338,7 @@ async function main() {
     const perfil = canonicalPerfil(r[idx.perfil]);
     if (!rawOrigem && !perfil) continue;
     const data = normalize(r[idx.data] || '');
+    const etapa = idx.etapa >= 0 ? canonicalEtapa(r[idx.etapa]) : '';
     const anuncio = idx.anuncio >= 0 ? normalize(r[idx.anuncio]) : '';
     const criativo = idx.criativo >= 0 ? normalize(r[idx.criativo]) : '';
 
@@ -276,13 +346,30 @@ async function main() {
     // independente do valor original da coluna ORIGEM. Mantém o rawOrigem só nos leads de mídia paga.
     const origem = (anuncio || criativo) ? 'Mídia paga' : rawOrigem;
 
-    leads.push({ data, origem, perfil });
+    leads.push({ data, origem, perfil, etapa });
     if (origem) origemSet.add(origem);
     if (perfil) perfilSet.add(perfil);
     if (perfil) perfilCounts[perfil] = (perfilCounts[perfil] || 0) + 1;
     if (origem) origemCounts[origem] = (origemCounts[origem] || 0) + 1;
     if (SQL_PERFIS.has(perfil)) {
       sqlByOrigem[origem || '(sem origem)'] = (sqlByOrigem[origem || '(sem origem)'] || 0) + 1;
+    }
+
+    if (etapa) {
+      etapaSet.add(etapa);
+      etapaCounts[etapa] = (etapaCounts[etapa] || 0) + 1;
+      const oKey = origem || '(sem origem)';
+      if (!etapaByOrigem[oKey]) etapaByOrigem[oKey] = {};
+      etapaByOrigem[oKey][etapa] = (etapaByOrigem[oKey][etapa] || 0) + 1;
+      const pKey = perfil || '(sem perfil)';
+      if (!etapaByPerfil[pKey]) etapaByPerfil[pKey] = {};
+      etapaByPerfil[pKey][etapa] = (etapaByPerfil[pKey][etapa] || 0) + 1;
+      const m = String(data).match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+      if (m) {
+        const mKey = `${m[3]}-${m[2]}`;
+        if (!etapaByMonth[mKey]) etapaByMonth[mKey] = {};
+        etapaByMonth[mKey][etapa] = (etapaByMonth[mKey][etapa] || 0) + 1;
+      }
     }
 
     if (anuncio || criativo) {
@@ -292,7 +379,7 @@ async function main() {
       else chanel.sem_criativo++;
       if (anuncio) bumpAgg(chanel.by_anuncio, anuncio, perfil);
       else chanel.sem_anuncio++;
-      chanel.leads.push({ data, perfil, anuncio, criativo, origem: rawOrigem });
+      chanel.leads.push({ data, perfil, anuncio, criativo, origem: rawOrigem, etapa });
     }
   }
 
@@ -318,6 +405,16 @@ async function main() {
 
   const perfis = Array.from(new Set([...KNOWN_PERFIS, ...perfilSet])).filter(p => perfilSet.has(p) || perfilCounts[p]);
   const origens = Array.from(origemSet).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+  // Lista ordenada: primeiro o funil (na ordem oficial), depois out-of-funnel, depois quaisquer
+  // valores desconhecidos que tenham aparecido na planilha. Só inclui o que de fato existe.
+  const etapasOrdered = [
+    ...FUNNEL_ETAPAS.filter(e => etapaSet.has(e)),
+    ...OUT_OF_FUNNEL_ETAPAS.filter(e => etapaSet.has(e)),
+    ...Array.from(etapaSet)
+      .filter(e => !FUNNEL_ETAPAS.includes(e) && !OUT_OF_FUNNEL_ETAPAS.includes(e))
+      .sort((a, b) => a.localeCompare(b, 'pt-BR')),
+  ];
 
   const metaCreds = loadMetaCreds();
   if (metaCreds) {
@@ -387,6 +484,15 @@ async function main() {
     origem_counts: origemCounts,
     sql_by_origem: sqlByOrigem,
     sql_perfis: Array.from(SQL_PERFIS),
+    etapas: {
+      list: etapasOrdered,
+      funnel_order: FUNNEL_ETAPAS,
+      out_of_funnel: OUT_OF_FUNNEL_ETAPAS,
+      counts: etapaCounts,
+      by_origem: etapaByOrigem,
+      by_perfil: etapaByPerfil,
+      by_month: etapaByMonth,
+    },
     midia_paga,
     leads,
   };
@@ -394,6 +500,10 @@ async function main() {
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
   fs.writeFileSync(OUT_PATH, JSON.stringify(out, null, 2));
   console.log(`OK. ${totalLeads} leads, ${totalSql} SQL (${out.sql_pct}%). Escrito em ${OUT_PATH}`);
+  if (UNMAPPED_ETAPAS.size > 0) {
+    console.warn(`AVISO: ${UNMAPPED_ETAPAS.size} valor(es) de ETAPA sem mapeamento — adicione em ETAPA_ALIASES:`);
+    for (const v of UNMAPPED_ETAPAS) console.warn(`  • "${v}"`);
+  }
 }
 
 main().catch(e => {

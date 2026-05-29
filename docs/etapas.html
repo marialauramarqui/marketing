@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var AUTH_KEY = "vesti.auth.ok";
+      var TTL = 1000 * 60 * 60 * 8;
+      try {
+        var raw = sessionStorage.getItem(AUTH_KEY);
+        if (raw) {
+          var data = JSON.parse(raw);
+          if (data && data.ts && Date.now() - data.ts < TTL) return;
+        }
+      } catch (e) { /* ignore */ }
+      window.location.replace("login.html");
+    })();
+  </script>
+  <title>Vesti · Etapas do Lead</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-pink':   '#6A52B3',
+            'brand-purple': '#63C19B',
+            'brand-peach':  '#549E86',
+          },
+          fontFamily: {
+            sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Roboto','"Helvetica Neue"','Arial','sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body { background: #f7f4fb; color: #1a1635; }
+    body {
+      background:
+        radial-gradient(ellipse at top left, #e9def5 0%, transparent 55%),
+        radial-gradient(ellipse at bottom right, #dff0e8 0%, transparent 55%),
+        #f7f4fb;
+      min-height: 100vh;
+    }
+    .bg-grid {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(43,12,85,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(43,12,85,0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+      pointer-events: none; z-index: 0;
+    }
+    .orb {
+      position: fixed; border-radius: 50%;
+      filter: blur(80px); opacity: 0.28; pointer-events: none; z-index: 0;
+      animation: drift 18s ease-in-out infinite;
+    }
+    .orb-1 { width:420px; height:420px; background: radial-gradient(circle,#6A52B3 0%,transparent 70%); top:-120px; left:-80px; }
+    .orb-2 { width:520px; height:520px; background: radial-gradient(circle,#63C19B 0%,transparent 70%); bottom:-160px; right:-120px; animation-delay:-6s; }
+    @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.08); } }
+
+    .card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid rgba(43,12,85,0.08);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(43,12,85,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(43,12,85,0.14); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(43,12,85,0.26); }
+  </style>
+
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div id="root" class="relative z-10"></div>
+
+  <script type="text/babel" data-presets="react">
+    const { useState, useEffect, useMemo, useRef } = React;
+
+    const AUTH_KEY = "vesti.auth.ok";
+    const MESES_LONG = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+
+    // Ordem oficial do funil (Etapa 1 → 6). Vem repetida do extract.js para o caso
+    // de o backend ainda não ter rodado com a versão nova (fallback gracioso).
+    const FUNNEL_ORDER = [
+      "Etapa 1 - inicial",
+      "Etapa 2 - Identificado",
+      "Etapa 3 - concluído",
+      "Etapa 4 - reunião agendada",
+      "Etapa 5 - em negociação",
+      "Etapa 6 - Ganho",
+    ];
+    const OUT_OF_FUNNEL = ["Etapa cliente", "Etapa desqualificado", "Etapa perdido"];
+
+    // Label curta de cada etapa (renomeada a pedido do negócio).
+    const STAGE_META = {
+      "Etapa 1 - inicial":          { short: "Entrou em contato" },
+      "Etapa 2 - Identificado":     { short: "Identificado - Fabricante" },
+      "Etapa 3 - concluído":        { short: "Concluiu a qualificação" },
+      "Etapa 4 - reunião agendada": { short: "Reunião agendada" },
+      "Etapa 5 - em negociação":    { short: "Em negociação" },
+      "Etapa 6 - Ganho":            { short: "Ganho" },
+      "Etapa cliente":              { short: "Cliente" },
+      "Etapa desqualificado":       { short: "Desqualificado" },
+      "Etapa perdido":              { short: "Perdido" },
+    };
+
+    const fmtNumber = (n) => (n == null ? "—" : new Intl.NumberFormat("pt-BR").format(n));
+    const fmtPct = (n) => (n == null || !isFinite(n) ? "—" : `${n.toFixed(1).replace(".", ",")}%`);
+
+    function leadMonthKey(str) {
+      const m = String(str || "").match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+      return m ? `${m[3]}-${m[2]}` : null;
+    }
+    function parseLeadDay(str) {
+      const m = String(str || "").match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+      return m ? new Date(+m[3], +m[2] - 1, +m[1]) : null;
+    }
+    const dateOnly = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    const dayKey = (d) => d.getFullYear()*10000 + (d.getMonth()+1)*100 + d.getDate();
+    const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+    const fmtDateShort = (d) => d ? `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}` : "";
+    const DOW_HEADERS = ["D","S","T","Q","Q","S","S"];
+
+    function applyFilters(leads, { years, months, origens, perfis, dateFrom, dateTo } = {}) {
+      const fromK = dateFrom ? dayKey(dateFrom) : null;
+      const toK   = dateTo   ? dayKey(dateTo)   : null;
+      return leads.filter(l => {
+        const k = leadMonthKey(l.data);
+        const [ky, km] = k ? k.split("-") : [null, null];
+        if (years   && years.size   > 0 && (!ky || !years.has(ky)))   return false;
+        if (months  && months.size  > 0 && (!km || !months.has(km)))  return false;
+        if (origens && origens.size > 0 && !origens.has(l.origem))    return false;
+        if (perfis  && perfis.size  > 0 && !perfis.has(l.perfil))     return false;
+        if (fromK != null || toK != null) {
+          const dd = parseLeadDay(l.data);
+          if (!dd) return false;
+          const dk = dayKey(dd);
+          if (fromK != null && dk < fromK) return false;
+          if (toK   != null && dk > toK)   return false;
+        }
+        return true;
+      });
+    }
+
+    // Agrega contagens de etapa a partir dos leads filtrados.
+    // Como o etapa atual representa o estágio MAIS AVANÇADO já alcançado pelo lead,
+    // o funil cumulativo "chegou até a etapa N" = soma de quem está em N, N+1, ..., 6.
+    function aggregate(leads) {
+      const counts = {};
+      let totalWithEtapa = 0;
+      let totalNoEtapa = 0;
+      for (const l of leads) {
+        if (!l.etapa) { totalNoEtapa++; continue; }
+        counts[l.etapa] = (counts[l.etapa] || 0) + 1;
+        totalWithEtapa++;
+      }
+
+      // Funil cumulativo: para a etapa i, soma de tudo em FUNNEL_ORDER[i..end].
+      const funnelCumulative = FUNNEL_ORDER.map((stage, i) => {
+        let acc = 0;
+        for (let j = i; j < FUNNEL_ORDER.length; j++) acc += (counts[FUNNEL_ORDER[j]] || 0);
+        return { stage, count: acc };
+      });
+
+      // Conversão etapa N → N+1.
+      const conversions = [];
+      for (let i = 0; i < FUNNEL_ORDER.length - 1; i++) {
+        const from = funnelCumulative[i].count;
+        const to   = funnelCumulative[i+1].count;
+        conversions.push({
+          from_stage: FUNNEL_ORDER[i],
+          to_stage:   FUNNEL_ORDER[i+1],
+          from, to,
+          drop: from - to,
+          pct: from > 0 ? (100 * to / from) : null,
+        });
+      }
+
+      const totalFunil = funnelCumulative[0].count;
+      const ganhos     = counts[FUNNEL_ORDER[FUNNEL_ORDER.length-1]] || 0;
+      const reunioes   = (counts["Etapa 4 - reunião agendada"] || 0)
+                       + (counts["Etapa 5 - em negociação"] || 0)
+                       + (counts["Etapa 6 - Ganho"] || 0);
+
+      // SQL (regra do negócio nesta visão): qualquer lead que entrou na Etapa 2
+      // ou mais funda no funil + os perdidos (já tinham sido qualificados).
+      // Não conta cliente nem desqualificado nem quem parou na Etapa 1.
+      const SQL_ETAPAS = [
+        "Etapa 2 - Identificado",
+        "Etapa 3 - concluído",
+        "Etapa 4 - reunião agendada",
+        "Etapa 5 - em negociação",
+        "Etapa 6 - Ganho",
+        "Etapa perdido",
+      ];
+      const sqlCount = SQL_ETAPAS.reduce((s, e) => s + (counts[e] || 0), 0);
+
+      const outOfFunnelCounts = {};
+      for (const e of OUT_OF_FUNNEL) outOfFunnelCounts[e] = counts[e] || 0;
+      const totalOutOfFunnel = OUT_OF_FUNNEL.reduce((s, e) => s + (counts[e] || 0), 0);
+
+      // Pior conversão (maior queda %) — destaque de gargalo.
+      let worstIdx = -1;
+      let worstPct = 101;
+      conversions.forEach((c, i) => {
+        if (c.pct != null && c.pct < worstPct && c.from >= 3) { worstPct = c.pct; worstIdx = i; }
+      });
+
+      return {
+        counts,
+        funnelCumulative,
+        conversions,
+        worstConversionIdx: worstIdx,
+        totalFunil,
+        ganhos,
+        reunioes,
+        clientes:        counts["Etapa cliente"] || 0,
+        desqualificados: counts["Etapa desqualificado"] || 0,
+        perdidos:        counts["Etapa perdido"] || 0,
+        totalOutOfFunnel,
+        totalWithEtapa,
+        totalNoEtapa,
+        outOfFunnelCounts,
+        sqlCount,
+        sqlRate: totalWithEtapa > 0 ? (100 * sqlCount / totalWithEtapa) : null,
+        winRate: totalFunil > 0 ? (100 * ganhos / totalFunil) : null,
+        meetingRate: totalFunil > 0 ? (100 * reunioes / totalFunil) : null,
+      };
+    }
+
+    function Header() {
+      const logout = () => {
+        try { sessionStorage.removeItem(AUTH_KEY); } catch (_) {}
+        window.location.replace("login.html");
+      };
+      const navBtnSecondary = "inline-flex items-center gap-1.5 text-xs text-slate-700 border border-[#2B0C55]/10 rounded-lg px-3 py-2 hover:text-slate-900 hover:border-brand-pink hover:bg-brand-pink/10 transition";
+      const navBtnPrimary   = "relative inline-flex items-center gap-1.5 text-xs font-semibold text-white rounded-lg px-3.5 py-2 shadow-[0_8px_20px_rgba(106,82,179,.35)] hover:shadow-[0_10px_26px_rgba(106,82,179,.5)] hover:-translate-y-0.5 transition";
+      const primaryStyle    = { background: "linear-gradient(120deg,#6A52B3 0%,#8A6DD1 55%,#63C19B 100%)" };
+      return (
+        <header className="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-[#2B0C55]/10 backdrop-blur-sm">
+          <div className="flex items-center gap-3">
+            <span className="relative inline-grid place-items-center w-9 h-9">
+              <span className="w-4 h-4 rounded-full"
+                    style={{ background: "linear-gradient(135deg,#6A52B3,#63C19B)",
+                             boxShadow: "0 0 22px rgba(106,82,179,.55), 0 0 40px rgba(99,193,155,.4)" }} />
+            </span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-[17px] font-bold tracking-wide"
+                    style={{ background:"linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
+                             WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
+                Vesti
+              </span>
+              <span className="text-[10.5px] uppercase tracking-[1.6px] text-slate-500">Etapas do Lead · Funil</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 flex-wrap justify-end">
+            <a href="index.html" className={navBtnSecondary} title="Voltar ao dashboard">
+              <svg viewBox="0 0 20 20" width="14" height="14">
+                <path d="M12 5l-5 5 5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Dashboard
+            </a>
+            <a href="midia-paga.html" className={navBtnPrimary} style={primaryStyle} title="Ver dados de mídia paga">
+              <svg viewBox="0 0 20 20" width="14" height="14">
+                <path d="M3 8v4l10 4V4L3 8Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+                <path d="M13 7c1.5 1 1.5 5 0 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+              </svg>
+              Mídia Paga
+            </a>
+            <a href="meta.html" className={navBtnPrimary} style={primaryStyle} title="Ver metas mensais e trimestrais">
+              <svg viewBox="0 0 20 20" width="14" height="14">
+                <circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+                <circle cx="10" cy="10" r="3.5" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+                <circle cx="10" cy="10" r="1" fill="currentColor"/>
+              </svg>
+              Comparação com metas
+            </a>
+            <button onClick={logout} className={navBtnSecondary} title="Encerrar sessão">
+              <svg viewBox="0 0 20 20" width="14" height="14">
+                <path d="M12 4H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7M9 10h8m0 0-3-3m3 3-3 3"
+                      fill="none" stroke="currentColor" strokeWidth="1.8"
+                      strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Sair
+            </button>
+          </div>
+        </header>
+      );
+    }
+
+    function KpiCard({ label, value, sub, accent, tone }) {
+      const accentStyle = accent ? {
+        background: "linear-gradient(120deg,#6A52B3 0%,#63C19B 100%)",
+        WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent"
+      } : {};
+      const toneStyles = {
+        win: {
+          background: "linear-gradient(120deg,#2B0C55 0%,#549E86 60%,#63C19B 100%)",
+          WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent"
+        },
+      };
+      const valueStyle = tone && toneStyles[tone] ? toneStyles[tone] : accentStyle;
+      return (
+        <div className="card p-5">
+          <div className="text-[11px] uppercase tracking-[1.4px] text-slate-500">{label}</div>
+          <div className="mt-1 text-3xl font-semibold tabular-nums" style={valueStyle}>{value}</div>
+          {sub && <div className="mt-1 text-xs text-slate-500">{sub}</div>}
+        </div>
+      );
+    }
+
+    function HighlightKpi({ label, value, sub }) {
+      return (
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none"
+               style={{ background: "linear-gradient(135deg, rgba(106,82,179,0.10) 0%, rgba(99,193,155,0.08) 100%)" }} />
+          <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+               style={{ background: "linear-gradient(180deg,#6A52B3 0%,#63C19B 100%)" }} />
+          <div className="relative">
+            <div className="text-[11px] uppercase tracking-[1.4px] text-slate-500">{label}</div>
+            <div className="mt-1 text-4xl font-bold tabular-nums"
+                 style={{ background: "linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
+                          WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+              {value}
+            </div>
+            {sub && <div className="mt-1 text-xs text-slate-500">{sub}</div>}
+          </div>
+        </div>
+      );
+    }
+
+    // Funil visual customizado — desenha trapezoides com largura proporcional ao count,
+    // gradient pink → green do topo (Etapa 1) ao fundo (Etapa 6 Ganho).
+    function FunnelChart({ funnelCumulative, totalFunil }) {
+      if (!totalFunil) return (
+        <div className="card p-10 text-center text-slate-400 text-sm">
+          Nenhum lead com etapa preenchida no recorte atual.
+        </div>
+      );
+      const maxCount = funnelCumulative[0].count || 1;
+      const rowHeight = 72;
+      const gapHeight = 18;
+      const totalHeight = funnelCumulative.length * rowHeight + (funnelCumulative.length - 1) * gapHeight;
+
+      // Gradiente: do topo (índice 0) ao fundo (índice 5). Mistura linear entre #6A52B3 e #63C19B.
+      // Retorna {solid, soft, shadow} — preciso de variantes alpha para o gradient/sombra
+      // (não dá pra concatenar "dd" num rgb() string — CSS invalida tudo).
+      const colorFor = (i, total) => {
+        const t = total > 1 ? i / (total - 1) : 0;
+        const r1 = 0x6A, g1 = 0x52, b1 = 0xB3;
+        const r2 = 0x63, g2 = 0xC1, b2 = 0x9B;
+        const r = Math.round(r1 + (r2 - r1) * t);
+        const g = Math.round(g1 + (g2 - g1) * t);
+        const b = Math.round(b1 + (b2 - b1) * t);
+        return {
+          solid:  `rgb(${r},${g},${b})`,
+          soft:   `rgba(${r},${g},${b},0.85)`,
+          shadow: `rgba(${r},${g},${b},0.35)`,
+        };
+      };
+
+      return (
+        <section className="card p-6">
+          <div className="mb-5">
+            <h2 className="text-base font-semibold">Funil de leads</h2>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Cada nível mostra quantos leads <strong>chegaram pelo menos</strong> a essa etapa.
+            </p>
+          </div>
+
+          <div className="relative mx-auto" style={{ height: `${totalHeight}px`, maxWidth: "720px" }}>
+            {funnelCumulative.map((row, i) => {
+              const pctOfTop = maxCount > 0 ? (row.count / maxCount) * 100 : 0;
+              const top = i * (rowHeight + gapHeight);
+              const meta = STAGE_META[row.stage] || { short: row.stage };
+              const col = colorFor(i, funnelCumulative.length);
+              const pctOfBase = totalFunil > 0 ? (100 * row.count / totalFunil) : 0;
+              return (
+                <div key={row.stage}
+                     className="absolute left-1/2 -translate-x-1/2 transition-all"
+                     style={{
+                       top: `${top}px`,
+                       height: `${rowHeight}px`,
+                       width: `${Math.max(pctOfTop, 20)}%`,
+                       minWidth: "320px",
+                     }}>
+                  <div className="h-full rounded-2xl flex items-center justify-between px-6 text-white relative overflow-hidden"
+                       style={{
+                         background: `linear-gradient(135deg, ${col.solid} 0%, ${col.soft} 100%)`,
+                         boxShadow: `0 12px 32px ${col.shadow}, inset 0 1px 0 rgba(255,255,255,0.25)`,
+                       }}>
+                    <div className="min-w-0">
+                      <div className="text-[10.5px] uppercase tracking-[1.4px] opacity-80">Etapa {i+1}</div>
+                      <div className="text-sm font-semibold truncate">{meta.short}</div>
+                    </div>
+                    <div className="text-right shrink-0 pl-3">
+                      <div className="text-3xl font-bold tabular-nums leading-none">{fmtNumber(row.count)}</div>
+                      <div className="text-[10.5px] opacity-80 mt-1">{fmtPct(pctOfBase)} do topo</div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    // Cards para etapas fora do funil (Cliente, Desqualificado, Perdido)
+    function OutOfFunnelCards({ counts, totalWithEtapa }) {
+      const palette = {
+        "Etapa cliente":         { from: "#6A52B3", to: "#9F88D4", title: "Clientes Vesti",    sub: "Base atendida (out of funnel)" },
+        "Etapa desqualificado":  { from: "#94a3b8", to: "#cbd5e1", title: "Desqualificados",   sub: "Não fazem sentido para Vesti" },
+        "Etapa perdido":         { from: "#9F1239", to: "#E11D48", title: "Perdidos",          sub: "Saíram durante o funil" },
+      };
+      return (
+        <section>
+          <div className="flex items-end justify-between mb-3 flex-wrap gap-2">
+            <div>
+              <h2 className="text-base font-semibold">Fora do funil</h2>
+              <p className="text-xs text-slate-500 mt-0.5">Leads que não estão sendo trabalhados ativamente no pipeline.</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {OUT_OF_FUNNEL.map(stage => {
+              const p = palette[stage] || { from: "#6A52B3", to: "#63C19B", title: stage, sub: "" };
+              const count = counts[stage] || 0;
+              const pct = totalWithEtapa > 0 ? (100 * count / totalWithEtapa) : 0;
+              return (
+                <div key={stage} className="card p-5 relative overflow-hidden">
+                  <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+                       style={{ background: `linear-gradient(180deg, ${p.from}, ${p.to})` }} />
+                  <div className="text-[11px] uppercase tracking-[1.4px] text-slate-500">{p.title}</div>
+                  <div className="mt-1 text-3xl font-semibold tabular-nums" style={{ color: p.from }}>
+                    {fmtNumber(count)}
+                  </div>
+                  <div className="mt-1 text-xs text-slate-500">{p.sub}</div>
+                  <div className="mt-3 text-[11px] text-slate-400 tabular-nums">
+                    {fmtPct(pct)} de todos os leads com etapa definida
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    // Heatmap: linhas = origem, colunas = etapas do funil + ganho. Cor proporcional
+    // à fatia da origem que chegou àquela etapa. Peça principal pós-funil — ajuda
+    // a decidir onde investir e qual canal traz lead mais maduro.
+    function OrigemEtapaHeatmap({ leads }) {
+      const { rows, totalGeral, allStages, totalsByStage, bestOrigemByWin, totalWinPct } = useMemo(() => {
+        // Só etapas do funil — out-of-funnel saiu da visão a pedido.
+        const allStages = [...FUNNEL_ORDER];
+        const stageSet = new Set(allStages);
+        const by = {};
+        const totalsByOrigem = {};
+        for (const l of leads) {
+          if (!l.etapa || !stageSet.has(l.etapa)) continue;
+          const o = l.origem || "(sem origem)";
+          if (!by[o]) by[o] = {};
+          by[o][l.etapa] = (by[o][l.etapa] || 0) + 1;
+          totalsByOrigem[o] = (totalsByOrigem[o] || 0) + 1;
+        }
+        // Cada row carrega seu próprio max — usado pra escala de cor row-based.
+        const rows = Object.keys(by)
+          .sort((a, b) => totalsByOrigem[b] - totalsByOrigem[a])
+          .map(o => {
+            let max = 0;
+            for (const s of allStages) if ((by[o][s] || 0) > max) max = by[o][s];
+            return { origem: o, counts: by[o], total: totalsByOrigem[o], maxInRow: max };
+          });
+        const totalGeral = rows.reduce((s, r) => s + r.total, 0);
+
+        const totalsByStage = {};
+        for (const s of allStages) totalsByStage[s] = rows.reduce((acc, r) => acc + (r.counts[s] || 0), 0);
+
+        let bestOrigemByWin = null;
+        for (const r of rows) {
+          const wins = r.counts["Etapa 6 - Ganho"] || 0;
+          if (wins === 0) continue;
+          const wp = (100 * wins) / r.total;
+          if (!bestOrigemByWin || wp > bestOrigemByWin.pct) {
+            bestOrigemByWin = { origem: r.origem, wins, total: r.total, pct: wp };
+          }
+        }
+
+        const totalWins = totalsByStage["Etapa 6 - Ganho"] || 0;
+        const totalWinPct = totalGeral > 0 ? (100 * totalWins / totalGeral) : 0;
+
+        return { rows, totalGeral, allStages, totalsByStage, bestOrigemByWin, totalWinPct };
+      }, [leads]);
+
+      if (rows.length === 0) {
+        return (
+          <section className="card p-10 text-center text-slate-400 text-sm">
+            Sem dados de origem × etapa para o recorte atual.
+          </section>
+        );
+      }
+
+      // Escala row-based: a cor é única (roxo brand) e a intensidade vem da
+      // proporção desta célula sobre o pico DA LINHA. Resultado: em cada origem,
+      // a etapa onde os leads concentram fica destacada — leitura imediata de
+      // "onde esta origem para de avançar".
+      const ROW_COLOR = [106, 82, 179]; // brand-pink #6A52B3
+      const cellStyle = (count, maxInRow) => {
+        if (count <= 0) return { background: "rgba(255,255,255,0.55)", color: "#cbd5e1" };
+        const [r, g, b] = ROW_COLOR;
+        const ratio = maxInRow > 0 ? (count / maxInRow) : 0;
+        const alpha = 0.20 + ratio * 0.80;
+        return {
+          background: `rgba(${r},${g},${b},${alpha})`,
+          color: alpha > 0.55 ? "white" : "#1a1635",
+        };
+      };
+
+      return (
+        <section>
+          <div className="mb-4 flex items-end justify-between flex-wrap gap-3">
+            <div>
+              <h2 className="text-xl font-semibold">Origem × Etapa</h2>
+              <p className="text-sm text-slate-500 mt-1 max-w-3xl">
+                Onde cada canal de aquisição está parando o lead dentro do funil. <strong>Intensidade da cor</strong> = a etapa em que aquela origem concentra mais leads (escala por linha).
+              </p>
+            </div>
+            <div className="flex gap-3 flex-wrap">
+              {bestOrigemByWin && (
+                <div className="card px-4 py-2.5">
+                  <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Maior taxa de ganho</div>
+                  <div className="text-sm font-semibold mt-0.5 text-slate-800">{bestOrigemByWin.origem}</div>
+                  <div className="text-xs tabular-nums font-semibold"
+                       style={{ background: "linear-gradient(120deg,#6A52B3 0%,#63C19B 100%)",
+                                WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                    {fmtPct(bestOrigemByWin.pct)} · {fmtNumber(bestOrigemByWin.wins)} ganho{bestOrigemByWin.wins === 1 ? "" : "s"}
+                  </div>
+                </div>
+              )}
+              <div className="card px-4 py-2.5">
+                <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Conversão geral</div>
+                <div className="text-2xl font-bold tabular-nums leading-tight"
+                     style={{ background: "linear-gradient(120deg,#2B0C55 0%,#549E86 60%,#63C19B 100%)",
+                              WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                  {fmtPct(totalWinPct)}
+                </div>
+                <div className="text-[10.5px] text-slate-500">leads → Ganho</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="card p-4 lg:p-5">
+            <table className="w-full border-separate border-spacing-1" style={{ tableLayout: "fixed" }}>
+              <thead>
+                <tr>
+                  <th className="text-left text-[10px] uppercase tracking-[1.4px] text-slate-500 px-2 pb-2" style={{ width: "18%" }}>Origem</th>
+                  {allStages.map((stage, i) => {
+                    const meta = STAGE_META[stage] || { short: stage };
+                    return (
+                      <th key={stage}
+                          className="text-center px-1 pb-2 align-bottom"
+                          title={stage}>
+                        <div className="flex flex-col items-center gap-0.5">
+                          <div className="text-[10.5px] font-semibold leading-tight text-slate-700">
+                            {meta.short}
+                          </div>
+                          <div className="text-[9px] uppercase tracking-[1.2px] text-slate-400">Etapa {i+1}</div>
+                        </div>
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map(row => {
+                  const ganhos = row.counts["Etapa 6 - Ganho"] || 0;
+                  const winPct = row.total > 0 ? (100 * ganhos / row.total) : 0;
+                  return (
+                    <tr key={row.origem}>
+                      <td className="px-2 py-1.5 align-middle">
+                        <div className="text-[12.5px] font-semibold text-slate-800 truncate" title={row.origem}>{row.origem}</div>
+                        <div className="text-[10px] text-slate-500 tabular-nums">
+                          {fmtNumber(row.total)} lead{row.total === 1 ? "" : "s"}
+                          {ganhos > 0 && <> · <span className="font-semibold text-[#549E86]">{fmtPct(winPct)}</span></>}
+                        </div>
+                      </td>
+                      {allStages.map(stage => {
+                        const count = row.counts[stage] || 0;
+                        const pct = row.total > 0 ? (100 * count / row.total) : 0;
+                        return (
+                          <td key={stage}
+                              className="text-center tabular-nums px-0.5 py-0.5"
+                              title={`${row.origem} → ${stage}: ${fmtNumber(count)} (${fmtPct(pct)} desta origem)`}>
+                            <div className="rounded-lg py-2 px-1" style={cellStyle(count, row.maxInRow)}>
+                              <div className="text-base font-bold leading-none">{count > 0 ? fmtNumber(count) : "·"}</div>
+                              {count > 0 && (
+                                <div className="text-[9.5px] opacity-90 mt-0.5 font-medium">{fmtPct(pct)}</div>
+                              )}
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+                {totalGeral > 0 && (
+                  <tr>
+                    <td className="px-2 pt-2 border-t border-[#2B0C55]/10">
+                      <div className="text-[12.5px] font-semibold text-slate-700">Total</div>
+                      <div className="text-[10px] text-slate-500">por etapa</div>
+                    </td>
+                    {allStages.map(stage => {
+                      const total = totalsByStage[stage] || 0;
+                      const pctOfBase = totalGeral > 0 ? (100 * total / totalGeral) : 0;
+                      return (
+                        <td key={stage} className="text-center pt-2 px-1 border-t border-[#2B0C55]/10">
+                          <div className="text-sm font-bold tabular-nums text-[#2B0C55]">{fmtNumber(total)}</div>
+                          {total > 0 && <div className="text-[9.5px] text-slate-500 tabular-nums">{fmtPct(pctOfBase)}</div>}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                )}
+              </tbody>
+            </table>
+
+            {/* Legenda */}
+            <div className="mt-4 flex items-center gap-3 text-[11.5px] text-slate-500">
+              <span>Menor concentração da origem</span>
+              <span className="inline-block h-3 w-40 rounded-md"
+                    style={{ background: "linear-gradient(90deg, rgba(106,82,179,0.20), rgba(106,82,179,1))" }} />
+              <span>Maior concentração da origem</span>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Sankey customizado em SVG: origens à esquerda, etapas à direita.
+    // Espessura de cada faixa = nº de leads daquela origem que terminaram naquela etapa.
+    function SankeyChart({ leads }) {
+      const data = useMemo(() => {
+        const allStages = [...FUNNEL_ORDER, ...OUT_OF_FUNNEL];
+        const stageSet = new Set(allStages);
+        const flowMap = {};
+        const origemTotals = {};
+        const etapaTotals = {};
+        for (const l of leads) {
+          if (!l.etapa || !stageSet.has(l.etapa)) continue;
+          const o = l.origem || "(sem origem)";
+          if (!flowMap[o]) flowMap[o] = {};
+          flowMap[o][l.etapa] = (flowMap[o][l.etapa] || 0) + 1;
+          origemTotals[o] = (origemTotals[o] || 0) + 1;
+          etapaTotals[l.etapa] = (etapaTotals[l.etapa] || 0) + 1;
+        }
+        const origens = Object.keys(origemTotals).sort((a, b) => origemTotals[b] - origemTotals[a]);
+        const etapas = allStages.filter(s => (etapaTotals[s] || 0) > 0);
+        // Flows ordenados: por origem (linha), depois pela ordem do funil (mantém empilhamento limpo)
+        const flows = [];
+        for (const o of origens) {
+          for (const e of etapas) {
+            const c = (flowMap[o] && flowMap[o][e]) || 0;
+            if (c > 0) flows.push({ origem: o, etapa: e, count: c });
+          }
+        }
+        const total = Object.values(origemTotals).reduce((s, c) => s + c, 0);
+        return { origens, etapas, flows, origemTotals, etapaTotals, total };
+      }, [leads]);
+
+      if (data.total === 0) {
+        return (
+          <section className="card p-10 text-center text-slate-400 text-sm">
+            Sem leads com etapa preenchida para o fluxograma.
+          </section>
+        );
+      }
+
+      const W = 1100, H = 560;
+      const NODE_W = 14;
+      const PAD_X_LEFT = 160;
+      const PAD_X_RIGHT = 220;
+      const PAD_Y = 16;
+      const NODE_GAP = 8;
+      // Gap maior entre Etapa 6 (último funil) e o primeiro out-of-funnel
+      const SECTION_GAP = 22;
+
+      const isOut = (e) => OUT_OF_FUNNEL.includes(e);
+      const lastFunnelIdx = data.etapas.reduce((acc, e, i) => isOut(e) ? acc : i, -1);
+
+      const sourceGapTotal = Math.max(0, data.origens.length - 1) * NODE_GAP;
+      const targetGapTotal = data.etapas.reduce((acc, e, i) => {
+        if (i === 0) return acc;
+        return acc + (i === lastFunnelIdx + 1 ? SECTION_GAP : NODE_GAP);
+      }, 0);
+      const availSource = H - 2 * PAD_Y - sourceGapTotal;
+      const availTarget = H - 2 * PAD_Y - targetGapTotal;
+      const pxPerLead = Math.min(availSource, availTarget) / data.total;
+
+      const sourceNodes = {};
+      let y = PAD_Y;
+      for (const o of data.origens) {
+        const h = Math.max(2, data.origemTotals[o] * pxPerLead);
+        sourceNodes[o] = { y, h };
+        y += h + NODE_GAP;
+      }
+
+      const targetNodes = {};
+      y = PAD_Y;
+      data.etapas.forEach((e, i) => {
+        const h = Math.max(2, data.etapaTotals[e] * pxPerLead);
+        targetNodes[e] = { y, h };
+        const gap = (i === lastFunnelIdx) ? SECTION_GAP : NODE_GAP;
+        y += h + gap;
+      });
+
+      const srcOffset = {}, tgtOffset = {};
+      for (const o of data.origens) srcOffset[o] = 0;
+      for (const e of data.etapas) tgtOffset[e] = 0;
+
+      const srcX = PAD_X_LEFT;
+      const tgtX = W - PAD_X_RIGHT - NODE_W;
+      const cpX = (srcX + NODE_W + tgtX) / 2;
+
+      const bands = data.flows.map(f => {
+        const srcY = sourceNodes[f.origem].y + srcOffset[f.origem];
+        const tgtY = targetNodes[f.etapa].y + tgtOffset[f.etapa];
+        const thickness = Math.max(1, f.count * pxPerLead);
+        srcOffset[f.origem] += thickness;
+        tgtOffset[f.etapa] += thickness;
+        return { flow: f, srcY, tgtY, thickness };
+      });
+
+      const colorForEtapa = (stage) => {
+        const i = FUNNEL_ORDER.indexOf(stage);
+        if (i >= 0) {
+          const t = i / Math.max(1, FUNNEL_ORDER.length - 1);
+          const r = Math.round(0x6A + (0x63 - 0x6A) * t);
+          const g = Math.round(0x52 + (0xC1 - 0x52) * t);
+          const b = Math.round(0xB3 + (0x9B - 0xB3) * t);
+          return [r, g, b];
+        }
+        if (stage === "Etapa cliente")        return [79, 70, 229];
+        if (stage === "Etapa desqualificado") return [100, 116, 139];
+        if (stage === "Etapa perdido")        return [225, 29, 72];
+        return [148, 163, 184];
+      };
+
+      return (
+        <section>
+          <div className="mb-4">
+            <h2 className="text-xl font-semibold">Fluxograma — Origem → Etapa</h2>
+            <p className="text-sm text-slate-500 mt-1 max-w-3xl">
+              Diagrama de Sankey: a espessura de cada faixa representa quantos leads daquela origem terminaram naquela etapa. Cor da faixa segue a etapa de destino.
+            </p>
+          </div>
+          <div className="card p-5 overflow-x-auto">
+            <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" preserveAspectRatio="xMinYMin meet">
+              {/* Bandas */}
+              {bands.map((b, i) => {
+                const [r, g, bl] = colorForEtapa(b.flow.etapa);
+                const fill = `rgba(${r},${g},${bl},0.42)`;
+                const x0 = srcX + NODE_W;
+                const x1 = tgtX;
+                const y0t = b.srcY, y0b = b.srcY + b.thickness;
+                const y1t = b.tgtY, y1b = b.tgtY + b.thickness;
+                const path = `M ${x0} ${y0t} C ${cpX} ${y0t}, ${cpX} ${y1t}, ${x1} ${y1t} L ${x1} ${y1b} C ${cpX} ${y1b}, ${cpX} ${y0b}, ${x0} ${y0b} Z`;
+                return (
+                  <path key={i} d={path} fill={fill}>
+                    <title>{`${b.flow.origem} → ${STAGE_META[b.flow.etapa]?.short || b.flow.etapa}: ${b.flow.count} lead${b.flow.count === 1 ? "" : "s"}`}</title>
+                  </path>
+                );
+              })}
+
+              {/* Nós origem */}
+              {data.origens.map(o => {
+                const n = sourceNodes[o];
+                return (
+                  <g key={o}>
+                    <rect x={srcX} y={n.y} width={NODE_W} height={n.h} rx="3"
+                          fill="#6A52B3" />
+                    <text x={srcX - 10} y={n.y + n.h / 2} textAnchor="end" dominantBaseline="middle"
+                          fontSize="12" fontWeight="600" fill="#1a1635">
+                      {o}
+                    </text>
+                    <text x={srcX - 10} y={n.y + n.h / 2 + 14} textAnchor="end" dominantBaseline="middle"
+                          fontSize="10.5" fill="#64748b">
+                      {fmtNumber(data.origemTotals[o])} lead{data.origemTotals[o] === 1 ? "" : "s"}
+                    </text>
+                  </g>
+                );
+              })}
+
+              {/* Nós etapa */}
+              {data.etapas.map(e => {
+                const n = targetNodes[e];
+                const meta = STAGE_META[e] || { short: e };
+                const [r, g, bl] = colorForEtapa(e);
+                return (
+                  <g key={e}>
+                    <rect x={tgtX} y={n.y} width={NODE_W} height={n.h} rx="3"
+                          fill={`rgb(${r},${g},${bl})`} />
+                    <text x={tgtX + NODE_W + 10} y={n.y + n.h / 2} textAnchor="start" dominantBaseline="middle"
+                          fontSize="12" fontWeight="600" fill="#1a1635">
+                      {meta.short}
+                    </text>
+                    <text x={tgtX + NODE_W + 10} y={n.y + n.h / 2 + 14} textAnchor="start" dominantBaseline="middle"
+                          fontSize="10.5" fill="#64748b">
+                      {fmtNumber(data.etapaTotals[e])} lead{data.etapaTotals[e] === 1 ? "" : "s"}
+                    </text>
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+        </section>
+      );
+    }
+
+    // Mesma ideia da OrigemEtapaHeatmap, mas restrita às etapas fora do funil
+    // (Cliente, Desqualificado, Perdido). Sem KPIs de ganho/conversão — não se aplicam.
+    function OrigemEtapaForaFunilHeatmap({ leads }) {
+      const { rows, totalsByStage, allStages, totalGeral } = useMemo(() => {
+        const allStages = [...OUT_OF_FUNNEL];
+        const stageSet = new Set(allStages);
+        const by = {};
+        const totalsByOrigem = {};
+        for (const l of leads) {
+          if (!l.etapa || !stageSet.has(l.etapa)) continue;
+          const o = l.origem || "(sem origem)";
+          if (!by[o]) by[o] = {};
+          by[o][l.etapa] = (by[o][l.etapa] || 0) + 1;
+          totalsByOrigem[o] = (totalsByOrigem[o] || 0) + 1;
+        }
+        const rows = Object.keys(by)
+          .sort((a, b) => totalsByOrigem[b] - totalsByOrigem[a])
+          .map(o => {
+            let max = 0;
+            for (const s of allStages) if ((by[o][s] || 0) > max) max = by[o][s];
+            return { origem: o, counts: by[o], total: totalsByOrigem[o], maxInRow: max };
+          });
+        const totalsByStage = {};
+        for (const s of allStages) totalsByStage[s] = rows.reduce((acc, r) => acc + (r.counts[s] || 0), 0);
+        const totalGeral = rows.reduce((s, r) => s + r.total, 0);
+        return { rows, totalsByStage, allStages, totalGeral };
+      }, [leads]);
+
+      // Mesma escala row-based, mas cor base muda por coluna (cada etapa fora do funil
+      // tem identidade diferente — cliente é positivo, perdido é negativo, etc.).
+      const colorByStage = {
+        "Etapa cliente":        [79, 70, 229],   // indigo
+        "Etapa desqualificado": [100, 116, 139], // slate
+        "Etapa perdido":        [225, 29, 72],   // rose
+      };
+      const cellStyleOut = (stage, count, maxInRow) => {
+        if (count <= 0) return { background: "rgba(255,255,255,0.55)", color: "#cbd5e1" };
+        const [r, g, b] = colorByStage[stage] || [148, 163, 184];
+        const ratio = maxInRow > 0 ? (count / maxInRow) : 0;
+        const alpha = 0.22 + ratio * 0.78;
+        return {
+          background: `rgba(${r},${g},${b},${alpha})`,
+          color: alpha > 0.55 ? "white" : "#1a1635",
+        };
+      };
+
+      if (rows.length === 0) {
+        return (
+          <section className="card p-10 text-center text-slate-400 text-sm">
+            Sem leads fora do funil para o recorte atual.
+          </section>
+        );
+      }
+
+      return (
+        <section>
+          <div className="mb-4">
+            <h2 className="text-xl font-semibold">Origem × Etapa — fora do funil</h2>
+            <p className="text-sm text-slate-500 mt-1 max-w-3xl">
+              Para onde os leads que <strong>saem do funil ativo</strong> estão indo. Cada coluna usa sua cor de identidade; a intensidade mostra em qual etapa daquela origem se concentra mais lead.
+            </p>
+          </div>
+
+          <div className="card p-4 lg:p-5">
+            <table className="w-full border-separate border-spacing-1" style={{ tableLayout: "fixed" }}>
+              <thead>
+                <tr>
+                  <th className="text-left text-[10px] uppercase tracking-[1.4px] text-slate-500 px-2 pb-2" style={{ width: "30%" }}>Origem</th>
+                  {allStages.map(stage => {
+                    const meta = STAGE_META[stage] || { short: stage };
+                    return (
+                      <th key={stage} className="text-center px-1 pb-2 align-bottom" title={stage}>
+                        <div className="text-[11px] font-semibold leading-tight text-slate-700">{meta.short}</div>
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map(row => (
+                  <tr key={row.origem}>
+                    <td className="px-2 py-1.5 align-middle">
+                      <div className="text-[12.5px] font-semibold text-slate-800 truncate" title={row.origem}>{row.origem}</div>
+                      <div className="text-[10px] text-slate-500 tabular-nums">
+                        {fmtNumber(row.total)} lead{row.total === 1 ? "" : "s"} fora do funil
+                      </div>
+                    </td>
+                    {allStages.map(stage => {
+                      const count = row.counts[stage] || 0;
+                      const pct = row.total > 0 ? (100 * count / row.total) : 0;
+                      return (
+                        <td key={stage}
+                            className="text-center tabular-nums px-0.5 py-0.5"
+                            title={`${row.origem} → ${stage}: ${fmtNumber(count)} (${fmtPct(pct)} dos out-of-funnel desta origem)`}>
+                          <div className="rounded-lg py-2 px-1" style={cellStyleOut(stage, count, row.maxInRow)}>
+                            <div className="text-base font-bold leading-none">{count > 0 ? fmtNumber(count) : "·"}</div>
+                            {count > 0 && (
+                              <div className="text-[9.5px] opacity-90 mt-0.5 font-medium">{fmtPct(pct)}</div>
+                            )}
+                          </div>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+                {totalGeral > 0 && (
+                  <tr>
+                    <td className="px-2 pt-2 border-t border-[#2B0C55]/10">
+                      <div className="text-[12.5px] font-semibold text-slate-700">Total</div>
+                      <div className="text-[10px] text-slate-500">por etapa</div>
+                    </td>
+                    {allStages.map(stage => {
+                      const total = totalsByStage[stage] || 0;
+                      const pctOfBase = totalGeral > 0 ? (100 * total / totalGeral) : 0;
+                      return (
+                        <td key={stage} className="text-center pt-2 px-1 border-t border-[#2B0C55]/10">
+                          <div className="text-sm font-bold tabular-nums text-[#2B0C55]">{fmtNumber(total)}</div>
+                          {total > 0 && <div className="text-[9.5px] text-slate-500 tabular-nums">{fmtPct(pctOfBase)}</div>}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                )}
+              </tbody>
+            </table>
+
+            <div className="mt-4 flex items-center gap-3 text-[11.5px] text-slate-500 flex-wrap">
+              <span>Cada etapa tem sua cor de identidade:</span>
+              {allStages.map(stage => {
+                const [r, g, b] = colorByStage[stage] || [148, 163, 184];
+                const meta = STAGE_META[stage] || { short: stage };
+                return (
+                  <div key={stage} className="flex items-center gap-1.5">
+                    <span className="inline-block h-3 w-3 rounded-sm"
+                          style={{ background: `rgba(${r},${g},${b},0.85)` }} />
+                    <span>{meta.short}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    const SELECT_CLS = "bg-white/80 border border-[#2B0C55]/10 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:border-brand-pink";
+
+    function CalendarPopover({ from, to, onApply, onClose, onClear }) {
+      const today = useMemo(() => dateOnly(new Date()), []);
+      const initView = from || to || today;
+      const [viewY, setViewY] = useState(initView.getFullYear());
+      const [viewM, setViewM] = useState(initView.getMonth());
+      const [draftFrom, setDraftFrom] = useState(from);
+      const [draftTo, setDraftTo]     = useState(to);
+
+      const prev = () => { const m = viewM-1; if (m < 0) { setViewY(viewY-1); setViewM(11); } else setViewM(m); };
+      const next = () => { const m = viewM+1; if (m > 11) { setViewY(viewY+1); setViewM(0); } else setViewM(m); };
+
+      const onPick = (d) => {
+        if (!draftFrom || (draftFrom && draftTo)) { setDraftFrom(d); setDraftTo(null); return; }
+        if (d < draftFrom) { setDraftTo(draftFrom); setDraftFrom(d); return; }
+        setDraftTo(d);
+      };
+
+      const grid = useMemo(() => {
+        const first = new Date(viewY, viewM, 1);
+        const startDow = first.getDay();
+        const cells = [];
+        for (let i = 0; i < startDow; i++) cells.push(addDays(first, i - startDow));
+        const lastDay = new Date(viewY, viewM+1, 0).getDate();
+        for (let d = 1; d <= lastDay; d++) cells.push(new Date(viewY, viewM, d));
+        while (cells.length % 7 !== 0) cells.push(addDays(cells[cells.length-1], 1));
+        while (cells.length < 42) cells.push(addDays(cells[cells.length-1], 1));
+        return cells;
+      }, [viewY, viewM]);
+
+      const inRange = (d) => {
+        if (!draftFrom) return false;
+        const dk = dayKey(d), a = dayKey(draftFrom);
+        const b = draftTo ? dayKey(draftTo) : a;
+        return dk >= a && dk <= b;
+      };
+      const presetRange = (days) => {
+        const end = today;
+        const start = addDays(end, -(days-1));
+        setDraftFrom(start); setDraftTo(end);
+        setViewY(end.getFullYear()); setViewM(end.getMonth());
+      };
+      const presetMonth = (offset) => {
+        const ref = new Date(today.getFullYear(), today.getMonth()+offset, 1);
+        const end = new Date(ref.getFullYear(), ref.getMonth()+1, 0);
+        setDraftFrom(ref); setDraftTo(end);
+        setViewY(ref.getFullYear()); setViewM(ref.getMonth());
+      };
+
+      return (
+        <div className="absolute left-0 mt-2 w-[320px] bg-white border border-[#2B0C55]/10 rounded-xl shadow-xl p-3"
+             style={{ zIndex: 60 }}>
+          <div className="flex items-center justify-between mb-2">
+            <button onClick={prev} className="p-1.5 rounded-md hover:bg-[#6A52B3]/10">
+              <svg width="14" height="14" viewBox="0 0 20 20"><path d="M12 5l-5 5 5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+            <div className="text-sm font-semibold text-slate-800">{MESES_LONG[viewM]} {viewY}</div>
+            <button onClick={next} className="p-1.5 rounded-md hover:bg-[#6A52B3]/10">
+              <svg width="14" height="14" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </div>
+          <div className="grid grid-cols-7 gap-1 text-[10px] text-slate-400 uppercase tracking-[1.4px] text-center mb-1">
+            {DOW_HEADERS.map((d,i) => <div key={i}>{d}</div>)}
+          </div>
+          <div className="grid grid-cols-7 gap-1 text-xs">
+            {grid.map((d, i) => {
+              const isCurMonth = d.getMonth() === viewM;
+              const isToday    = dayKey(d) === dayKey(today);
+              const sel        = inRange(d);
+              const isStart    = draftFrom && dayKey(d) === dayKey(draftFrom);
+              const isEnd      = draftTo   && dayKey(d) === dayKey(draftTo);
+              const isEdge     = isStart || isEnd;
+              return (
+                <button key={i} onClick={() => onPick(d)}
+                        className={[
+                          "h-8 rounded-md tabular-nums transition",
+                          !isCurMonth ? "text-slate-300" : "text-slate-700",
+                          sel && !isEdge ? "bg-[#6A52B3]/15 text-[#2B0C55]" : "",
+                          isEdge ? "text-white font-semibold" : "",
+                          !sel && !isEdge ? "hover:bg-slate-100" : "",
+                          isToday && !isEdge ? "ring-1 ring-[#6A52B3]/30" : "",
+                        ].join(" ")}
+                        style={isEdge ? { background: "linear-gradient(135deg,#6A52B3,#549E86)" } : {}}>
+                  {d.getDate()}
+                </button>
+              );
+            })}
+          </div>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {[
+              { label: "Hoje",        run: () => { setDraftFrom(today); setDraftTo(today); } },
+              { label: "Últimos 7d",  run: () => presetRange(7) },
+              { label: "Últimos 30d", run: () => presetRange(30) },
+              { label: "Este mês",    run: () => presetMonth(0) },
+              { label: "Mês passado", run: () => presetMonth(-1) },
+            ].map(p => (
+              <button key={p.label} onClick={p.run}
+                      className="text-[11px] px-2 py-1 rounded-md border border-[#2B0C55]/10 text-slate-600 hover:bg-[#6A52B3]/10 hover:text-[#2B0C55] transition">
+                {p.label}
+              </button>
+            ))}
+          </div>
+          <div className="mt-3 flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
+            <button onClick={() => { onClear(); onClose(); }}
+                    className="text-xs text-slate-500 hover:text-slate-700 underline-offset-2 hover:underline">
+              Limpar
+            </button>
+            <div className="flex items-center gap-2">
+              <button onClick={onClose}
+                      className="text-xs px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100">
+                Cancelar
+              </button>
+              <button onClick={() => { onApply(draftFrom, draftTo || draftFrom); onClose(); }}
+                      disabled={!draftFrom}
+                      className="text-xs px-3 py-1.5 rounded-md text-white font-semibold disabled:opacity-50"
+                      style={{ background: "linear-gradient(120deg,#6A52B3,#63C19B)" }}>
+                Aplicar
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function CalendarButton({ from, to, onChange }) {
+      const [open, setOpen] = useState(false);
+      const ref = useRef(null);
+      useEffect(() => {
+        const h = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+        document.addEventListener("mousedown", h);
+        return () => document.removeEventListener("mousedown", h);
+      }, []);
+      const hasRange = from || to;
+      const label = hasRange
+        ? (from && to && dayKey(from) === dayKey(to) ? fmtDateShort(from) : `${fmtDateShort(from)} – ${fmtDateShort(to || from)}`)
+        : "Calendário";
+      return (
+        <div ref={ref} className="relative">
+          <button type="button" onClick={() => setOpen(o => !o)}
+                  className={SELECT_CLS + " flex items-center gap-2 justify-between min-w-[200px]"}>
+            <span className="flex items-center gap-2 truncate">
+              <svg viewBox="0 0 20 20" width="14" height="14" className="shrink-0 text-[#6A52B3]">
+                <path d="M5 4v2M15 4v2M3 8h14M4 6h12a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+              </svg>
+              <span className={`truncate ${hasRange ? "text-slate-800 font-medium" : "text-slate-500"}`}>{label}</span>
+            </span>
+            <svg width="10" height="10" viewBox="0 0 20 20" className="shrink-0"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+          </button>
+          {open && (
+            <CalendarPopover from={from} to={to}
+              onApply={(a, b) => onChange(a, b || a)}
+              onClose={() => setOpen(false)}
+              onClear={() => onChange(null, null)} />
+          )}
+        </div>
+      );
+    }
+
+    function MultiSelectDropdown({ allLabel, pluralLabel, options, selected, onChange, displayFn, minWidth = 180, popoverWidth = "w-64" }) {
+      const [open, setOpen] = useState(false);
+      const ref = useRef(null);
+      useEffect(() => {
+        const onClick = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+        document.addEventListener("mousedown", onClick);
+        return () => document.removeEventListener("mousedown", onClick);
+      }, []);
+      const display = displayFn || ((v) => v);
+      const label = selected.size === 0
+        ? allLabel
+        : selected.size === 1 ? display([...selected][0])
+        : `${selected.size} ${pluralLabel}`;
+      const toggle = (v) => {
+        const next = new Set(selected);
+        if (next.has(v)) next.delete(v); else next.add(v);
+        onChange(next);
+      };
+      return (
+        <div ref={ref} className="relative">
+          <button type="button" onClick={() => setOpen(o => !o)}
+                  className={SELECT_CLS + " flex items-center gap-2 justify-between"}
+                  style={{ minWidth: `${minWidth}px`, maxWidth: "280px" }}>
+            <span className="truncate">{label}</span>
+            <svg width="10" height="10" viewBox="0 0 20 20" className="shrink-0"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+          </button>
+          {open && (
+            <div className={`absolute left-0 mt-2 ${popoverWidth} bg-white border border-[#2B0C55]/10 rounded-lg shadow-xl max-h-72 overflow-y-auto`}
+                 style={{ zIndex: 50 }}>
+              {options.length === 0 ? (
+                <div className="px-3 py-3 text-xs text-slate-400">Nenhuma opção disponível</div>
+              ) : options.map(v => {
+                const checked = selected.has(v);
+                return (
+                  <label key={v} className="flex items-center gap-2 px-3 py-2 hover:bg-[#6A52B3]/5 cursor-pointer text-sm">
+                    <input type="checkbox" checked={checked} onChange={() => toggle(v)} />
+                    <span className="truncate">{display(v)}</span>
+                  </label>
+                );
+              })}
+              {selected.size > 0 && (
+                <button onClick={() => onChange(new Set())}
+                        className="w-full text-left px-3 py-2 text-xs text-slate-500 border-t border-slate-100 hover:bg-slate-50 sticky bottom-0 bg-white">
+                  Limpar seleção
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function App() {
+      const [data, setData] = useState(null);
+      const [err, setErr] = useState(null);
+      const [selectedYears, setSelectedYears] = useState(new Set());
+      const [selectedMonths, setSelectedMonths] = useState(new Set());
+      const [selectedOrigens, setSelectedOrigens] = useState(new Set());
+      const [selectedPerfis, setSelectedPerfis] = useState(new Set());
+      const [dateFrom, setDateFrom] = useState(null);
+      const [dateTo, setDateTo] = useState(null);
+
+      useEffect(() => {
+        fetch("data/data.json?t=" + Date.now())
+          .then(r => r.json())
+          .then(setData)
+          .catch(e => setErr(e.message));
+      }, []);
+
+      const leads = (data && data.leads) || [];
+
+      const monthsAvailable = useMemo(() => {
+        const set = new Set();
+        for (const l of leads) {
+          const k = leadMonthKey(l.data);
+          if (k) set.add(k);
+        }
+        return [...set].sort().reverse();
+      }, [leads]);
+
+      const yearsAll = useMemo(
+        () => [...new Set(monthsAvailable.map(k => k.split("-")[0]))].sort((a,b)=>b.localeCompare(a)),
+        [monthsAvailable]
+      );
+      const monthsAll = useMemo(
+        () => [...new Set(monthsAvailable.map(k => k.split("-")[1]))].sort(),
+        [monthsAvailable]
+      );
+
+      const origensAll = useMemo(() => {
+        const s = new Set();
+        for (const l of leads) if (l.origem) s.add(l.origem);
+        return [...s].sort((a,b) => a.localeCompare(b, "pt-BR"));
+      }, [leads]);
+
+      const perfisAll = useMemo(() => {
+        const s = new Set();
+        for (const l of leads) if (l.perfil) s.add(l.perfil);
+        return [...s].sort((a,b) => a.localeCompare(b, "pt-BR"));
+      }, [leads]);
+
+      const filtered = useMemo(() => applyFilters(leads, {
+        years: selectedYears, months: selectedMonths,
+        origens: selectedOrigens, perfis: selectedPerfis,
+        dateFrom, dateTo,
+      }), [leads, selectedYears, selectedMonths, selectedOrigens, selectedPerfis, dateFrom, dateTo]);
+
+      const agg = useMemo(() => aggregate(filtered), [filtered]);
+
+      const hasAnyEtapa = leads.some(l => l.etapa);
+
+      return (
+        <>
+          <Header />
+          <main className="px-6 lg:px-10 py-8 max-w-6xl mx-auto space-y-6">
+            <div className="flex items-center justify-between flex-wrap gap-3">
+              <div>
+                <h1 className="text-xl font-semibold">Etapas do lead</h1>
+                <p className="text-sm text-slate-500">Como os leads avançam no pipeline e onde estão parando.</p>
+              </div>
+              {data && (
+                <div className="text-xs text-slate-500">
+                  Atualizado em {new Date(data.generated_at).toLocaleString("pt-BR")} · fonte: {data.sheet_tab}
+                </div>
+              )}
+            </div>
+
+            {data && (
+              <div className="card px-5 py-4 flex items-center justify-between flex-wrap gap-3 relative" style={{ zIndex: 30 }}>
+                <div className="flex items-center flex-wrap gap-3">
+                  <MultiSelectDropdown
+                    allLabel="Todos os meses"
+                    pluralLabel="meses selecionados"
+                    options={monthsAll}
+                    selected={selectedMonths}
+                    onChange={setSelectedMonths}
+                    displayFn={(mm) => MESES_LONG[+mm - 1]}
+                    minWidth={170}
+                    popoverWidth="w-56"
+                  />
+                  <MultiSelectDropdown
+                    allLabel="Todos os anos"
+                    pluralLabel="anos selecionados"
+                    options={yearsAll}
+                    selected={selectedYears}
+                    onChange={setSelectedYears}
+                    minWidth={140}
+                    popoverWidth="w-40"
+                  />
+                  <MultiSelectDropdown
+                    allLabel="Todas as origens"
+                    pluralLabel="origens selecionadas"
+                    options={origensAll}
+                    selected={selectedOrigens}
+                    onChange={setSelectedOrigens}
+                    minWidth={180}
+                    popoverWidth="w-64"
+                  />
+                  <MultiSelectDropdown
+                    allLabel="Todos os perfis"
+                    pluralLabel="perfis selecionados"
+                    options={perfisAll}
+                    selected={selectedPerfis}
+                    onChange={setSelectedPerfis}
+                    minWidth={180}
+                    popoverWidth="w-64"
+                  />
+                  <CalendarButton from={dateFrom} to={dateTo}
+                    onChange={(a, b) => { setDateFrom(a); setDateTo(b); }} />
+                </div>
+                {(selectedYears.size > 0 || selectedMonths.size > 0 || selectedOrigens.size > 0 || selectedPerfis.size > 0 || dateFrom || dateTo) && (
+                  <button onClick={() => {
+                            setSelectedYears(new Set());
+                            setSelectedMonths(new Set());
+                            setSelectedOrigens(new Set());
+                            setSelectedPerfis(new Set());
+                            setDateFrom(null); setDateTo(null);
+                          }}
+                          className="text-xs text-slate-600 underline-offset-2 hover:underline">
+                    Limpar filtros
+                  </button>
+                )}
+              </div>
+            )}
+
+            {err && (
+              <div className="card p-5 text-sm text-rose-700 border-rose-200">Erro ao carregar dados: {err}</div>
+            )}
+
+            {!data && !err && (
+              <div className="card p-10 text-center text-slate-400 text-sm">Carregando…</div>
+            )}
+
+            {data && !hasAnyEtapa && (
+              <div className="card p-6 border-l-4 border-amber-400">
+                <div className="text-sm font-semibold text-amber-900 mb-1">Coluna ETAPA ainda sem dados</div>
+                <p className="text-xs text-slate-600">
+                  Os dashboards abaixo aparecerão assim que a integração começar a popular a coluna <strong>ETAPA</strong> da planilha LeadsV2. Estrutura, estilos e filtros já estão prontos.
+                </p>
+              </div>
+            )}
+
+            {data && (
+              <>
+                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <HighlightKpi label="No funil"
+                                value={fmtNumber(agg.totalFunil)}
+                                sub="Etapa 1 → Ganho" />
+                  <KpiCard label="SQL"
+                           value={fmtNumber(agg.sqlCount)}
+                           sub={`${fmtPct(agg.sqlRate)} dos leads classificados`}
+                           accent />
+                  <KpiCard label="Reuniões agendadas+"
+                           value={fmtNumber(agg.reunioes)}
+                           sub={`${fmtPct(agg.meetingRate)} do funil`}
+                           accent />
+                  <KpiCard label="Ganhos"
+                           value={fmtNumber(agg.ganhos)}
+                           sub={`${fmtPct(agg.winRate)} de conversão geral`}
+                           tone="win" />
+                </section>
+
+                <FunnelChart
+                  funnelCumulative={agg.funnelCumulative}
+                  conversions={agg.conversions}
+                  worstConversionIdx={agg.worstConversionIdx}
+                  totalFunil={agg.totalFunil}
+                />
+
+                <OutOfFunnelCards counts={agg.outOfFunnelCounts} totalWithEtapa={agg.totalWithEtapa} />
+
+                <OrigemEtapaHeatmap leads={filtered} />
+
+                <OrigemEtapaForaFunilHeatmap leads={filtered} />
+
+                <SankeyChart leads={filtered} />
+              </>
+            )}
+          </main>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
