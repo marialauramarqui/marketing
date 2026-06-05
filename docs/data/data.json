@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-05T10:19:38.504Z",
+  "generated_at": "2026-06-05T14:13:28.586Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "LeadsV2",
-  "total_leads": 1422,
-  "total_sql": 198,
-  "sql_pct": 13.92,
+  "total_leads": 1426,
+  "total_sql": 197,
+  "sql_pct": 13.81,
   "perfis": [
     "Pro",
     "Starter",
@@ -27,24 +27,24 @@
   "perfil_counts": {
     "Qualificação incompleta": 782,
     "Multimarca": 213,
-    "Qualificado (Sem Faixa)": 38,
+    "Qualificado (Sem Faixa)": 37,
     "Starter": 125,
     "Suporte": 111,
     "Pro": 35,
     "Desqualificado": 77,
     "CS": 19,
-    "Em atendimento": 21
+    "Em atendimento": 26
   },
   "origem_counts": {
-    "Mídia paga": 277,
-    "Site": 473,
+    "Mídia paga": 279,
+    "Site": 474,
     "Bio Instagram": 83,
-    "Orgânico": 126,
+    "Orgânico": 127,
     "Evento": 9,
     "Evento Denim": 448
   },
   "sql_by_origem": {
-    "Site": 121,
+    "Site": 120,
     "Orgânico": 16,
     "Bio Instagram": 27,
     "Mídia paga": 24,
@@ -81,8 +81,8 @@
     ],
     "counts": {
       "Etapa 3 - concluído": 16,
+      "Etapa 1 - inicial": 122,
       "ETAPA_3_IDENTIFICADO": 1,
-      "Etapa 1 - inicial": 117,
       "Etapa cliente": 10,
       "Etapa 6 - Ganho": 1,
       "Etapa desqualificado": 30,
@@ -91,8 +91,8 @@
     "by_origem": {
       "Site": {
         "Etapa 3 - concluído": 8,
+        "Etapa 1 - inicial": 30,
         "Etapa cliente": 7,
-        "Etapa 1 - inicial": 28,
         "Etapa desqualificado": 10
       },
       "Bio Instagram": {
@@ -103,7 +103,7 @@
         "Etapa 1 - inicial": 5
       },
       "Mídia paga": {
-        "Etapa 1 - inicial": 73,
+        "Etapa 1 - inicial": 75,
         "Etapa 3 - concluído": 3,
         "Etapa desqualificado": 15,
         "Etapa 2 - Identificado": 4,
@@ -111,7 +111,7 @@
       },
       "Orgânico": {
         "Etapa 6 - Ganho": 1,
-        "Etapa 1 - inicial": 8,
+        "Etapa 1 - inicial": 9,
         "Etapa desqualificado": 1,
         "Etapa cliente": 1,
         "Etapa 3 - concluído": 1
@@ -126,6 +126,9 @@
         "Etapa 3 - concluído": 14,
         "ETAPA_3_IDENTIFICADO": 1,
         "Etapa 6 - Ganho": 1
+      },
+      "Em atendimento": {
+        "Etapa 1 - inicial": 26
       },
       "Qualificação incompleta": {
         "Etapa 1 - inicial": 96,
@@ -147,9 +150,6 @@
       "CS": {
         "Etapa cliente": 3
       },
-      "Em atendimento": {
-        "Etapa 1 - inicial": 21
-      },
       "Pro": {
         "Etapa 3 - concluído": 1
       }
@@ -157,8 +157,8 @@
     "by_month": {
       "2026-05": {
         "Etapa 3 - concluído": 3,
+        "Etapa 1 - inicial": 59,
         "ETAPA_3_IDENTIFICADO": 1,
-        "Etapa 1 - inicial": 58,
         "Etapa cliente": 8,
         "Etapa 6 - Ganho": 1,
         "Etapa desqualificado": 16,
@@ -166,7 +166,7 @@
       },
       "2026-06": {
         "Etapa 3 - concluído": 13,
-        "Etapa 1 - inicial": 59,
+        "Etapa 1 - inicial": 63,
         "Etapa desqualificado": 14,
         "Etapa cliente": 2,
         "Etapa 2 - Identificado": 1
@@ -175,16 +175,16 @@
   },
   "midia_paga": {
     "chanel": {
-      "total": 277,
+      "total": 279,
       "total_sql": 24,
-      "sql_pct": 8.66,
+      "sql_pct": 8.6,
       "sem_criativo": 0,
       "sem_anuncio": 0,
       "pct_sem_criativo": 0,
       "criativos": [
         {
           "name": "est_Reg-SP_interesses_moda_SP",
-          "total": 44,
+          "total": 45,
           "sql": 7,
           "by_perfil": {
             "Qualificado (Sem Faixa)": 5,
@@ -193,9 +193,9 @@
             "Desqualificado": 1,
             "Multimarca": 5,
             "CS": 1,
-            "Em atendimento": 4
+            "Em atendimento": 5
           },
-          "sql_pct": 15.91
+          "sql_pct": 15.56
         },
         {
           "name": "Carrossel 2 - Plataforma",
@@ -252,14 +252,14 @@
         },
         {
           "name": "Video_22052026_interesses_moda",
-          "total": 17,
+          "total": 18,
           "sql": 0,
           "by_perfil": {
             "Qualificação incompleta": 10,
             "Desqualificado": 2,
             "CS": 1,
             "Multimarca": 2,
-            "Em atendimento": 2
+            "Em atendimento": 3
           },
           "sql_pct": 0
         },
@@ -583,7 +583,7 @@
       "anuncios": [
         {
           "name": "interesses_moda",
-          "total": 76,
+          "total": 77,
           "sql": 4,
           "by_perfil": {
             "Suporte": 2,
@@ -593,9 +593,9 @@
             "CS": 2,
             "Qualificado (Sem Faixa)": 3,
             "Starter": 1,
-            "Em atendimento": 2
+            "Em atendimento": 3
           },
-          "sql_pct": 5.26
+          "sql_pct": 5.19
         },
         {
           "name": "[F] Captação de novos clientes - Filtro — Carrosséis",
@@ -615,7 +615,7 @@
         },
         {
           "name": "interesses_moda_SP",
-          "total": 49,
+          "total": 50,
           "sql": 7,
           "by_perfil": {
             "Multimarca": 6,
@@ -624,9 +624,9 @@
             "Starter": 2,
             "Desqualificado": 1,
             "CS": 1,
-            "Em atendimento": 4
+            "Em atendimento": 5
           },
-          "sql_pct": 14.29
+          "sql_pct": 14
         },
         {
           "name": "PageView_25percent_last90Days",
@@ -2913,6 +2913,22 @@
           "criativo": "Video_22052026_look_a_like_followers(1)",
           "origem": "WA_leads_26052026",
           "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "05/06/2026 08:16:00",
+          "perfil": "Em atendimento",
+          "anuncio": "interesses_moda_SP",
+          "criativo": "est_Reg-SP_interesses_moda_SP",
+          "origem": "WA_leads_26052026_interesses_moda",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "05/06/2026 08:34:00",
+          "perfil": "Em atendimento",
+          "anuncio": "interesses_moda",
+          "criativo": "Video_22052026_interesses_moda",
+          "origem": "WA_leads_26052026_interesses_moda",
+          "etapa": "Etapa 1 - inicial"
         }
       ]
     },
@@ -3408,7 +3424,7 @@
         "2026-06-02": 17.7,
         "2026-06-03": 37.65,
         "2026-06-04": 16.53,
-        "2026-06-05": 1.04
+        "2026-06-05": 6.32
       },
       "carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 21.45,
@@ -3429,7 +3445,7 @@
         "2026-06-02": 0.56,
         "2026-06-03": 21.71,
         "2026-06-04": 0.67,
-        "2026-06-05": 1.16
+        "2026-06-05": 1.17
       },
       "estatica-rfv_ecommerce_interesses_moda": {
         "2026-05-13": 0.42,
@@ -3506,7 +3522,8 @@
         "2026-05-28": 0.03,
         "2026-05-31": 0.79,
         "2026-06-02": 0.08,
-        "2026-06-03": 0.16
+        "2026-06-03": 0.16,
+        "2026-06-05": 0.11
       },
       "est_ia-atacad-moda_interesses_moda": {
         "2026-05-18": 0,
@@ -3591,7 +3608,8 @@
         "2026-05-29": 0.01
       },
       "carrossel_plat-vesti-v1_interactions_vestioficial_29042026": {
-        "2026-05-19": 1.25
+        "2026-05-19": 1.25,
+        "2026-06-05": 0.11
       },
       "est_ia-atacad-moda_interactions_vestioficial_29042026": {
         "2026-05-19": 3.1,
@@ -3650,7 +3668,8 @@
         "2026-05-20": 1.56,
         "2026-05-28": 0.01,
         "2026-05-29": 0.17,
-        "2026-06-03": 0.01
+        "2026-06-03": 0.01,
+        "2026-06-05": 0.06
       },
       "est_CRM-ia-v2_look_a_like_followers(1)": {
         "2026-05-20": 0.26
@@ -3725,7 +3744,7 @@
         "2026-06-02": 18.58,
         "2026-06-03": 10.09,
         "2026-06-04": 6.66,
-        "2026-06-05": 2.42
+        "2026-06-05": 5.7
       },
       "Video_22052026_interactions_vestioficial_29042026": {
         "2026-05-23": 3.34,
@@ -3746,7 +3765,8 @@
         "2026-06-01": 0.11,
         "2026-06-02": 1.17,
         "2026-06-03": 0.31,
-        "2026-06-04": 1.8
+        "2026-06-04": 1.8,
+        "2026-06-05": 0.52
       },
       "est_Reg-SC_look_a_like_clientes(1) _SC": {
         "2026-05-24": 4.77,
@@ -3763,7 +3783,7 @@
         "2026-06-02": 0.11,
         "2026-06-03": 1.56,
         "2026-06-04": 11.68,
-        "2026-06-05": 0.02
+        "2026-06-05": 2.27
       },
       "est_confec-on_look_a_like_clientes(1)": {
         "2026-05-27": 0.02,
@@ -3880,7 +3900,8 @@
         "2026-06-01": 0.27,
         "2026-06-02": 23.06,
         "2026-06-03": 3.94,
-        "2026-06-04": 21.11
+        "2026-06-04": 21.11,
+        "2026-06-05": 1.05
       },
       "est_Reg-SP_interesses_moda_SP": {
         "2026-05-28": 30.05,
@@ -3891,7 +3912,7 @@
         "2026-06-02": 31.38,
         "2026-06-03": 19.33,
         "2026-06-04": 37.94,
-        "2026-06-05": 0.57
+        "2026-06-05": 8.99
       },
       "carrossel_13052026_look_a_like_followers(1)": {
         "2026-05-29": 0.04
@@ -4408,7 +4429,7 @@
         "2026-06-02": 263,
         "2026-06-03": 509,
         "2026-06-04": 203,
-        "2026-06-05": 19
+        "2026-06-05": 69
       },
       "carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 640,
@@ -4429,7 +4450,7 @@
         "2026-06-02": 14,
         "2026-06-03": 616,
         "2026-06-04": 18,
-        "2026-06-05": 29
+        "2026-06-05": 31
       },
       "estatica-rfv_ecommerce_interesses_moda": {
         "2026-05-13": 36,
@@ -4506,7 +4527,8 @@
         "2026-05-28": 4,
         "2026-05-31": 60,
         "2026-06-02": 1,
-        "2026-06-03": 6
+        "2026-06-03": 6,
+        "2026-06-05": 9
       },
       "est_ia-atacad-moda_interesses_moda": {
         "2026-05-18": 2,
@@ -4591,7 +4613,8 @@
         "2026-05-29": 2
       },
       "carrossel_plat-vesti-v1_interactions_vestioficial_29042026": {
-        "2026-05-19": 27
+        "2026-05-19": 27,
+        "2026-06-05": 2
       },
       "est_ia-atacad-moda_interactions_vestioficial_29042026": {
         "2026-05-19": 73,
@@ -4650,7 +4673,8 @@
         "2026-05-20": 40,
         "2026-05-28": 1,
         "2026-05-29": 6,
-        "2026-06-03": 1
+        "2026-06-03": 1,
+        "2026-06-05": 2
       },
       "est_CRM-ia-v2_look_a_like_followers(1)": {
         "2026-05-20": 8
@@ -4725,7 +4749,7 @@
         "2026-06-02": 346,
         "2026-06-03": 98,
         "2026-06-04": 68,
-        "2026-06-05": 18
+        "2026-06-05": 49
       },
       "Video_22052026_interactions_vestioficial_29042026": {
         "2026-05-23": 104,
@@ -4746,7 +4770,8 @@
         "2026-06-01": 5,
         "2026-06-02": 26,
         "2026-06-03": 7,
-        "2026-06-04": 46
+        "2026-06-04": 46,
+        "2026-06-05": 5
       },
       "est_Reg-SC_look_a_like_clientes(1) _SC": {
         "2026-05-24": 192,
@@ -4763,7 +4788,7 @@
         "2026-06-02": 3,
         "2026-06-03": 32,
         "2026-06-04": 157,
-        "2026-06-05": 1
+        "2026-06-05": 15
       },
       "est_confec-on_look_a_like_clientes(1)": {
         "2026-05-27": 3,
@@ -4880,7 +4905,8 @@
         "2026-06-01": 6,
         "2026-06-02": 1592,
         "2026-06-03": 192,
-        "2026-06-04": 1737
+        "2026-06-04": 1738,
+        "2026-06-05": 79
       },
       "est_Reg-SP_interesses_moda_SP": {
         "2026-05-28": 1623,
@@ -4890,8 +4916,8 @@
         "2026-06-01": 2467,
         "2026-06-02": 2129,
         "2026-06-03": 1073,
-        "2026-06-04": 3467,
-        "2026-06-05": 34
+        "2026-06-04": 3468,
+        "2026-06-05": 569
       },
       "carrossel_13052026_look_a_like_followers(1)": {
         "2026-05-29": 3
@@ -5408,7 +5434,7 @@
         "2026-06-02": 234,
         "2026-06-03": 434,
         "2026-06-04": 184,
-        "2026-06-05": 17
+        "2026-06-05": 62
       },
       "carrossel_ecommerce_interesses_moda": {
         "2026-05-13": 585,
@@ -5429,7 +5455,7 @@
         "2026-06-02": 12,
         "2026-06-03": 557,
         "2026-06-04": 17,
-        "2026-06-05": 29
+        "2026-06-05": 31
       },
       "estatica-rfv_ecommerce_interesses_moda": {
         "2026-05-13": 36,
@@ -5506,7 +5532,8 @@
         "2026-05-28": 4,
         "2026-05-31": 58,
         "2026-06-02": 1,
-        "2026-06-03": 6
+        "2026-06-03": 6,
+        "2026-06-05": 9
       },
       "est_ia-atacad-moda_interesses_moda": {
         "2026-05-18": 2,
@@ -5591,7 +5618,8 @@
         "2026-05-29": 1
       },
       "carrossel_plat-vesti-v1_interactions_vestioficial_29042026": {
-        "2026-05-19": 24
+        "2026-05-19": 24,
+        "2026-06-05": 2
       },
       "est_ia-atacad-moda_interactions_vestioficial_29042026": {
         "2026-05-19": 46,
@@ -5650,7 +5678,8 @@
         "2026-05-20": 39,
         "2026-05-28": 1,
         "2026-05-29": 5,
-        "2026-06-03": 1
+        "2026-06-03": 1,
+        "2026-06-05": 2
       },
       "est_CRM-ia-v2_look_a_like_followers(1)": {
         "2026-05-20": 8
@@ -5725,7 +5754,7 @@
         "2026-06-02": 324,
         "2026-06-03": 91,
         "2026-06-04": 68,
-        "2026-06-05": 17
+        "2026-06-05": 44
       },
       "Video_22052026_interactions_vestioficial_29042026": {
         "2026-05-23": 89,
@@ -5746,7 +5775,8 @@
         "2026-06-01": 5,
         "2026-06-02": 26,
         "2026-06-03": 7,
-        "2026-06-04": 42
+        "2026-06-04": 42,
+        "2026-06-05": 3
       },
       "est_Reg-SC_look_a_like_clientes(1) _SC": {
         "2026-05-24": 175,
@@ -5763,7 +5793,7 @@
         "2026-06-02": 3,
         "2026-06-03": 31,
         "2026-06-04": 145,
-        "2026-06-05": 1
+        "2026-06-05": 15
       },
       "est_confec-on_look_a_like_clientes(1)": {
         "2026-05-27": 3,
@@ -5880,7 +5910,8 @@
         "2026-06-01": 6,
         "2026-06-02": 1392,
         "2026-06-03": 187,
-        "2026-06-04": 1691
+        "2026-06-04": 1691,
+        "2026-06-05": 75
       },
       "est_Reg-SP_interesses_moda_SP": {
         "2026-05-28": 1510,
@@ -5891,7 +5922,7 @@
         "2026-06-02": 1978,
         "2026-06-03": 1005,
         "2026-06-04": 3336,
-        "2026-06-05": 29
+        "2026-06-05": 527
       },
       "carrossel_13052026_look_a_like_followers(1)": {
         "2026-05-29": 3
@@ -6506,7 +6537,8 @@
         "2026-05-28": 0,
         "2026-05-31": 0,
         "2026-06-02": 0,
-        "2026-06-03": 0
+        "2026-06-03": 0,
+        "2026-06-05": 0
       },
       "est_ia-atacad-moda_interesses_moda": {
         "2026-05-18": 0,
@@ -6591,7 +6623,8 @@
         "2026-05-29": 0
       },
       "carrossel_plat-vesti-v1_interactions_vestioficial_29042026": {
-        "2026-05-19": 0
+        "2026-05-19": 0,
+        "2026-06-05": 0
       },
       "est_ia-atacad-moda_interactions_vestioficial_29042026": {
         "2026-05-19": 0,
@@ -6650,7 +6683,8 @@
         "2026-05-20": 1,
         "2026-05-28": 0,
         "2026-05-29": 0,
-        "2026-06-03": 0
+        "2026-06-03": 0,
+        "2026-06-05": 0
       },
       "est_CRM-ia-v2_look_a_like_followers(1)": {
         "2026-05-20": 0
@@ -6746,7 +6780,8 @@
         "2026-06-01": 0,
         "2026-06-02": 0,
         "2026-06-03": 0,
-        "2026-06-04": 0
+        "2026-06-04": 0,
+        "2026-06-05": 0
       },
       "est_Reg-SC_look_a_like_clientes(1) _SC": {
         "2026-05-24": 0,
@@ -6763,7 +6798,7 @@
         "2026-06-02": 0,
         "2026-06-03": 0,
         "2026-06-04": 2,
-        "2026-06-05": 0
+        "2026-06-05": 1
       },
       "est_confec-on_look_a_like_clientes(1)": {
         "2026-05-27": 0,
@@ -6880,7 +6915,8 @@
         "2026-06-01": 0,
         "2026-06-02": 2,
         "2026-06-03": 0,
-        "2026-06-04": 0
+        "2026-06-04": 0,
+        "2026-06-05": 0
       },
       "est_Reg-SP_interesses_moda_SP": {
         "2026-05-28": 5,
@@ -6891,7 +6927,7 @@
         "2026-06-02": 3,
         "2026-06-03": 7,
         "2026-06-04": 6,
-        "2026-06-05": 1
+        "2026-06-05": 2
       },
       "carrossel_13052026_look_a_like_followers(1)": {
         "2026-05-29": 0
@@ -7005,11 +7041,11 @@
       },
       "carrossel_ecommerce_PageView_25percent_last90Days": {
         "2026-05": 337,
-        "2026-06": 1100
+        "2026-06": 1134
       },
       "carrossel_ecommerce_interesses_moda": {
         "2026-05": 600,
-        "2026-06": 1021
+        "2026-06": 1024
       },
       "estatica-rfv_ecommerce_interesses_moda": {
         "2026-05": 296
@@ -7040,7 +7076,7 @@
       },
       "est_depoimento-cliente_look_a_like_followers(1)": {
         "2026-05": 6,
-        "2026-06": 1
+        "2026-06": 3
       },
       "est_CRM-ia-v1_look_a_like_followers(1)": {
         "2026-05": 19
@@ -7089,7 +7125,8 @@
         "2026-05": 22
       },
       "carrossel_plat-vesti-v1_interactions_vestioficial_29042026": {
-        "2026-05": 24
+        "2026-05": 24,
+        "2026-06": 2
       },
       "est_ia-atacad-moda_interactions_vestioficial_29042026": {
         "2026-05": 206,
@@ -7135,7 +7172,7 @@
       },
       "Video_22052026_look_a_like_followers(1)": {
         "2026-05": 489,
-        "2026-06": 546
+        "2026-06": 569
       },
       "Video_22052026_interactions_vestioficial_29042026": {
         "2026-05": 22,
@@ -7143,7 +7180,7 @@
       },
       "Video_22052026_look_a_like_clientes(1)": {
         "2026-05": 112,
-        "2026-06": 78
+        "2026-06": 81
       },
       "Video_22052026_interesses_moda_": {
         "2026-05": 360
@@ -7157,7 +7194,7 @@
       },
       "Video_22052026_interesses_moda": {
         "2026-05": 15,
-        "2026-06": 35
+        "2026-06": 50
       },
       "est_confec-on_look_a_like_clientes(1)": {
         "2026-05": 18
@@ -7250,11 +7287,11 @@
       },
       "est_Reg-SC_interesses_moda_SC": {
         "2026-05": 251,
-        "2026-06": 3101
+        "2026-06": 3162
       },
       "est_Reg-SP_interesses_moda_SP": {
         "2026-05": 6171,
-        "2026-06": 8279
+        "2026-06": 8684
       },
       "carrossel_plat-vesti-v2_interesses_moda_SP": {
         "2026-06": 38
@@ -13829,8 +13866,8 @@
     {
       "data": "19/05/2026 20:31:00",
       "origem": "Site",
-      "perfil": "Qualificado (Sem Faixa)",
-      "etapa": ""
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
     },
     {
       "data": "19/05/2026 21:32:00",
@@ -15803,6 +15840,30 @@
     {
       "data": "05/06/2026 01:08:00",
       "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "05/06/2026 08:16:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "05/06/2026 08:34:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "05/06/2026 09:08:00",
+      "origem": "Site",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "05/06/2026 10:41:00",
+      "origem": "Orgânico",
       "perfil": "Em atendimento",
       "etapa": "Etapa 1 - inicial"
     }
