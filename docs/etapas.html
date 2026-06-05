@@ -1168,7 +1168,7 @@
                                 sub="Etapa 1 → Ganho" />
                   <KpiCard label="SQL"
                            value={fmtNumber(agg.sqlCount)}
-                           sub={`${fmtPct(agg.sqlRate)} dos leads classificados`}
+                           sub={`${fmtPct(agg.sqlRate)} dos leads MQLs`}
                            accent />
                   <KpiCard label="Reuniões agendadas+"
                            value={fmtNumber(agg.reunioes)}
@@ -1180,18 +1180,18 @@
                            tone="win" />
                 </section>
 
+                <OrigemEtapaForaFunilHeatmap leads={filtered} />
+
+                <OrigemEtapaHeatmap leads={filtered} />
+
+                <OutOfFunnelCards counts={agg.outOfFunnelCounts} totalWithEtapa={agg.totalWithEtapa} />
+
                 <FunnelChart
                   funnelCumulative={agg.funnelCumulative}
                   conversions={agg.conversions}
                   worstConversionIdx={agg.worstConversionIdx}
                   totalFunil={agg.totalFunil}
                 />
-
-                <OutOfFunnelCards counts={agg.outOfFunnelCounts} totalWithEtapa={agg.totalWithEtapa} />
-
-                <OrigemEtapaHeatmap leads={filtered} />
-
-                <OrigemEtapaForaFunilHeatmap leads={filtered} />
               </>
             )}
           </main>
