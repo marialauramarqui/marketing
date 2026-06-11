@@ -128,7 +128,10 @@ async function fetchMetaAdsMetadata(creds) {
   // alimentar o filtro de campanha e o rodapé "Conjunto de anúncio" do card.
   const params = new URLSearchParams({
     fields: 'name,creative.thumbnail_width(400).thumbnail_height(400){thumbnail_url},campaign{id,name,status,effective_status},adset{id,name}',
-    limit: '500',
+    // limit baixo de propósito: com a expansão de creative{thumbnail_url} aninhada,
+    // páginas grandes (ex.: 500) fazem a Meta recusar com "Please reduce the amount
+    // of data you're asking for". A paginação abaixo (paging.next) cobre o resto.
+    limit: '50',
     access_token: creds.token,
   });
   let url = `https://graph.facebook.com/${META_API_VERSION}/${creds.acct}/ads?${params}`;
