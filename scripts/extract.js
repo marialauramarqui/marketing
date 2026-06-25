@@ -281,6 +281,44 @@ async function getAuth() {
   });
 }
 
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+// Campos do midia_paga que vêm da Meta (tudo menos `chanel`, recalculado da planilha).
+const META_FIELDS = [
+  'spend_daily', 'impressions_daily', 'reach_daily', 'new_msg_contacts_daily',
+  'spend_window', 'reach_monthly', 'thumbnails', 'ad_campaign', 'ad_adset', 'campaigns',
+];
+
+// Repete uma chamada assíncrona em caso de erro transitório da Meta
+// (ex.: "An unknown error occurred (code 1)", que costuma passar na 2ª tentativa).
+async function withRetry(label, fn, attempts = 3, baseDelayMs = 3000) {
+  let lastErr;
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      lastErr = e;
+      if (i < attempts) {
+        console.warn(`AVISO: ${label} falhou (tentativa ${i}/${attempts}): ${e.message} — repetindo em ${(baseDelayMs * i) / 1000}s`);
+        await sleep(baseDelayMs * i);
+      }
+    }
+  }
+  throw lastErr;
+}
+
+// Lê o midia_paga do data.json anterior (já em disco via checkout no CI) para reaproveitar
+// dados da Meta quando a atualização falhar — evita "perder" imagens/gasto numa falha pontual.
+function loadPrevMidiaPaga() {
+  try {
+    if (fs.existsSync(OUT_PATH)) {
+      const prev = JSON.parse(fs.readFileSync(OUT_PATH, 'utf8'));
+      return (prev && prev.midia_paga) || null;
+    }
+  } catch (e) { /* ignore */ }
+  return null;
+}
+
 async function main() {
   const auth = await (await getAuth()).getClient();
   const sheets = google.sheets({ version: 'v4', auth });
@@ -419,6 +457,7 @@ async function main() {
       .sort((a, b) => a.localeCompare(b, 'pt-BR')),
   ];
 
+  const prevMidiaPaga = loadPrevMidiaPaga();
   const metaCreds = loadMetaCreds();
   if (metaCreds) {
     try {
@@ -435,7 +474,7 @@ async function main() {
       const since = earliestIso && earliestIso < fallback ? earliestIso : fallback;
       const until = today.toISOString().slice(0, 10);
       console.log(`Buscando insights diários no Meta Ads (${since} → ${until})...`);
-      const insights = await fetchMetaInsightsDaily(metaCreds, since, until);
+      const insights = await withRetry('insights diários da Meta', () => fetchMetaInsightsDaily(metaCreds, since, until));
       midia_paga.spend_daily             = insights.spend;
       midia_paga.impressions_daily       = insights.impressions;
       midia_paga.reach_daily             = insights.reach;
@@ -448,7 +487,7 @@ async function main() {
 
       try {
         console.log('Buscando alcance único por mês...');
-        const reachMonthly = await fetchMetaReachMonthly(metaCreds, since, until);
+        const reachMonthly = await withRetry('alcance mensal da Meta', () => fetchMetaReachMonthly(metaCreds, since, until));
         midia_paga.reach_monthly = reachMonthly;
         const totalAds = Object.keys(reachMonthly).length;
         console.log(`OK alcance mensal: ${totalAds} ad(s) mapeados`);
@@ -457,7 +496,7 @@ async function main() {
       }
 
       try {
-        const { thumbs, adCampaign, adAdset, campaigns } = await fetchMetaAdsMetadata(metaCreds);
+        const { thumbs, adCampaign, adAdset, campaigns } = await withRetry('metadata/imagens dos ads da Meta', () => fetchMetaAdsMetadata(metaCreds));
         midia_paga.thumbnails = thumbs;
         midia_paga.ad_campaign = adCampaign;
         midia_paga.ad_adset = adAdset;
@@ -472,6 +511,22 @@ async function main() {
     }
   } else {
     console.warn('AVISO: credenciais Meta nao definidas (META_ACCESS_TOKEN/META_AD_ACCOUNT_ID ou ~/.secrets/meta.json) — pulando.');
+  }
+
+  // Reaproveita dados da Meta da execução anterior para os campos que não vieram agora
+  // (falha total ou parcial). Assim uma falha transitória da Meta não zera as imagens/gasto
+  // do dashboard — os leads continuam atualizando normalmente (vêm da planilha).
+  if (prevMidiaPaga) {
+    const restored = [];
+    for (const f of META_FIELDS) {
+      if (midia_paga[f] === undefined && prevMidiaPaga[f] !== undefined) {
+        midia_paga[f] = prevMidiaPaga[f];
+        restored.push(f);
+      }
+    }
+    if (restored.length) {
+      console.warn(`AVISO: reaproveitando dados anteriores da Meta (atualização falhou para): ${restored.join(', ')}`);
+    }
   }
 
   const out = {
