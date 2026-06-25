@@ -3,20 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    (function () {
-      var AUTH_KEY = "vesti.auth.ok";
-      var TTL = 1000 * 60 * 60 * 8;
-      try {
-        var raw = sessionStorage.getItem(AUTH_KEY);
-        if (raw) {
-          var data = JSON.parse(raw);
-          if (data && data.ts && Date.now() - data.ts < TTL) return;
-        }
-      } catch (e) { /* ignore */ }
-      window.location.replace("login.html");
-    })();
-  </script>
+  <!-- Guard de acesso: redireciona p/ login se a sessão não for válida -->
+  <script src="js/auth-guard.js" data-guard="on"></script>
   <title>Vesti · Mídia Paga</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -93,7 +81,6 @@
   <script type="text/babel" data-presets="react">
     const { useState, useEffect, useMemo, useRef } = React;
 
-    const AUTH_KEY = "vesti.auth.ok";
     const SQL_PERFIS = new Set(["Pro", "Starter", "Qualificado (Sem Faixa)"]);
     const PERFIL_ORDER = ["Pro", "Starter", "Qualificado (Sem Faixa)", "Multimarca", "Suporte", "Desqualificado", "Qualificação incompleta"];
     const MESES_LONG = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
@@ -297,10 +284,7 @@
     }
 
     function Header() {
-      const logout = () => {
-        try { sessionStorage.removeItem(AUTH_KEY); } catch (_) {}
-        window.location.replace("login.html");
-      };
+      const logout = () => window.VestiAuth.logout();
       return (
         <header className="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-[#2B0C55]/10 backdrop-blur-sm">
           <div className="flex items-center gap-3">

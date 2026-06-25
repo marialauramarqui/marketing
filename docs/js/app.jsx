@@ -12,7 +12,6 @@
   } = Recharts;
 
   // --------------------------- constants ---------------------------
-  const AUTH_KEY = "vesti.auth.ok";
   const SQL_PERFIS = ["Pro", "Starter", "Qualificado (Sem Faixa)"];
   const MONTH_LABELS_FULL = [
     "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
@@ -336,10 +335,7 @@
 
   // --------------------------- Header ---------------------------
   function Header({ total, updatedAt }) {
-    const logout = () => {
-      try { sessionStorage.removeItem(AUTH_KEY); } catch (_) {}
-      window.location.replace("login.html");
-    };
+    const logout = () => window.VestiAuth.logout();
     return (
       <header className="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-[#2B0C55]/10 backdrop-blur-sm">
         <div className="flex items-center gap-3">
@@ -767,56 +763,6 @@
     );
   }
 
-  // --------------------------- Background canvas ---------------------------
-  function initLeadsCanvas() {
-    const canvas = document.getElementById("leads-canvas");
-    if (!canvas || !canvas.getContext) return;
-    const ctx = canvas.getContext("2d");
-    let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const nodes = []; const COUNT = 42; const LINK_DIST = 130;
-    const resize = () => {
-      w = canvas.clientWidth; h = canvas.clientHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-    const init = () => {
-      nodes.length = 0;
-      for (let i = 0; i < COUNT; i++) {
-        nodes.push({
-          x: Math.random() * w, y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
-          r: Math.random() * 1.6 + 0.6,
-          hue: Math.random() < 0.5 ? "#6A52B3" : "#63C19B",
-        });
-      }
-    };
-    const step = () => {
-      ctx.clearRect(0,0,w,h);
-      for (const n of nodes) { n.x += n.vx; n.y += n.vy;
-        if (n.x < 0 || n.x > w) n.vx *= -1;
-        if (n.y < 0 || n.y > h) n.vy *= -1; }
-      for (let i = 0; i < nodes.length; i++)
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i], b = nodes[j];
-          const d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < LINK_DIST) {
-            const alpha = (1 - d / LINK_DIST) * 0.3;
-            ctx.strokeStyle = `rgba(106,82,179,${(alpha * 0.55).toFixed(3)})`;
-            ctx.lineWidth = 0.6;
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-          }
-        }
-      for (const n of nodes) {
-        ctx.fillStyle = n.hue;
-        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
-      }
-      requestAnimationFrame(step);
-    };
-    const onResize = () => { resize(); init(); };
-    window.addEventListener("resize", onResize);
-    resize(); init(); step();
-  }
-
   // --------------------------- App ---------------------------
   function App() {
     const [raw, setRaw]         = useState(null);
@@ -860,7 +806,7 @@
     }, []);
 
     // Init background canvas once
-    useEffect(() => { initLeadsCanvas(); }, []);
+    useEffect(() => { window.initLeadsCanvas && window.initLeadsCanvas(); }, []);
 
     // Available years, default to most recent
     const years = useMemo(() => {

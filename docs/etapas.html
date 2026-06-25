@@ -3,20 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    (function () {
-      var AUTH_KEY = "vesti.auth.ok";
-      var TTL = 1000 * 60 * 60 * 8;
-      try {
-        var raw = sessionStorage.getItem(AUTH_KEY);
-        if (raw) {
-          var data = JSON.parse(raw);
-          if (data && data.ts && Date.now() - data.ts < TTL) return;
-        }
-      } catch (e) { /* ignore */ }
-      window.location.replace("login.html");
-    })();
-  </script>
+  <!-- Guard de acesso: redireciona p/ login se a sessão não for válida -->
+  <script src="js/auth-guard.js" data-guard="on"></script>
   <title>Vesti · Etapas do Lead</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -93,7 +81,6 @@
   <script type="text/babel" data-presets="react">
     const { useState, useEffect, useMemo, useRef } = React;
 
-    const AUTH_KEY = "vesti.auth.ok";
     const MESES_LONG = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 
     // Ordem oficial do funil (Etapa 1 → 6). Vem repetida do extract.js para o caso
@@ -246,10 +233,7 @@
     }
 
     function Header() {
-      const logout = () => {
-        try { sessionStorage.removeItem(AUTH_KEY); } catch (_) {}
-        window.location.replace("login.html");
-      };
+      const logout = () => window.VestiAuth.logout();
       const navBtnSecondary = "inline-flex items-center gap-1.5 text-xs text-slate-700 border border-[#2B0C55]/10 rounded-lg px-3 py-2 hover:text-slate-900 hover:border-brand-pink hover:bg-brand-pink/10 transition";
       const navBtnPrimary   = "relative inline-flex items-center gap-1.5 text-xs font-semibold text-white rounded-lg px-3.5 py-2 shadow-[0_8px_20px_rgba(106,82,179,.35)] hover:shadow-[0_10px_26px_rgba(106,82,179,.5)] hover:-translate-y-0.5 transition";
       const primaryStyle    = { background: "linear-gradient(120deg,#6A52B3 0%,#8A6DD1 55%,#63C19B 100%)" };

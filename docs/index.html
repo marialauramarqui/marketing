@@ -3,20 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    (function () {
-      var AUTH_KEY = "vesti.auth.ok";
-      var TTL = 1000 * 60 * 60 * 8;
-      try {
-        var raw = sessionStorage.getItem(AUTH_KEY);
-        if (raw) {
-          var data = JSON.parse(raw);
-          if (data && data.ts && Date.now() - data.ts < TTL) return;
-        }
-      } catch (e) { /* ignore */ }
-      window.location.replace("login.html");
-    })();
-  </script>
+  <!-- Guard de acesso: redireciona p/ login se a sessão não for válida -->
+  <script src="js/auth-guard.js" data-guard="on"></script>
   <title>Vesti · Dashboard de Leads</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -124,6 +112,7 @@
 
   <div id="root" class="relative z-10"></div>
 
-  <script type="text/babel" data-presets="react" src="js/app.jsx?v=2026-06-24-horario"></script>
+  <script src="js/bg-canvas.js"></script>
+  <script type="text/babel" data-presets="react" src="js/app.jsx?v=2026-06-24-dedup"></script>
 </body>
 </html>
