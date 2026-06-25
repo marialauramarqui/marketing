@@ -26,19 +26,20 @@
   </script>
 
   <style>
-    html, body { background: #f7f4fb; color: #1a1635; }
+    /* ===== Tema escuro Vesti (roxo + verde) ===== */
+    html, body { background: #14101f; color: #e9e4f4; }
     body {
       background:
-        radial-gradient(ellipse at top left, #e9def5 0%, transparent 55%),
-        radial-gradient(ellipse at bottom right, #dff0e8 0%, transparent 55%),
-        #f7f4fb;
+        radial-gradient(ellipse at top left, rgba(106,82,179,0.28) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom right, rgba(99,193,155,0.18) 0%, transparent 55%),
+        #14101f;
       min-height: 100vh;
     }
     .bg-grid {
       position: fixed; inset: 0;
       background-image:
-        linear-gradient(rgba(43,12,85,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(43,12,85,0.05) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
       -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
@@ -46,7 +47,7 @@
     }
     .orb {
       position: fixed; border-radius: 50%;
-      filter: blur(80px); opacity: 0.28; pointer-events: none; z-index: 0;
+      filter: blur(80px); opacity: 0.32; pointer-events: none; z-index: 0;
       animation: drift 18s ease-in-out infinite;
     }
     .orb-1 { width:420px; height:420px; background: radial-gradient(circle,#6A52B3 0%,transparent 70%); top:-120px; left:-80px; }
@@ -54,23 +55,39 @@
     @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.08); } }
 
     .card {
-      background: rgba(255,255,255,0.85);
+      background: rgba(30,24,52,0.70);
       backdrop-filter: blur(18px) saturate(140%);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
-      border: 1px solid rgba(43,12,85,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(43,12,85,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
     }
     ::-webkit-scrollbar { width: 10px; height: 10px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(43,12,85,0.14); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(43,12,85,0.26); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.26); }
 
+    /* ===== Overrides utilitários Tailwind p/ o escuro ===== */
+    [class*="bg-white"]         { background-color: rgba(42,35,68,0.72) !important; }
+    [class*="bg-slate-100"]     { background-color: rgba(255,255,255,0.06) !important; }
+    [class*="border-slate-100"] { border-color: rgba(255,255,255,0.08) !important; }
+    [class*="border-[#2B0C55]"] { border-color: rgba(255,255,255,0.10) !important; }
+    [class*="bg-[#2B0C55]"]     { background-color: rgba(138,109,209,0.90) !important; }
+    [class*="text-slate-900"]   { color: #ffffff !important; }
+    [class*="text-slate-800"]   { color: #e7e2f4 !important; }
+    [class*="text-slate-700"]   { color: #d4cdea !important; }
+    [class*="text-slate-600"]   { color: #bcb4dc !important; }
+    [class*="text-slate-500"]   { color: #a299c6 !important; }
+    [class*="text-slate-400"]   { color: #877da6 !important; }
+    [class*="text-slate-300"]   { color: #6f6691 !important; }
+    [class*="text-[#2B0C55]"]   { color: #cdbff2 !important; }
+    [class*="text-[#6A52B3]"]   { color: #9c84ea !important; }
+    input[type="checkbox"]      { accent-color: #8A6DD1; }
     .recharts-default-tooltip {
-      background: rgba(255,255,255,0.96) !important;
-      border: 1px solid rgba(43,12,85,0.1) !important;
+      background: rgba(24,19,42,0.96) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
       border-radius: 10px !important;
-      color: #1a1635 !important;
+      color: #e9e4f4 !important;
     }
   </style>
 
@@ -183,7 +200,7 @@
             </span>
             <div className="flex flex-col leading-tight">
               <span className="text-[17px] font-bold tracking-wide"
-                    style={{ background:"linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
+                    style={{ background:"linear-gradient(120deg,#9C84EA 0%,#8A6DD1 45%,#63C19B 100%)",
                              WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
                 Vesti
               </span>
@@ -349,7 +366,7 @@
       return (l.perfil || "").trim().toLowerCase() === "pro";
     }
 
-    function WeeklyLineChart({ rows, seriesKey, title, subtitle, mainColor = "#6A52B3", mainColorDark = "#2B0C55" }) {
+    function WeeklyLineChart({ rows, seriesKey, title, subtitle, mainColor = "#6A52B3", mainColorDark = "#8A6DD1" }) {
       return (
         <div className="card card-gradient-border p-5">
           <div className="flex items-baseline justify-between mb-3">
@@ -359,9 +376,9 @@
           <div style={{ width: "100%", height: 360 }}>
             <ResponsiveContainer>
               <LineChart data={rows} margin={{ top: 32, right: 24, left: 36, bottom: 24 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(43,12,85,0.08)" />
-                <XAxis dataKey="label" tick={{ fill: "#475569", fontSize: 12 }} padding={{ left: 16, right: 16 }} />
-                <YAxis tick={{ fill: "#475569", fontSize: 12 }} allowDecimals={false}
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.10)" />
+                <XAxis dataKey="label" tick={{ fill: "#a299c6", fontSize: 12 }} padding={{ left: 16, right: 16 }} />
+                <YAxis tick={{ fill: "#a299c6", fontSize: 12 }} allowDecimals={false}
                        domain={[0, (dataMax) => Math.max(5, Math.ceil(dataMax * 1.25))]} />
                 <Tooltip
                   formatter={(v, name) => [fmtNumber(v), name]}
@@ -397,13 +414,13 @@
           <div style={{ width: "100%", height: 340 }}>
             <ResponsiveContainer>
               <BarChart data={rows} margin={{ top: 16, right: 16, left: 0, bottom: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(43,12,85,0.08)" />
-                <XAxis dataKey="label" tick={{ fill: "#475569", fontSize: 12 }} />
-                <YAxis tick={{ fill: "#475569", fontSize: 12 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.10)" />
+                <XAxis dataKey="label" tick={{ fill: "#a299c6", fontSize: 12 }} />
+                <YAxis tick={{ fill: "#a299c6", fontSize: 12 }} />
                 <Tooltip formatter={(v) => fmtNumber(v)} />
                 <Legend wrapperStyle={{ paddingTop: 8 }} />
                 <Bar dataKey="Realizado" fill="#6A52B3" radius={[6,6,0,0]}>
-                  <LabelList dataKey="Realizado" position="top" style={{ fill: "#2B0C55", fontSize: 11, fontWeight: 600 }} />
+                  <LabelList dataKey="Realizado" position="top" style={{ fill: "#cdbff2", fontSize: 11, fontWeight: 600 }} />
                 </Bar>
                 <Bar dataKey="Meta" fill="#63C19B" radius={[6,6,0,0]}>
                   <LabelList dataKey="Meta" position="top" style={{ fill: "#2F6B56", fontSize: 11, fontWeight: 600 }} />
@@ -475,7 +492,7 @@
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
               <div>
                 <h1 className="text-2xl font-bold tracking-tight"
-                    style={{ background:"linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
+                    style={{ background:"linear-gradient(120deg,#9C84EA 0%,#8A6DD1 45%,#63C19B 100%)",
                              WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
                   Metas mensais
                 </h1>

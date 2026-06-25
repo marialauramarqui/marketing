@@ -26,19 +26,20 @@
   </script>
 
   <style>
-    html, body { background: #f7f4fb; color: #1a1635; }
+    /* ===== Tema escuro Vesti (roxo + verde) ===== */
+    html, body { background: #14101f; color: #e9e4f4; }
     body {
       background:
-        radial-gradient(ellipse at top left, #e9def5 0%, transparent 55%),
-        radial-gradient(ellipse at bottom right, #dff0e8 0%, transparent 55%),
-        #f7f4fb;
+        radial-gradient(ellipse at top left, rgba(106,82,179,0.28) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom right, rgba(99,193,155,0.18) 0%, transparent 55%),
+        #14101f;
       min-height: 100vh;
     }
     .bg-grid {
       position: fixed; inset: 0;
       background-image:
-        linear-gradient(rgba(43,12,85,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(43,12,85,0.05) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
       -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
@@ -46,7 +47,7 @@
     }
     .orb {
       position: fixed; border-radius: 50%;
-      filter: blur(80px); opacity: 0.28; pointer-events: none; z-index: 0;
+      filter: blur(80px); opacity: 0.32; pointer-events: none; z-index: 0;
       animation: drift 18s ease-in-out infinite;
     }
     .orb-1 { width:420px; height:420px; background: radial-gradient(circle,#6A52B3 0%,transparent 70%); top:-120px; left:-80px; }
@@ -54,17 +55,40 @@
     @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.08); } }
 
     .card {
-      background: rgba(255,255,255,0.85);
+      background: rgba(30,24,52,0.70);
       backdrop-filter: blur(18px) saturate(140%);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
-      border: 1px solid rgba(43,12,85,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(43,12,85,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
     }
     ::-webkit-scrollbar { width: 10px; height: 10px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(43,12,85,0.14); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(43,12,85,0.26); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.26); }
+
+    /* ===== Overrides utilitários Tailwind p/ o escuro ===== */
+    [class*="bg-white"]         { background-color: rgba(42,35,68,0.72) !important; }
+    [class*="bg-slate-100"]     { background-color: rgba(255,255,255,0.06) !important; }
+    [class*="border-slate-100"] { border-color: rgba(255,255,255,0.08) !important; }
+    [class*="border-[#2B0C55]"] { border-color: rgba(255,255,255,0.10) !important; }
+    [class*="bg-[#2B0C55]"]     { background-color: rgba(138,109,209,0.90) !important; }
+    [class*="text-slate-900"]   { color: #ffffff !important; }
+    [class*="text-slate-800"]   { color: #e7e2f4 !important; }
+    [class*="text-slate-700"]   { color: #d4cdea !important; }
+    [class*="text-slate-600"]   { color: #bcb4dc !important; }
+    [class*="text-slate-500"]   { color: #a299c6 !important; }
+    [class*="text-slate-400"]   { color: #877da6 !important; }
+    [class*="text-slate-300"]   { color: #6f6691 !important; }
+    [class*="text-[#2B0C55]"]   { color: #cdbff2 !important; }
+    [class*="text-[#6A52B3]"]   { color: #9c84ea !important; }
+    input[type="checkbox"]      { accent-color: #8A6DD1; }
+    .recharts-default-tooltip {
+      background: rgba(24,19,42,0.96) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 10px !important;
+      color: #e9e4f4 !important;
+    }
   </style>
 
   <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
@@ -247,7 +271,7 @@
             </span>
             <div className="flex flex-col leading-tight">
               <span className="text-[17px] font-bold tracking-wide"
-                    style={{ background:"linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
+                    style={{ background:"linear-gradient(120deg,#9C84EA 0%,#8A6DD1 45%,#63C19B 100%)",
                              WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
                 Vesti
               </span>
@@ -301,7 +325,7 @@
           WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent"
         },
       };
-      const valueStyle = tone && toneStyles[tone] ? toneStyles[tone] : accentStyle;
+      const valueStyle = { color: "#ffffff" };
       return (
         <div className="card p-5">
           <div className="text-[11px] uppercase tracking-[1.4px] text-slate-500">{label}</div>
@@ -321,8 +345,7 @@
           <div className="relative">
             <div className="text-[11px] uppercase tracking-[1.4px] text-slate-500">{label}</div>
             <div className="mt-1 text-4xl font-bold tabular-nums"
-                 style={{ background: "linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
-                          WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                 style={{ color: "#ffffff" }}>
               {value}
             </div>
             {sub && <div className="mt-1 text-xs text-slate-500">{sub}</div>}
@@ -334,15 +357,20 @@
     // Funil visual customizado — desenha trapezoides com largura proporcional ao count,
     // gradient pink → green do topo (Etapa 1) ao fundo (Etapa 6 Ganho).
     function FunnelChart({ funnelCumulative, totalFunil }) {
-      if (!totalFunil) return (
+      // A pedido do negócio, o funil começa na Etapa 2 (a Etapa 1 sai da visão).
+      // A Etapa 2 passa a ser o topo / 100% do gráfico. Os KPIs acima (MQL,
+      // % do funil, conversão geral) seguem inalterados, na base da Etapa 1.
+      const rows = funnelCumulative.slice(1);
+      const base = rows.length ? rows[0].count : 0;
+      if (!base) return (
         <div className="card p-10 text-center text-slate-400 text-sm">
-          Nenhum lead com etapa preenchida no recorte atual.
+          Nenhum lead a partir da Etapa 2 no recorte atual.
         </div>
       );
-      const maxCount = funnelCumulative[0].count || 1;
+      const maxCount = base;
       const rowHeight = 72;
       const gapHeight = 18;
-      const totalHeight = funnelCumulative.length * rowHeight + (funnelCumulative.length - 1) * gapHeight;
+      const totalHeight = rows.length * rowHeight + (rows.length - 1) * gapHeight;
 
       // Gradiente: do topo (índice 0) ao fundo (índice 5). Mistura linear entre #6A52B3 e #63C19B.
       // Retorna {solid, soft, shadow} — preciso de variantes alpha para o gradient/sombra
@@ -371,12 +399,12 @@
           </div>
 
           <div className="relative mx-auto" style={{ height: `${totalHeight}px`, maxWidth: "720px" }}>
-            {funnelCumulative.map((row, i) => {
+            {rows.map((row, i) => {
               const pctOfTop = maxCount > 0 ? (row.count / maxCount) * 100 : 0;
               const top = i * (rowHeight + gapHeight);
               const meta = STAGE_META[row.stage] || { short: row.stage };
-              const col = colorFor(i, funnelCumulative.length);
-              const pctOfBase = totalFunil > 0 ? (100 * row.count / totalFunil) : 0;
+              const col = colorFor(i, rows.length);
+              const pctOfBase = base > 0 ? (100 * row.count / base) : 0;
               return (
                 <div key={row.stage}
                      className="absolute left-1/2 -translate-x-1/2 transition-all"
@@ -392,7 +420,7 @@
                          boxShadow: `0 12px 32px ${col.shadow}, inset 0 1px 0 rgba(255,255,255,0.25)`,
                        }}>
                     <div className="min-w-0">
-                      <div className="text-[10.5px] uppercase tracking-[1.4px] opacity-80">Etapa {i+1}</div>
+                      <div className="text-[10.5px] uppercase tracking-[1.4px] opacity-80">Etapa {i+2}</div>
                       <div className="text-sm font-semibold truncate">{meta.short}</div>
                     </div>
                     <div className="text-right shrink-0 pl-3">
@@ -412,7 +440,7 @@
     function OutOfFunnelCards({ counts, totalWithEtapa }) {
       const palette = {
         "Etapa cliente":         { from: "#6A52B3", to: "#9F88D4", title: "Clientes Vesti",    sub: "Base atendida (out of funnel)" },
-        "Etapa desqualificado":  { from: "#94a3b8", to: "#cbd5e1", title: "Desqualificados",   sub: "Não fazem sentido para Vesti" },
+        "Etapa desqualificado":  { from: "#475569", to: "#64748b", title: "Desqualificados",   sub: "Não fazem sentido para Vesti" },
         "Etapa perdido":         { from: "#9F1239", to: "#E11D48", title: "Perdidos",          sub: "Saíram durante o funil" },
       };
       return (
@@ -508,13 +536,13 @@
       // "onde esta origem para de avançar".
       const ROW_COLOR = [106, 82, 179]; // brand-pink #6A52B3
       const cellStyle = (count, maxInRow) => {
-        if (count <= 0) return { background: "rgba(255,255,255,0.55)", color: "#cbd5e1" };
+        if (count <= 0) return { background: "rgba(255,255,255,0.04)", color: "rgba(233,228,244,0.30)" };
         const [r, g, b] = ROW_COLOR;
         const ratio = maxInRow > 0 ? (count / maxInRow) : 0;
         const alpha = 0.20 + ratio * 0.80;
         return {
           background: `rgba(${r},${g},${b},${alpha})`,
-          color: alpha > 0.55 ? "white" : "#1a1635",
+          color: alpha > 0.55 ? "white" : "#cdbff2",
         };
       };
 
@@ -542,8 +570,7 @@
               <div className="card px-4 py-2.5">
                 <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Conversão geral</div>
                 <div className="text-2xl font-bold tabular-nums leading-tight"
-                     style={{ background: "linear-gradient(120deg,#2B0C55 0%,#549E86 60%,#63C19B 100%)",
-                              WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                     style={{ color: "#ffffff" }}>
                   {fmtPct(totalWinPct)}
                 </div>
                 <div className="text-[10.5px] text-slate-500">leads → Ganho</div>
@@ -674,13 +701,13 @@
         "Etapa perdido":        [225, 29, 72],   // rose
       };
       const cellStyleOut = (stage, count, maxInRow) => {
-        if (count <= 0) return { background: "rgba(255,255,255,0.55)", color: "#cbd5e1" };
+        if (count <= 0) return { background: "rgba(255,255,255,0.04)", color: "rgba(233,228,244,0.30)" };
         const [r, g, b] = colorByStage[stage] || [148, 163, 184];
         const ratio = maxInRow > 0 ? (count / maxInRow) : 0;
         const alpha = 0.22 + ratio * 0.78;
         return {
           background: `rgba(${r},${g},${b},${alpha})`,
-          color: alpha > 0.55 ? "white" : "#1a1635",
+          color: alpha > 0.55 ? "white" : "#cdbff2",
         };
       };
 

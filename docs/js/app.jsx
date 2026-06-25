@@ -346,7 +346,7 @@
           </span>
           <div className="flex flex-col leading-tight">
             <span className="text-[17px] font-bold tracking-wide"
-                  style={{ background:"linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
+                  style={{ background:"linear-gradient(120deg,#9C84EA 0%,#8A6DD1 45%,#63C19B 100%)",
                            WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
               Vesti
             </span>
@@ -446,7 +446,7 @@
   function CentralKpi({ total, sql, sqlPct }) {
     return (
       <div className="card card-gradient-border p-6 lg:p-7 flex flex-col justify-between min-h-[220px]"
-           style={{ background: "linear-gradient(145deg, rgba(106,82,179,.12), rgba(99,193,155,.10) 60%, rgba(255,255,255,.88))" }}>
+           style={{ background: "linear-gradient(145deg, rgba(106,82,179,.20), rgba(99,193,155,.14) 60%, rgba(255,255,255,.04))" }}>
         <div>
           <span className="text-[11px] uppercase tracking-[1.6px] text-slate-600">Total de Leads</span>
           <div className="mt-2 flex items-baseline gap-3">
@@ -548,8 +548,8 @@
   }
 
   // --------------------------- Charts ---------------------------
-  const AXIS_STYLE = { fill: "#6473A0", fontSize: 11 };
-  const GRID_STROKE = "rgba(43,12,85,0.08)";
+  const AXIS_STYLE = { fill: "#a299c6", fontSize: 11 };
+  const GRID_STROKE = "rgba(255,255,255,0.10)";
 
   function SqlByOriginChart({ data, onBarClick, activeOrigins }) {
     if (data.length === 0) {
@@ -566,8 +566,8 @@
             <YAxis allowDecimals={false} tick={AXIS_STYLE} tickLine={false} axisLine={{ stroke: GRID_STROKE }}/>
             <Tooltip
               cursor={{ fill: "rgba(99,193,155,0.10)" }}
-              contentStyle={{ background: "rgba(255,255,255,0.96)", border: "1px solid rgba(43,12,85,0.1)", borderRadius: 10 }}
-              labelStyle={{ color: "#1a1635" }}
+              contentStyle={{ background: "rgba(24,19,42,0.96)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10 }}
+              labelStyle={{ color: "#e9e4f4" }}
               itemStyle={{ color: "#549E86" }}
               formatter={(v) => [fmtNumber(v), "SQLs"]}
             />
@@ -590,7 +590,7 @@
               <LabelList
                 dataKey="sqls"
                 position="top"
-                fill="#2B0C55"
+                fill="#cdbff2"
                 fontSize={11}
                 fontWeight={600}
                 formatter={(v) => fmtNumber(v)}
@@ -638,8 +638,8 @@
             <YAxis allowDecimals={false} tick={AXIS_STYLE} tickLine={false} axisLine={{ stroke: GRID_STROKE }}/>
             <Tooltip
               cursor={{ stroke: "rgba(106,82,179,0.35)", strokeWidth: 1 }}
-              contentStyle={{ background: "rgba(255,255,255,0.96)", border: "1px solid rgba(43,12,85,0.1)", borderRadius: 10 }}
-              labelStyle={{ color: "#1a1635" }}
+              contentStyle={{ background: "rgba(24,19,42,0.96)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10 }}
+              labelStyle={{ color: "#e9e4f4" }}
               formatter={(v, name) => [fmtNumber(v), name]}
               labelFormatter={(l, payload) => {
                 if (granularity === "week") {
@@ -654,7 +654,7 @@
               verticalAlign="top"
               height={28}
               iconType="circle"
-              wrapperStyle={{ fontSize: 12, color: "#4A467A" }}
+              wrapperStyle={{ fontSize: 12, color: "#bcb4dc" }}
             />
             <Line type="monotone" dataKey="leads" name="Leads totais"
                   stroke="#6A52B3" strokeWidth={2.4}
@@ -663,7 +663,7 @@
               <LabelList
                 dataKey="leads"
                 position="top"
-                fill="#2B0C55"
+                fill="#cdbff2"
                 fontSize={11}
                 fontWeight={600}
                 formatter={(v) => fmtNumber(v)}
@@ -722,20 +722,20 @@
             <YAxis allowDecimals={false} tick={AXIS_STYLE} tickLine={false} axisLine={{ stroke: GRID_STROKE }}/>
             <Tooltip
               cursor={{ stroke: "rgba(106,82,179,0.35)", strokeWidth: 1 }}
-              contentStyle={{ background: "rgba(255,255,255,0.96)", border: "1px solid rgba(43,12,85,0.1)", borderRadius: 10 }}
-              labelStyle={{ color: "#1a1635" }}
+              contentStyle={{ background: "rgba(24,19,42,0.96)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10 }}
+              labelStyle={{ color: "#e9e4f4" }}
               formatter={(v, name) => [fmtNumber(v), name]}
               labelFormatter={(l, payload) => {
                 const dow = payload && payload[0] && payload[0].payload && payload[0].payload.dow;
                 return dow ? `Dia ${l} (${dow})` : `Dia ${l}`;
               }}
             />
-            <Legend verticalAlign="top" height={28} iconType="circle" wrapperStyle={{ fontSize: 12, color: "#4A467A" }}/>
+            <Legend verticalAlign="top" height={28} iconType="circle" wrapperStyle={{ fontSize: 12, color: "#bcb4dc" }}/>
             <Line type="monotone" dataKey="leads" name="Leads totais"
                   stroke="#6A52B3" strokeWidth={2.2}
                   dot={makeDot("#6A52B3")}
                   activeDot={{ r: 5, stroke: "#fff", strokeWidth: 1.5 }}>
-              <LabelList dataKey="leads" position="top" fill="#2B0C55" fontSize={10} fontWeight={600}
+              <LabelList dataKey="leads" position="top" fill="#cdbff2" fontSize={10} fontWeight={600}
                          formatter={(v) => v > 0 ? fmtNumber(v) : ""}/>
             </Line>
             <Line type="monotone" dataKey="sqls" name="SQLs"

@@ -26,19 +26,20 @@
   </script>
 
   <style>
-    html, body { background: #f7f4fb; color: #1a1635; }
+    /* ===== Tema escuro Vesti (roxo + verde) ===== */
+    html, body { background: #14101f; color: #e9e4f4; }
     body {
       background:
-        radial-gradient(ellipse at top left, #e9def5 0%, transparent 55%),
-        radial-gradient(ellipse at bottom right, #dff0e8 0%, transparent 55%),
-        #f7f4fb;
+        radial-gradient(ellipse at top left, rgba(106,82,179,0.28) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom right, rgba(99,193,155,0.18) 0%, transparent 55%),
+        #14101f;
       min-height: 100vh;
     }
     .bg-grid {
       position: fixed; inset: 0;
       background-image:
-        linear-gradient(rgba(43,12,85,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(43,12,85,0.05) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
       -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
@@ -46,7 +47,7 @@
     }
     .orb {
       position: fixed; border-radius: 50%;
-      filter: blur(80px); opacity: 0.28; pointer-events: none; z-index: 0;
+      filter: blur(80px); opacity: 0.32; pointer-events: none; z-index: 0;
       animation: drift 18s ease-in-out infinite;
     }
     .orb-1 { width:420px; height:420px; background: radial-gradient(circle,#6A52B3 0%,transparent 70%); top:-120px; left:-80px; }
@@ -54,17 +55,40 @@
     @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.08); } }
 
     .card {
-      background: rgba(255,255,255,0.85);
+      background: rgba(30,24,52,0.70);
       backdrop-filter: blur(18px) saturate(140%);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
-      border: 1px solid rgba(43,12,85,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(43,12,85,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
     }
     ::-webkit-scrollbar { width: 10px; height: 10px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(43,12,85,0.14); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(43,12,85,0.26); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.26); }
+
+    /* ===== Overrides utilitários Tailwind p/ o escuro ===== */
+    [class*="bg-white"]         { background-color: rgba(42,35,68,0.72) !important; }
+    [class*="bg-slate-100"]     { background-color: rgba(255,255,255,0.06) !important; }
+    [class*="border-slate-100"] { border-color: rgba(255,255,255,0.08) !important; }
+    [class*="border-[#2B0C55]"] { border-color: rgba(255,255,255,0.10) !important; }
+    [class*="bg-[#2B0C55]"]     { background-color: rgba(138,109,209,0.90) !important; }
+    [class*="text-slate-900"]   { color: #ffffff !important; }
+    [class*="text-slate-800"]   { color: #e7e2f4 !important; }
+    [class*="text-slate-700"]   { color: #d4cdea !important; }
+    [class*="text-slate-600"]   { color: #bcb4dc !important; }
+    [class*="text-slate-500"]   { color: #a299c6 !important; }
+    [class*="text-slate-400"]   { color: #877da6 !important; }
+    [class*="text-slate-300"]   { color: #6f6691 !important; }
+    [class*="text-[#2B0C55]"]   { color: #cdbff2 !important; }
+    [class*="text-[#6A52B3]"]   { color: #9c84ea !important; }
+    input[type="checkbox"]      { accent-color: #8A6DD1; }
+    .recharts-default-tooltip {
+      background: rgba(24,19,42,0.96) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 10px !important;
+      color: #e9e4f4 !important;
+    }
   </style>
 
   <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
@@ -295,7 +319,7 @@
             </span>
             <div className="flex flex-col leading-tight">
               <span className="text-[17px] font-bold tracking-wide"
-                    style={{ background:"linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
+                    style={{ background:"linear-gradient(120deg,#9C84EA 0%,#8A6DD1 45%,#63C19B 100%)",
                              WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
                 Vesti
               </span>
@@ -352,8 +376,7 @@
         <div className="card p-5">
           <div className="text-[11px] uppercase tracking-[1.4px] text-slate-500">{label}</div>
           <div className="mt-1 text-3xl font-semibold tabular-nums"
-               style={accent ? { background: "linear-gradient(120deg,#6A52B3 0%,#63C19B 100%)",
-                                 WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" } : {}}>
+               style={{ color: "#ffffff" }}>
             {value}
           </div>
           {sub && <div className="mt-1 text-xs text-slate-500">{sub}</div>}
@@ -371,8 +394,7 @@
           <div className="relative">
             <div className="text-[11px] uppercase tracking-[1.4px] text-slate-500">{label}</div>
             <div className="mt-1 text-4xl font-bold tabular-nums"
-                 style={{ background: "linear-gradient(120deg,#2B0C55 0%,#6A52B3 60%,#549E86 100%)",
-                          WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                 style={{ color: "#ffffff" }}>
               {value}
             </div>
             {sub && <div className="mt-1 text-xs text-slate-500">{sub}</div>}
@@ -484,8 +506,7 @@
             <div className="rounded-lg bg-[#63C19B]/8 border border-[#63C19B]/15 px-3 py-2">
               <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">SQL</div>
               <div className="mt-0.5 text-2xl font-semibold tabular-nums"
-                   style={{ background: "linear-gradient(120deg,#6A52B3 0%,#63C19B 100%)",
-                            WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                   style={{ color: "#ffffff" }}>
                 {fmtNumber(c.sql)}
               </div>
             </div>
@@ -507,8 +528,7 @@
               <div>
                 <div className="text-[10px] uppercase tracking-[1.4px] text-slate-500">Custo/SQL</div>
                 <div className="mt-0.5 text-sm font-semibold tabular-nums"
-                     style={c.cpsql != null ? { background: "linear-gradient(120deg,#6A52B3 0%,#63C19B 100%)",
-                                                WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" } : { color: "#94a3b8" }}>
+                     style={c.cpsql != null ? { color: "#ffffff" } : { color: "#94a3b8" }}>
                   {fmtBRL(c.cpsql)}
                 </div>
               </div>
