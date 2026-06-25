@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-25T02:40:53.508Z",
+  "generated_at": "2026-06-25T10:02:55.167Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "LeadsV2",
-  "total_leads": 2891,
-  "total_sql": 473,
-  "sql_pct": 16.36,
+  "total_leads": 2895,
+  "total_sql": 474,
+  "sql_pct": 16.37,
   "perfis": [
     "Pro",
     "Starter",
@@ -31,23 +31,23 @@
     "Site (formulário)"
   ],
   "perfil_counts": {
-    "Multimarca": 494,
-    "Qualificação incompleta": 1485,
+    "Multimarca": 495,
+    "Qualificação incompleta": 1494,
     "Suporte": 252,
-    "Starter": 283,
+    "Starter": 284,
     "Qualificado (Sem Faixa)": 99,
     "Pro": 91,
     "Desqualificado": 115,
     "CS": 34,
-    "Em atendimento": 35,
+    "Em atendimento": 28,
     "Parceria": 1,
     "Evento - Fevest": 1
   },
   "origem_counts": {
     "Bio Instagram": 218,
-    "Mídia paga": 632,
+    "Mídia paga": 635,
     "Orgânico": 262,
-    "Site": 1270,
+    "Site": 1271,
     "Campanha - Google": 1,
     "Evento": 9,
     "Evento Denim": 448,
@@ -58,7 +58,7 @@
   "sql_by_origem": {
     "Site": 277,
     "Orgânico": 46,
-    "Mídia paga": 66,
+    "Mídia paga": 67,
     "Bio Instagram": 61,
     "Evento": 9,
     "Evento Denim": 1,
@@ -97,20 +97,20 @@
       "Etapa perdido"
     ],
     "counts": {
-      "Etapa 3 - concluído": 47,
+      "Etapa 3 - concluído": 48,
       "Etapa 2 - Identificado": 14,
       "Etapa perdido": 19,
-      "Etapa 1 - inicial": 402,
+      "Etapa 1 - inicial": 404,
       "Etapa 5 - em negociação": 9,
       "Etapa cliente": 39,
-      "Etapa desqualificado": 91,
+      "Etapa desqualificado": 92,
       "ETAPA_3_IDENTIFICADO": 1,
       "Etapa 6 - Ganho": 5
     },
     "by_origem": {
       "Site": {
         "Etapa 3 - concluído": 11,
-        "Etapa 1 - inicial": 85,
+        "Etapa 1 - inicial": 86,
         "Etapa perdido": 7,
         "Etapa 5 - em negociação": 6,
         "Etapa cliente": 18,
@@ -139,9 +139,9 @@
         "Etapa 3 - concluído": 3
       },
       "Mídia paga": {
-        "Etapa 3 - concluído": 20,
-        "Etapa desqualificado": 44,
-        "Etapa 1 - inicial": 260,
+        "Etapa 3 - concluído": 21,
+        "Etapa desqualificado": 45,
+        "Etapa 1 - inicial": 261,
         "Etapa perdido": 4,
         "Etapa 2 - Identificado": 6,
         "Etapa cliente": 9,
@@ -183,11 +183,11 @@
       },
       "Qualificação incompleta": {
         "Etapa perdido": 1,
-        "Etapa 1 - inicial": 366,
+        "Etapa 1 - inicial": 375,
         "Etapa desqualificado": 3
       },
       "Starter": {
-        "Etapa 3 - concluído": 34,
+        "Etapa 3 - concluído": 35,
         "Etapa 5 - em negociação": 2,
         "ETAPA_3_IDENTIFICADO": 1,
         "Etapa 6 - Ganho": 4,
@@ -199,7 +199,7 @@
         "Etapa cliente": 24
       },
       "Multimarca": {
-        "Etapa desqualificado": 72,
+        "Etapa desqualificado": 73,
         "Etapa 2 - Identificado": 1,
         "Etapa perdido": 1
       },
@@ -211,7 +211,7 @@
         "Etapa cliente": 15
       },
       "Em atendimento": {
-        "Etapa 1 - inicial": 35
+        "Etapa 1 - inicial": 28
       },
       "Parceria": {
         "Etapa 3 - concluído": 1
@@ -250,9 +250,9 @@
       },
       "2026-06": {
         "Etapa perdido": 15,
-        "Etapa 1 - inicial": 340,
-        "Etapa desqualificado": 74,
-        "Etapa 3 - concluído": 43,
+        "Etapa 1 - inicial": 342,
+        "Etapa desqualificado": 75,
+        "Etapa 3 - concluído": 44,
         "Etapa cliente": 30,
         "Etapa 5 - em negociação": 8,
         "Etapa 2 - Identificado": 9,
@@ -262,9 +262,9 @@
   },
   "midia_paga": {
     "chanel": {
-      "total": 632,
-      "total_sql": 66,
-      "sql_pct": 10.44,
+      "total": 635,
+      "total_sql": 67,
+      "sql_pct": 10.55,
       "sem_criativo": 0,
       "sem_anuncio": 0,
       "pct_sem_criativo": 0,
@@ -329,10 +329,9 @@
           "sql": 0,
           "by_perfil": {
             "Suporte": 1,
-            "Qualificação incompleta": 34,
+            "Qualificação incompleta": 35,
             "Desqualificado": 3,
-            "Multimarca": 6,
-            "Em atendimento": 1
+            "Multimarca": 6
           },
           "sql_pct": 0
         },
@@ -363,17 +362,17 @@
         },
         {
           "name": "est_Reg-SP_abroad",
-          "total": 29,
-          "sql": 17,
+          "total": 31,
+          "sql": 18,
           "by_perfil": {
             "Qualificação incompleta": 1,
             "CS": 4,
-            "Starter": 13,
-            "Multimarca": 7,
+            "Starter": 14,
+            "Multimarca": 8,
             "Pro": 2,
             "Qualificado (Sem Faixa)": 2
           },
-          "sql_pct": 58.62
+          "sql_pct": 58.06
         },
         {
           "name": "Carrossel 1 - Oráculo",
@@ -393,11 +392,11 @@
           "total": 25,
           "sql": 0,
           "by_perfil": {
-            "Qualificação incompleta": 16,
+            "Qualificação incompleta": 17,
             "Desqualificado": 2,
             "CS": 1,
             "Multimarca": 4,
-            "Em atendimento": 2
+            "Em atendimento": 1
           },
           "sql_pct": 0
         },
@@ -459,11 +458,11 @@
         },
         {
           "name": "est_ia-atacad-moda_PageView_25percent_last90Days",
-          "total": 10,
+          "total": 11,
           "sql": 0,
           "by_perfil": {
-            "Qualificação incompleta": 1,
-            "Em atendimento": 9
+            "Qualificação incompleta": 5,
+            "Em atendimento": 6
           },
           "sql_pct": 0
         },
@@ -919,30 +918,30 @@
           "sql": 4,
           "by_perfil": {
             "Suporte": 2,
-            "Qualificação incompleta": 121,
+            "Qualificação incompleta": 123,
             "Desqualificado": 12,
             "Multimarca": 15,
             "Qualificado (Sem Faixa)": 3,
             "Starter": 1,
             "CS": 1,
-            "Em atendimento": 5
+            "Em atendimento": 3
           },
           "sql_pct": 2.5
         },
         {
           "name": "PageView_25percent_last90Days",
-          "total": 83,
+          "total": 84,
           "sql": 3,
           "by_perfil": {
             "Multimarca": 13,
-            "Qualificação incompleta": 51,
+            "Qualificação incompleta": 55,
             "Desqualificado": 4,
             "Qualificado (Sem Faixa)": 1,
             "Suporte": 2,
             "Starter": 2,
-            "Em atendimento": 10
+            "Em atendimento": 7
           },
-          "sql_pct": 3.61
+          "sql_pct": 3.57
         },
         {
           "name": "interesses_moda_SP",
@@ -1000,6 +999,20 @@
           "sql_pct": 0
         },
         {
+          "name": "abroad",
+          "total": 31,
+          "sql": 18,
+          "by_perfil": {
+            "Qualificação incompleta": 1,
+            "CS": 4,
+            "Starter": 14,
+            "Multimarca": 8,
+            "Pro": 2,
+            "Qualificado (Sem Faixa)": 2
+          },
+          "sql_pct": 58.06
+        },
+        {
           "name": "[F] Captação de novos clientes",
           "total": 30,
           "sql": 6,
@@ -1011,20 +1024,6 @@
             "Qualificado (Sem Faixa)": 1
           },
           "sql_pct": 20
-        },
-        {
-          "name": "abroad",
-          "total": 29,
-          "sql": 17,
-          "by_perfil": {
-            "Qualificação incompleta": 1,
-            "CS": 4,
-            "Starter": 13,
-            "Multimarca": 7,
-            "Pro": 2,
-            "Qualificado (Sem Faixa)": 2
-          },
-          "sql_pct": 58.62
         },
         {
           "name": "interactions_vestioficial_29042026",
@@ -5914,7 +5913,7 @@
         },
         {
           "data": "23/06/2026 06:58:00",
-          "perfil": "Em atendimento",
+          "perfil": "Qualificação incompleta",
           "anuncio": "PageView_25percent_last90Days",
           "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
           "origem": "WA_leads_26052026",
@@ -5930,7 +5929,7 @@
         },
         {
           "data": "23/06/2026 09:21:00",
-          "perfil": "Em atendimento",
+          "perfil": "Qualificação incompleta",
           "anuncio": "PageView_25percent_last90Days",
           "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
           "origem": "WA_leads_26052026",
@@ -5962,7 +5961,7 @@
         },
         {
           "data": "23/06/2026 16:18:00",
-          "perfil": "Em atendimento",
+          "perfil": "Qualificação incompleta",
           "anuncio": "PageView_25percent_last90Days",
           "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
           "origem": "WA_leads_26052026",
@@ -5978,7 +5977,7 @@
         },
         {
           "data": "23/06/2026 19:24:00",
-          "perfil": "Em atendimento",
+          "perfil": "Qualificação incompleta",
           "anuncio": "PageView_25percent_last90Days",
           "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
           "origem": "WA_leads_26052026",
@@ -5986,7 +5985,7 @@
         },
         {
           "data": "23/06/2026 20:00:00",
-          "perfil": "Em atendimento",
+          "perfil": "Qualificação incompleta",
           "anuncio": "interesses_moda",
           "criativo": "carrossel_ecommerce_interesses_moda",
           "origem": "WA_leads_26052026",
@@ -6018,7 +6017,7 @@
         },
         {
           "data": "23/06/2026 23:43:00",
-          "perfil": "Em atendimento",
+          "perfil": "Qualificação incompleta",
           "anuncio": "interesses_moda",
           "criativo": "Video_22052026_interesses_moda",
           "origem": "WA_leads_26052026",
@@ -6162,6 +6161,30 @@
         },
         {
           "data": "24/06/2026 23:21:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "24/06/2026 23:46:00",
+          "perfil": "Em atendimento",
+          "anuncio": "PageView_25percent_last90Days",
+          "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 23:57:00",
+          "perfil": "Multimarca",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa desqualificado"
+        },
+        {
+          "data": "25/06/2026 06:10:00",
           "perfil": "Starter",
           "anuncio": "abroad",
           "criativo": "est_Reg-SP_abroad",
@@ -32560,13 +32583,13 @@
     {
       "data": "23/06/2026 05:55:00",
       "origem": "Bio Instagram",
-      "perfil": "Em atendimento",
+      "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
     {
       "data": "23/06/2026 06:58:00",
       "origem": "Mídia paga",
-      "perfil": "Em atendimento",
+      "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
     {
@@ -32584,7 +32607,7 @@
     {
       "data": "23/06/2026 09:21:00",
       "origem": "Mídia paga",
-      "perfil": "Em atendimento",
+      "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
     {
@@ -32620,7 +32643,7 @@
     {
       "data": "23/06/2026 12:30:00",
       "origem": "Site",
-      "perfil": "Em atendimento",
+      "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
     {
@@ -32638,7 +32661,7 @@
     {
       "data": "23/06/2026 16:18:00",
       "origem": "Mídia paga",
-      "perfil": "Em atendimento",
+      "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
     {
@@ -32656,13 +32679,13 @@
     {
       "data": "23/06/2026 19:24:00",
       "origem": "Mídia paga",
-      "perfil": "Em atendimento",
+      "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
     {
       "data": "23/06/2026 20:00:00",
       "origem": "Mídia paga",
-      "perfil": "Em atendimento",
+      "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
     {
@@ -32674,7 +32697,7 @@
     {
       "data": "23/06/2026 21:08:00",
       "origem": "",
-      "perfil": "Em atendimento",
+      "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
     {
@@ -32698,7 +32721,7 @@
     {
       "data": "23/06/2026 23:43:00",
       "origem": "Mídia paga",
-      "perfil": "Em atendimento",
+      "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
     {
@@ -32901,6 +32924,30 @@
     },
     {
       "data": "24/06/2026 23:21:00",
+      "origem": "Mídia paga",
+      "perfil": "Starter",
+      "etapa": "Etapa 3 - concluído"
+    },
+    {
+      "data": "24/06/2026 23:46:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 23:57:00",
+      "origem": "Mídia paga",
+      "perfil": "Multimarca",
+      "etapa": "Etapa desqualificado"
+    },
+    {
+      "data": "25/06/2026 00:02:00",
+      "origem": "Site",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "25/06/2026 06:10:00",
       "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
