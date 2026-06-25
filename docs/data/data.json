@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-24T10:03:14.911Z",
+  "generated_at": "2026-06-25T02:02:48.838Z",
   "sheet_id": "1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE",
   "sheet_tab": "LeadsV2",
-  "total_leads": 2862,
-  "total_sql": 467,
-  "sql_pct": 16.32,
+  "total_leads": 2890,
+  "total_sql": 472,
+  "sql_pct": 16.33,
   "perfis": [
     "Pro",
     "Starter",
@@ -31,41 +31,40 @@
     "Site (formulário)"
   ],
   "perfil_counts": {
-    "Multimarca": 491,
-    "Qualificação incompleta": 1486,
-    "Suporte": 251,
-    "Starter": 279,
-    "Qualificado (Sem Faixa)": 97,
+    "Multimarca": 494,
+    "Qualificação incompleta": 1485,
+    "Suporte": 252,
+    "Starter": 282,
+    "Qualificado (Sem Faixa)": 99,
     "Pro": 91,
     "Desqualificado": 115,
     "CS": 34,
-    "Em atendimento": 15,
+    "Em atendimento": 35,
     "Parceria": 1,
     "Evento - Fevest": 1
   },
   "origem_counts": {
     "Bio Instagram": 218,
-    "Mídia paga": 594,
-    "Orgânico": 254,
-    "Site": 1264,
+    "Mídia paga": 631,
+    "Orgânico": 262,
+    "Site": 1270,
     "Campanha - Google": 1,
     "Evento": 9,
     "Evento Denim": 448,
-    "Site (formulário)": 25,
+    "Site (formulário)": 24,
     "Formulário (LP Catálogo Google)": 3,
-    "Formulário Cris": 2
+    "Formulário Cris": 3
   },
   "sql_by_origem": {
     "Site": 277,
-    "Orgânico": 45,
-    "Mídia paga": 48,
+    "Orgânico": 46,
+    "Mídia paga": 65,
     "Bio Instagram": 61,
     "Evento": 9,
     "Evento Denim": 1,
-    "Site (formulário)": 8,
+    "Site (formulário)": 7,
     "Formulário (LP Catálogo Google)": 3,
-    "Formulário Cris": 2,
-    "(sem origem)": 13
+    "Formulário Cris": 3
   },
   "sql_perfis": [
     "Pro",
@@ -98,26 +97,35 @@
       "Etapa perdido"
     ],
     "counts": {
-      "Etapa 3 - concluído": 43,
+      "Etapa 3 - concluído": 46,
+      "Etapa 2 - Identificado": 14,
       "Etapa perdido": 19,
-      "Etapa 1 - inicial": 382,
+      "Etapa 1 - inicial": 402,
       "Etapa 5 - em negociação": 9,
-      "Etapa cliente": 38,
-      "Etapa desqualificado": 88,
+      "Etapa cliente": 39,
+      "Etapa desqualificado": 91,
       "ETAPA_3_IDENTIFICADO": 1,
-      "Etapa 6 - Ganho": 4,
-      "Etapa 2 - Identificado": 12
+      "Etapa 6 - Ganho": 5
     },
     "by_origem": {
       "Site": {
         "Etapa 3 - concluído": 11,
-        "Etapa 1 - inicial": 81,
+        "Etapa 1 - inicial": 85,
         "Etapa perdido": 7,
         "Etapa 5 - em negociação": 6,
-        "Etapa cliente": 17,
-        "Etapa desqualificado": 24,
+        "Etapa cliente": 18,
+        "Etapa desqualificado": 25,
         "Etapa 2 - Identificado": 3,
         "Etapa 6 - Ganho": 1
+      },
+      "Orgânico": {
+        "Etapa 2 - Identificado": 2,
+        "Etapa 1 - inicial": 32,
+        "Etapa 6 - Ganho": 2,
+        "Etapa desqualificado": 6,
+        "Etapa cliente": 3,
+        "Etapa perdido": 1,
+        "Etapa 3 - concluído": 3
       },
       "Bio Instagram": {
         "Etapa perdido": 6,
@@ -131,47 +139,47 @@
         "Etapa 3 - concluído": 3
       },
       "Mídia paga": {
-        "Etapa 3 - concluído": 5,
-        "Etapa desqualificado": 37,
-        "Etapa 1 - inicial": 251,
+        "Etapa 3 - concluído": 19,
+        "Etapa desqualificado": 44,
+        "Etapa 1 - inicial": 260,
         "Etapa perdido": 4,
-        "Etapa 2 - Identificado": 4,
-        "Etapa cliente": 5
-      },
-      "Orgânico": {
-        "Etapa 1 - inicial": 24,
-        "Etapa 6 - Ganho": 2,
-        "Etapa desqualificado": 6,
-        "Etapa cliente": 3,
-        "Etapa perdido": 1,
-        "Etapa 3 - concluído": 3
+        "Etapa 2 - Identificado": 6,
+        "Etapa cliente": 9,
+        "Etapa 5 - em negociação": 1
       },
       "(sem origem)": {
-        "Etapa 1 - inicial": 13,
-        "Etapa desqualificado": 6,
-        "Etapa cliente": 5,
-        "Etapa 3 - concluído": 11,
-        "Etapa 2 - Identificado": 2
+        "Etapa 1 - inicial": 11,
+        "Etapa desqualificado": 1,
+        "Etapa cliente": 2
       },
       "Site (formulário)": {
-        "Etapa cliente": 7,
+        "Etapa cliente": 6,
         "Etapa desqualificado": 8,
-        "Etapa 3 - concluído": 7,
-        "Etapa 1 - inicial": 2,
+        "Etapa 3 - concluído": 6,
+        "Etapa 1 - inicial": 3,
         "Etapa perdido": 1
       },
       "Formulário (LP Catálogo Google)": {
         "Etapa 3 - concluído": 3
       },
       "Formulário Cris": {
-        "Etapa 5 - em negociação": 2
+        "Etapa 5 - em negociação": 1,
+        "Etapa 6 - Ganho": 1,
+        "Etapa 3 - concluído": 1
       }
     },
     "by_perfil": {
       "Pro": {
-        "Etapa 3 - concluído": 10,
+        "Etapa 3 - concluído": 9,
         "Etapa perdido": 2,
-        "Etapa 5 - em negociação": 5
+        "Etapa 5 - em negociação": 6
+      },
+      "Qualificado (Sem Faixa)": {
+        "Etapa 2 - Identificado": 12,
+        "Etapa perdido": 1,
+        "Etapa 3 - concluído": 2,
+        "Etapa 5 - em negociação": 1,
+        "Etapa 6 - Ganho": 1
       },
       "Qualificação incompleta": {
         "Etapa perdido": 1,
@@ -179,7 +187,7 @@
         "Etapa desqualificado": 3
       },
       "Starter": {
-        "Etapa 3 - concluído": 30,
+        "Etapa 3 - concluído": 33,
         "Etapa 5 - em negociação": 2,
         "ETAPA_3_IDENTIFICADO": 1,
         "Etapa 6 - Ganho": 4,
@@ -188,10 +196,10 @@
         "Etapa 1 - inicial": 1
       },
       "Suporte": {
-        "Etapa cliente": 23
+        "Etapa cliente": 24
       },
       "Multimarca": {
-        "Etapa desqualificado": 69,
+        "Etapa desqualificado": 72,
         "Etapa 2 - Identificado": 1,
         "Etapa perdido": 1
       },
@@ -199,17 +207,11 @@
         "Etapa perdido": 1,
         "Etapa desqualificado": 16
       },
-      "Qualificado (Sem Faixa)": {
-        "Etapa 2 - Identificado": 10,
-        "Etapa perdido": 1,
-        "Etapa 3 - concluído": 1,
-        "Etapa 5 - em negociação": 2
-      },
       "CS": {
         "Etapa cliente": 15
       },
       "Em atendimento": {
-        "Etapa 1 - inicial": 15
+        "Etapa 1 - inicial": 35
       },
       "Parceria": {
         "Etapa 3 - concluído": 1
@@ -222,8 +224,12 @@
       "2026-01": {
         "Etapa 3 - concluído": 1
       },
+      "2026-02": {
+        "Etapa 2 - Identificado": 1
+      },
       "2026-03": {
         "Etapa perdido": 1,
+        "Etapa 2 - Identificado": 1,
         "Etapa 1 - inicial": 1
       },
       "2026-04": {
@@ -244,21 +250,21 @@
       },
       "2026-06": {
         "Etapa perdido": 15,
-        "Etapa 1 - inicial": 320,
-        "Etapa desqualificado": 71,
-        "Etapa 3 - concluído": 39,
-        "Etapa cliente": 29,
+        "Etapa 1 - inicial": 340,
+        "Etapa desqualificado": 74,
+        "Etapa 3 - concluído": 42,
+        "Etapa cliente": 30,
         "Etapa 5 - em negociação": 8,
         "Etapa 2 - Identificado": 9,
-        "Etapa 6 - Ganho": 3
+        "Etapa 6 - Ganho": 4
       }
     }
   },
   "midia_paga": {
     "chanel": {
-      "total": 594,
-      "total_sql": 48,
-      "sql_pct": 8.08,
+      "total": 631,
+      "total_sql": 65,
+      "sql_pct": 10.3,
       "sem_criativo": 0,
       "sem_anuncio": 0,
       "pct_sem_criativo": 0,
@@ -356,6 +362,20 @@
           "sql_pct": 0
         },
         {
+          "name": "est_Reg-SP_abroad",
+          "total": 28,
+          "sql": 16,
+          "by_perfil": {
+            "Qualificação incompleta": 1,
+            "CS": 4,
+            "Starter": 12,
+            "Multimarca": 7,
+            "Pro": 2,
+            "Qualificado (Sem Faixa)": 2
+          },
+          "sql_pct": 57.14
+        },
+        {
           "name": "Carrossel 1 - Oráculo",
           "total": 27,
           "sql": 2,
@@ -369,25 +389,25 @@
           "sql_pct": 7.41
         },
         {
-          "name": "est_clickbait_interesses_moda_SP",
-          "total": 25,
-          "sql": 0,
-          "by_perfil": {
-            "Qualificação incompleta": 24,
-            "Multimarca": 1
-          },
-          "sql_pct": 0
-        },
-        {
           "name": "Video_22052026_interesses_moda",
-          "total": 24,
+          "total": 25,
           "sql": 0,
           "by_perfil": {
             "Qualificação incompleta": 16,
             "Desqualificado": 2,
             "CS": 1,
             "Multimarca": 4,
-            "Em atendimento": 1
+            "Em atendimento": 2
+          },
+          "sql_pct": 0
+        },
+        {
+          "name": "est_clickbait_interesses_moda_SP",
+          "total": 25,
+          "sql": 0,
+          "by_perfil": {
+            "Qualificação incompleta": 24,
+            "Multimarca": 1
           },
           "sql_pct": 0
         },
@@ -438,6 +458,16 @@
           "sql_pct": 8.33
         },
         {
+          "name": "est_ia-atacad-moda_PageView_25percent_last90Days",
+          "total": 10,
+          "sql": 0,
+          "by_perfil": {
+            "Qualificação incompleta": 1,
+            "Em atendimento": 9
+          },
+          "sql_pct": 0
+        },
+        {
           "name": "est_Reg-SC_interesses_moda_SC",
           "total": 9,
           "sql": 0,
@@ -459,10 +489,11 @@
         },
         {
           "name": "est_clickbait_PageView_25percent_last90Days",
-          "total": 7,
+          "total": 8,
           "sql": 0,
           "by_perfil": {
-            "Qualificação incompleta": 7
+            "Qualificação incompleta": 7,
+            "Em atendimento": 1
           },
           "sql_pct": 0
         },
@@ -507,16 +538,6 @@
             "Qualificação incompleta": 5
           },
           "sql_pct": 16.67
-        },
-        {
-          "name": "est_ia-atacad-moda_PageView_25percent_last90Days",
-          "total": 5,
-          "sql": 0,
-          "by_perfil": {
-            "Qualificação incompleta": 1,
-            "Em atendimento": 4
-          },
-          "sql_pct": 0
         },
         {
           "name": "est_ia-atacad-moda_interesses_moda",
@@ -672,6 +693,16 @@
             "Qualificado (Sem Faixa)": 1
           },
           "sql_pct": 50
+        },
+        {
+          "name": "est_confec-on_interesses_moda",
+          "total": 2,
+          "sql": 0,
+          "by_perfil": {
+            "Qualificação incompleta": 1,
+            "Em atendimento": 1
+          },
+          "sql_pct": 0
         },
         {
           "name": "AD Carrossel 2",
@@ -854,15 +885,6 @@
           "sql_pct": 0
         },
         {
-          "name": "est_confec-on_interesses_moda",
-          "total": 1,
-          "sql": 0,
-          "by_perfil": {
-            "Qualificação incompleta": 1
-          },
-          "sql_pct": 0
-        },
-        {
           "name": "est_CRM-ia-v2_interesses_moda_SP",
           "total": 1,
           "sql": 0,
@@ -879,12 +901,21 @@
             "Em atendimento": 1
           },
           "sql_pct": 0
+        },
+        {
+          "name": "est_clickbait_look_a_like_clientes(1)",
+          "total": 1,
+          "sql": 1,
+          "by_perfil": {
+            "Starter": 1
+          },
+          "sql_pct": 100
         }
       ],
       "anuncios": [
         {
           "name": "interesses_moda",
-          "total": 158,
+          "total": 160,
           "sql": 4,
           "by_perfil": {
             "Suporte": 2,
@@ -894,9 +925,24 @@
             "Qualificado (Sem Faixa)": 3,
             "Starter": 1,
             "CS": 1,
-            "Em atendimento": 3
+            "Em atendimento": 5
           },
-          "sql_pct": 2.53
+          "sql_pct": 2.5
+        },
+        {
+          "name": "PageView_25percent_last90Days",
+          "total": 83,
+          "sql": 3,
+          "by_perfil": {
+            "Multimarca": 13,
+            "Qualificação incompleta": 51,
+            "Desqualificado": 4,
+            "Qualificado (Sem Faixa)": 1,
+            "Suporte": 2,
+            "Starter": 2,
+            "Em atendimento": 10
+          },
+          "sql_pct": 3.61
         },
         {
           "name": "interesses_moda_SP",
@@ -912,21 +958,6 @@
             "Em atendimento": 1
           },
           "sql_pct": 7.41
-        },
-        {
-          "name": "PageView_25percent_last90Days",
-          "total": 77,
-          "sql": 3,
-          "by_perfil": {
-            "Multimarca": 13,
-            "Qualificação incompleta": 51,
-            "Desqualificado": 4,
-            "Qualificado (Sem Faixa)": 1,
-            "Suporte": 2,
-            "Starter": 2,
-            "Em atendimento": 4
-          },
-          "sql_pct": 3.9
         },
         {
           "name": "[F] Captação de novos clientes - Filtro — Carrosséis",
@@ -982,6 +1013,20 @@
           "sql_pct": 20
         },
         {
+          "name": "abroad",
+          "total": 28,
+          "sql": 16,
+          "by_perfil": {
+            "Qualificação incompleta": 1,
+            "CS": 4,
+            "Starter": 12,
+            "Multimarca": 7,
+            "Pro": 2,
+            "Qualificado (Sem Faixa)": 2
+          },
+          "sql_pct": 57.14
+        },
+        {
           "name": "interactions_vestioficial_29042026",
           "total": 25,
           "sql": 1,
@@ -1008,13 +1053,14 @@
         },
         {
           "name": "look_a_like_clientes(1)",
-          "total": 6,
-          "sql": 0,
+          "total": 7,
+          "sql": 1,
           "by_perfil": {
             "Qualificação incompleta": 4,
-            "Desqualificado": 2
+            "Desqualificado": 2,
+            "Starter": 1
           },
-          "sql_pct": 0
+          "sql_pct": 14.29
         },
         {
           "name": "[F] Captação de novos clientes - Filtro",
@@ -5467,6 +5513,14 @@
           "etapa": "Etapa 1 - inicial"
         },
         {
+          "data": "18/06/2026 20:03:00",
+          "perfil": "Qualificação incompleta",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
           "data": "18/06/2026 20:07:00",
           "perfil": "Qualificação incompleta",
           "anuncio": "interesses_moda_SC",
@@ -5595,6 +5649,14 @@
           "etapa": "Etapa 1 - inicial"
         },
         {
+          "data": "20/06/2026 10:37:00",
+          "perfil": "CS",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa cliente"
+        },
+        {
           "data": "20/06/2026 14:55:00",
           "perfil": "Qualificação incompleta",
           "anuncio": "interesses_moda",
@@ -5707,6 +5769,22 @@
           "etapa": "Etapa desqualificado"
         },
         {
+          "data": "21/06/2026 18:20:00",
+          "perfil": "CS",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa cliente"
+        },
+        {
+          "data": "21/06/2026 21:02:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
           "data": "21/06/2026 22:28:00",
           "perfil": "Qualificação incompleta",
           "anuncio": "interesses_moda",
@@ -5755,12 +5833,100 @@
           "etapa": "Etapa 1 - inicial"
         },
         {
+          "data": "22/06/2026 19:20:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "22/06/2026 20:35:00",
+          "perfil": "Multimarca",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa desqualificado"
+        },
+        {
+          "data": "22/06/2026 20:44:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "22/06/2026 21:29:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "22/06/2026 22:05:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "22/06/2026 23:30:00",
+          "perfil": "Pro",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 5 - em negociação"
+        },
+        {
+          "data": "22/06/2026 23:41:00",
+          "perfil": "Qualificado (Sem Faixa)",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 2 - Identificado"
+        },
+        {
+          "data": "23/06/2026 02:46:00",
+          "perfil": "Multimarca",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa desqualificado"
+        },
+        {
+          "data": "23/06/2026 02:47:00",
+          "perfil": "Qualificado (Sem Faixa)",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 2 - Identificado"
+        },
+        {
+          "data": "23/06/2026 04:00:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
           "data": "23/06/2026 06:58:00",
           "perfil": "Em atendimento",
           "anuncio": "PageView_25percent_last90Days",
           "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
           "origem": "WA_leads_26052026",
           "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "23/06/2026 08:04:00",
+          "perfil": "CS",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa cliente"
         },
         {
           "data": "23/06/2026 09:21:00",
@@ -5771,12 +5937,44 @@
           "etapa": "Etapa 1 - inicial"
         },
         {
+          "data": "23/06/2026 10:16:00",
+          "perfil": "Pro",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "Site (formulário)",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "23/06/2026 12:19:00",
+          "perfil": "CS",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "Site (formulário)",
+          "etapa": "Etapa cliente"
+        },
+        {
+          "data": "23/06/2026 14:49:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
           "data": "23/06/2026 16:18:00",
           "perfil": "Em atendimento",
           "anuncio": "PageView_25percent_last90Days",
           "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
           "origem": "WA_leads_26052026",
           "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "23/06/2026 18:45:00",
+          "perfil": "Multimarca",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa desqualificado"
         },
         {
           "data": "23/06/2026 19:24:00",
@@ -5793,6 +5991,30 @@
           "criativo": "carrossel_ecommerce_interesses_moda",
           "origem": "WA_leads_26052026",
           "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "23/06/2026 22:04:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "23/06/2026 22:25:00",
+          "perfil": "Multimarca",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa desqualificado"
+        },
+        {
+          "data": "23/06/2026 22:44:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
         },
         {
           "data": "23/06/2026 23:43:00",
@@ -5817,6 +6039,126 @@
           "criativo": "carrossel_quem_e_a_vesti_interesses_moda",
           "origem": "WA_leads_26052026",
           "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 06:24:00",
+          "perfil": "Multimarca",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa desqualificado"
+        },
+        {
+          "data": "24/06/2026 06:59:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "24/06/2026 07:38:00",
+          "perfil": "Em atendimento",
+          "anuncio": "PageView_25percent_last90Days",
+          "criativo": "est_clickbait_PageView_25percent_last90Days",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 07:46:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "24/06/2026 09:05:00",
+          "perfil": "Multimarca",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa desqualificado"
+        },
+        {
+          "data": "24/06/2026 09:19:00",
+          "perfil": "Em atendimento",
+          "anuncio": "PageView_25percent_last90Days",
+          "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 10:09:00",
+          "perfil": "Em atendimento",
+          "anuncio": "PageView_25percent_last90Days",
+          "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 12:03:00",
+          "perfil": "Starter",
+          "anuncio": "look_a_like_clientes(1)",
+          "criativo": "est_clickbait_look_a_like_clientes(1)",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "24/06/2026 16:35:00",
+          "perfil": "Starter",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa 3 - concluído"
+        },
+        {
+          "data": "24/06/2026 17:04:00",
+          "perfil": "Em atendimento",
+          "anuncio": "interesses_moda",
+          "criativo": "est_confec-on_interesses_moda",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 18:20:00",
+          "perfil": "Em atendimento",
+          "anuncio": "PageView_25percent_last90Days",
+          "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 18:20:00",
+          "perfil": "Em atendimento",
+          "anuncio": "PageView_25percent_last90Days",
+          "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 19:14:00",
+          "perfil": "Em atendimento",
+          "anuncio": "interesses_moda",
+          "criativo": "Video_22052026_interesses_moda",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 22:32:00",
+          "perfil": "Em atendimento",
+          "anuncio": "PageView_25percent_last90Days",
+          "criativo": "est_ia-atacad-moda_PageView_25percent_last90Days",
+          "origem": "WA_leads_26052026",
+          "etapa": "Etapa 1 - inicial"
+        },
+        {
+          "data": "24/06/2026 22:53:00",
+          "perfil": "Multimarca",
+          "anuncio": "abroad",
+          "criativo": "est_Reg-SP_abroad",
+          "origem": "site_leads_09062026",
+          "etapa": "Etapa desqualificado"
         }
       ]
     }
@@ -9516,7 +9858,7 @@
       "data": "03/02/2026 11:25",
       "origem": "Orgânico",
       "perfil": "Qualificado (Sem Faixa)",
-      "etapa": ""
+      "etapa": "Etapa 2 - Identificado"
     },
     {
       "data": "03/02/2026 13:21",
@@ -12167,8 +12509,8 @@
     {
       "data": "24/03/2026 09:55:55",
       "origem": "Orgânico",
-      "perfil": "Qualificação incompleta",
-      "etapa": ""
+      "perfil": "Qualificado (Sem Faixa)",
+      "etapa": "Etapa 2 - Identificado"
     },
     {
       "data": "24/03/2026 09:56:13",
@@ -22264,7 +22606,7 @@
     },
     {
       "data": "18/06/2026 20:03:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Qualificação incompleta",
       "etapa": "Etapa 1 - inicial"
     },
@@ -22362,7 +22704,7 @@
       "data": "19/06/2026 15:28:00",
       "origem": "Formulário Cris",
       "perfil": "Qualificado (Sem Faixa)",
-      "etapa": "Etapa 5 - em negociação"
+      "etapa": "Etapa 6 - Ganho"
     },
     {
       "data": "19/06/2026 17:37:00",
@@ -22456,7 +22798,7 @@
     },
     {
       "data": "20/06/2026 10:37:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "CS",
       "etapa": "Etapa cliente"
     },
@@ -22624,7 +22966,7 @@
     },
     {
       "data": "21/06/2026 18:20:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "CS",
       "etapa": "Etapa cliente"
     },
@@ -22642,7 +22984,7 @@
     },
     {
       "data": "21/06/2026 21:02:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
     },
@@ -22756,31 +23098,31 @@
     },
     {
       "data": "22/06/2026 19:20:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
     },
     {
       "data": "22/06/2026 20:35:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Multimarca",
       "etapa": "Etapa desqualificado"
     },
     {
       "data": "22/06/2026 20:44:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
     },
     {
       "data": "22/06/2026 21:29:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
     },
     {
       "data": "22/06/2026 22:05:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
     },
@@ -22792,31 +23134,31 @@
     },
     {
       "data": "22/06/2026 23:30:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Pro",
-      "etapa": "Etapa 3 - concluído"
+      "etapa": "Etapa 5 - em negociação"
     },
     {
       "data": "22/06/2026 23:41:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Qualificado (Sem Faixa)",
       "etapa": "Etapa 2 - Identificado"
     },
     {
       "data": "23/06/2026 02:46:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Multimarca",
       "etapa": "Etapa desqualificado"
     },
     {
       "data": "23/06/2026 02:47:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Qualificado (Sem Faixa)",
       "etapa": "Etapa 2 - Identificado"
     },
     {
       "data": "23/06/2026 04:00:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
     },
@@ -22834,7 +23176,7 @@
     },
     {
       "data": "23/06/2026 08:04:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "CS",
       "etapa": "Etapa cliente"
     },
@@ -22864,7 +23206,7 @@
     },
     {
       "data": "23/06/2026 10:16:00",
-      "origem": "Site (formulário)",
+      "origem": "Mídia paga",
       "perfil": "Pro",
       "etapa": "Etapa 3 - concluído"
     },
@@ -22876,7 +23218,7 @@
     },
     {
       "data": "23/06/2026 12:19:00",
-      "origem": "Site (formulário)",
+      "origem": "Mídia paga",
       "perfil": "CS",
       "etapa": "Etapa cliente"
     },
@@ -22894,7 +23236,7 @@
     },
     {
       "data": "23/06/2026 14:49:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
     },
@@ -22912,7 +23254,7 @@
     },
     {
       "data": "23/06/2026 18:45:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Multimarca",
       "etapa": "Etapa desqualificado"
     },
@@ -22942,27 +23284,21 @@
     },
     {
       "data": "23/06/2026 22:04:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
     },
     {
       "data": "23/06/2026 22:25:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Multimarca",
       "etapa": "Etapa desqualificado"
     },
     {
       "data": "23/06/2026 22:44:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
-    },
-    {
-      "data": "23/06/2026 23:05:00",
-      "origem": "",
-      "perfil": "Em atendimento",
-      "etapa": "Etapa 1 - inicial"
     },
     {
       "data": "23/06/2026 23:43:00",
@@ -22984,15 +23320,189 @@
     },
     {
       "data": "24/06/2026 06:24:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Multimarca",
       "etapa": "Etapa desqualificado"
     },
     {
       "data": "24/06/2026 06:59:00",
-      "origem": "",
+      "origem": "Mídia paga",
       "perfil": "Starter",
       "etapa": "Etapa 3 - concluído"
+    },
+    {
+      "data": "24/06/2026 07:38:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 07:46:00",
+      "origem": "Mídia paga",
+      "perfil": "Starter",
+      "etapa": "Etapa 3 - concluído"
+    },
+    {
+      "data": "24/06/2026 08:06:00",
+      "origem": "Site",
+      "perfil": "Multimarca",
+      "etapa": "Etapa desqualificado"
+    },
+    {
+      "data": "24/06/2026 09:05:00",
+      "origem": "Mídia paga",
+      "perfil": "Multimarca",
+      "etapa": "Etapa desqualificado"
+    },
+    {
+      "data": "24/06/2026 09:19:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 10:00:00",
+      "origem": "Orgânico",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 10:00:00",
+      "origem": "Orgânico",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 10:00:00",
+      "origem": "Orgânico",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 10:00:00",
+      "origem": "Orgânico",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 10:02:00",
+      "origem": "Orgânico",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 10:09:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 10:43:00",
+      "origem": "Orgânico",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 12:03:00",
+      "origem": "Mídia paga",
+      "perfil": "Starter",
+      "etapa": "Etapa 3 - concluído"
+    },
+    {
+      "data": "24/06/2026 12:54:00",
+      "origem": "Site",
+      "perfil": "Suporte",
+      "etapa": "Etapa cliente"
+    },
+    {
+      "data": "24/06/2026 13:26:00",
+      "origem": "Site",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 13:32:00",
+      "origem": "Orgânico",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 14:20:00",
+      "origem": "Orgânico",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 14:54:00",
+      "origem": "Site",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 15:40:00",
+      "origem": "Formulário Cris",
+      "perfil": "Qualificado (Sem Faixa)",
+      "etapa": "Etapa 3 - concluído"
+    },
+    {
+      "data": "24/06/2026 16:20:00",
+      "origem": "Site (formulário)",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 16:35:00",
+      "origem": "Mídia paga",
+      "perfil": "Starter",
+      "etapa": "Etapa 3 - concluído"
+    },
+    {
+      "data": "24/06/2026 17:04:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 18:20:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 18:20:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 19:14:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 20:46:00",
+      "origem": "Site",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 22:00:00",
+      "origem": "Site",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 22:32:00",
+      "origem": "Mídia paga",
+      "perfil": "Em atendimento",
+      "etapa": "Etapa 1 - inicial"
+    },
+    {
+      "data": "24/06/2026 22:53:00",
+      "origem": "Mídia paga",
+      "perfil": "Multimarca",
+      "etapa": "Etapa desqualificado"
     }
   ]
 }
