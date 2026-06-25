@@ -8,6 +8,7 @@
     "serve": "npx --yes http-server docs -p 8080 -c-1"
   },
   "dependencies": {
-    "googleapis": "^144.0.0"
+    "googleapis": "^144.0.0",
+    "libsodium-wrappers": "^0.8.4"
   }
 }

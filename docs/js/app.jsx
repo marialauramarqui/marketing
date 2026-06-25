@@ -1319,7 +1319,7 @@
           </section>
 
           <footer className="text-center text-[11px] text-slate-400 pt-4 pb-6">
-            Atualizado automaticamente todo dia às 04:30 BRT.
+            Atualizado automaticamente todo dia às 06:00 BRT.
           </footer>
         </main>
       </>
