@@ -149,18 +149,22 @@
     const fmtDateShort = (d) => d ? `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}` : "";
     const DOW_HEADERS = ["D","S","T","Q","Q","S","S"];
 
-    function applyFilters(leads, { years, months, origens, perfis, dateFrom, dateTo } = {}) {
+    // dateField define qual data baliza o recorte de período:
+    //   "data"       → safra (data de entrada do lead, coluna A)
+    //   "data_etapa" → competência (data da etapa atual, coluna K)
+    // Os filtros de origem/perfil não dependem disso.
+    function applyFilters(leads, { years, months, origens, perfis, dateFrom, dateTo, dateField = "data" } = {}) {
       const fromK = dateFrom ? dayKey(dateFrom) : null;
       const toK   = dateTo   ? dayKey(dateTo)   : null;
       return leads.filter(l => {
-        const k = leadMonthKey(l.data);
+        const k = leadMonthKey(l[dateField]);
         const [ky, km] = k ? k.split("-") : [null, null];
         if (years   && years.size   > 0 && (!ky || !years.has(ky)))   return false;
         if (months  && months.size  > 0 && (!km || !months.has(km)))  return false;
         if (origens && origens.size > 0 && !origens.has(l.origem))    return false;
         if (perfis  && perfis.size  > 0 && !perfis.has(l.perfil))     return false;
         if (fromK != null || toK != null) {
-          const dd = parseLeadDay(l.data);
+          const dd = parseLeadDay(l[dateField]);
           if (!dd) return false;
           const dk = dayKey(dd);
           if (fromK != null && dk < fromK) return false;
@@ -356,18 +360,13 @@
 
     // Funil visual customizado — desenha trapezoides com largura proporcional ao count,
     // gradient pink → green do topo (Etapa 1) ao fundo (Etapa 6 Ganho).
-    function FunnelChart({ funnelCumulative, totalFunil }) {
+    function FunnelChart({ funnelCumulative, totalFunil, basis = "safra" }) {
       // A pedido do negócio, o funil começa na Etapa 2 (a Etapa 1 sai da visão).
       // A Etapa 2 passa a ser o topo / 100% do gráfico. Os KPIs acima (MQL,
       // % do funil, conversão geral) seguem inalterados, na base da Etapa 1.
       const rows = funnelCumulative.slice(1);
       const base = rows.length ? rows[0].count : 0;
-      if (!base) return (
-        <div className="card p-10 text-center text-slate-400 text-sm">
-          Nenhum lead a partir da Etapa 2 no recorte atual.
-        </div>
-      );
-      const maxCount = base;
+      const maxCount = base || 1;
       const rowHeight = 72;
       const gapHeight = 18;
       const totalHeight = rows.length * rowHeight + (rows.length - 1) * gapHeight;
@@ -393,11 +392,20 @@
         <section className="card p-6">
           <div className="mb-5">
             <h2 className="text-base font-semibold">Funil de leads</h2>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Cada nível mostra quantos leads <strong>chegaram pelo menos</strong> a essa etapa.
+            <p className="text-xs text-slate-500 mt-0.5 max-w-xl">
+              {basis === "competencia"
+                ? <>Por <strong>competência</strong>: leads pelo mês da <strong>etapa atual</strong> (coluna K, quando o evento ocorreu). Quem não tem data de etapa fica de fora. Cada nível mostra quantos <strong>chegaram pelo menos</strong> a essa etapa.</>
+                : <>Por <strong>safra</strong>: leads pela <strong>data de entrada</strong> (coluna A). Cada nível mostra quantos <strong>chegaram pelo menos</strong> a essa etapa.</>}
             </p>
           </div>
 
+          {!base ? (
+            <div className="p-10 text-center text-slate-400 text-sm">
+              {basis === "competencia"
+                ? "Nenhuma etapa com data (coluna K) no recorte atual."
+                : "Nenhum lead a partir da Etapa 2 no recorte atual."}
+            </div>
+          ) : (
           <div className="relative mx-auto" style={{ height: `${totalHeight}px`, maxWidth: "720px" }}>
             {rows.map((row, i) => {
               const pctOfTop = maxCount > 0 ? (row.count / maxCount) * 100 : 0;
@@ -432,6 +440,7 @@
               );
             })}
           </div>
+          )}
         </section>
       );
     }
@@ -1030,6 +1039,8 @@
       const [selectedPerfis, setSelectedPerfis] = useState(new Set());
       const [dateFrom, setDateFrom] = useState(null);
       const [dateTo, setDateTo] = useState(null);
+      // Base da tela inteira: "safra" (data de entrada, col A) ou "competencia" (data da etapa, col K).
+      const [basis, setBasis] = useState("safra");
 
       useEffect(() => {
         fetch("data/data.json?t=" + Date.now())
@@ -1070,11 +1081,15 @@
         return [...s].sort((a,b) => a.localeCompare(b, "pt-BR"));
       }, [leads]);
 
+      // A base (safra ⇄ competência) define qual data baliza o recorte de período:
+      // safra = data de entrada (col A); competência = data da etapa (col K).
+      // Vale pra TODA a tela (KPIs, heatmaps, fora do funil e funil).
       const filtered = useMemo(() => applyFilters(leads, {
         years: selectedYears, months: selectedMonths,
         origens: selectedOrigens, perfis: selectedPerfis,
         dateFrom, dateTo,
-      }), [leads, selectedYears, selectedMonths, selectedOrigens, selectedPerfis, dateFrom, dateTo]);
+        dateField: basis === "competencia" ? "data_etapa" : "data",
+      }), [leads, selectedYears, selectedMonths, selectedOrigens, selectedPerfis, dateFrom, dateTo, basis]);
 
       const agg = useMemo(() => aggregate(filtered), [filtered]);
 
@@ -1138,6 +1153,19 @@
                   />
                   <CalendarButton from={dateFrom} to={dateTo}
                     onChange={(a, b) => { setDateFrom(a); setDateTo(b); }} />
+                  <div className="inline-flex rounded-lg p-0.5 border border-[#2B0C55]/10"
+                       style={{ background: "rgba(255,255,255,0.04)" }}
+                       title="Safra = recorta pela data de entrada (col A) · Competência = pela data da etapa (col K)">
+                    {[["safra","Safra"],["competencia","Competência"]].map(([v,label]) => (
+                      <button key={v} type="button" onClick={() => setBasis(v)}
+                        className="px-3.5 py-1.5 text-xs font-semibold rounded-md transition"
+                        style={basis === v
+                          ? { background: "linear-gradient(120deg,#6A52B3,#63C19B)", color: "#fff" }
+                          : { color: "#a299c6" }}>
+                        {label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
                 {(selectedYears.size > 0 || selectedMonths.size > 0 || selectedOrigens.size > 0 || selectedPerfis.size > 0 || dateFrom || dateTo) && (
                   <button onClick={() => {
@@ -1202,6 +1230,7 @@
                   conversions={agg.conversions}
                   worstConversionIdx={agg.worstConversionIdx}
                   totalFunil={agg.totalFunil}
+                  basis={basis}
                 />
               </>
             )}

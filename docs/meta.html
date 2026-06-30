@@ -162,10 +162,11 @@
       return new Date(year, monthIdx + 1, 0).getDate();
     }
 
-    function countForMonth(leads, year, month) {
+    // dateField: "data" = safra (entrada, col A) · "data_etapa" = competência (col K).
+    function countForMonth(leads, year, month, dateField = "data") {
       let total = 0, pro = 0, starter = 0, quali = 0;
       for (const l of leads) {
-        const d = parseLeadDate(l.data);
+        const d = parseLeadDate(l[dateField]);
         if (!d || d.y !== year || d.m !== month) continue;
         total++;
         const p = (l.perfil || "").trim().toLowerCase();
@@ -334,12 +335,12 @@
       );
     }
 
-    function weeklySeries(leads, year, month, metaMensal, matchFn, seriesKey) {
+    function weeklySeries(leads, year, month, metaMensal, matchFn, seriesKey, dateField = "data") {
       const monthIdx = month - 1;
       const nWeeks = weeksInMonth(year, monthIdx);
       const buckets = Array(nWeeks).fill(0);
       for (const l of leads) {
-        const d = parseLeadDate(l.data);
+        const d = parseLeadDate(l[dateField]);
         if (!d || d.y !== year || d.m !== month) continue;
         if (!matchFn(l)) continue;
         const w = weekOfMonth(year, monthIdx, d.d);
@@ -438,6 +439,8 @@
       const [err, setErr] = useState(null);
       const [year, setYear] = useState(null);
       const [month, setMonth] = useState(null);
+      // Base: "safra" (data de entrada, col A) ou "competencia" (data da etapa, col K).
+      const [basis, setBasis] = useState("safra");
 
       useEffect(() => {
         const bust = `?v=${Date.now()}`;
@@ -467,10 +470,11 @@
       }, []);
 
       const months = useMemo(() => leads ? availableMonths(leads) : [], [leads]);
+      const dateField = basis === "competencia" ? "data_etapa" : "data";
       const counts = useMemo(() => {
         if (!leads || year == null || month == null) return null;
-        return countForMonth(leads, year, month);
-      }, [leads, year, month]);
+        return countForMonth(leads, year, month, dateField);
+      }, [leads, year, month, dateField]);
 
       if (err) return <div className="p-10 text-red-600">Erro: {err}</div>;
       if (!leads || !metas || !counts) return <div className="p-10 text-slate-500">Carregando…</div>;
@@ -482,8 +486,8 @@
         { label: "Pro", Realizado: counts.pro, Meta: meta.pro },
         { label: "Starter", Realizado: counts.starter, Meta: meta.starter },
       ];
-      const weeklySql = weeklySeries(leads, year, month, meta.sql, isSqlLead, "SQL");
-      const weeklyPro = weeklySeries(leads, year, month, meta.pro, isProLead, "Pro");
+      const weeklySql = weeklySeries(leads, year, month, meta.sql, isSqlLead, "SQL", dateField);
+      const weeklyPro = weeklySeries(leads, year, month, meta.pro, isProLead, "Pro", dateField);
 
       return (
         <>
@@ -497,11 +501,26 @@
                   Metas mensais
                 </h1>
                 <p className="text-sm text-slate-500 mt-1">
-                  Comparativo entre o realizado e a meta em {MESES_LONG[month-1]}/{year}. <span className="text-slate-400">(Excluídos: origem <strong>Evento Denim</strong> e perfis <strong>Suporte</strong>/<strong>CS</strong>)</span>
+                  Comparativo entre o realizado e a meta em {MESES_LONG[month-1]}/{year} · visão por <strong>{basis === "competencia" ? "competência (data da etapa)" : "safra (data de entrada)"}</strong>. <span className="text-slate-400">(Excluídos: origem <strong>Evento Denim</strong> e perfis <strong>Suporte</strong>/<strong>CS</strong>)</span>
                 </p>
               </div>
-              <MonthSelector months={months} year={year} month={month}
-                             onChange={(y, m) => { setYear(y); setMonth(m); }} />
+              <div className="flex items-center gap-3 flex-wrap">
+                <div className="inline-flex rounded-lg p-0.5 border border-[#2B0C55]/10"
+                     style={{ background: "rgba(255,255,255,0.04)" }}
+                     title="Safra = data de entrada (col A) · Competência = data da etapa (col K)">
+                  {[["safra","Safra"],["competencia","Competência"]].map(([v,label]) => (
+                    <button key={v} type="button" onClick={() => setBasis(v)}
+                      className="px-3 py-1.5 text-xs font-semibold rounded-md transition"
+                      style={basis === v
+                        ? { background: "linear-gradient(120deg,#6A52B3,#63C19B)", color: "#fff" }
+                        : { color: "#a299c6" }}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                <MonthSelector months={months} year={year} month={month}
+                               onChange={(y, m) => { setYear(y); setMonth(m); }} />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">

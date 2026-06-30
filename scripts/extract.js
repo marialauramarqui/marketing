@@ -5,7 +5,7 @@ const { google } = require('googleapis');
 
 const SHEET_ID = process.env.SHEET_ID || '1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE';
 const TAB = process.env.SHEET_TAB || 'LeadsV2';
-const RANGE = `${TAB}!A:I`;
+const RANGE = `${TAB}!A:K`;
 const OUT_PATH = path.join(__dirname, '..', 'docs', 'data', 'data.json');
 const META_API_VERSION = 'v21.0';
 const META_LOCAL_CREDS = path.join(process.env.USERPROFILE || process.env.HOME || '', '.secrets', 'meta.json');
@@ -175,54 +175,59 @@ async function fetchMetaInsightsDaily(creds, since, until) {
   // do Ads Manager — pessoa enviou a 1ª resposta após clicar no anúncio, ou seja, contato novo).
   const MSG_ACTION = 'onsite_conversion.messaging_first_reply';
   const fields = 'ad_name,spend,impressions,reach,actions,date_start';
-  const params = new URLSearchParams({
-    level: 'ad',
-    time_increment: '1',
-    time_range: JSON.stringify({ since, until }),
-    fields,
-    limit: '500',
-    access_token: creds.token,
-  });
-  let url = `https://graph.facebook.com/${META_API_VERSION}/${creds.acct}/insights?${params}`;
   const spend = {};
   const impressions = {};
   const reach = {};
   const newMsgContacts = {};
-  let pages = 0;
-  while (url) {
-    const r = await fetch(url);
-    const j = await r.json();
-    if (j.error) throw new Error(`Meta API: ${j.error.message} (code ${j.error.code})`);
-    for (const row of (j.data || [])) {
-      const ad = row.ad_name;
-      const day = row.date_start;
-      if (!ad || !day) continue;
-      const action = (row.actions || []).find(a => a.action_type === MSG_ACTION);
-      const newContacts = action ? parseInt(action.value, 10) : 0;
-      if (!spend[ad])           spend[ad]           = {};
-      if (!impressions[ad])     impressions[ad]     = {};
-      if (!reach[ad])           reach[ad]           = {};
-      if (!newMsgContacts[ad])  newMsgContacts[ad]  = {};
-      spend[ad][day]           = +((parseFloat(row.spend) || 0).toFixed(2));
-      impressions[ad][day]     = parseInt(row.impressions || 0, 10);
-      reach[ad][day]           = parseInt(row.reach || 0, 10);
-      newMsgContacts[ad][day]  = newContacts;
+
+  // Fatiamos a janela por mês calendário. O campo `actions` com time_increment=1
+  // estoura "code 1 / subcode 99" (erro genérico do Meta) em ranges longos (~7 meses);
+  // por mês a chamada fica dentro do limite síncrono. As chaves são [ad][dia], então
+  // os meses se acumulam sem colisão. Mesmo padrão de fatiamento de fetchMetaReachMonthly.
+  for (const { since: s, until: u } of monthWindows(since, until)) {
+    const params = new URLSearchParams({
+      level: 'ad',
+      time_increment: '1',
+      time_range: JSON.stringify({ since: s, until: u }),
+      fields,
+      limit: '500',
+      access_token: creds.token,
+    });
+    let url = `https://graph.facebook.com/${META_API_VERSION}/${creds.acct}/insights?${params}`;
+    let pages = 0;
+    while (url) {
+      const r = await fetch(url);
+      const j = await r.json();
+      if (j.error) throw new Error(`Meta API: ${j.error.message} (code ${j.error.code})`);
+      for (const row of (j.data || [])) {
+        const ad = row.ad_name;
+        const day = row.date_start;
+        if (!ad || !day) continue;
+        const action = (row.actions || []).find(a => a.action_type === MSG_ACTION);
+        const newContacts = action ? parseInt(action.value, 10) : 0;
+        if (!spend[ad])           spend[ad]           = {};
+        if (!impressions[ad])     impressions[ad]     = {};
+        if (!reach[ad])           reach[ad]           = {};
+        if (!newMsgContacts[ad])  newMsgContacts[ad]  = {};
+        spend[ad][day]           = +((parseFloat(row.spend) || 0).toFixed(2));
+        impressions[ad][day]     = parseInt(row.impressions || 0, 10);
+        reach[ad][day]           = parseInt(row.reach || 0, 10);
+        newMsgContacts[ad][day]  = newContacts;
+      }
+      pages++;
+      url = j.paging && j.paging.next;
+      if (pages > 50) break; // hard guard
     }
-    pages++;
-    url = j.paging && j.paging.next;
-    if (pages > 50) break; // hard guard
   }
   return { spend, impressions, reach, newMsgContacts };
 }
 
-// Reach único por mês (calendário) por ad. Necessário porque somar reach diário super-estima
-// o alcance real do período — Meta deduplica usuários. Uma chamada por mês.
-async function fetchMetaReachMonthly(creds, since, until) {
-  const reachMonthly = {};
-  // Lista de meses calendário entre since e until inclusivos.
+// Lista de janelas {since, until} por mês calendário entre since e until (inclusivos),
+// recortadas nas bordas. Usada pra fatiar chamadas de insights que estouram em ranges longos.
+function monthWindows(since, until) {
   const startD = new Date(since + 'T00:00:00Z');
   const endD   = new Date(until + 'T00:00:00Z');
-  const months = [];
+  const windows = [];
   let cur = new Date(Date.UTC(startD.getUTCFullYear(), startD.getUTCMonth(), 1));
   while (cur <= endD) {
     const y = cur.getUTCFullYear();
@@ -231,10 +236,17 @@ async function fetchMetaReachMonthly(creds, since, until) {
     const monthEnd   = new Date(Date.UTC(y, m + 1, 0));
     const callSince = monthStart < startD ? since : `${y}-${String(m+1).padStart(2,'0')}-01`;
     const callUntil = monthEnd > endD ? until : `${y}-${String(m+1).padStart(2,'0')}-${String(monthEnd.getUTCDate()).padStart(2,'0')}`;
-    months.push({ ym: `${y}-${String(m+1).padStart(2,'0')}`, since: callSince, until: callUntil });
+    windows.push({ ym: `${y}-${String(m+1).padStart(2,'0')}`, since: callSince, until: callUntil });
     cur = new Date(Date.UTC(y, m + 1, 1));
   }
-  for (const { ym, since: s, until: u } of months) {
+  return windows;
+}
+
+// Reach único por mês (calendário) por ad. Necessário porque somar reach diário super-estima
+// o alcance real do período — Meta deduplica usuários. Uma chamada por mês.
+async function fetchMetaReachMonthly(creds, since, until) {
+  const reachMonthly = {};
+  for (const { ym, since: s, until: u } of monthWindows(since, until)) {
     const params = new URLSearchParams({
       level: 'ad',
       time_range: JSON.stringify({ since: s, until: u }),
@@ -339,7 +351,11 @@ async function main() {
     etapa: header.indexOf('ETAPA'),
     anuncio: header.indexOf('ANUNCIO'),
     criativo: header.indexOf('NOME CRIATIVO'),
+    // Coluna K = "Datetime Etapa": data do evento (quando o lead chegou na etapa atual).
+    // Usada na visão "Competência" do funil. Detecta pela grafia e cai p/ índice 10 (col K).
+    dataEtapa: header.findIndex(h => /datetime.*etapa|data.*etapa/i.test(String(h))),
   };
+  if (idx.dataEtapa < 0 && header.length > 10) idx.dataEtapa = 10;
   if (idx.origem < 0 || idx.perfil < 0) {
     throw new Error(`Header esperado nao encontrado. Header lido: ${JSON.stringify(header)}`);
   }
@@ -382,12 +398,13 @@ async function main() {
     const etapa = idx.etapa >= 0 ? canonicalEtapa(r[idx.etapa]) : '';
     const anuncio = idx.anuncio >= 0 ? normalize(r[idx.anuncio]) : '';
     const criativo = idx.criativo >= 0 ? normalize(r[idx.criativo]) : '';
+    const dataEtapa = idx.dataEtapa >= 0 ? normalize(r[idx.dataEtapa] || '') : '';
 
     // Reclassifica como "Mídia paga" qualquer lead com ANUNCIO ou NOME CRIATIVO preenchido,
     // independente do valor original da coluna ORIGEM. Mantém o rawOrigem só nos leads de mídia paga.
     const origem = (anuncio || criativo) ? 'Mídia paga' : rawOrigem;
 
-    leads.push({ data, origem, perfil, etapa });
+    leads.push({ data, origem, perfil, etapa, data_etapa: dataEtapa });
     if (origem) origemSet.add(origem);
     if (perfil) perfilSet.add(perfil);
     if (perfil) perfilCounts[perfil] = (perfilCounts[perfil] || 0) + 1;
