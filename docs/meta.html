@@ -116,6 +116,7 @@
 
     const fmtNumber = (n) => (n == null ? "—" : new Intl.NumberFormat("pt-BR").format(n));
     const fmtPct = (n) => (n == null || !isFinite(n) ? "—" : `${n.toFixed(1).replace(".", ",")}%`);
+    const monthKey = (y, m) => `${y}-${String(m).padStart(2, "0")}`;
 
     // dd/mm/aaaa hh:mm:ss  → { y, m, d }
     function parseLeadDate(str) {
@@ -162,12 +163,14 @@
       return new Date(year, monthIdx + 1, 0).getDate();
     }
 
+    // Agrega os contadores em vários meses (lista de {y, m}).
     // dateField: "data" = safra (entrada, col A) · "data_etapa" = competência (col K).
-    function countForMonth(leads, year, month, dateField = "data") {
+    function countForMonths(leads, monthObjs, dateField = "data") {
+      const wanted = new Set(monthObjs.map(o => monthKey(o.y, o.m)));
       let total = 0, pro = 0, starter = 0, quali = 0;
       for (const l of leads) {
         const d = parseLeadDate(l[dateField]);
-        if (!d || d.y !== year || d.m !== month) continue;
+        if (!d || !wanted.has(monthKey(d.y, d.m))) continue;
         total++;
         const p = (l.perfil || "").trim().toLowerCase();
         if (p === "pro") pro++;
@@ -247,26 +250,34 @@
       );
     }
 
-    function MonthSelector({ months, year, month, onChange }) {
-      const years = Array.from(new Set(months.map(x => x.y))).sort((a,b)=>b-a);
-      const monthsOfYear = months.filter(x => x.y === year).map(x => x.m).sort((a,b)=>a-b);
+    // Seletor de múltiplos meses via chips. `selected` é uma lista de chaves "YYYY-MM".
+    function MonthMultiSelector({ months, selected, onToggle, onAll, onClear }) {
       return (
-        <div className="flex flex-wrap items-center gap-3">
-          <label className="text-sm text-slate-600">Mês de referência:</label>
-          <select value={month} onChange={e => onChange(year, +e.target.value)}
-                  className="bg-white/80 border border-[#2B0C55]/10 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:border-brand-pink">
-            {monthsOfYear.map(m => (
-              <option key={m} value={m}>{MESES_LONG[m-1]}</option>
-            ))}
-          </select>
-          <select value={year} onChange={e => {
-                    const ny = +e.target.value;
-                    const ms = months.filter(x => x.y === ny).map(x => x.m);
-                    onChange(ny, ms.includes(month) ? month : ms[ms.length-1]);
-                  }}
-                  className="bg-white/80 border border-[#2B0C55]/10 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:border-brand-pink">
-            {years.map(y => <option key={y} value={y}>{y}</option>)}
-          </select>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <label className="text-sm text-slate-600">Meses:</label>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {months.map(({ y, m }) => {
+              const k = monthKey(y, m);
+              const on = selected.includes(k);
+              return (
+                <button key={k} type="button" onClick={() => onToggle(k)}
+                  aria-pressed={on}
+                  className="px-2.5 py-1 text-xs font-semibold rounded-md border transition"
+                  style={on
+                    ? { background: "linear-gradient(120deg,#6A52B3,#63C19B)", color: "#fff", borderColor: "transparent" }
+                    : { color: "#a299c6", borderColor: "rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.04)" }}>
+                  {MESES[m-1]}/{String(y).slice(2)}
+                </button>
+              );
+            })}
+          </div>
+          <div className="inline-flex items-center gap-1 text-[11px]">
+            <button type="button" onClick={onAll}
+              className="text-slate-500 hover:text-slate-800 underline-offset-2 hover:underline">Todos</button>
+            <span className="text-slate-600">·</span>
+            <button type="button" onClick={onClear}
+              className="text-slate-500 hover:text-slate-800 underline-offset-2 hover:underline">Limpar</button>
+          </div>
         </div>
       );
     }
@@ -359,6 +370,23 @@
       });
     }
 
+    // Série com um ponto por mês selecionado (cronológica). Meta = meta mensal fixa.
+    function monthlySeries(leads, monthObjs, metaMensal, matchFn, seriesKey, dateField = "data") {
+      return monthObjs.map(({ y, m }) => {
+        let v = 0;
+        for (const l of leads) {
+          const d = parseLeadDate(l[dateField]);
+          if (!d || d.y !== y || d.m !== m) continue;
+          if (matchFn(l)) v++;
+        }
+        return {
+          label: `${MESES[m-1]}/${String(y).slice(2)}`,
+          [seriesKey]: v,
+          Meta: metaMensal,
+        };
+      });
+    }
+
     function isSqlLead(l) {
       const p = (l.perfil || "").trim().toLowerCase();
       return p === "pro" || p === "starter" || p.startsWith("qualificado");
@@ -437,8 +465,8 @@
       const [leads, setLeads] = useState(null);
       const [metas, setMetas] = useState(null);
       const [err, setErr] = useState(null);
-      const [year, setYear] = useState(null);
-      const [month, setMonth] = useState(null);
+      // Meses selecionados: lista de chaves "YYYY-MM".
+      const [selected, setSelected] = useState([]);
       // Base: "safra" (data de entrada, col A) ou "competencia" (data da etapa, col K).
       const [basis, setBasis] = useState("safra");
 
@@ -463,7 +491,7 @@
             const today = new Date();
             const ty = today.getFullYear(), tm = today.getMonth() + 1;
             const match = months.find(x => x.y === ty && x.m === tm) || months[0];
-            setYear(match.y); setMonth(match.m);
+            setSelected([monthKey(match.y, match.m)]);
           }
         })
         .catch(e => setErr(String(e)));
@@ -471,41 +499,70 @@
 
       const months = useMemo(() => leads ? availableMonths(leads) : [], [leads]);
       const dateField = basis === "competencia" ? "data_etapa" : "data";
+      // Meses selecionados como objetos {y, m}, em ordem cronológica (ascendente).
+      const selMonths = useMemo(() =>
+        months
+          .filter(x => selected.includes(monthKey(x.y, x.m)))
+          .sort((a, b) => a.y - b.y || a.m - b.m),
+        [months, selected]);
       const counts = useMemo(() => {
-        if (!leads || year == null || month == null) return null;
-        return countForMonth(leads, year, month, dateField);
-      }, [leads, year, month, dateField]);
+        if (!leads || !selMonths.length) return null;
+        return countForMonths(leads, selMonths, dateField);
+      }, [leads, selMonths, dateField]);
 
       if (err) return <div className="p-10 text-red-600">Erro: {err}</div>;
-      if (!leads || !metas || !counts) return <div className="p-10 text-slate-500">Carregando…</div>;
+      if (!leads || !metas) return <div className="p-10 text-slate-500">Carregando…</div>;
 
-      const meta = metas.mensal;
-      const chartRows = [
+      const nSel = selMonths.length;
+      const singleMonth = nSel === 1;
+      const metaBase = metas.mensal;
+      // Meta agregada = meta mensal × nº de meses selecionados.
+      const meta = {
+        total_leads: metaBase.total_leads * nSel,
+        sql: metaBase.sql * nSel,
+        pro: metaBase.pro * nSel,
+        starter: metaBase.starter * nSel,
+      };
+      const periodLabel = nSel === 1
+        ? `${MESES_LONG[selMonths[0].m-1]}/${selMonths[0].y}`
+        : `${nSel} meses (${selMonths.map(o => `${MESES[o.m-1]}/${String(o.y).slice(2)}`).join(", ")})`;
+
+      const chartRows = counts ? [
         { label: "Total de leads", Realizado: counts.total, Meta: meta.total_leads },
         { label: "SQL", Realizado: counts.sql, Meta: meta.sql },
         { label: "Pro", Realizado: counts.pro, Meta: meta.pro },
         { label: "Starter", Realizado: counts.starter, Meta: meta.starter },
-      ];
-      const weeklySql = weeklySeries(leads, year, month, meta.sql, isSqlLead, "SQL", dateField);
-      const weeklyPro = weeklySeries(leads, year, month, meta.pro, isProLead, "Pro", dateField);
+      ] : [];
+      // 1 mês → série semanal; vários meses → série por mês.
+      const sqlRows = singleMonth
+        ? weeklySeries(leads, selMonths[0].y, selMonths[0].m, metaBase.sql, isSqlLead, "SQL", dateField)
+        : monthlySeries(leads, selMonths, metaBase.sql, isSqlLead, "SQL", dateField);
+      const proRows = singleMonth
+        ? weeklySeries(leads, selMonths[0].y, selMonths[0].m, metaBase.pro, isProLead, "Pro", dateField)
+        : monthlySeries(leads, selMonths, metaBase.pro, isProLead, "Pro", dateField);
+      const sqlTitle = singleMonth ? "SQLs por semana × meta" : "SQLs por mês × meta";
+      const proTitle = singleMonth ? "Pros por semana × meta" : "Pros por mês × meta";
+      const chartSub  = singleMonth ? "meta proporcional aos dias de cada semana" : "meta mensal fixa por mês";
 
       return (
         <>
           <Header />
           <main className="max-w-6xl mx-auto px-6 lg:px-10 py-8">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight"
-                    style={{ background:"linear-gradient(120deg,#9C84EA 0%,#8A6DD1 45%,#63C19B 100%)",
-                             WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
-                  Metas mensais
-                </h1>
-                <p className="text-sm text-slate-500 mt-1">
-                  Comparativo entre o realizado e a meta em {MESES_LONG[month-1]}/{year} · visão por <strong>{basis === "competencia" ? "competência (data da etapa)" : "safra (data de entrada)"}</strong>. <span className="text-slate-400">(Excluídos: origem <strong>Evento Denim</strong> e perfis <strong>Suporte</strong>/<strong>CS</strong>)</span>
-                </p>
-              </div>
-              <div className="flex items-center gap-3 flex-wrap">
-                <div className="inline-flex rounded-lg p-0.5 border border-[#2B0C55]/10"
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <div>
+                  <h1 className="text-2xl font-bold tracking-tight"
+                      style={{ background:"linear-gradient(120deg,#9C84EA 0%,#8A6DD1 45%,#63C19B 100%)",
+                               WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent" }}>
+                    Metas mensais
+                  </h1>
+                  <p className="text-sm text-slate-500 mt-1">
+                    {nSel === 0
+                      ? <>Selecione ao menos um mês nos chips abaixo.</>
+                      : <>Comparativo entre o realizado e a meta em <strong>{periodLabel}</strong> · visão por <strong>{basis === "competencia" ? "competência (data da etapa)" : "safra (data de entrada)"}</strong>.{nSel > 1 ? <> Meta = mensal × {nSel} meses.</> : null} <span className="text-slate-400">(Excluídos: origem <strong>Evento Denim</strong> e perfis <strong>Suporte</strong>/<strong>CS</strong>)</span></>}
+                  </p>
+                </div>
+                <div className="inline-flex rounded-lg p-0.5 border border-[#2B0C55]/10 self-start md:self-auto"
                      style={{ background: "rgba(255,255,255,0.04)" }}
                      title="Safra = data de entrada (col A) · Competência = data da etapa (col K)">
                   {[["safra","Safra"],["competencia","Competência"]].map(([v,label]) => (
@@ -518,38 +575,50 @@
                     </button>
                   ))}
                 </div>
-                <MonthSelector months={months} year={year} month={month}
-                               onChange={(y, m) => { setYear(y); setMonth(m); }} />
+              </div>
+              <div className="card p-3">
+                <MonthMultiSelector
+                  months={months}
+                  selected={selected}
+                  onToggle={(k) => setSelected(prev => prev.includes(k) ? prev.filter(x => x !== k) : [...prev, k])}
+                  onAll={() => setSelected(months.map(x => monthKey(x.y, x.m)))}
+                  onClear={() => setSelected([])} />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-              <MetaCard label="Total de leads" realizado={counts.total} meta={meta.total_leads} />
-              <MetaCard label="SQL"            realizado={counts.sql}   meta={meta.sql} />
-              <MetaCard label="Leads Pro"      realizado={counts.pro}   meta={meta.pro} />
-              <MetaCard label="Leads Starter"  realizado={counts.starter} meta={meta.starter} />
-              <CountCard label="Qualificados (Sem Faixa)" value={counts.quali}
-                         hint="incluídos no total de SQL" />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <div className="lg:col-span-2">
-                <ComparativoChart rows={chartRows} />
+            {nSel === 0 ? (
+              <div className="card p-8 text-center text-slate-500">
+                Selecione ao menos um mês nos chips acima para ver as metas.
               </div>
-              <PctCard label="% Pro sobre SQL"
-                       realizadoNum={counts.pro} realizadoDen={counts.sql}
-                       metaNum={meta.pro}        metaDen={meta.sql}
-                       hint={`${counts.pro} de ${counts.sql} SQLs são Pro`} />
-            </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+                  <MetaCard label="Total de leads" realizado={counts.total} meta={meta.total_leads} />
+                  <MetaCard label="SQL"            realizado={counts.sql}   meta={meta.sql} />
+                  <MetaCard label="Leads Pro"      realizado={counts.pro}   meta={meta.pro} />
+                  <MetaCard label="Leads Starter"  realizado={counts.starter} meta={meta.starter} />
+                  <CountCard label="Qualificados (Sem Faixa)" value={counts.quali}
+                             hint="incluídos no total de SQL" />
+                </div>
 
-            <div className="mt-4 grid grid-cols-1 gap-4">
-              <WeeklyLineChart rows={weeklySql} seriesKey="SQL"
-                               title="SQLs por semana × meta"
-                               subtitle="meta proporcional aos dias de cada semana" />
-              <WeeklyLineChart rows={weeklyPro} seriesKey="Pro"
-                               title="Pros por semana × meta"
-                               subtitle="meta proporcional aos dias de cada semana" />
-            </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                  <div className="lg:col-span-2">
+                    <ComparativoChart rows={chartRows} />
+                  </div>
+                  <PctCard label="% Pro sobre SQL"
+                           realizadoNum={counts.pro} realizadoDen={counts.sql}
+                           metaNum={meta.pro}        metaDen={meta.sql}
+                           hint={`${counts.pro} de ${counts.sql} SQLs são Pro`} />
+                </div>
+
+                <div className="mt-4 grid grid-cols-1 gap-4">
+                  <WeeklyLineChart rows={sqlRows} seriesKey="SQL"
+                                   title={sqlTitle} subtitle={chartSub} />
+                  <WeeklyLineChart rows={proRows} seriesKey="Pro"
+                                   title={proTitle} subtitle={chartSub} />
+                </div>
+              </>
+            )}
           </main>
         </>
       );
