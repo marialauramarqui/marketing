@@ -429,12 +429,12 @@
                 <Legend wrapperStyle={{ paddingTop: 8 }} />
                 <Line type="monotone" dataKey="Meta" stroke="#63C19B" strokeWidth={2}
                       strokeDasharray="6 4" dot={{ r: 3, fill: "#63C19B" }} activeDot={{ r: 5 }}>
-                  <LabelList dataKey="Meta" position="bottom" offset={10}
-                             style={{ fill: "#2F6B56", fontSize: 10, fontWeight: 600 }} />
+                  <LabelList dataKey="Meta" position="top" offset={10}
+                             style={{ fill: "#63C19B", fontSize: 10, fontWeight: 600 }} />
                 </Line>
                 <Line type="monotone" dataKey={seriesKey} stroke={mainColor} strokeWidth={2.5}
                       dot={{ r: 4, fill: mainColor }} activeDot={{ r: 6 }}>
-                  <LabelList dataKey={seriesKey} position="top" offset={12}
+                  <LabelList dataKey={seriesKey} position="bottom" offset={12}
                              style={{ fill: mainColorDark, fontSize: 11, fontWeight: 700 }} />
                 </Line>
               </LineChart>
