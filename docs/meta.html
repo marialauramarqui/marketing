@@ -250,13 +250,20 @@
       );
     }
 
-    // Seletor de múltiplos meses via chips. `selected` é uma lista de chaves "YYYY-MM".
-    function MonthMultiSelector({ months, selected, onToggle, onAll, onClear }) {
+    // Seletor de múltiplos meses via chips, filtrados por um ano (dropdown).
+    // `selected` é uma lista de chaves "YYYY-MM"; a seleção pode abranger vários anos.
+    function MonthMultiSelector({ months, years, filterYear, onYearChange, selected, onToggle, onAllYear, onClearYear }) {
+      const monthsOfYear = months.filter(x => x.y === filterYear).sort((a, b) => a.m - b.m);
       return (
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-          <label className="text-sm text-slate-600">Meses:</label>
+          <label className="text-sm text-slate-600">Ano:</label>
+          <select value={filterYear} onChange={e => onYearChange(+e.target.value)}
+                  className="bg-white/80 border border-[#2B0C55]/10 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:border-brand-pink">
+            {years.map(y => <option key={y} value={y}>{y}</option>)}
+          </select>
+          <span className="text-sm text-slate-600">Meses:</span>
           <div className="flex flex-wrap items-center gap-1.5">
-            {months.map(({ y, m }) => {
+            {monthsOfYear.map(({ y, m }) => {
               const k = monthKey(y, m);
               const on = selected.includes(k);
               return (
@@ -266,16 +273,17 @@
                   style={on
                     ? { background: "linear-gradient(120deg,#6A52B3,#63C19B)", color: "#fff", borderColor: "transparent" }
                     : { color: "#a299c6", borderColor: "rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.04)" }}>
-                  {MESES[m-1]}/{String(y).slice(2)}
+                  {MESES[m-1]}
                 </button>
               );
             })}
           </div>
-          <div className="inline-flex items-center gap-1 text-[11px]">
-            <button type="button" onClick={onAll}
+          <div className="inline-flex items-center gap-1 text-[11px]"
+               title="Aplica-se aos meses do ano selecionado acima">
+            <button type="button" onClick={onAllYear}
               className="text-slate-500 hover:text-slate-800 underline-offset-2 hover:underline">Todos</button>
             <span className="text-slate-600">·</span>
-            <button type="button" onClick={onClear}
+            <button type="button" onClick={onClearYear}
               className="text-slate-500 hover:text-slate-800 underline-offset-2 hover:underline">Limpar</button>
           </div>
         </div>
@@ -467,6 +475,8 @@
       const [err, setErr] = useState(null);
       // Meses selecionados: lista de chaves "YYYY-MM".
       const [selected, setSelected] = useState([]);
+      // Ano que filtra os chips de mês exibidos (a seleção pode abranger vários anos).
+      const [filterYear, setFilterYear] = useState(null);
       // Base: "safra" (data de entrada, col A) ou "competencia" (data da etapa, col K).
       const [basis, setBasis] = useState("safra");
 
@@ -492,12 +502,16 @@
             const ty = today.getFullYear(), tm = today.getMonth() + 1;
             const match = months.find(x => x.y === ty && x.m === tm) || months[0];
             setSelected([monthKey(match.y, match.m)]);
+            setFilterYear(match.y);
           }
         })
         .catch(e => setErr(String(e)));
       }, []);
 
       const months = useMemo(() => leads ? availableMonths(leads) : [], [leads]);
+      const years = useMemo(() => Array.from(new Set(months.map(x => x.y))).sort((a, b) => b - a), [months]);
+      // Ano resolvido (fallback enquanto o estado inicializa).
+      const fy = filterYear ?? years[0] ?? null;
       const dateField = basis === "competencia" ? "data_etapa" : "data";
       // Meses selecionados como objetos {y, m}, em ordem cronológica (ascendente).
       const selMonths = useMemo(() =>
@@ -579,10 +593,19 @@
               <div className="card p-3">
                 <MonthMultiSelector
                   months={months}
+                  years={years}
+                  filterYear={fy}
+                  onYearChange={(y) => setFilterYear(y)}
                   selected={selected}
                   onToggle={(k) => setSelected(prev => prev.includes(k) ? prev.filter(x => x !== k) : [...prev, k])}
-                  onAll={() => setSelected(months.map(x => monthKey(x.y, x.m)))}
-                  onClear={() => setSelected([])} />
+                  onAllYear={() => {
+                    const yk = months.filter(x => x.y === fy).map(x => monthKey(x.y, x.m));
+                    setSelected(prev => Array.from(new Set([...prev, ...yk])));
+                  }}
+                  onClearYear={() => {
+                    const yk = new Set(months.filter(x => x.y === fy).map(x => monthKey(x.y, x.m)));
+                    setSelected(prev => prev.filter(k => !yk.has(k)));
+                  }} />
               </div>
             </div>
 
