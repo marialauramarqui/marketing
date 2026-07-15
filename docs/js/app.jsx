@@ -13,6 +13,9 @@
 
   // --------------------------- constants ---------------------------
   const SQL_PERFIS = ["Pro", "Starter", "Qualificado (Sem Faixa)"];
+  // Rótulo para leads sem origem/perfil preenchido — torna-os selecionáveis
+  // no filtro (sem isso, filtrar por origem/perfil descartava esses leads).
+  const BLANK = "(vazio)";
   const MONTH_LABELS_FULL = [
     "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
     "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro",
@@ -783,24 +786,33 @@
       fetch("data/data.json", { cache: "no-store" })
         .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
         .then(json => {
+          // Normaliza vazios/espaços para o rótulo BLANK, mantendo o valor real caso preenchido.
+          const norm = (v) => (v != null && String(v).trim()) ? String(v).trim() : BLANK;
           const leads = (json.leads || []).map(l => ({
             ...l,
-            origem: canonicalOrigem(l.origem),
+            origem: norm(canonicalOrigem(l.origem)),
+            perfil: norm(l.perfil),
             _d: parseLeadDate(l.data),
           }));
-          const origens = [...new Set((json.origens || []).map(canonicalOrigem))]
+          const hasBlankOrigem = leads.some(l => l.origem === BLANK);
+          const hasBlankPerfil = leads.some(l => l.perfil === BLANK);
+          // Opções: só valores preenchidos; acrescenta "(vazio)" ao final se houver leads sem preenchimento.
+          const origens = [...new Set((json.origens || []).map(canonicalOrigem).filter(o => o && String(o).trim()))]
             .sort((a, b) => a.localeCompare(b, "pt-BR"));
+          if (hasBlankOrigem) origens.push(BLANK);
+          const perfis = [...new Set((json.perfis || []).filter(p => p && String(p).trim()))];
+          if (hasBlankPerfil) perfis.push(BLANK);
           const origem_counts = {};
           for (const [k, v] of Object.entries(json.origem_counts || {})) {
-            const ck = canonicalOrigem(k);
+            const ck = norm(canonicalOrigem(k));
             origem_counts[ck] = (origem_counts[ck] || 0) + v;
           }
           const sql_by_origem = {};
           for (const [k, v] of Object.entries(json.sql_by_origem || {})) {
-            const ck = canonicalOrigem(k);
+            const ck = norm(canonicalOrigem(k));
             sql_by_origem[ck] = (sql_by_origem[ck] || 0) + v;
           }
-          setRaw({ ...json, leads, origens, origem_counts, sql_by_origem });
+          setRaw({ ...json, leads, origens, perfis, origem_counts, sql_by_origem });
         })
         .catch(e => setError(e.message || String(e)));
     }, []);
