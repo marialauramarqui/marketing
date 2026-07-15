@@ -477,8 +477,6 @@
       const [selected, setSelected] = useState([]);
       // Ano que filtra os chips de mês exibidos (a seleção pode abranger vários anos).
       const [filterYear, setFilterYear] = useState(null);
-      // Base: "safra" (data de entrada, col A) ou "competencia" (data da etapa, col K).
-      const [basis, setBasis] = useState("safra");
 
       useEffect(() => {
         const bust = `?v=${Date.now()}`;
@@ -512,7 +510,8 @@
       const years = useMemo(() => Array.from(new Set(months.map(x => x.y))).sort((a, b) => b - a), [months]);
       // Ano resolvido (fallback enquanto o estado inicializa).
       const fy = filterYear ?? years[0] ?? null;
-      const dateField = basis === "competencia" ? "data_etapa" : "data";
+      // Fonte de data fixa: coluna DATA (data de entrada do lead).
+      const dateField = "data";
       // Meses selecionados como objetos {y, m}, em ordem cronológica (ascendente).
       const selMonths = useMemo(() =>
         months
@@ -573,21 +572,8 @@
                   <p className="text-sm text-slate-500 mt-1">
                     {nSel === 0
                       ? <>Selecione ao menos um mês nos chips abaixo.</>
-                      : <>Comparativo entre o realizado e a meta em <strong>{periodLabel}</strong> · visão por <strong>{basis === "competencia" ? "competência (data da etapa)" : "safra (data de entrada)"}</strong>.{nSel > 1 ? <> Meta = mensal × {nSel} meses.</> : null} <span className="text-slate-400">(Excluídos: origem <strong>Evento Denim</strong> e perfis <strong>Suporte</strong>/<strong>CS</strong>)</span></>}
+                      : <>Comparativo entre o realizado e a meta em <strong>{periodLabel}</strong>.{nSel > 1 ? <> Meta = mensal × {nSel} meses.</> : null} <span className="text-slate-400">(Excluídos: origem <strong>Evento Denim</strong> e perfis <strong>Suporte</strong>/<strong>CS</strong>)</span></>}
                   </p>
-                </div>
-                <div className="inline-flex rounded-lg p-0.5 border border-[#2B0C55]/10 self-start md:self-auto"
-                     style={{ background: "rgba(255,255,255,0.04)" }}
-                     title="Safra = data de entrada (col A) · Competência = data da etapa (col K)">
-                  {[["safra","Safra"],["competencia","Competência"]].map(([v,label]) => (
-                    <button key={v} type="button" onClick={() => setBasis(v)}
-                      className="px-3 py-1.5 text-xs font-semibold rounded-md transition"
-                      style={basis === v
-                        ? { background: "linear-gradient(120deg,#6A52B3,#63C19B)", color: "#fff" }
-                        : { color: "#a299c6" }}>
-                      {label}
-                    </button>
-                  ))}
                 </div>
               </div>
               <div className="card p-3">
