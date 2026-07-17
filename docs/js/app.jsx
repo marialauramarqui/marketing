@@ -16,6 +16,8 @@
   // Rótulo para leads sem origem/perfil preenchido — torna-os selecionáveis
   // no filtro (sem isso, filtrar por origem/perfil descartava esses leads).
   const BLANK = "(vazio)";
+  // Opções fixas do filtro de Formulário: "Sim" (coluna preenchida) ou "Não" (vazia).
+  const FORMULARIO_OPTS = ["Sim", "Não"];
   const MONTH_LABELS_FULL = [
     "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
     "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro",
@@ -417,9 +419,10 @@
 
   // --------------------------- Filters ---------------------------
   function Filters({
-    origens, perfis, years,
+    origens, perfis, formularios, years,
     origemSel, setOrigemSel,
     perfilSel, setPerfilSel,
+    formularioSel, setFormularioSel,
     year, setYear,
     month, setMonth,
     dateFrom, dateTo, setDateRange,
@@ -430,9 +433,10 @@
 
     return (
       <section className="card card-gradient-border p-5 lg:p-6 relative z-40">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 items-end">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4 items-end">
           <MultiSelect label="Origem"        options={origens}      selected={origemSel} onChange={setOrigemSel} placeholder="Todas" />
           <MultiSelect label="Perfil"        options={perfis}       selected={perfilSel} onChange={setPerfilSel} placeholder="Todos" />
+          <MultiSelect label="Formulário"    options={formularios}  selected={formularioSel} onChange={setFormularioSel} placeholder="Todos" />
           <MultiSelect label="Ano"           options={yearOptions}  selected={year}      onChange={setYear}      placeholder="Todos" />
           <MultiSelect label="Mês"           options={monthOptions} selected={month}     onChange={setMonth}     placeholder="Todos" />
           <CalendarButton from={dateFrom} to={dateTo} onChange={(a, b) => setDateRange(a, b)} />
@@ -773,6 +777,7 @@
 
     const [origemSel, setOrigemSel] = useState([]);
     const [perfilSel, setPerfilSel] = useState([]);
+    const [formularioSel, setFormularioSel] = useState([]);
     const [year, setYear]           = useState(null); // null = não inicializado; [] = "Todos"
     const [month, setMonth]         = useState([]);
     const [weekSel, setWeekSel]     = useState(null); // 1..6 ou null
@@ -792,6 +797,7 @@
             ...l,
             origem: norm(canonicalOrigem(l.origem)),
             perfil: norm(l.perfil),
+            formulario: l.formulario === "Sim" ? "Sim" : "Não",
             _d: parseLeadDate(l.data),
           }));
           const hasBlankOrigem = leads.some(l => l.origem === BLANK);
@@ -842,6 +848,7 @@
       return raw.leads.filter(l => {
         if (origemSel.length > 0 && !origemSel.includes(l.origem)) return false;
         if (perfilSel.length > 0 && !perfilSel.includes(l.perfil)) return false;
+        if (formularioSel.length > 0 && !formularioSel.includes(l.formulario)) return false;
         if (l._d) {
           if (ySel.length  > 0 && !ySel.includes(l._d.getFullYear()))      return false;
           if (month.length > 0 && !month.includes(l._d.getMonth() + 1))    return false;
@@ -855,7 +862,7 @@
         }
         return true;
       });
-    }, [raw, origemSel, perfilSel, year, month, dateFrom, dateTo]);
+    }, [raw, origemSel, perfilSel, formularioSel, year, month, dateFrom, dateTo]);
 
     // Reset de seleções quando perdem contexto
     useEffect(() => {
@@ -929,6 +936,7 @@
       const hasDateFilter = fromK != null || toK != null;
       return raw.leads.filter(l => {
         if (perfilSel.length > 0 && !perfilSel.includes(l.perfil)) return false;
+        if (formularioSel.length > 0 && !formularioSel.includes(l.formulario)) return false;
         if (l._d) {
           if (ySel.length  > 0 && !ySel.includes(l._d.getFullYear()))      return false;
           if (month.length > 0 && !month.includes(l._d.getMonth() + 1))    return false;
@@ -944,7 +952,7 @@
         }
         return true;
       });
-    }, [raw, perfilSel, year, month, weekSel, daySel, dateFrom, dateTo]);
+    }, [raw, perfilSel, formularioSel, year, month, weekSel, daySel, dateFrom, dateTo]);
 
     const sqlsByOriginData = useMemo(() => {
       const m = {};
@@ -1152,7 +1160,7 @@
     }, [trendGranularity]);
 
     const clear = useCallback(() => {
-      setOrigemSel([]); setPerfilSel([]);
+      setOrigemSel([]); setPerfilSel([]); setFormularioSel([]);
       setYear([]);      setMonth([]);
       setWeekSel(null);
       setDaySel(null);
@@ -1192,9 +1200,11 @@
           <Filters
             origens={origensAll}
             perfis={perfisAll}
+            formularios={FORMULARIO_OPTS}
             years={years}
             origemSel={origemSel} setOrigemSel={setOrigemSel}
             perfilSel={perfilSel} setPerfilSel={setPerfilSel}
+            formularioSel={formularioSel} setFormularioSel={setFormularioSel}
             year={year ?? []}  setYear={setYear}
             month={month}      setMonth={setMonth}
             dateFrom={dateFrom} dateTo={dateTo} setDateRange={setDateRange}

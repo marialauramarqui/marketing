@@ -351,6 +351,8 @@ async function main() {
     etapa: header.indexOf('ETAPA'),
     anuncio: header.indexOf('ANUNCIO'),
     criativo: header.indexOf('NOME CRIATIVO'),
+    // Coluna "FORMULÁRIO": preenchida ("Sim") ou vazia. Detecta pela grafia p/ tolerar acento/caixa.
+    formulario: header.findIndex(h => /formul/i.test(String(h))),
     // Coluna K = "Datetime Etapa": data do evento (quando o lead chegou na etapa atual).
     // Usada na visão "Competência" do funil. Detecta pela grafia e cai p/ índice 10 (col K).
     dataEtapa: header.findIndex(h => /datetime.*etapa|data.*etapa/i.test(String(h))),
@@ -399,12 +401,14 @@ async function main() {
     const anuncio = idx.anuncio >= 0 ? normalize(r[idx.anuncio]) : '';
     const criativo = idx.criativo >= 0 ? normalize(r[idx.criativo]) : '';
     const dataEtapa = idx.dataEtapa >= 0 ? normalize(r[idx.dataEtapa] || '') : '';
+    // Coluna FORMULÁRIO: "Sim" se preenchida com algo tipo "sim", senão "Não" (inclui vazio).
+    const formulario = idx.formulario >= 0 && /sim/i.test(normalize(r[idx.formulario])) ? 'Sim' : 'Não';
 
     // Reclassifica como "Mídia paga" qualquer lead com ANUNCIO ou NOME CRIATIVO preenchido,
     // independente do valor original da coluna ORIGEM. Mantém o rawOrigem só nos leads de mídia paga.
     const origem = (anuncio || criativo) ? 'Mídia paga' : rawOrigem;
 
-    leads.push({ data, origem, perfil, etapa, data_etapa: dataEtapa });
+    leads.push({ data, origem, perfil, etapa, data_etapa: dataEtapa, formulario });
     if (origem) origemSet.add(origem);
     if (perfil) perfilSet.add(perfil);
     if (perfil) perfilCounts[perfil] = (perfilCounts[perfil] || 0) + 1;
