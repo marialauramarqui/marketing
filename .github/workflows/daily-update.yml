@@ -1,4 +1,8 @@
 name: Daily data update + Pages deploy
+# NOTA (transição Cloudflare): este workflow continua publicando no GitHub Pages.
+# Em paralelo, a Cloudflare Pages reconstrói do mesmo push (deploy independente).
+# O commit de docs/data/data.json serve aos dois: site do Pages + base do merge da Function.
+# Desligar o GitHub Pages é passo manual/opcional pós-validação (ver DEPLOY-CLOUDFLARE.md).
 
 on:
   schedule:

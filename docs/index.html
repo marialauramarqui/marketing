@@ -112,6 +112,16 @@
       border-radius: 10px !important;
       color: #e9e4f4 !important;
     }
+
+    /* ===== Botão Atualizar ===== */
+    .refresh-wrap { display: inline-flex; align-items: center; gap: 10px; }
+    .refresh-status { font-size: 11.5px; color: #8a8a8a; white-space: nowrap; }
+    .btn-refresh { display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      border: 0; border-radius: 8px; padding: 8px 14px; color: #fff; background: #7a1f3d; font-weight: 600; }
+    .btn-refresh:hover { background: #601731; }
+    .btn-refresh:disabled { opacity: .6; cursor: default; }
+    .btn-refresh.loading .ic { animation: spin .9s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 
   <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
@@ -130,6 +140,6 @@
   <div id="root" class="relative z-10"></div>
 
   <script src="js/bg-canvas.js"></script>
-  <script type="text/babel" data-presets="react" src="js/app.jsx?v=2026-07-17-formulario"></script>
+  <script type="text/babel" data-presets="react" src="js/app.jsx?v=2026-08-12-atualizar"></script>
 </body>
 </html>

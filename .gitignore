@@ -10,3 +10,5 @@ service-account*.json
 Thumbs.db
 .vscode/
 .idea/
+.dev.vars
+.superpowers/

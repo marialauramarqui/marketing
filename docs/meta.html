@@ -89,6 +89,15 @@
       border-radius: 10px !important;
       color: #e9e4f4 !important;
     }
+
+    /* ===== Botão Atualizar ===== */
+    .refresh-wrap { display: inline-flex; align-items: center; gap: 10px; }
+    .refresh-status { font-size: 11.5px; color: #8a8a8a; white-space: nowrap; }
+    .btn-refresh { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: 0; border-radius: 8px; padding: 8px 14px; color: #fff; background: #7a1f3d; font-weight: 600; font-family: inherit; }
+    .btn-refresh:hover { background: #601731; }
+    .btn-refresh:disabled { opacity: .6; cursor: default; }
+    .btn-refresh.loading .ic { animation: spin .9s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 
   <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
@@ -477,14 +486,23 @@
       const [selected, setSelected] = useState([]);
       // Ano que filtra os chips de mês exibidos (a seleção pode abranger vários anos).
       const [filterYear, setFilterYear] = useState(null);
+      const [refreshing, setRefreshing] = useState(false);
+      const [refreshedAt, setRefreshedAt] = useState(null);
 
-      useEffect(() => {
-        const bust = `?v=${Date.now()}`;
-        Promise.all([
-          fetch(`data/data.json${bust}`).then(r => r.json()),
-          fetch(`data/metas.json${bust}`).then(r => r.json()),
-        ])
-        .then(([d, m]) => {
+      // Detecta se estamos na Cloudflare Pages ou localhost (tem /api ao vivo).
+      const hasLiveApi = /(^|\.)pages\.dev$/.test(location.hostname) || location.hostname === "localhost";
+
+      const loadData = React.useCallback(async (fresh) => {
+        const dataUrl = (fresh && hasLiveApi)
+          ? "/api/dados?fresh=1"
+          : ("data/data.json?t=" + Date.now());
+        const metasUrl = "data/metas.json?t=" + Date.now();
+        if (fresh) setRefreshing(true);
+        try {
+          const [d, m] = await Promise.all([
+            fetch(dataUrl, { cache: "no-store" }).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }),
+            fetch(metasUrl, { cache: "no-store" }).then(r => r.json()),
+          ]);
           const filtered = (d.leads || []).filter(l => {
             const origem = (l.origem || "").trim();
             const perfil = (l.perfil || "").trim().toLowerCase();
@@ -494,17 +512,30 @@
           });
           setLeads(filtered);
           setMetas(m);
-          const months = availableMonths(filtered);
-          if (months.length) {
-            const today = new Date();
-            const ty = today.getFullYear(), tm = today.getMonth() + 1;
-            const match = months.find(x => x.y === ty && x.m === tm) || months[0];
-            setSelected([monthKey(match.y, match.m)]);
-            setFilterYear(match.y);
+          if (fresh) {
+            setRefreshedAt(new Date());
+          } else {
+            const months = availableMonths(filtered);
+            if (months.length) {
+              const today = new Date();
+              const ty = today.getFullYear(), tm = today.getMonth() + 1;
+              const match = months.find(x => x.y === ty && x.m === tm) || months[0];
+              setSelected([monthKey(match.y, match.m)]);
+              setFilterYear(match.y);
+            }
           }
-        })
-        .catch(e => setErr(String(e)));
-      }, []);
+        } catch (e) {
+          if (fresh) {
+            // Falhou o ao vivo → mantém os dados já na tela (não limpa).
+          } else {
+            setErr(String(e));
+          }
+        } finally {
+          if (fresh) setRefreshing(false);
+        }
+      }, [hasLiveApi]);
+
+      useEffect(() => { loadData(false); }, [loadData]);
 
       const months = useMemo(() => leads ? availableMonths(leads) : [], [leads]);
       const years = useMemo(() => Array.from(new Set(months.map(x => x.y))).sort((a, b) => b - a), [months]);
@@ -575,6 +606,23 @@
                       : <>Comparativo entre o realizado e a meta em <strong>{periodLabel}</strong>.{nSel > 1 ? <> Meta = mensal × {nSel} meses.</> : null} <span className="text-slate-400">(Excluídos: origem <strong>Evento Denim</strong> e perfis <strong>Suporte</strong>/<strong>CS</strong>)</span></>}
                   </p>
                 </div>
+                {hasLiveApi && (
+                  <div className="refresh-wrap">
+                    {refreshedAt && (
+                      <span className="refresh-status">
+                        ✓ Atualizado às {refreshedAt.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
+                      </span>
+                    )}
+                    <button
+                      className={"btn-refresh" + (refreshing ? " loading" : "")}
+                      onClick={() => loadData(true)}
+                      disabled={refreshing}
+                      title="Puxar leads ao vivo agora"
+                    >
+                      <span className="ic">⟳</span> {refreshing ? "Atualizando…" : "Atualizar"}
+                    </button>
+                  </div>
+                )}
               </div>
               <div className="card p-3">
                 <MonthMultiSelector

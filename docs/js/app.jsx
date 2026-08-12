@@ -339,7 +339,7 @@
   }
 
   // --------------------------- Header ---------------------------
-  function Header({ total, updatedAt }) {
+  function Header({ total, updatedAt, hasLiveApi, refreshing, refreshedAt, onRefresh }) {
     const logout = () => window.VestiAuth.logout();
     return (
       <header className="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-[#2B0C55]/10 backdrop-blur-sm">
@@ -360,6 +360,23 @@
         </div>
 
         <div className="flex items-center gap-4">
+          {hasLiveApi && (
+            <div className="refresh-wrap">
+              {refreshedAt && (
+                <span className="refresh-status">
+                  ✓ Atualizado às {refreshedAt.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
+                </span>
+              )}
+              <button
+                className={"btn-refresh" + (refreshing ? " loading" : "")}
+                onClick={onRefresh}
+                disabled={refreshing}
+                title="Puxar leads da planilha e Meta Ads (mês corrente + anterior) agora"
+              >
+                <span className="ic">⟳</span> {refreshing ? "Atualizando…" : "Atualizar"}
+              </button>
+            </div>
+          )}
           <div className="hidden md:flex flex-col items-end text-right">
             <span className="text-xs text-slate-500">
               {total != null
@@ -786,42 +803,67 @@
     const [dateTo, setDateTo]       = useState(null); // Date | null
     const setDateRange = useCallback((a, b) => { setDateFrom(a); setDateTo(b); }, []);
 
-    // Load + parse data
-    useEffect(() => {
-      fetch("data/data.json", { cache: "no-store" })
-        .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-        .then(json => {
-          // Normaliza vazios/espaços para o rótulo BLANK, mantendo o valor real caso preenchido.
-          const norm = (v) => (v != null && String(v).trim()) ? String(v).trim() : BLANK;
-          const leads = (json.leads || []).map(l => ({
-            ...l,
-            origem: norm(canonicalOrigem(l.origem)),
-            perfil: norm(l.perfil),
-            formulario: l.formulario === "Sim" ? "Sim" : "Não",
-            _d: parseLeadDate(l.data),
-          }));
-          const hasBlankOrigem = leads.some(l => l.origem === BLANK);
-          const hasBlankPerfil = leads.some(l => l.perfil === BLANK);
-          // Opções: só valores preenchidos; acrescenta "(vazio)" ao final se houver leads sem preenchimento.
-          const origens = [...new Set((json.origens || []).map(canonicalOrigem).filter(o => o && String(o).trim()))]
-            .sort((a, b) => a.localeCompare(b, "pt-BR"));
-          if (hasBlankOrigem) origens.push(BLANK);
-          const perfis = [...new Set((json.perfis || []).filter(p => p && String(p).trim()))];
-          if (hasBlankPerfil) perfis.push(BLANK);
-          const origem_counts = {};
-          for (const [k, v] of Object.entries(json.origem_counts || {})) {
-            const ck = norm(canonicalOrigem(k));
-            origem_counts[ck] = (origem_counts[ck] || 0) + v;
-          }
-          const sql_by_origem = {};
-          for (const [k, v] of Object.entries(json.sql_by_origem || {})) {
-            const ck = norm(canonicalOrigem(k));
-            sql_by_origem[ck] = (sql_by_origem[ck] || 0) + v;
-          }
-          setRaw({ ...json, leads, origens, perfis, origem_counts, sql_by_origem });
-        })
-        .catch(e => setError(e.message || String(e)));
+    const [refreshing, setRefreshing]   = useState(false);
+    const [refreshedAt, setRefreshedAt] = useState(null);
+
+    // Detecta se estamos na Cloudflare (tem /api). Fora dela, usa só o snapshot estático.
+    const hasLiveApi = /(^|\.)pages\.dev$/.test(location.hostname) || location.hostname === "localhost";
+
+    const applyJson = useCallback((json) => {
+      // Normaliza vazios/espaços para o rótulo BLANK, mantendo o valor real caso preenchido.
+      const norm = (v) => (v != null && String(v).trim()) ? String(v).trim() : BLANK;
+      const leads = (json.leads || []).map(l => ({
+        ...l,
+        origem: norm(canonicalOrigem(l.origem)),
+        perfil: norm(l.perfil),
+        formulario: l.formulario === "Sim" ? "Sim" : "Não",
+        _d: parseLeadDate(l.data),
+      }));
+      const hasBlankOrigem = leads.some(l => l.origem === BLANK);
+      const hasBlankPerfil = leads.some(l => l.perfil === BLANK);
+      // Opções: só valores preenchidos; acrescenta "(vazio)" ao final se houver leads sem preenchimento.
+      const origens = [...new Set((json.origens || []).map(canonicalOrigem).filter(o => o && String(o).trim()))]
+        .sort((a, b) => a.localeCompare(b, "pt-BR"));
+      if (hasBlankOrigem) origens.push(BLANK);
+      const perfis = [...new Set((json.perfis || []).filter(p => p && String(p).trim()))];
+      if (hasBlankPerfil) perfis.push(BLANK);
+      const origem_counts = {};
+      for (const [k, v] of Object.entries(json.origem_counts || {})) {
+        const ck = norm(canonicalOrigem(k));
+        origem_counts[ck] = (origem_counts[ck] || 0) + v;
+      }
+      const sql_by_origem = {};
+      for (const [k, v] of Object.entries(json.sql_by_origem || {})) {
+        const ck = norm(canonicalOrigem(k));
+        sql_by_origem[ck] = (sql_by_origem[ck] || 0) + v;
+      }
+      setRaw({ ...json, leads, origens, perfis, origem_counts, sql_by_origem });
     }, []);
+
+    const loadData = useCallback(async (fresh) => {
+      // fresh=true e com API → puxa ao vivo; senão o snapshot estático.
+      const url = (fresh && hasLiveApi) ? "/api/dados?fresh=1" : "data/data.json";
+      if (fresh) setRefreshing(true);
+      try {
+        const r = await fetch(url, { cache: "no-store" });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        applyJson(await r.json());
+        setError(null);
+        if (fresh) setRefreshedAt(new Date());
+      } catch (e) {
+        if (fresh) {
+          // Falhou o ao vivo → mantém o que está na tela (snapshot já carregado).
+          setRefreshedAt(null);
+        } else {
+          setError(e.message || String(e));
+        }
+      } finally {
+        if (fresh) setRefreshing(false);
+      }
+    }, [applyJson, hasLiveApi]);
+
+    // Load inicial: snapshot estático (rápido, sem custo de API).
+    useEffect(() => { loadData(false); }, [loadData]);
 
     // Init background canvas once
     useEffect(() => { window.initLeadsCanvas && window.initLeadsCanvas(); }, []);
@@ -1171,7 +1213,7 @@
     if (error) {
       return (
         <>
-          <Header total={null} updatedAt={null} />
+          <Header total={null} updatedAt={null} hasLiveApi={hasLiveApi} refreshing={refreshing} refreshedAt={refreshedAt} onRefresh={() => loadData(true)} />
           <main className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8">
             <div className="card p-8 text-center text-slate-700">
               <p className="text-brand-pink font-medium mb-2">Falha ao carregar os dados</p>
@@ -1185,7 +1227,7 @@
     if (!raw) {
       return (
         <>
-          <Header total={null} updatedAt={null} />
+          <Header total={null} updatedAt={null} hasLiveApi={hasLiveApi} refreshing={refreshing} refreshedAt={refreshedAt} onRefresh={() => loadData(true)} />
           <main className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8">
             <div className="card p-12 text-center text-slate-500 text-sm">Carregando dados…</div>
           </main>
@@ -1195,7 +1237,7 @@
 
     return (
       <>
-        <Header total={raw.total_leads} updatedAt={raw.generated_at} />
+        <Header total={raw.total_leads} updatedAt={raw.generated_at} hasLiveApi={hasLiveApi} refreshing={refreshing} refreshedAt={refreshedAt} onRefresh={() => loadData(true)} />
         <main className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8 space-y-6">
           <Filters
             origens={origensAll}
