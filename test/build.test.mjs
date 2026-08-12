@@ -60,4 +60,20 @@ test('buildDataFromRows: conta leads, SQL e reclassifica mídia paga', () => {
   assert.equal(out.midia_paga.chanel.total, 1);
   // sem séries da Meta ainda
   assert.equal(out.midia_paga.spend_daily, undefined);
+  // sql_pct: 2 SQL de 3 leads → 66.67
+  assert.equal(out.sql_pct, 66.67);
+  // etapas.list: funil primeiro, depois out-of-funnel; só os que existem na fixture
+  assert.deepEqual(out.etapas.list, [
+    'Etapa 1 - inicial',
+    'Etapa 2 - Identificado',
+    'Etapa perdido',
+  ]);
+  // etapas.counts: um lead em cada etapa
+  assert.deepEqual(out.etapas.counts, {
+    'Etapa 1 - inicial': 1,
+    'Etapa 2 - Identificado': 1,
+    'Etapa perdido': 1,
+  });
+  // perfil_counts: um lead por perfil
+  assert.deepEqual(out.perfil_counts, { Pro: 1, Starter: 1, Desqualificado: 1 });
 });
