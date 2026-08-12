@@ -46,15 +46,35 @@ npm run extract
 npm run serve   # abre em http://localhost:8080
 ```
 
+## Arquitetura (Cloudflare Pages + botão Atualizar)
+
+O dashboard migrou de GitHub Pages puro para **Cloudflare Pages**, ganhando uma
+**Pages Function** (`/api/dados`) que entrega dados ao vivo sob demanda:
+
+- **Snapshot diário** (`docs/data/data.json`) — gerado pela GitHub Action às 06:00 BRT e
+  commitado no repo. Continua servindo como base histórica e como site estático de fallback.
+- **Dados ao vivo** — ao clicar **Atualizar**, a Function lê a planilha `LeadsV2` ao vivo e
+  busca os insights da Meta Ads do **mês corrente + mês anterior** (janela de atribuição de 28
+  dias), fazendo *merge* sobre o snapshot base para preservar o histórico completo.
+- **Cache de borda** — respostas do `/api/dados` ficam em cache por 10 min na borda da
+  Cloudflare; `?fresh=1` fura o cache quando necessário.
+- **Fallback gracioso** — se a Meta Ads falhar, o dashboard mantém o snapshot base; se a
+  planilha falhar, o front mantém os dados já exibidos.
+
+Veja o passo a passo completo de deploy em [`DEPLOY-CLOUDFLARE.md`](DEPLOY-CLOUDFLARE.md).
+
 ## CI/CD
 
 O workflow roda diariamente e em pushes na `main`:
 1. Restaura a chave da service account a partir do secret `GCP_SA_KEY`
 2. Executa `node scripts/extract.js` → atualiza `docs/data/data.json`
-3. Comita o arquivo (se mudou) e publica no GitHub Pages
+3. Comita o arquivo (se mudou) e publica no GitHub Pages (durante a transição)
+4. O push aciona automaticamente o rebuild na Cloudflare Pages
 
 ### Secrets obrigatórios
 
 | Nome | Valor |
 |---|---|
 | `GCP_SA_KEY` | JSON completo da service account (uma linha) |
+| `META_ACCESS_TOKEN` | Token do System User da Meta (sem expiração) |
+| `META_AD_ACCOUNT_ID` | `act_674298545378209` |
