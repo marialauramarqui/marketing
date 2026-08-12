@@ -36,6 +36,7 @@ export async function withRetry(label, fn, attempts = 3, baseDelayMs = 3000) {
     } catch (e) {
       lastErr = e;
       if (i < attempts) {
+        console.warn(`AVISO: ${label} falhou (tentativa ${i}/${attempts}): ${e.message} — repetindo em ${(baseDelayMs * i) / 1000}s`);
         await sleep(baseDelayMs * i);
       }
     }
