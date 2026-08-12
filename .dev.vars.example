@@ -1,0 +1,6 @@
+# Copie para .dev.vars (git-ignored) e preencha para rodar `wrangler pages dev` localmente.
+META_ACCESS_TOKEN=
+META_AD_ACCOUNT_ID=act_674298545378209
+GCP_SA_KEY=
+SHEET_ID=1zNRw8zfoASVlO2EhR56sldTCy4IXRCLKfauU1ROChCE
+SHEET_TAB=LeadsV2

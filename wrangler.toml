@@ -1,0 +1,4 @@
+# Cloudflare Pages (Functions). Site estático em docs/, funções em functions/api/*.
+name = "marketing-vesti"
+compatibility_date = "2024-11-06"
+pages_build_output_dir = "docs"
