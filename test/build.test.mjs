@@ -1,7 +1,7 @@
 // test/build.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { recentWindow, mergeMetaFields, META_FIELDS } from '../functions/api/_build.js';
+import { recentWindow, mergeMetaFields, META_FIELDS, buildDataFromRows } from '../functions/api/_build.js';
 
 test('recentWindow: mês corrente + anterior', () => {
   // 12/08/2026 → since = 1º de julho/2026, until = hoje
@@ -39,4 +39,25 @@ test('mergeMetaFields: sem base (snapshot indisponível) devolve o live', () => 
   const out = mergeMetaFields(null, live);
   assert.deepEqual(out.spend_daily, { A: { '2026-08-12': 1 } });
   assert.deepEqual(out.thumbnails, { A: 'u' });
+});
+
+test('buildDataFromRows: conta leads, SQL e reclassifica mídia paga', () => {
+  const rows = [
+    ['DATA', 'ORIGEM', 'PERFIL', 'ETAPA', 'ANUNCIO', 'NOME CRIATIVO', 'FORMULÁRIO', '', '', '', 'Datetime Etapa'],
+    ['01/08/2026', 'Orgânico', 'Pro', 'Etapa 1 - inicial', '', '', 'Sim', '', '', '', ''],
+    ['02/08/2026', 'Indicação', 'Starter', 'Etapa 2 - Identificado', 'Ad X', 'Criativo Y', '', '', '', '', ''],
+    ['03/08/2026', 'Orgânico', 'Desqualificado', 'Etapa perdido', '', '', '', '', '', '', ''],
+  ];
+  const out = buildDataFromRows(rows, { sheetId: 'S', tab: 'LeadsV2', generatedAt: '2026-08-12T00:00:00.000Z' });
+  assert.equal(out.total_leads, 3);
+  assert.equal(out.total_sql, 2); // Pro + Starter são SQL; Desqualificado não
+  assert.equal(out.sheet_id, 'S');
+  assert.equal(out.generated_at, '2026-08-12T00:00:00.000Z');
+  // lead 2 tem ANUNCIO/CRIATIVO → origem reclassificada para "Mídia paga"
+  const pago = out.leads.find(l => l.perfil === 'Starter');
+  assert.equal(pago.origem, 'Mídia paga');
+  // bloco chanel presente e contando o lead de mídia paga
+  assert.equal(out.midia_paga.chanel.total, 1);
+  // sem séries da Meta ainda
+  assert.equal(out.midia_paga.spend_daily, undefined);
 });
