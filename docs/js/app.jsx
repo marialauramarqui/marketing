@@ -360,23 +360,6 @@
         </div>
 
         <div className="flex items-center gap-4">
-          {hasLiveApi && (
-            <div className="refresh-wrap">
-              {refreshedAt && (
-                <span className="refresh-status">
-                  ✓ Atualizado às {refreshedAt.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
-                </span>
-              )}
-              <button
-                className={"btn-refresh" + (refreshing ? " loading" : "")}
-                onClick={onRefresh}
-                disabled={refreshing}
-                title="Puxar leads da planilha e Meta Ads (mês corrente + anterior) agora"
-              >
-                <span className="ic">⟳</span> {refreshing ? "Atualizando…" : "Atualizar"}
-              </button>
-            </div>
-          )}
           <div className="hidden md:flex flex-col items-end text-right">
             <span className="text-xs text-slate-500">
               {total != null
@@ -389,6 +372,15 @@
               </span>
             )}
           </div>
+          {hasLiveApi && (
+            <button onClick={onRefresh} disabled={refreshing}
+              className="relative inline-flex items-center gap-1.5 text-xs font-semibold text-white rounded-lg px-3.5 py-2 shadow-[0_8px_20px_rgba(106,82,179,.35)] hover:shadow-[0_10px_26px_rgba(106,82,179,.5)] hover:-translate-y-0.5 transition disabled:opacity-60 disabled:cursor-default"
+              style={{ background: "linear-gradient(120deg,#6A52B3 0%,#8A6DD1 55%,#63C19B 100%)" }}
+              title="Puxar leads da planilha e Meta Ads (mês corrente + anterior) agora">
+              <span style={{ display: "inline-block", animation: refreshing ? "spin .9s linear infinite" : "none" }}>⟳</span>
+              {refreshing ? "Atualizando…" : "Atualizar"}
+            </button>
+          )}
           <a href="etapas.html"
             className="relative inline-flex items-center gap-1.5 text-xs font-semibold text-white rounded-lg px-3.5 py-2 shadow-[0_8px_20px_rgba(106,82,179,.35)] hover:shadow-[0_10px_26px_rgba(106,82,179,.5)] hover:-translate-y-0.5 transition"
             style={{ background: "linear-gradient(120deg,#6A52B3 0%,#8A6DD1 55%,#63C19B 100%)" }}
