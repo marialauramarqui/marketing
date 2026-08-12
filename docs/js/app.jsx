@@ -848,6 +848,7 @@
         const r = await fetch(url, { cache: "no-store" });
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         applyJson(await r.json());
+        setError(null);
         if (fresh) setRefreshedAt(new Date());
       } catch (e) {
         if (fresh) {
