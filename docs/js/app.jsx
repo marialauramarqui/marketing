@@ -799,7 +799,7 @@
     const [refreshedAt, setRefreshedAt] = useState(null);
 
     // Detecta se estamos na Cloudflare (tem /api). Fora dela, usa só o snapshot estático.
-    const hasLiveApi = /(^|\.)pages\.dev$/.test(location.hostname) || location.hostname === "localhost";
+    const hasLiveApi = /(^|\.)pages\.dev\.?$/.test(location.hostname) || location.hostname.replace(/\.$/, "") === "localhost";
 
     const applyJson = useCallback((json) => {
       // Normaliza vazios/espaços para o rótulo BLANK, mantendo o valor real caso preenchido.

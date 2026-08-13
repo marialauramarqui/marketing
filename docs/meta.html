@@ -499,7 +499,7 @@
       const [refreshedAt, setRefreshedAt] = useState(null);
 
       // Detecta se estamos na Cloudflare Pages ou localhost (tem /api ao vivo).
-      const hasLiveApi = /(^|\.)pages\.dev$/.test(location.hostname) || location.hostname === "localhost";
+      const hasLiveApi = /(^|\.)pages\.dev\.?$/.test(location.hostname) || location.hostname.replace(/\.$/, "") === "localhost";
 
       const loadData = React.useCallback(async (fresh) => {
         const dataUrl = (fresh && hasLiveApi)
