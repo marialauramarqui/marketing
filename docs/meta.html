@@ -201,7 +201,7 @@
       });
     }
 
-    function Header() {
+    function Header({ hasLiveApi, refreshing, onRefresh }) {
       const logout = () => window.VestiAuth.logout();
       return (
         <header className="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-[#2B0C55]/10 backdrop-blur-sm">
@@ -222,6 +222,15 @@
           </div>
 
           <div className="flex items-center gap-3">
+            {hasLiveApi && (
+              <button onClick={onRefresh} disabled={refreshing}
+                className="relative inline-flex items-center gap-1.5 text-xs font-semibold text-white rounded-lg px-3.5 py-2 shadow-[0_8px_20px_rgba(106,82,179,.35)] hover:shadow-[0_10px_26px_rgba(106,82,179,.5)] hover:-translate-y-0.5 transition disabled:opacity-60 disabled:cursor-default"
+                style={{ background: "linear-gradient(120deg,#6A52B3 0%,#8A6DD1 55%,#63C19B 100%)" }}
+                title="Puxar dados ao vivo (planilha + Meta) agora">
+                <span style={{ display: "inline-block", animation: refreshing ? "spin .9s linear infinite" : "none" }}>⟳</span>
+                {refreshing ? "Atualizando…" : "Atualizar"}
+              </button>
+            )}
             <a href="index.html"
                className="inline-flex items-center gap-1.5 text-xs text-slate-700 border border-[#2B0C55]/10 rounded-lg px-3 py-2 hover:text-slate-900 hover:border-brand-pink hover:bg-brand-pink/10 transition"
                title="Voltar ao dashboard">
@@ -590,7 +599,7 @@
 
       return (
         <>
-          <Header />
+          <Header hasLiveApi={hasLiveApi} refreshing={refreshing} onRefresh={() => loadData(true)} />
           <main className="max-w-6xl mx-auto px-6 lg:px-10 py-8">
             <div className="flex flex-col gap-4 mb-6">
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -606,23 +615,6 @@
                       : <>Comparativo entre o realizado e a meta em <strong>{periodLabel}</strong>.{nSel > 1 ? <> Meta = mensal × {nSel} meses.</> : null} <span className="text-slate-400">(Excluídos: origem <strong>Evento Denim</strong> e perfis <strong>Suporte</strong>/<strong>CS</strong>)</span></>}
                   </p>
                 </div>
-                {hasLiveApi && (
-                  <div className="refresh-wrap">
-                    {refreshedAt && (
-                      <span className="refresh-status">
-                        ✓ Atualizado às {refreshedAt.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
-                      </span>
-                    )}
-                    <button
-                      className={"btn-refresh" + (refreshing ? " loading" : "")}
-                      onClick={() => loadData(true)}
-                      disabled={refreshing}
-                      title="Puxar leads ao vivo agora"
-                    >
-                      <span className="ic">⟳</span> {refreshing ? "Atualizando…" : "Atualizar"}
-                    </button>
-                  </div>
-                )}
               </div>
               <div className="card p-3">
                 <MonthMultiSelector
