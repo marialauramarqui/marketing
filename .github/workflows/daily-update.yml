@@ -10,11 +10,6 @@ on:
     - cron: '0 9 * * *'
   push:
     branches: [main]
-    # O commit diário de dados NÃO deve re-disparar este workflow (evita loop).
-    # Substitui o antigo "[skip ci]" na mensagem — que também fazia o Cloudflare
-    # Pages pular o deploy, deixando o snapshot estático congelado.
-    paths-ignore:
-      - 'docs/data/data.json'
   workflow_dispatch: {}
 
 permissions:
@@ -54,9 +49,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if ! git diff --quiet docs/data/data.json; then
             git add docs/data/data.json
-            # Sem "[skip ci]": o Cloudflare Pages honra essa marca e pularia o
-            # deploy. O loop do workflow é evitado pelo paths-ignore no push (topo).
-            git commit -m "chore(data): atualiza dados"
+            git commit -m "chore(data): atualiza dados [skip ci]"
             git push
           else
             echo "Sem mudanças em data.json."
