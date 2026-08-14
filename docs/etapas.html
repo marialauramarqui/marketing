@@ -1066,8 +1066,10 @@
       const hasLiveApi = /(^|\.)pages\.dev\.?$/.test(location.hostname) || location.hostname.replace(/\.$/, "") === "localhost";
 
       const loadData = React.useCallback(async (fresh) => {
-        const url = (fresh && hasLiveApi)
-          ? "/api/dados?fresh=1"
+        // No Cloudflare sempre lê da API (cache de borda aquecido pelo "Atualizar");
+        // ao recarregar, permanece nos dados da última atualização. Estático = fallback.
+        const url = hasLiveApi
+          ? ("/api/dados" + (fresh ? "?fresh=1" : ""))
           : ("data/data.json?t=" + Date.now());
         if (fresh) setRefreshing(true);
         try {

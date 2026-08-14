@@ -833,8 +833,11 @@
     }, []);
 
     const loadData = useCallback(async (fresh) => {
-      // fresh=true e com API → puxa ao vivo; senão o snapshot estático.
-      const url = (fresh && hasLiveApi) ? "/api/dados?fresh=1" : "data/data.json";
+      // No Cloudflare (hasLiveApi) SEMPRE lê da API: no load usa o cache de borda
+      // (aquecido pelo último "Atualizar") e o clique fura com ?fresh=1 e reaquece o
+      // cache. Assim, ao recarregar, os dados permanecem os da última atualização —
+      // nunca voltam para o snapshot antigo. Fora do Cloudflare, usa o estático.
+      const url = hasLiveApi ? ("/api/dados" + (fresh ? "?fresh=1" : "")) : "data/data.json";
       if (fresh) setRefreshing(true);
       try {
         const r = await fetch(url, { cache: "no-store" });
