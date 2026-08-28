@@ -378,7 +378,7 @@
 
     // Funil visual customizado — desenha trapezoides com largura proporcional ao count,
     // gradient pink → green do topo (Etapa 1) ao fundo (Etapa 6 Ganho).
-    function FunnelChart({ funnelCumulative, totalFunil, basis = "safra" }) {
+    function FunnelChart({ funnelCumulative, totalFunil }) {
       // A pedido do negócio, o funil começa na Etapa 2 (a Etapa 1 sai da visão).
       // A Etapa 2 passa a ser o topo / 100% do gráfico. Os KPIs acima (MQL,
       // % do funil, conversão geral) seguem inalterados, na base da Etapa 1.
@@ -411,17 +411,13 @@
           <div className="mb-5">
             <h2 className="text-base font-semibold">Funil de leads</h2>
             <p className="text-xs text-slate-500 mt-0.5 max-w-xl">
-              {basis === "competencia"
-                ? <>Por <strong>competência</strong>: leads pelo mês da <strong>etapa atual</strong> (coluna K, quando o evento ocorreu). Quem não tem data de etapa fica de fora. Cada nível mostra quantos <strong>chegaram pelo menos</strong> a essa etapa.</>
-                : <>Por <strong>safra</strong>: leads pela <strong>data de entrada</strong> (coluna A). Cada nível mostra quantos <strong>chegaram pelo menos</strong> a essa etapa.</>}
+              Por <strong>safra</strong>: leads pela <strong>data de entrada</strong> (coluna A). Cada nível mostra quantos <strong>chegaram pelo menos</strong> a essa etapa.
             </p>
           </div>
 
           {!base ? (
             <div className="p-10 text-center text-slate-400 text-sm">
-              {basis === "competencia"
-                ? "Nenhuma etapa com data (coluna K) no recorte atual."
-                : "Nenhum lead a partir da Etapa 2 no recorte atual."}
+              Nenhum lead a partir da Etapa 2 no recorte atual.
             </div>
           ) : (
           <div className="relative mx-auto" style={{ height: `${totalHeight}px`, maxWidth: "720px" }}>
@@ -1057,8 +1053,6 @@
       const [selectedPerfis, setSelectedPerfis] = useState(new Set());
       const [dateFrom, setDateFrom] = useState(null);
       const [dateTo, setDateTo] = useState(null);
-      // Base da tela inteira: "safra" (data de entrada, col A) ou "competencia" (data da etapa, col K).
-      const [basis, setBasis] = useState("safra");
       const [refreshing, setRefreshing] = useState(false);
       const [refreshedAt, setRefreshedAt] = useState(null);
 
@@ -1123,15 +1117,14 @@
         return [...s].sort((a,b) => a.localeCompare(b, "pt-BR"));
       }, [leads]);
 
-      // A base (safra ⇄ competência) define qual data baliza o recorte de período:
-      // safra = data de entrada (col A); competência = data da etapa (col K).
+      // Recorte de período sempre pela safra: data de entrada (col A).
       // Vale pra TODA a tela (KPIs, heatmaps, fora do funil e funil).
       const filtered = useMemo(() => applyFilters(leads, {
         years: selectedYears, months: selectedMonths,
         origens: selectedOrigens, perfis: selectedPerfis,
         dateFrom, dateTo,
-        dateField: basis === "competencia" ? "data_etapa" : "data",
-      }), [leads, selectedYears, selectedMonths, selectedOrigens, selectedPerfis, dateFrom, dateTo, basis]);
+        dateField: "data",
+      }), [leads, selectedYears, selectedMonths, selectedOrigens, selectedPerfis, dateFrom, dateTo]);
 
       const agg = useMemo(() => aggregate(filtered), [filtered]);
 
@@ -1197,19 +1190,6 @@
                   />
                   <CalendarButton from={dateFrom} to={dateTo}
                     onChange={(a, b) => { setDateFrom(a); setDateTo(b); }} />
-                  <div className="inline-flex rounded-lg p-0.5 border border-[#2B0C55]/10"
-                       style={{ background: "rgba(255,255,255,0.04)" }}
-                       title="Safra = recorta pela data de entrada (col A) · Competência = pela data da etapa (col K)">
-                    {[["safra","Safra"],["competencia","Competência"]].map(([v,label]) => (
-                      <button key={v} type="button" onClick={() => setBasis(v)}
-                        className="px-3.5 py-1.5 text-xs font-semibold rounded-md transition"
-                        style={basis === v
-                          ? { background: "linear-gradient(120deg,#6A52B3,#63C19B)", color: "#fff" }
-                          : { color: "#a299c6" }}>
-                        {label}
-                      </button>
-                    ))}
-                  </div>
                 </div>
                 {(selectedYears.size > 0 || selectedMonths.size > 0 || selectedOrigens.size > 0 || selectedPerfis.size > 0 || dateFrom || dateTo) && (
                   <button onClick={() => {
@@ -1274,7 +1254,6 @@
                   conversions={agg.conversions}
                   worstConversionIdx={agg.worstConversionIdx}
                   totalFunil={agg.totalFunil}
-                  basis={basis}
                 />
               </>
             )}
