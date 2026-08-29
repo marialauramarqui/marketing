@@ -832,33 +832,42 @@
       setRaw({ ...json, leads, origens, perfis, origem_counts, sql_by_origem });
     }, []);
 
-    const loadData = useCallback(async (fresh) => {
-      // No Cloudflare (hasLiveApi) SEMPRE lê da API: no load usa o cache de borda
-      // (aquecido pelo último "Atualizar") e o clique fura com ?fresh=1 e reaquece o
-      // cache. Assim, ao recarregar, os dados permanecem os da última atualização —
-      // nunca voltam para o snapshot antigo. Fora do Cloudflare, usa o estático.
-      const url = hasLiveApi ? ("/api/dados" + (fresh ? "?fresh=1" : "")) : "data/data.json";
-      if (fresh) setRefreshing(true);
+    // Snapshot estático (docs/data/data.json): primeiro paint rápido, quase nunca falha.
+    // Erro aqui (raro) é o único que mostra o card de erro.
+    const loadSnapshot = useCallback(async () => {
       try {
-        const r = await fetch(url, { cache: "no-store" });
+        const r = await fetch("data/data.json?t=" + Date.now(), { cache: "no-store" });
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         applyJson(await r.json());
         setError(null);
-        if (fresh) setRefreshedAt(new Date());
       } catch (e) {
-        if (fresh) {
-          // Falhou o ao vivo → mantém o que está na tela (snapshot já carregado).
-          setRefreshedAt(null);
-        } else {
-          setError(e.message || String(e));
-        }
+        setError(e.message || String(e));
+      }
+    }, [applyJson]);
+
+    // Ao vivo (/api/dados): roda em background no load (fresh=false, cache de borda) e no
+    // clique do botão Atualizar (fresh=true, fura o cache). Nunca bloqueia o primeiro paint;
+    // se falhar, mantém o snapshot na tela — sem card de erro.
+    const loadLive = useCallback(async (fresh) => {
+      if (!hasLiveApi) return;
+      setRefreshing(true);
+      try {
+        const r = await fetch("/api/dados" + (fresh ? "?fresh=1" : ""), { cache: "no-store" });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        applyJson(await r.json());
+        setError(null);
+        setRefreshedAt(new Date());
+      } catch (e) {
+        setRefreshedAt(null);
       } finally {
-        if (fresh) setRefreshing(false);
+        setRefreshing(false);
       }
     }, [applyJson, hasLiveApi]);
 
-    // Load inicial: snapshot estático (rápido, sem custo de API).
-    useEffect(() => { loadData(false); }, [loadData]);
+    // Load inicial: snapshot primeiro (instantâneo), depois ao vivo em background.
+    useEffect(() => {
+      (async () => { await loadSnapshot(); loadLive(false); })();
+    }, [loadSnapshot, loadLive]);
 
     // Init background canvas once
     useEffect(() => { window.initLeadsCanvas && window.initLeadsCanvas(); }, []);
@@ -1208,7 +1217,7 @@
     if (error) {
       return (
         <>
-          <Header total={null} updatedAt={null} hasLiveApi={hasLiveApi} refreshing={refreshing} refreshedAt={refreshedAt} onRefresh={() => loadData(true)} />
+          <Header total={null} updatedAt={null} hasLiveApi={hasLiveApi} refreshing={refreshing} refreshedAt={refreshedAt} onRefresh={() => loadLive(true)} />
           <main className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8">
             <div className="card p-8 text-center text-slate-700">
               <p className="text-brand-pink font-medium mb-2">Falha ao carregar os dados</p>
@@ -1222,7 +1231,7 @@
     if (!raw) {
       return (
         <>
-          <Header total={null} updatedAt={null} hasLiveApi={hasLiveApi} refreshing={refreshing} refreshedAt={refreshedAt} onRefresh={() => loadData(true)} />
+          <Header total={null} updatedAt={null} hasLiveApi={hasLiveApi} refreshing={refreshing} refreshedAt={refreshedAt} onRefresh={() => loadLive(true)} />
           <main className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8">
             <div className="card p-12 text-center text-slate-500 text-sm">Carregando dados…</div>
           </main>
@@ -1232,7 +1241,7 @@
 
     return (
       <>
-        <Header total={raw.total_leads} updatedAt={raw.generated_at} hasLiveApi={hasLiveApi} refreshing={refreshing} refreshedAt={refreshedAt} onRefresh={() => loadData(true)} />
+        <Header total={raw.total_leads} updatedAt={raw.generated_at} hasLiveApi={hasLiveApi} refreshing={refreshing} refreshedAt={refreshedAt} onRefresh={() => loadLive(true)} />
         <main className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8 space-y-6">
           <Filters
             origens={origensAll}
