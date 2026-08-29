@@ -1059,31 +1059,40 @@
       // Detecta se estamos na Cloudflare Pages ou localhost (tem /api ao vivo).
       const hasLiveApi = /(^|\.)pages\.dev\.?$/.test(location.hostname) || location.hostname.replace(/\.$/, "") === "localhost";
 
-      const loadData = React.useCallback(async (fresh) => {
-        // No Cloudflare sempre lê da API (cache de borda aquecido pelo "Atualizar");
-        // ao recarregar, permanece nos dados da última atualização. Estático = fallback.
-        const url = hasLiveApi
-          ? ("/api/dados" + (fresh ? "?fresh=1" : ""))
-          : ("data/data.json?t=" + Date.now());
-        if (fresh) setRefreshing(true);
+      // Snapshot estático (data/data.json): primeiro paint rápido, quase nunca falha.
+      const loadSnapshot = React.useCallback(async () => {
         try {
-          const r = await fetch(url, { cache: "no-store" });
+          const r = await fetch("data/data.json?t=" + Date.now(), { cache: "no-store" });
           if (!r.ok) throw new Error("HTTP " + r.status);
-          const json = await r.json();
-          setData(json);
-          if (fresh) setRefreshedAt(new Date());
+          setData(await r.json());
+          setErr(null);
         } catch (e) {
-          if (fresh) {
-            // Falhou o ao vivo → mantém os dados já na tela (não limpa).
-          } else {
-            setErr(e.message || String(e));
-          }
+          setErr(e.message || String(e));
+        }
+      }, []);
+
+      // Ao vivo (/api/dados): background no load (fresh=false) e forçado no botão (fresh=true).
+      // Nunca bloqueia o primeiro paint; se falhar, mantém o snapshot na tela — sem erro.
+      const loadLive = React.useCallback(async (fresh) => {
+        if (!hasLiveApi) return;
+        setRefreshing(true);
+        try {
+          const r = await fetch("/api/dados" + (fresh ? "?fresh=1" : ""), { cache: "no-store" });
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          setData(await r.json());
+          setErr(null);
+          setRefreshedAt(new Date());
+        } catch (e) {
+          setRefreshedAt(null);
         } finally {
-          if (fresh) setRefreshing(false);
+          setRefreshing(false);
         }
       }, [hasLiveApi]);
 
-      useEffect(() => { loadData(false); }, [loadData]);
+      // Load inicial: snapshot primeiro (instantâneo), depois ao vivo em background.
+      useEffect(() => {
+        (async () => { await loadSnapshot(); loadLive(false); })();
+      }, [loadSnapshot, loadLive]);
 
       const leads = (data && data.leads) || [];
 
@@ -1132,7 +1141,7 @@
 
       return (
         <>
-          <Header hasLiveApi={hasLiveApi} refreshing={refreshing} onRefresh={() => loadData(true)} />
+          <Header hasLiveApi={hasLiveApi} refreshing={refreshing} onRefresh={() => loadLive(true)} />
           <main className="px-6 lg:px-10 py-8 max-w-6xl mx-auto space-y-6">
             <div className="flex items-center justify-between flex-wrap gap-3">
               <div>
