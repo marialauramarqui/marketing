@@ -50,6 +50,16 @@ export async function fetchMetaAdsMetadata(creds) {
   // alimentar o filtro de campanha e o rodapé "Conjunto de anúncio" do card.
   const params = new URLSearchParams({
     fields: 'name,creative.thumbnail_width(400).thumbnail_height(400){thumbnail_url},campaign{id,name,status,effective_status},adset{id,name}',
+    // Inclui anúncios ARCHIVED/pausados: o /ads por padrão só devolve os ativos, mas o
+    // insights (level=ad) traz o gasto deles. Sem este filtro, anúncio arquivado com gasto
+    // vira card sem foto (o thumbnail_url só existe quando o ad é retornado por este edge).
+    filtering: JSON.stringify([{
+      field: 'ad.effective_status',
+      operator: 'IN',
+      value: ['ACTIVE', 'PAUSED', 'ARCHIVED', 'CAMPAIGN_PAUSED', 'ADSET_PAUSED',
+              'PENDING_REVIEW', 'DISAPPROVED', 'PREAPPROVED', 'PENDING_BILLING_INFO',
+              'IN_PROCESS', 'WITH_ISSUES'],
+    }]),
     // limit baixo de propósito: com a expansão de creative{thumbnail_url} aninhada,
     // páginas grandes (ex.: 500) fazem a Meta recusar com "Please reduce the amount
     // of data you're asking for". A paginação abaixo (paging.next) cobre o resto.
